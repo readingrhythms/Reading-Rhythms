@@ -1,15 +1,21 @@
 ---
-import { Image } from 'astro:assets'
-import nyt from '../assets/icons/nyt.svg'
+import type { ImageMetadata } from 'astro';
+import { Image } from 'astro:assets';
+import nyt from '../assets/icons/nyt.svg';
 
 interface Props {
 	title: string
 	source: string
 	href: string
   thumb: string
-}
+};
 
-const { title, source, href, thumb } = Astro.props
+const { title, source, href, thumb } = Astro.props;
+const images = import.meta.glob<{ default: ImageMetadata }>('/src/assets/media/*.{jpeg,jpg,png,webp}');
+
+if (!images[thumb]) {
+    throw new Error(`"${thumb}" does not exist in glob: "/src/assets/media/*.{jpeg,jpg,png,webp}"`);
+};
 ---
 
 <div class="absolute p-6 border border-beaver rounded-xl shadow-sm">
@@ -19,6 +25,6 @@ const { title, source, href, thumb } = Astro.props
 		</div>
 		<h3 class="mb-1 text-dark-gray text-sm leading-snug">{title}</h3>
 		<p class="text-dark-gray/50 text-xs">{source}</p>
-		<img src={thumb} alt="New York Times story thumbnail" class="w-full mt-6 rounded-xl" />
+		<Image src={images[thumb]()} alt="New York Times story thumbnail" class="w-full mt-6 rounded-xl" />
 	</a>
 </div>
