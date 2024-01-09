@@ -1,16 +1,24 @@
 ---
+import type { ImageMetadata } from 'astro';
+import { Image } from 'astro:assets';
+
 interface Props {
-	type: 'photo' | 'video';
-	src: string;
-	caption: string;
+    type: 'photo' | 'video';
+    src: string;
+    caption: string;
 }
 
 const { type, src, caption } = Astro.props;
+const images = import.meta.glob<{ default: ImageMetadata }>('/src/assets/media/*.{jpeg,jpg,png,webp}');
+
+if (type === 'photo' && !images[src]) {
+    throw new Error(`"${src}" does not exist in glob: "/src/assets/media/*.{jpeg,jpg,png,webp}"`);
+}
 ---
 
 <div class="absolute aspect-square border border-transparent rounded-xl shadow-sm overflow-hidden">
     {type === 'photo' ? (
-        <img src={src} alt={caption} class="w-full object-cover object-center" />
+        <Image src={images[src]()} alt={caption} class="w-full object-cover object-center" />
     ) : (
         <video src={src} class="w-full object-cover object-center" muted autoplay loop />
     )}

@@ -6,8 +6,8 @@ import Media from '../components/Media.astro'
 import Quote from '../components/Quote.astro'
 import Spotify from '../components/Spotify.astro'
 import Instagram from '../components/Instagram.astro'
-import logo from '../images/logo.svg'
-import arrowright from '../icons/arrow-right.svg'
+import logo from '../assets/images/logo.svg'
+import arrowright from '../assets/icons/arrow-right.svg'
 ---
 
 <html lang="en">
@@ -47,16 +47,16 @@ import arrowright from '../icons/arrow-right.svg'
 			<div class="md:w-[calc(100%-475px)] md:h-full md:ml-[475px]">
 				<div class="masonry relative">
 					<div class="absolute">
-						<a href="https://form.typeform.com/to/BIBgPgKU" target="_blank" class="group flex items-center justify-between mb-2 py-6 px-8 bg-jean text-white rounded-xl font-bold">
-							Apply to Host or MC in NYC
+						<a href="https://form.typeform.com/to/BIBgPgKU" target="_blank" class="group flex items-center justify-between mb-2 py-6 px-8 bg-jean text-white rounded-xl font-bold leading-none">
+							<span class="mt-0.5">Apply to Host or MC in NYC</span>
 							<Image src={arrowright} alt="Arrow right" class="w-4 ml-2 group-hover:rotate-0 transition duration-250 ease-in-out -rotate-45" />
 						</a>
-						<a href="https://lu.ma/readingrhythms-brooklyn?utm_source=bento" target="_blank" class="group flex items-center justify-between mb-2 py-6 px-8 bg-rust text-white rounded-xl font-bold">
-							Brooklyn Event Tickets
+						<a href="https://lu.ma/readingrhythms-brooklyn?utm_source=bento" target="_blank" class="group flex items-center justify-between mb-2 py-6 px-8 bg-rust text-white rounded-xl font-bold leading-none">
+							<span class="mt-0.5">Brooklyn Event Tickets</span>
 							<Image src={arrowright} alt="Arrow right" class="w-4 ml-2 group-hover:rotate-0 transition duration-250 ease-in-out -rotate-45" />
 						</a>
-						<a href="https://lu.ma/readingrhythms-manhattan?utm_source=bento" target="_blank" class="group flex items-center justify-between py-6 px-8 bg-dark-purple text-white rounded-xl font-bold">
-							Manhattan Event Tickets
+						<a href="https://lu.ma/readingrhythms-manhattan?utm_source=bento" target="_blank" class="group flex items-center justify-between py-6 px-8 bg-dark-purple text-white rounded-xl font-bold leading-none">
+							<span class="mt-0.5">Manhattan Event Tickets</span>
 							<Image src={arrowright} alt="Arrow right" class="w-4 ml-2 group-hover:rotate-0 transition duration-250 ease-in-out -rotate-45" />
 						</a>
 					</div>
@@ -69,7 +69,7 @@ import arrowright from '../icons/arrow-right.svg'
 						title="Reading Rhythms in the NYT!: It’s My Party and I’ll Read If I Want To"
 						source="nytimes.com"
 						href="https://www.nytimes.com/2023/12/19/books/reading-rhythms.html"
-						thumb="https://static01.nyt.com/images/2024/01/14/multimedia/20READING-RHYTHMS-01-fjzh/20READING-RHYTHMS-01-fjzh-superJumbo.jpg?quality=75&auto=webp"
+						thumb="/src/assets/media/nyt_img.webp"
 					/>
 					<Quote
 						title="Literally one of the best events I’ve been to in a really long time!"
@@ -78,7 +78,7 @@ import arrowright from '../icons/arrow-right.svg'
 					<Instagram />
 					<Media
 					  type="photo"
-						src="https://creatorspace.imgix.net/users/cln66jsyk02gwp301vjhpzgpb/IaLELO03VbwkR9B9-IMG_2331.JPG"
+						src="/src/assets/media/Chapter_10_Maison_Mono.webp"
 						caption="Chapter 10 @ Maison Mono"
 					/>
 					<Quote
@@ -96,7 +96,7 @@ import arrowright from '../icons/arrow-right.svg'
 					/>
 					<Media
 					  type="photo"
-						src="https://creatorspace.imgix.net/users/cln66jsyk02gwp301vjhpzgpb/VLV4QCE6eRdTD7XJ-IMG_0081.JPG"
+						src="/src/assets/media/Chapter_3_on_the_Roof.webp"
 						caption="Chapter 3 on the Roof"
 					/>
 					<Quote
@@ -114,7 +114,7 @@ import arrowright from '../icons/arrow-right.svg'
 					/>
 					<Media
 					  type="photo"
-						src="https://creatorspace.imgix.net/users/cln66jsyk02gwp301vjhpzgpb/EfUtWx12avb3TCxV-IMG_2587.JPG"
+						src="/src/assets/media/Readers_FourFiveSix_Bar.webp"
 						caption="Readers @ FourFiveSix Bar"
 					/>
 				</div>
