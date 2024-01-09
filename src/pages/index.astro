@@ -33,15 +33,15 @@ import arrowright from '../assets/icons/arrow-right.svg';
 		<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-PS29M37L"
 		height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 		<!-- End Google Tag Manager (noscript) -->
-		<main class="relative md:w-screen md:h-full md:flex md:items-center md:justify-center p-4 md:p-16">
+		<main class="relative md:w-screen md:h-full md:flex md:items-center md:justify-center mb-8 md:mb-0 p-4 md:p-16">
 			<div class="md:fixed md:top-0 md:left-0 w-full md:h-full md:max-w-[475px] mb-8 md:mb-0 md:py-16 md:pl-16">
-				<Image src={logo} alt="Reading Rhythms logo" class="w-32 md:w-44 h-32 md:h-44 mb-4 md:mb-8" />
+				<Image src={logo} alt="Reading Rhythms logo" class="w-32 md:w-44 h-32 md:h-44 mb-6 md:mb-8" />
 				<h1 class="mb-4 text-4xl text-dark-gray font-display tracking-wider">Reading Rhythms</h1>
 				<p class="my-1 md:text-xl text-dark-gray/75 font-light">Not a book club. A reading party.</p>
 				<p class="my-1 md:text-xl text-dark-gray/75 font-light">Read with friends to curated music.</p>
 				<p class="my-1 md:text-xl text-dark-gray/75 font-light">Playlists & Event Tickets 👇</p>
-				<a href="mailto:hello@readingrhythms.co" class="md:absolute md:bottom-16 hidden md:flex items-center justify-center py-4 px-8 bg-dark-gray text-white rounded-xl font-bold">
-					Feedback Or Ideas? Email us!
+				<a href="mailto:hello@readingrhythms.co" class="md:absolute md:bottom-16 hidden md:flex items-center justify-center py-4 px-8 bg-dark-gray text-white rounded-xl font-bold leading-none">
+					<span class="mt-0.5">Feedback Or Ideas? Email us!</span>
 				</a>
 			</div>
 			<div class="md:w-[calc(100%-475px)] md:h-full md:ml-[475px]">
@@ -119,6 +119,9 @@ import arrowright from '../assets/icons/arrow-right.svg';
 					/>
 				</div>
 			</div>
+			<a href="mailto:hello@readingrhythms.co" class="flex md:hidden items-center justify-center mt-16 py-4 px-8 bg-dark-gray text-white rounded-xl font-bold leading-none">
+				<span class="mt-0.5">Feedback Or Ideas? Email us!</span>
+			</a>
 		</main>
 	</body>
 </html>
