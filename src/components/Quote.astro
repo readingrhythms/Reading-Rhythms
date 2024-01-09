@@ -1,0 +1,16 @@
+---
+import { Image } from 'astro:assets'
+import quotes from '../icons/quotes.svg'
+
+interface Props {
+	title: string;
+	author: string;
+}
+
+const { title, author } = Astro.props;
+---
+
+<div class="absolute p-6 border border-beaver rounded-xl shadow-sm">
+	<Image src={quotes} alt="Quotes icon" class="w-8 mb-6" />
+	<p class="text-dark-gray text-xl font-bold italic">{title} <span class="ml-1.5 font-normal not-italic">-{author}</span></p>
+</div>

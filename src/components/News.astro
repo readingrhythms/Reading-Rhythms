@@ -1,0 +1,24 @@
+---
+import { Image } from 'astro:assets'
+import nyt from '../icons/nyt.svg'
+
+interface Props {
+	title: string
+	source: string
+	href: string
+  thumb: string
+}
+
+const { title, source, href, thumb } = Astro.props
+---
+
+<div class="absolute p-6 border border-beaver rounded-xl shadow-sm">
+	<a href={href} target="_blank">
+		<div class="w-10 h-10 inline-flex items-center justify-center mb-3 bg-dark-gray rounded-xl">
+			<Image src={nyt} alt="New York Times logo" class="w-6" />
+		</div>
+		<h3 class="mb-1 text-dark-gray text-sm leading-snug">{title}</h3>
+		<p class="text-dark-gray/50 text-xs">{source}</p>
+		<img src={thumb} alt="New York Times story thumbnail" class="w-full mt-6 rounded-xl" />
+	</a>
+</div>
