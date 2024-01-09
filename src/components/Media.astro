@@ -16,7 +16,7 @@ if (type === 'photo' && !images[src]) {
 }
 ---
 
-<div class="absolute aspect-square border border-transparent rounded-xl shadow-sm overflow-hidden">
+<div class="aspect-square border border-transparent rounded-xl shadow-sm overflow-hidden">
     {type === 'photo' ? (
         <Image src={images[src]()} alt={caption} class="aspect-square w-full object-cover object-center" />
     ) : (
