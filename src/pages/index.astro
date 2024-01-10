@@ -1,166 +1,102 @@
 ---
-import '../styles.css';
 import { Image } from 'astro:assets';
-import News from '../components/News.astro';
-import Media from '../components/Media.astro';
-import Quote from '../components/Quote.astro';
-import Spotify from '../components/Spotify.astro';
-import Instagram from '../components/Instagram.astro';
-import logo from '../assets/images/logo.svg';
-import arrowright from '../assets/icons/arrow-right.svg';
+import BaseLayout from '@layouts/BaseLayout.astro';
+import News from '@components/index/News.astro';
+import Media from '@components/index/Media.astro';
+import Quote from '@components/index/Quote.astro';
+import Spotify from '@components/index/Spotify.astro';
+import Instagram from '@components/index/Instagram.astro';
+import logo from '@assets/images/logo.svg';
+import arrowright from '@assets/icons/arrow-right.svg';
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-		<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-		<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
-		<link rel="manifest" href="/site.webmanifest">
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Reading Rhythms</title>
-		<!-- Google Tag Manager -->
-		<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-		new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-		j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-		'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-		})(window,document,'script','dataLayer','GTM-PS29M37L');</script>
-		<!-- End Google Tag Manager -->
-	</head>
-	<body class="font-serif">
-		<!-- Google Tag Manager (noscript) -->
-		<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-PS29M37L"
-		height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-		<!-- End Google Tag Manager (noscript) -->
-		<main class="relative md:w-screen md:h-full md:flex md:items-center md:justify-center mb-8 md:mb-0 p-4 md:p-16">
-			<div class="md:fixed md:top-0 md:left-0 w-full md:h-full md:max-w-[475px] mb-8 md:mb-0 md:py-16 md:pl-16">
-				<Image src={logo} alt="Reading Rhythms logo" class="w-32 md:w-44 h-32 md:h-44 mb-6 md:mb-8" />
-				<h1 class="mb-4 text-4xl text-dark-gray font-display tracking-wider">Reading Rhythms</h1>
-				<p class="my-1 md:text-xl text-dark-gray/75 font-light">Not a book club. A reading party.</p>
-				<p class="my-1 md:text-xl text-dark-gray/75 font-light">Read with friends to curated music.</p>
-				<p class="my-1 md:text-xl text-dark-gray/75 font-light">Playlists & Event Tickets 👇</p>
-				<a href="mailto:hello@readingrhythms.co" class="md:absolute md:bottom-16 hidden md:flex items-center justify-center py-4 px-8 bg-dark-gray text-white rounded-xl font-bold leading-none">
-					<span class="mt-0.5">Feedback Or Ideas? Email us!</span>
+<BaseLayout>
+	<div class="md:fixed md:top-0 md:left-0 w-full md:h-full md:max-w-[475px] mb-8 md:mb-0 md:py-16 md:pl-16">
+		<Image src={logo} alt="Reading Rhythms logo" class="w-32 md:w-44 h-32 md:h-44 mb-6 md:mb-8" />
+		<h1 class="mb-4 text-4xl text-dark-gray font-display tracking-wider">Reading Rhythms</h1>
+		<p class="my-1 md:text-xl text-dark-gray/75 font-light">Not a book club. A reading party.</p>
+		<p class="my-1 md:text-xl text-dark-gray/75 font-light">Read with friends to curated music.</p>
+		<p class="my-1 md:text-xl text-dark-gray/75 font-light">Playlists & Event Tickets 👇</p>
+		<a href="mailto:hello@readingrhythms.co" class="md:absolute md:bottom-16 hidden md:flex items-center justify-center py-4 px-8 bg-dark-gray text-white rounded-xl font-bold leading-none">
+			<span class="mt-0.5">Feedback Or Ideas? Email us!</span>
+		</a>
+	</div>
+	<div class="md:w-[calc(100%-475px)] md:h-full md:ml-[475px]">
+		<div class="masonry">
+			<div>
+				<a href="https://form.typeform.com/to/BIBgPgKU" target="_blank" class="group flex items-center justify-between mb-2 py-6 px-8 bg-jean text-white rounded-xl font-bold leading-none">
+					<span class="mt-0.5">Apply to Host or MC in NYC</span>
+					<Image src={arrowright} alt="Arrow right" class="w-4 ml-2 group-hover:rotate-0 transition duration-250 ease-in-out -rotate-45" />
+				</a>
+				<a href="https://lu.ma/readingrhythms-brooklyn?utm_source=bento" target="_blank" class="group flex items-center justify-between mb-2 py-6 px-8 bg-rust text-white rounded-xl font-bold leading-none">
+					<span class="mt-0.5">Brooklyn Event Tickets</span>
+					<Image src={arrowright} alt="Arrow right" class="w-4 ml-2 group-hover:rotate-0 transition duration-250 ease-in-out -rotate-45" />
+				</a>
+				<a href="https://lu.ma/readingrhythms-manhattan?utm_source=bento" target="_blank" class="group flex items-center justify-between py-6 px-8 bg-dark-purple text-white rounded-xl font-bold leading-none">
+					<span class="mt-0.5">Manhattan Event Tickets</span>
+					<Image src={arrowright} alt="Arrow right" class="w-4 ml-2 group-hover:rotate-0 transition duration-250 ease-in-out -rotate-45" />
 				</a>
 			</div>
-			<div class="md:w-[calc(100%-475px)] md:h-full md:ml-[475px]">
-				<div class="masonry">
-					<div>
-						<a href="https://form.typeform.com/to/BIBgPgKU" target="_blank" class="group flex items-center justify-between mb-2 py-6 px-8 bg-jean text-white rounded-xl font-bold leading-none">
-							<span class="mt-0.5">Apply to Host or MC in NYC</span>
-							<Image src={arrowright} alt="Arrow right" class="w-4 ml-2 group-hover:rotate-0 transition duration-250 ease-in-out -rotate-45" />
-						</a>
-						<a href="https://lu.ma/readingrhythms-brooklyn?utm_source=bento" target="_blank" class="group flex items-center justify-between mb-2 py-6 px-8 bg-rust text-white rounded-xl font-bold leading-none">
-							<span class="mt-0.5">Brooklyn Event Tickets</span>
-							<Image src={arrowright} alt="Arrow right" class="w-4 ml-2 group-hover:rotate-0 transition duration-250 ease-in-out -rotate-45" />
-						</a>
-						<a href="https://lu.ma/readingrhythms-manhattan?utm_source=bento" target="_blank" class="group flex items-center justify-between py-6 px-8 bg-dark-purple text-white rounded-xl font-bold leading-none">
-							<span class="mt-0.5">Manhattan Event Tickets</span>
-							<Image src={arrowright} alt="Arrow right" class="w-4 ml-2 group-hover:rotate-0 transition duration-250 ease-in-out -rotate-45" />
-						</a>
-					</div>
-					<Spotify
-						title="RR: Lo-Fi & Piano"
-						songs="629"
-						href="https://open.spotify.com/playlist/6xEAVQ9006ReaFeeSfR06x?si=UzKBA6J4RiS1ZKVAAzARew&pi=u-elLm48hsQ9ee"
-					/>
-					<News
-						title="Reading Rhythms in the NYT!: It’s My Party and I’ll Read If I Want To"
-						source="nytimes.com"
-						href="https://www.nytimes.com/2023/12/19/books/reading-rhythms.html"
-						thumb="/src/assets/media/New_York_Times.webp"
-					/>
-					<Quote
-						title="Literally one of the best events I’ve been to in a really long time!"
-						author="Aagam"
-					/>
-					<Instagram />
-					<Media
-					  type="photo"
-						src="/src/assets/media/Chapter_10_Maison_Mono.webp"
-						caption="Chapter 10 @ Maison Mono"
-					/>
-					<Quote
-						title="Reading Rhythms is amazing… Every book club should be like this!"
-						author="Reader"
-					/>
-					<Quote
-						title="A millennial library"
-						author="Barstool Sports"
-					/>
-					<Media
-					  type="video"
-						src="https://storage.googleapis.com/creatorspace-public/users%2Fcln66jsyk02gwp301vjhpzgpb%2Fo2IiXETcTwo9owRa-IMG_3727.MOV"
-						caption="The Big Read @ FourFiveSix Bar"
-					/>
-					<Media
-					  type="photo"
-						src="/src/assets/media/Chapter_3_on_the_Roof.webp"
-						caption="Chapter 3 on the Roof"
-					/>
-					<Quote
-						title="I have my met absolute best friends at this event…"
-						author="Jacey"
-					/>
-					<Quote
-						title="I feel like I might meet my husband at this event!"
-						author="Allie"
-					/>
-					<Media
-					  type="video"
-						src="https://storage.googleapis.com/creatorspace-public/users%2Fcln66jsyk02gwp301vjhpzgpb%2FNOZsvPuKS7s9wRIo-IMG_7150.MP4"
-						caption="Reading in The Park"
-					/>
-					<Media
-					  type="photo"
-						src="/src/assets/media/Readers_FourFiveSix_Bar.webp"
-						caption="Readers @ FourFiveSix Bar"
-					/>
-				</div>
-			</div>
-			<a href="mailto:hello@readingrhythms.co" class="flex md:hidden items-center justify-center mt-16 py-4 px-8 bg-dark-gray text-white rounded-xl font-bold leading-none">
-				<span class="mt-0.5">Feedback Or Ideas? Email us!</span>
-			</a>
-		</main>
-	</body>
-</html>
-
-<style is:global>
-.masonry {
-	--masonry-columns: 1;
-	--masonry-gap: 1rem;
-}
-
-@media (min-width: 768px) {
-	.masonry {
-		--masonry-columns: 2;
-		--masonry-gap: 1rem;
-	}
-}
-
-/* Load only if grid-template-rows: masonry is supported by the browser, else use the fallback */
-@supports (grid-template-rows: masonry) {
-	.masonry {
-		display: grid;
-		grid-template-columns: repeat(var(--masonry-columns), 1fr);
-		grid-gap: var(--masonry-gap);
-		grid-template-rows: masonry;
-	}
-
-	.masonry > * {
-		margin-bottom: 0;
-	}
-}
-
-/* Fallback */
-.masonry {
-	column-count: var(--masonry-columns);
-	column-gap: var(--masonry-gap);
-}
-
-.masonry > div {
-	margin-bottom: var(--masonry-gap);
-	break-inside: avoid;
-}
-</style>
+			<Spotify
+				title="RR: Lo-Fi & Piano"
+				songs="629"
+				href="https://open.spotify.com/playlist/6xEAVQ9006ReaFeeSfR06x?si=UzKBA6J4RiS1ZKVAAzARew&pi=u-elLm48hsQ9ee"
+			/>
+			<News
+				title="Reading Rhythms in the NYT!: It’s My Party and I’ll Read If I Want To"
+				source="nytimes.com"
+				href="https://www.nytimes.com/2023/12/19/books/reading-rhythms.html"
+				thumb="/src/assets/media/New_York_Times.webp"
+			/>
+			<Quote
+				title="Literally one of the best events I’ve been to in a really long time!"
+				author="Aagam"
+			/>
+			<Instagram />
+			<Media
+				type="photo"
+				src="/src/assets/media/Chapter_10_Maison_Mono.webp"
+				caption="Chapter 10 @ Maison Mono"
+			/>
+			<Quote
+				title="Reading Rhythms is amazing… Every book club should be like this!"
+				author="Reader"
+			/>
+			<Quote
+				title="A millennial library"
+				author="Barstool Sports"
+			/>
+			<Media
+				type="video"
+				src="https://storage.googleapis.com/creatorspace-public/users%2Fcln66jsyk02gwp301vjhpzgpb%2Fo2IiXETcTwo9owRa-IMG_3727.MOV"
+				caption="The Big Read @ FourFiveSix Bar"
+			/>
+			<Media
+				type="photo"
+				src="/src/assets/media/Chapter_3_on_the_Roof.webp"
+				caption="Chapter 3 on the Roof"
+			/>
+			<Quote
+				title="I have my met absolute best friends at this event…"
+				author="Jacey"
+			/>
+			<Quote
+				title="I feel like I might meet my husband at this event!"
+				author="Allie"
+			/>
+			<Media
+				type="video"
+				src="https://storage.googleapis.com/creatorspace-public/users%2Fcln66jsyk02gwp301vjhpzgpb%2FNOZsvPuKS7s9wRIo-IMG_7150.MP4"
+				caption="Reading in The Park"
+			/>
+			<Media
+				type="photo"
+				src="/src/assets/media/Readers_FourFiveSix_Bar.webp"
+				caption="Readers @ FourFiveSix Bar"
+			/>
+		</div>
+	</div>
+	<a href="mailto:hello@readingrhythms.co" class="flex md:hidden items-center justify-center mt-16 py-4 px-8 bg-dark-gray text-white rounded-xl font-bold leading-none">
+		<span class="mt-0.5">Feedback Or Ideas? Email us!</span>
+	</a>
+</BaseLayout>
