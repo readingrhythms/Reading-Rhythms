@@ -19,8 +19,20 @@ const { title, description, fullPage } = Astro.props;
 		<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-PS29M37L"
 		height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 		<!-- End Google Tag Manager (noscript) -->
-		<main class={`relative ${fullPage ? 'h-screen w-screen flex items-center justify-center' : 'w-full h-full mb-4 md:mb-0 p-8 md:p-16'}`}>
-			<slot />
-		</main>
+		<main class={`relative ${fullPage ? 'full-height-mobile w-screen flex items-center justify-center' : 'w-full h-full mb-4 md:mb-0 p-8 md:p-16'}`}>
+      <slot />
+    </main>
 	</body>
 </html>
+
+<script is:inline>
+function setFullHeight() {
+	const vh = window.innerHeight;
+	document.documentElement.style.setProperty('--full-vh', `${vh}px`);
+}
+
+window.addEventListener('resize', setFullHeight);
+window.addEventListener('load', setFullHeight);
+
+setFullHeight();
+</script>

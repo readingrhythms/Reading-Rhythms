@@ -34,6 +34,16 @@
   font-display: swap;
 }
 
+:root {
+  --full-vh: 100vh;
+}
+
+@media (max-width: 768px) {
+  .full-height-mobile {
+    height: var(--full-vh);
+  }
+}
+
 .masonry {
   --masonry-columns: 1;
   --masonry-gap: 1rem;
