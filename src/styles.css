@@ -39,7 +39,7 @@
   --masonry-gap: 1rem;
 }
 
-@media (min-width: 768px) {
+@media (min-width: 1024px) {
   .masonry {
     --masonry-columns: 2;
     --masonry-gap: 1rem;
