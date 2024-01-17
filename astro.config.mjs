@@ -10,4 +10,7 @@ export default defineConfig({
   integrations: [tailwind(), robotsTxt()],
   output: 'server',
   adapter: netlify(),
+  redirects: {
+    '/host': '/apply',
+  },
 });
