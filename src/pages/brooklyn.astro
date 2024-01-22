@@ -1,5 +1,7 @@
 ---
 import BaseLayout from '@layouts/BaseLayout.astro';
+import { Image } from 'astro:assets';
+import arrowright from '@assets/icons/arrow-right.svg';
 
 const getTomorrowsDate = () => {
   const tomorrow = new Date();
@@ -56,7 +58,7 @@ const events = await fetchEvents();
   <div class="overlay fixed inset-0 bg-black bg-opacity-50 z-40 hidden"></div>
   <div class="sliding-div fixed top-0 right-0 w-3/5 h-full px-12 bg-[#202325] z-50 transform translate-x-full transition-transform">
     <button class="back-button absolute top-5 left-5 flex items-center text-white font-semibold">
-      <img src="../src/assets/icons/arrow-right.svg" alt="Arrow icon" class="w-4 mr-1.5 scale-x-[-1]" />Back
+      <Image src={arrowright} alt="Arrow icon" class="w-4 mr-1.5 scale-x-[-1]" />Back
     </button>
     <iframe class="w-full h-full mt-16" frameborder="0" aria-hidden="false" tabindex="0"></iframe>
     <div id="lumaLoader" class="fixed top-0 right-0 bottom-0 left-0 flex justify-center items-center bg-luma-gray z-50">
