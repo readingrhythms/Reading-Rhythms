@@ -2,6 +2,7 @@
 import BaseLayout from '@layouts/BaseLayout.astro';
 import { Image } from 'astro:assets';
 import arrowright from '@assets/icons/arrow-right.svg';
+import 'vanilla-calendar-pro/build/vanilla-calendar.min.css';
 
 const getTomorrowsDate = () => {
   const tomorrow = new Date();
@@ -67,12 +68,8 @@ const events = await fetchEvents();
   </div>
 </BaseLayout>
 
-<!--<link is:inline href="https://cdn.jsdelivr.net/npm/vanilla-calendar-pro/build/vanilla-calendar.min.css" rel="stylesheet">
-<script is:inline src="https://cdn.jsdelivr.net/npm/vanilla-calendar-pro/build/vanilla-calendar.min.js"></script>-->
-
 <script type="module" define:vars={{events}}>
-import VanillaCalendar from 'vanilla-calendar-pro';
-import 'vanilla-calendar-pro/build/vanilla-calendar.min.css';
+import 'https://cdn.jsdelivr.net/npm/vanilla-calendar-pro/build/vanilla-calendar.min.js';
 
 document.addEventListener('DOMContentLoaded', () => {
   let filteredEvents = events;
