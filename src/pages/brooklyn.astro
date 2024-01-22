@@ -67,12 +67,12 @@ const events = await fetchEvents();
   </div>
 </BaseLayout>
 
-<link is:inline href="https://cdn.jsdelivr.net/npm/vanilla-calendar-pro/build/vanilla-calendar.min.css" rel="stylesheet">
-<script is:inline src="https://cdn.jsdelivr.net/npm/vanilla-calendar-pro/build/vanilla-calendar.min.js"></script>
+<!--<link is:inline href="https://cdn.jsdelivr.net/npm/vanilla-calendar-pro/build/vanilla-calendar.min.css" rel="stylesheet">
+<script is:inline src="https://cdn.jsdelivr.net/npm/vanilla-calendar-pro/build/vanilla-calendar.min.js"></script>-->
 
 <script type="module" define:vars={{events}}>
-//import VanillaCalendar from '../../node_modules/vanilla-calendar-pro';
-//import '../../node_modules/vanilla-calendar-pro/build/vanilla-calendar.min.css';
+import VanillaCalendar from 'vanilla-calendar-pro';
+import 'vanilla-calendar-pro/build/vanilla-calendar.min.css';
 
 document.addEventListener('DOMContentLoaded', () => {
   let filteredEvents = events;
