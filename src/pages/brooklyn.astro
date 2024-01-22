@@ -2,7 +2,6 @@
 import BaseLayout from '@layouts/BaseLayout.astro';
 import { Image } from 'astro:assets';
 import arrowright from '@assets/icons/arrow-right.svg';
-import 'vanilla-calendar-pro/build/vanilla-calendar.min.css';
 
 const getTomorrowsDate = () => {
   const tomorrow = new Date();
@@ -186,6 +185,8 @@ document.addEventListener('DOMContentLoaded', () => {
 </script>
 
 <style>
+@import 'https://cdn.jsdelivr.net/npm/vanilla-calendar-pro/build/vanilla-calendar.min.css';
+
 .loader {
   border-color: #fff;
   border-top-color: transparent;
