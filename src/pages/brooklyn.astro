@@ -1,5 +1,36 @@
 ---
 import BaseLayout from '@layouts/BaseLayout.astro';
+
+const getTomorrowsDate = () => {
+  const tomorrow = new Date();
+  tomorrow.setDate(tomorrow.getDate() + 1);
+  return tomorrow.toISOString().split('T')[0];
+};
+
+const tomorrowsDate = getTomorrowsDate();
+
+const fetchEvents = async () => {
+  const options = {
+    method: 'GET',
+    headers: {
+      accept: 'application/json',
+      'x-luma-api-key': 'secret-EtDtVkTBFjFoltBNNgZO9EaUY'
+    }
+  };
+
+  const apiUrl = `https://api.lu.ma/public/v1/calendar/list-events?after=${tomorrowsDate}&series_mode=sessions`;
+
+  try {
+    const response = await fetch(apiUrl, options);
+    const data = await response.json();
+    return data.entries.filter(entry => entry.event.visibility === 'public');
+  } catch (err) {
+    console.error(err);
+    return [];
+  }
+};
+
+const events = await fetchEvents();
 ---
 
 <BaseLayout title='Reading Rhythms | Brooklyn Events' description='We throw the world’s best reading parties. Bringing reading, ambient music, and cozy venues together to create a one of a kind experience. Bring any book you want. As seen on TV &amp; in major media.' showNavbar={true} bodyClasses='bg-luma-gray text-white font-system' extraClasses='bg-luma-gray text-white font-system'>
@@ -34,47 +65,14 @@ import BaseLayout from '@layouts/BaseLayout.astro';
   </div>
 </BaseLayout>
 
-<script type="module">
-import VanillaCalendar from '../../node_modules/vanilla-calendar-pro';
-import '../../node_modules/vanilla-calendar-pro/build/vanilla-calendar.min.css';
+<link is:inline href="https://cdn.jsdelivr.net/npm/vanilla-calendar-pro/build/vanilla-calendar.min.css" rel="stylesheet">
+<script is:inline src="https://cdn.jsdelivr.net/npm/vanilla-calendar-pro/build/vanilla-calendar.min.js"></script>
 
-const getTomorrowsDate = () => {
-  const tomorrow = new Date();
-  tomorrow.setDate(tomorrow.getDate() + 1);
-  return tomorrow.toISOString().split('T')[0];
-};
-
-const fetchEvents = async () => {
-  const tomorrowsDate = getTomorrowsDate();
-  const options = {
-    method: 'GET',
-    headers: {
-      accept: 'application/json',
-      'x-luma-api-key': 'secret-EtDtVkTBFjFoltBNNgZO9EaUY'
-    }
-  };
-
-  const apiUrl = `https://api.lu.ma/public/v1/calendar/list-events?after=${tomorrowsDate}&series_mode=sessions`;
-
-  try {
-    const response = await fetch(apiUrl, options);
-    const data = await response.json();
-    return data.entries.filter(entry => entry.event.visibility === 'public');
-  } catch (err) {
-    console.error(err);
-    return [];
-  }
-};
-
-let events = [];
-
-const init = async () => {
-  events = await fetchEvents();
-};
+<script type="module" define:vars={{events}}>
+//import VanillaCalendar from '../../node_modules/vanilla-calendar-pro';
+//import '../../node_modules/vanilla-calendar-pro/build/vanilla-calendar.min.css';
 
 document.addEventListener('DOMContentLoaded', () => {
-  init();
-
   let filteredEvents = events;
 
   const convertDateToEST = (dateStr) => {
