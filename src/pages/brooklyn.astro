@@ -38,18 +38,6 @@ import BaseLayout from '@layouts/BaseLayout.astro';
 import VanillaCalendar from '../../node_modules/vanilla-calendar-pro';
 import '../../node_modules/vanilla-calendar-pro/build/vanilla-calendar.min.css';
 
----
-import BaseLayout from '@layouts/BaseLayout.astro';
----
-
-<BaseLayout title='Reading Rhythms | Brooklyn Events' description='We throw the world’s best reading parties. Bringing reading, ambient music, and cozy venues together to create a one of a kind experience. Bring any book you want. As seen on TV &amp; in major media.' showNavbar={true} bodyClasses='bg-luma-gray text-white font-system' extraClasses='bg-luma-gray text-white font-system'>
-  <!-- ... (Rest of your HTML content) ... -->
-</BaseLayout>
-
-<script type="module">
-import VanillaCalendar from '../../node_modules/vanilla-calendar-pro';
-import '../../node_modules/vanilla-calendar-pro/build/vanilla-calendar.min.css';
-
 const getTomorrowsDate = () => {
   const tomorrow = new Date();
   tomorrow.setDate(tomorrow.getDate() + 1);
