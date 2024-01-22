@@ -108,7 +108,7 @@ document.addEventListener('DOMContentLoaded', () => {
           <div>
             <p class="mb-2 text-sm md:text-base opacity-50">${startTime} EST</p>
             <h2 class="text-base md:text-xl font-bold">${event.event.name}</h2>
-            <p class="flex items-center mt-2 text-sm md:text-base opacity-50"><img src="../src/assets/icons/map.svg" alt="Map icon" class="w-4 mr-1.5" /> ${event.event.geo_address_json?.address ?? 'Address not available'}</p>
+            <p class="flex items-center mt-2 text-sm md:text-base opacity-50"><img src="/assets/icons/map.svg" alt="Map icon" class="w-4 mr-1.5" /> ${event.event.geo_address_json?.address ?? 'Address not available'}</p>
           </div>
           <img src=${event.event.cover_url} alt=${event.event.name} class="w-20 md:w-36 h-20 md:h-36 rounded-lg" />
         </a>
