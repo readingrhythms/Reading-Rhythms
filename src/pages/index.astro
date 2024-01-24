@@ -16,7 +16,7 @@ import arrowright from '@assets/icons/arrow-right.svg';
 		<h1 class="mb-4 text-4xl text-dark-gray font-display tracking-wider">Reading Rhythms</h1>
 		<p class="my-1 md:text-xl text-dark-gray/75 font-light">Not a book club. A reading party.</p>
 		<p class="my-1 md:text-xl text-dark-gray/75 font-light">Read with friends to curated music.</p>
-		<p class="my-1 md:text-xl text-dark-gray/75 font-light">Playlists & Event Tickets 👇</p>
+		<br><p class="my-1 md:text-xl text-dark-gray/75 font-light"><b>Press 👉 press@readingrhythms.co</b></p>
 		<a href="mailto:hello@readingrhythms.co" class="md:absolute md:bottom-16 hidden md:flex items-center justify-center py-4 px-8 bg-dark-gray text-white rounded-xl font-bold leading-snug">
 			<span class="mt-0.5">Feedback Or Ideas? Email us!</span>
 		</a>
@@ -24,35 +24,35 @@ import arrowright from '@assets/icons/arrow-right.svg';
 	<div class="md:w-[calc(100%-375px)] lg:w-[calc(100%-475px)] md:h-full md:ml-[375px] lg:ml-[475px]">
 		<div class="masonry">
 			<div>
-				<a href="/apply" id="applyBtn" class="group flex items-center justify-between mb-2 p-4 md:py-6 md:px-8 bg-jean text-white rounded-xl font-bold leading-snug">
-					<span class="mt-0.5">Apply to Host or MC in NYC</span>
-					<Image src={arrowright} alt="Arrow right" class="w-4 ml-2 group-hover:rotate-0 transition duration-250 ease-in-out -rotate-45" />
-				</a>
 				<a href="https://lu.ma/readingrhythms-brooklyn?utm_source=website" target="_blank" rel="noopener" id="brooklynTicketsBtn" class="group flex items-center justify-between mb-2 p-4 md:py-6 md:px-8 bg-rust text-white rounded-xl font-bold leading-snug">
 					<span class="mt-0.5">Brooklyn Event Tickets</span>
 					<Image src={arrowright} alt="Arrow right" class="w-4 ml-2 group-hover:rotate-0 transition duration-250 ease-in-out -rotate-45" />
 				</a>
-				<a href="https://lu.ma/readingrhythms-manhattan?utm_source=website" target="_blank" rel="noopener" id="manhattanTicketsBtn" class="group flex items-center justify-between p-4 md:py-6 md:px-8 bg-dark-purple text-white rounded-xl font-bold leading-snug">
+				<br><a href="https://lu.ma/readingrhythms-manhattan?utm_source=website" target="_blank" rel="noopener" id="manhattanTicketsBtn" class="group flex items-center justify-between p-4 md:py-6 md:px-8 bg-dark-purple text-white rounded-xl font-bold leading-snug">
 					<span class="mt-0.5">Manhattan Event Tickets</span>
 					<Image src={arrowright} alt="Arrow right" class="w-4 ml-2 group-hover:rotate-0 transition duration-250 ease-in-out -rotate-45" />
 				</a>
+				<br><a href="/apply" id="applyBtn" class="group flex items-center justify-between mb-2 p-4 md:py-6 md:px-8 bg-jean text-white rounded-xl font-bold leading-snug">
+					<span class="mt-0.5">Apply to Host or MC in NYC</span>
+					<Image src={arrowright} alt="Arrow right" class="w-4 ml-2 group-hover:rotate-0 transition duration-250 ease-in-out -rotate-45" />
+				</a>				
 			</div>
-			<Spotify
-				title="RR: Lo-Fi & Piano"
-				songs="629"
-				href="https://open.spotify.com/playlist/6xEAVQ9006ReaFeeSfR06x?si=UzKBA6J4RiS1ZKVAAzARew&pi=u-elLm48hsQ9ee"
-			/>
+			<Instagram />
 			<News
 				title="Reading Rhythms in the NYT!: It’s My Party and I’ll Read If I Want To"
 				source="nytimes.com"
 				href="https://www.nytimes.com/2023/12/19/books/reading-rhythms.html"
 				thumb="/src/assets/media/New_York_Times.webp"
 			/>
+			<Spotify
+				title="RR: Lo-Fi & Piano"
+				songs="629"
+				href="https://open.spotify.com/playlist/6xEAVQ9006ReaFeeSfR06x?si=UzKBA6J4RiS1ZKVAAzARew&pi=u-elLm48hsQ9ee"
+			/>
 			<Quote
 				title="Literally one of the best events I’ve been to in a really long time!"
 				author="Aagam"
 			/>
-			<Instagram />
 			<Media
 				type="photo"
 				src="/src/assets/media/Chapter_10_Maison_Mono.webp"
@@ -71,6 +71,10 @@ import arrowright from '@assets/icons/arrow-right.svg';
 				src="https://storage.googleapis.com/creatorspace-public/users%2Fcln66jsyk02gwp301vjhpzgpb%2Fo2IiXETcTwo9owRa-IMG_3727.MOV"
 				caption="The Big Read @ FourFiveSix Bar"
 			/>
+			<Quote
+				title="I feel like I might meet my husband at this event!"
+				author="Allie"
+			/>
 			<Media
 				type="photo"
 				src="/src/assets/media/Chapter_3_on_the_Roof.webp"
@@ -79,10 +83,6 @@ import arrowright from '@assets/icons/arrow-right.svg';
 			<Quote
 				title="I have my met absolute best friends at this event…"
 				author="Jacey"
-			/>
-			<Quote
-				title="I feel like I might meet my husband at this event!"
-				author="Allie"
 			/>
 			<Media
 				type="video"
