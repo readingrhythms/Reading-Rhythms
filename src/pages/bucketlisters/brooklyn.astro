@@ -2,49 +2,17 @@
 import BaseLayout from '@layouts/BaseLayout.astro';
 import { Image } from 'astro:assets';
 import arrowright from '@assets/icons/arrow-right.svg';
-
-const getTomorrowsDate = () => {
-  const tomorrow = new Date();
-  tomorrow.setDate(tomorrow.getDate() + 1);
-  return tomorrow.toISOString().split('T')[0];
-};
-
-const tomorrowsDate = getTomorrowsDate();
-
-const fetchEvents = async () => {
-  const options = {
-    method: 'GET',
-    headers: {
-      accept: 'application/json',
-      'x-luma-api-key': 'secret-EtDtVkTBFjFoltBNNgZO9EaUY'
-    }
-  };
-
-  const apiUrl = `https://api.lu.ma/public/v1/calendar/list-events?after=${tomorrowsDate}&series_mode=sessions`;
-
-  try {
-    const response = await fetch(apiUrl, options);
-    const data = await response.json();
-    return data.entries.filter(entry => entry.event.visibility === 'public');
-  } catch (err) {
-    console.error(err);
-    return [];
-  }
-};
-
-const events = await fetchEvents();
 ---
 
 <BaseLayout title='Reading Rhythms | Brooklyn Events' description='We throw the world’s best reading parties. Bringing reading, ambient music, and cozy venues together to create a one of a kind experience. Bring any book you want. As seen on TV &amp; in major media.' showNavbar={true} bodyClasses='bg-luma-white text-black font-system' extraClasses='bg-luma-gray text-white font-system'>
-  <a href="https://bucketlisters.com/experience/reading-rhythms/" class="pl-20 underline">< Back</a>
+<a href="https://bucketlisters.com/experience/reading-rhythms/" target="_self" class="pl-20 font-bold">< Back</a>
   <div class="md:mr-24 flex justify-between items-center pl-20 pb-10">
-        <h1 class="md:mb-4 text-xl md:text-3xl font-bold ">Manhattan Events</h1>
-         <a href="https://lu.ma/readingrhythms-brooklyn" target="_blank" rel="noopener" class="pt-2 pb-2.5 mb-5 px-4 bg-rust text-white rounded text-sm md:text-base font-semibold">Subscribe</a>
+        <h1 class="md:mb-4 text-xl md:text-3xl font-bold ">Brooklyn Events</h1>
       </div>
   <div class="luma-wrapper max-w-4xl mx-auto">
     <div class="flex items-center justify-between">
       <iframe
-  src="https://lu.ma/embed/calendar/cal-Q8l315UsVMWb6h6/events?lt=light&utm_source=bucketlisters"
+  src="https://lu.ma/embed/calendar/cal-CDoX2WaI5IHD5xs/events?lt=light&utm_source=bucketlisters"
   width="1000"
   height="1100"
   frameborder="0" 
