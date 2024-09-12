@@ -11,6 +11,6 @@ const { title, author } = Astro.props;
 ---
 
 <div class="p-6 border border-beaver rounded-xl shadow-sm">
-	<Image src={quotes} alt="Quotes icon" class="w-8 mb-6" />
+	<img src={quotes.src} alt="Quotes icon" class="w-8 mb-6" />
 	<p class="text-dark-gray text-l font-bold italic">{title} <span class="ml-1.5 font-normal not-italic">-{author}</span></p>
 </div>
