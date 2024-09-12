@@ -17,15 +17,15 @@ const { title, songs, href } = Astro.props;
 	<a href={href} target="_blank" rel="noopener" class="flex items-center justify-between">
 		<div>
 			<div class="w-10 h-10 inline-flex items-center justify-center mb-3 bg-spotify-green rounded-xl">
-				<img src={spotify.svg} alt="Spotify logo" class="w-6" />
+				<img src={spotify.src} alt="Spotify logo" class="w-6" />
 			</div>
 			<h3 class="mb-1 text-dark-gray text-sm leading-snug">{title}</h3>
 			<p class="mb-4 text-dark-gray/50 text-xs">{songs} songs</p>
 			<div class="inline-flex items-center justify-center py-1.5 px-6 bg-spotify-green text-white rounded-full text-sm font-semibold">
-				<img src={play.svg} alt="Play icon" class="w-2.5 mr-1.5" />
+				<img src={play.srx} alt="Play icon" class="w-2.5 mr-1.5" />
 				Play
 			</div>
 		</div>
-		<img src={logo.svg} alt="Reading Rhythms logo" class="w-32 h-32 bg-dark-gray rounded-xl" />
+		<img src={logo.src} alt="Reading Rhythms logo" class="w-32 h-32 bg-dark-gray rounded-xl" />
 	</a>
 </div>
