@@ -29,15 +29,17 @@ import arrowright from '@assets/icons/arrow-right.svg';
 			<div class="w-1/4"><img src={pressFox5.src} alt="FOX5 logo" class="w-full h-auto" /></div>
 			<div class="w-1/4"><img src={rollingStone.src} alt="Rolling Stone logo" class="w-full h-auto" /></div>
 		</div>
-		<a href="mailto:hello@readingrhythms.co" class="hidden md:absolute md:bottom-20 md:block items-center justify-center py-4 px-8 bg-dark-gray text-white rounded-xl font-bold leading-snug ml-5">
-  <span class="mt-0.5">Feedback Or Ideas? Email us!</span>
-</a>
-		<div class="md:absolute md:bottom-4 hidden md:flex text-center items-center justify-center">
-    		<p class="md:text-sm text-dark-gray/75 font-light">
-        		Not a book club™ <br>
-        		<a href="/privacy-policy" class="text-blue-500 underline">Privacy Policy</a> | <a href="/terms" class="text-blue-500 underline">Terms & Conditions</a> | <a href="/ticketing-agreement" class="text-blue-500 underline">Ticketing Agreement</a>
-    		</p>
-		</div>
+<div class="w-full flex justify-start md:mt-56 mb-20 hidden md:flex">
+    <div class="max-w-4xl flex flex-col items-center justify-center">
+        <a href="mailto:hello@readingrhythms.co" class="py-4 px-8 bg-dark-gray text-white rounded-xl font-bold leading-snug mb-8">
+            Feedback Or Ideas? Email us!
+        </a>
+        <p class="md:text-sm text-dark-gray/75 font-light text-center">
+            Not a book club™ &nbsp;|&nbsp; Reading Rhythms LLC 2024 <br>
+            <a href="/privacy-policy" class="text-blue-500 underline">Privacy Policy</a> | <a href="/terms" class="text-blue-500 underline">Terms & Conditions</a> | <a href="/ticketing-agreement" class="text-blue-500 underline">Ticketing Agreement</a>
+        </p>
+    </div>
+</div>
 	</div>
 	
 	<div class="md:w-[calc(100%-375px)] lg:w-[calc(100%-475px)] md:h-full md:ml-[375px] lg:ml-[475px]">
@@ -120,7 +122,8 @@ import arrowright from '@assets/icons/arrow-right.svg';
 </a>
 	
 	<div class="md:hidden items-center justify-center mt-4 p-4 text-center">
-    	<p class="my-1 md:text-sm text-dark-gray/75 font-light">Not a book club™<br> 
+    	<p class="my-1 md:text-sm text-dark-gray/75 font-light">Not a book club™<br>
+		<p class="my-1 md:text-sm text-dark-gray/75 font-light">Reading Rhythms LLC 2024</p> 
 		<a href="/privacy-policy" class="text-blue-500 underline">Privacy Policy</a> | <a href="/terms" class="text-blue-500 underline">Terms & Conditions</a> | <a href="/ticketing-agreement" class="text-blue-500 underline">Ticketing Agreement </a></p>
 	</div>
 </BaseLayout>
