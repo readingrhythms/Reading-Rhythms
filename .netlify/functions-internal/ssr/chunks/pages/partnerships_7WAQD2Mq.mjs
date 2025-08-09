@@ -3,7 +3,7 @@ import { e as createAstro, f as createComponent, r as renderTemplate, i as rende
 import 'kleur/colors';
 import 'html-escaper';
 import { $ as $$BaseLayout } from './404_cKZbEBIF.mjs';
-import { a as arrowright, r as rollingStone, w as washpost, t as thrillist, g as gma, p as pressFox5, c as cbsNew, f as forbesNew, l as londonNew, n as nbcNew, b as techcrunchNew } from './index_qOyzfAVh.mjs';
+import { a as arrowright, r as rollingStone, w as washpost, t as thrillist, g as gma, p as pressFox5, c as cbsNew, f as forbesNew, l as londonNew, n as nbcNew, b as techcrunchNew } from './index_RI2itDOM.mjs';
 /* empty css                                 */
 
 const $$Astro = createAstro("https://readingrhythms.co");

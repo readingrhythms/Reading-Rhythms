@@ -162,7 +162,7 @@ const arrowright = new Proxy({"src":"/_astro/arrow-right.ixKGTF1m.svg","width":5
 						}
 					});
 
-const chapterPhoto1 = new Proxy({"src":"/_astro/25F4AA6E-1E1D-479C-810E-1DFBDD3CCABA_1_105_c.PqAkt7is.jpeg","width":1086,"height":724,"format":"jpg"}, {
+const chapterPhoto1 = new Proxy({"src":"/_astro/25F4AA6E.PqAkt7is.jpeg","width":1086,"height":724,"format":"jpg"}, {
 						get(target, name, receiver) {
 							if (name === 'clone') {
 								return structuredClone(target);

@@ -3,7 +3,7 @@ import { e as createAstro, f as createComponent, r as renderTemplate, i as rende
 import 'kleur/colors';
 import 'html-escaper';
 import { $ as $$BaseLayout } from './404_cKZbEBIF.mjs';
-import { a as arrowright, d as pressNyt, p as pressFox5, r as rollingStone, g as gma, t as thrillist, w as washpost, c as cbsNew, f as forbesNew, l as londonNew, n as nbcNew, b as techcrunchNew } from './index_qOyzfAVh.mjs';
+import { a as arrowright, d as pressNyt, p as pressFox5, r as rollingStone, g as gma, t as thrillist, w as washpost, c as cbsNew, f as forbesNew, l as londonNew, n as nbcNew, b as techcrunchNew } from './index_RI2itDOM.mjs';
 /* empty css                          */
 
 const pressNyp = new Proxy({"src":"/_astro/press-nyp.gho-j5Lk.svg","width":387,"height":57.708,"format":"svg"}, {
