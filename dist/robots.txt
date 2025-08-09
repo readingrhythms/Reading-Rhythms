@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://readingrhythms.co/sitemap-index.xml

@@ -1,0 +1,1 @@
+import"./hoisted.RJ9RqrME.js";document.addEventListener("DOMContentLoaded",()=>{const t=document.querySelector(".press-carousel");if(t&&window.innerWidth>=768){let n=function(){e+=o,t.style.transform=`translateX(-${e}px)`,e>=t.scrollWidth/4&&(e=0),requestAnimationFrame(n)},e=0;const o=.5;n()}});
