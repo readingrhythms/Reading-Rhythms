@@ -1,0 +1,99 @@
+/* empty css                          */
+import { e as createAstro, f as createComponent, r as renderTemplate, i as renderComponent, m as maybeRenderHead } from '../astro_cMhD-XD7.mjs';
+import 'kleur/colors';
+import 'html-escaper';
+import 'clsx';
+import { $ as $$BaseLayout } from './404_cKZbEBIF.mjs';
+
+const $$Astro = createAstro("https://readingrhythms.co");
+const $$PrivacyPolicy = createComponent(async ($$result, $$props, $$slots) => {
+  const Astro2 = $$result.createAstro($$Astro, $$props, $$slots);
+  Astro2.self = $$PrivacyPolicy;
+  return renderTemplate`${renderComponent($$result, "BaseLayout", $$BaseLayout, { "title": "Reading Rhythms | Privacy Policy" }, { "default": ($$result2) => renderTemplate` ${maybeRenderHead()}<div> <a href="/" class="items-center justify-center py-4 px-8 bg-dark-gray text-white rounded-xl font-bold ">Back</a> </div> <div class="text-center mt-10"> <h1 class="text-xl underline">Reading Rhythms LLC</h1> <h1 class="text-xl underline">PRIVACY POLICY</h1> </div> <div> <br> <p>Please Read This Privacy Policy Before Accessing or Using the Services. Reading Rhythms LLC, (“Reading Rhythms”, “we”, “us, or “our”) is committed to safeguarding your personal 
+        information. We have adopted this privacy policy (“Privacy Policy”) to further our goal of protecting 
+        your personal information across any website, mobile application, or other online platform that we own, 
+        control, and/or operate (“Sites”). This Privacy Policy applies only to the Sites and applies only to 
+        information that you provide us or that we collect in connection with your use and/or access of the Sites. 
+        This Privacy Policy is also governed by and expressly incorporated into our Terms and Conditions.</p> <br> <p>This purpose of this Privacy Policy is to describe how and when Reading Rhythms collects, uses and shares 
+        your information when you use and/or access our Sites, including when you book any Services we provide either 
+        on our Sites or in person but booked through our Sites (“Services”), purchase any products we sell (“Products”), 
+        or communicate with us. BY ACCESSING OR USING OUR SITES, SOLICITING AND/OR USING OUR SERVICES, PURCHASING OUR 
+        PRODUCTS, OR COMMUNICATING WITH US, YOU AGREE TO BE BOUND BY THIS PRIVACY POLICY AND THE TERMS AND CONDITIONS. 
+        IF YOU DO NOT AGREE WITH THIS PRIVACY POLICY OR THE TERMS AND CONDITIONS, DO NOT ACCESS OR USE OUR SITES OR 
+        SERVICES.</p> <br> <p>Your information is controlled by Reading Rhythms, and you hereby authorize us to use your information 
+        anywhere we operate.</p> <br> <p>If you have any questions or comments about this Privacy Policy, please contact <a href="mailto:hello@readingrhythms.co" class="text-blue-500 underline">hello@readingrhythms.co</a></p> <br> <p class="text-xl underline text-center">Information Collection and Use</p> <br> <p>User-Provided Information: Through accessing our Sites, using our Services, and/or buying our Products, 
+        you will provide certain personal information required for us to provide the Services or sell the Products. 
+        Such information includes, but is not limited to, your full name, email address, phone number, date of birth, 
+        business name (where applicable), social media information, physical address, property ownership information, 
+        information necessary to process a payment, and any other information required for providing the Services, 
+        selling our Products, and/or facilitating a transaction. You understand that failing to provide any 
+        information requested may result in us being unable to provide the Services or sell our Products.</p> <br> <p>Third Parties: Reading Rhythms may receive information about you from third parties, such as if someone else 
+        purchases a Product to send as a gift.</p> <br> <p>Cookies: Like many websites, we use cookies and similar technologies to collect additional website usage data 
+        and to improve our Services and the function of our Sites. A cookie is a small data file that is transferred to 
+        your computer or mobile device. Reading Rhythms may use both session cookies and persistent cookies to better 
+        understand how you interact with our Services and Sites, to monitor aggregate usage by our users and web 
+        traffic routing on our Services, and to customize and improve our Services and/or functionality of our Sites. 
+        Most Internet browsers automatically accept cookies. You can instruct your browser, by changing its settings, 
+        to stop accepting cookies or to prompt you before accepting a cookie from the websites you visit. However, 
+        some Services may not function properly if you disable cookies.</p> <br> <p>Log Data: When you use our Sites, we may receive information (“Log Data”) such as your IP address, browser 
+        type, operating system, the referring web page, pages visited, location, your mobile carrier, device 
+        information (including device and application IDs), search terms, and cookie information. We receive Log Data 
+        when you interact with our Sites. We may also receive Log Data when you click on, view or interact with links 
+        on our Sites , including links to third-party Sites, or purchase Products.</p> <br> <p>Geolocation Data: We may collect data related to your physical location while you are using the Sites.</p> <br> <p>Commerce Services: All payments made for any Reading Rhythms Service or product are handled by third-party 
+        payment services, who receive and handle your payment information directly. Reading Rhythms does not have 
+        access to or store the entirety of your payment information, but rather only has access to your full name, 
+        email address, physical address, and any other data required by our third-party payment processor, which 
+        Reading Rhythms shall keep as confidential.</p> <br> <p>Use: Reading Rhythms will generally only use your data as necessary for providing Services, selling Products, 
+        communication with you, and support related to the Services and Sites, improving the way we provide Services 
+        and the functionality of the Sites, communicating with you, marketing and promotion purposes, and for 
+        investigative or legal purposes.</p> <br> <p class="text-xl underline text-center">Information Sharing and Disclosure</p> <br> <p>We do not disclose your private personal information except in the limited circumstances described here.</p> <br> <p>User Consent or Direction: We may share or disclose your information at your direction, such as when you 
+        authorize a third-party web client or application to access your account or information. We also will disclose 
+        or use your information as reasonably necessary to provide you Services or sell you Products.</p> <br> <p>Service Providers: We engage service providers to perform functions and provide services to us. We may share 
+        your private personal information with such service providers subject to obligations consistent with this Privacy 
+        Policy and any other appropriate confidentiality and security measures, and on the condition that the third 
+        parties use your private personal data only on our behalf and pursuant to our instructions.</p> <br> <p>Other Third Parties: We will share your information as necessary to third parties as necessary to provide the 
+        Services, sell our Products, or to carry out other activities related to the Services, Products, and/or Sites.</p> <br> <p>Law and Harm: Notwithstanding anything to the contrary in this Privacy Policy, we may preserve or disclose 
+        your information if we believe that it is reasonably necessary to comply with a law, regulation, legal process, 
+        or governmental request; to protect the safety of any person; to address fraud, security, or technical issues; 
+        or to protect Reading Rhythms’ rights or property. However, nothing in this Privacy Policy is intended to 
+        limit any legal defenses or objections that you may have to a third party’s, including a government’s, 
+        request to disclose your information.</p> <br> <p>Business Transfers and Affiliates: In the event that Reading Rhythms is involved in a bankruptcy, merger, 
+        acquisition, reorganization or sale of assets, your information may be sold or transferred as part of that 
+        transaction. This Privacy Policy will apply to your information as transferred to the new entity or with any 
+        entity that becomes or is a subsidiary or affiliate of Reading Rhythms.</p> <br> <p class="text-xl underline text-center">California Privacy Rights</p> <br> <p>Under the California Consumer Privacy Act (“<span class="underline">CCPA</span>”) California residents have certain rights and privileges. 
+        You can exercise any of the following rights by notifying us as described below:</p> <ul class="list-disc mx-12 my-5"> <li><span class="underline">Disclosure Request</span>. Upon request and when possible, we will disclose the categories and specific pieces of 
+            personal information we have collected about you. Additionally, you may also obtain the categories of 
+            information about you that we have sold, the categories of third parties to whom the information was sold, 
+            and the categories of personal information that we disclosed about you for a business purpose. You may submit 
+            these requests via email to <a href="mailto:hello@readingrhythms.co" class="text-blue-500 underline">hello@readingrhythms.co</a>. When such a request cannot be honored, we will advise 
+            you accordingly.</li> <li><span class="underline">Deletion</span>. If you should wish to cease use of our Sites and have your personal data deleted from our Sites, 
+            then you may submit a request by emailing us at <a href="mailto:hello@readingrhythms.co" class="text-blue-500 underline">hello@readingrhythms.co</a>. 
+            Upon receipt of a verifiable request for deletion, we will confirm receipt and will confirm once your personal 
+            data has been deleted. To exercise this right via email, simply type the words “Personal Data Deletion” in the 
+            subject line of your email.</li> <li>Right to Sue for Security Breaches. You also have the right to sue in the event your nonencrypted or 
+            nonredacted personal information, is subject to an unauthorized access and exfiltration, theft, or disclosure 
+            as a result of our violation of the duty to implement and maintain reasonable security procedures and 
+            practices. Prior to exercising this right, you must provide us with 30 days’ written notice by emailing us at
+<a href="mailto:hello@readingrhythms.co" class="text-blue-500 underline">hello@readingrhythms.co</a>
+and providing us with an opportunity to fix this violation.</li> </ul> <p>We reserve the right to ask for information verifying your identity and residency prior to disclosing any 
+        information to you or acting on your request.  Should we ask for verification, the information you provide to 
+        verify your identity and residency will be used only for that purpose, and all copies of this information in 
+        our possession will be destroyed when the process is complete. We strive to respond to your request within 45 
+        days of receiving a verifiable consumer request however, we reserve the right to respond within 90 days when 
+        reasonably necessary.</p> <br> <p>Except as provided herein, we will not disclose or share your personal information with third parties for the 
+        purposes of third-party marketing to you without your prior consent.</p> <br> <p class="text-xl underline text-center">Our Policy Towards Children</p> <br> <p>Our Services are not directed to persons under 18. If you become aware that your child has provided us with 
+        personal information without your consent, please contact us at hello@readingrhythms.co. In compliance 
+        with the Children’s Online Privacy Protection act of 1998, we do not knowingly collect personal information 
+        from children under 18 without parental consent. If we become aware that a child under 18 has provided us 
+        with personal information, we will take steps to remove such information and terminate the child’s account.</p> <br> <p class="text-xl underline text-center">Privacy Shield Framework</p> <br> <p>EA complies with the EU-U.S. Privacy Shield Framework. To learn more about the Safe Harbor program, and to 
+        view our certification, please visit the following <a href="https://www.ftc.gov/business-guidance/privacy-security/us-eu-safe-harbor-framework" class="text-blue-500 underline">website</a>.</p> <br> <p class="text-xl underline text-center">Changes to this Policy</p> <br> <p>We may revise this Privacy Policy from time to time. The most current version of the policy will govern our 
+        use of your information and will always be at <a href="https://readingrhythms.co/privacy-policy" class="text-blue-500 underline">https://readingrhythms.co/privacy-policy</a>. 
+        If we make a change to this policy that, in our sole discretion, is material, we will notify you via email to the email address 
+        associated with your account. By continuing to access or use the Services after those changes become effective, 
+        you agree to be bound by the revised Privacy Policy.</p> </div>` })}`;
+}, "/home/readingrhythms/Reading-Rhythms/src/pages/privacy-policy.astro", void 0);
+
+const $$file = "/home/readingrhythms/Reading-Rhythms/src/pages/privacy-policy.astro";
+const $$url = "/privacy-policy";
+
+export { $$PrivacyPolicy as default, $$file as file, $$url as url };
