@@ -15,6 +15,7 @@ export default {
         beaber: '#8b7867',
         rust: '#b55336',
         'dark-purple': '#2f131f',
+       beige: '#f5f5dc',
       },
       backgroundImage: {
         'custom-gradient':

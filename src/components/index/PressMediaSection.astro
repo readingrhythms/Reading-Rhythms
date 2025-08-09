@@ -1,0 +1,229 @@
+---
+import type { ImageMetadata } from 'astro';
+import { Image } from 'astro:assets';
+import News from '@components/index/News.astro';
+import Spotify from '@components/index/Spotify.astro';
+import Instagram from '@components/index/Instagram.astro';
+
+// Import all press images
+import pressNyt from '@assets/images/press_section/bizinsiderimage.webp';
+import pressNyp from '@assets/images/press_section/rollingstoneimage.webp';
+import pressTodayShow from '@assets/images/press_section/todayshowimage.png';
+import pressFox5 from '@assets/images/press_section/fox5ny_article.jpg';
+import pressRollingStone from '@assets/images/press_section/rollingstoneimage.webp';
+import pressGma from '@assets/images/press_section/GMA.png';
+import pressGuardian from '@assets/images/press_section/guardian_article.jpg';
+import pressThrillist from '@assets/images/press_section/thrillist_article.jpg';
+import pressWashpost from '@assets/images/press_section/forbes_image.webp';
+import pressCbs from '@assets/images/press_section/cbs_article.png';
+import pressForbes from '@assets/images/press_section/forbes_image.webp';
+import pressLondon from '@assets/images/press_section/london_times_favicon.png';
+import pressNbc from '@assets/images/press_section/wnbc_article.png';
+import pressTechcrunch from '@assets/images/press_section/techcrunch_article.jpg';
+
+const pressItems = [
+  {
+    type: 'news',
+    title: 'The Reading Party Revolution',
+    source: 'Business Insider',
+    href: '#',
+    thumb: '/src/assets/media/New_York_Times.webp',
+    width: '300px',
+    height: '280px'
+  },
+  {
+    type: 'news',
+    title: 'Silent Reading, Loud Impact',
+    source: 'Rolling Stone',
+    href: '#',
+    thumb: '/src/assets/media/Chapter_3_on_the_Roof.webp',
+    width: '280px',
+    height: '200px'
+  },
+  {
+    type: 'news',
+    title: 'NYC\'s Hottest Reading Trend',
+    source: 'Today Show',
+    href: '#',
+    thumb: '/src/assets/media/Chapter_10_Maison_Mono.webp',
+    width: '320px',
+    height: '320px'
+  },
+  {
+    type: 'news',
+    title: 'Book Clubs Are So Last Year',
+    source: 'FOX5 NY',
+    href: '#',
+    thumb: '/src/assets/media/Readers_FourFiveSix_Bar.webp',
+    width: '270px',
+    height: '240px'
+  },
+  {
+    type: 'news',
+    title: 'The Future of Reading',
+    source: 'The Guardian',
+    href: '#',
+    thumb: '/src/assets/media/New_York_Times.webp',
+    width: '290px',
+    height: '300px'
+  },
+  {
+    type: 'news',
+    title: 'Reading Parties Take Manhattan',
+    source: 'Thrillist',
+    href: '#',
+    thumb: '/src/assets/media/Chapter_3_on_the_Roof.webp',
+    width: '310px',
+    height: '210px'
+  },
+  {
+    type: 'news',
+    title: 'Community Through Literature',
+    source: 'Forbes',
+    href: '#',
+    thumb: '/src/assets/media/Chapter_10_Maison_Mono.webp',
+    width: '285px',
+    height: '290px'
+  },
+  {
+    type: 'news',
+    title: 'The Social Reading Movement',
+    source: 'CBS News',
+    href: '#',
+    thumb: '/src/assets/media/Readers_FourFiveSix_Bar.webp',
+    width: '295px',
+    height: '220px'
+  },
+  {
+    type: 'news',
+    title: 'Books and Beats',
+    source: 'NBC New York',
+    href: '#',
+    thumb: '/src/assets/media/New_York_Times.webp',
+    width: '275px',
+    height: '310px'
+  },
+  {
+    type: 'news',
+    title: 'Reading Renaissance',
+    source: 'TechCrunch',
+    href: '#',
+    thumb: '/src/assets/media/Chapter_3_on_the_Roof.webp',
+    width: '305px',
+    height: '250px'
+  },
+  {
+    type: 'news',
+    title: 'Literary Social Hours',
+    source: 'Washington Post',
+    href: '#',
+    thumb: '/src/assets/media/Chapter_10_Maison_Mono.webp',
+    width: '290px',
+    height: '270px'
+  },
+  {
+    type: 'news',
+    title: 'The Reading Revolution',
+    source: 'London Times',
+    href: '#',
+    thumb: '/src/assets/media/Readers_FourFiveSix_Bar.webp',
+    width: '280px',
+    height: '230px'
+  }
+];
+
+// Filter out Instagram and Spotify
+const newsItems = pressItems.filter(item => item.type === 'news');
+---
+// Create staggered margin-top values for visual variety
+const getStaggeredMargin = (index) => {
+  const margins = ['0px', '25px', '-15px', '40px', '-10px', '30px'];
+  return margins[index % margins.length];
+};
+
+<section class="py-16 lg:py-24 bg-gradient-to-b from-gray-50/30 to-white">
+  <div class="max-w-7xl mx-auto px-6 lg:px-8">
+    <div class="text-center mb-12">
+      <h2 class="text-3xl md:text-4xl font-display text-dark-gray mb-4">
+        Press & <span class="bg-gradient-to-r from-jean to-rust bg-clip-text text-transparent">Media</span>
+      </h2>
+      <p class="text-lg text-dark-gray/70">
+        Reading Rhythms in the news
+      </p>
+    </div>
+    
+    <div class="relative">
+      <!-- Flexible Press Grid -->
+      <div id="press-container" class="flex flex-wrap justify-center gap-4 lg:gap-6">
+        {newsItems.map((item, index) => (
+          <div 
+            class={`press-item ${index >= 9 ? 'hidden-press hidden' : ''} transition-all duration-300`}
+            style={`width: ${item.width}; height: ${item.height}; min-width: 250px; margin-top: ${getStaggeredMargin(index)};`}
+          >
+            <News 
+              title={item.title}
+              source={item.source}
+              href={item.href}
+              thumb={item.thumb}
+            />
+          </div>
+        ))}
+      </div>
+      
+      <!-- Fade Overlay and See More Button -->
+      <div id="fade-overlay" class="relative -mt-20 pt-20 bg-gradient-to-t from-white via-white/90 to-transparent text-center">
+        <button 
+          id="see-more-press"
+          class="inline-flex items-center justify-center px-8 py-4 bg-gradient-to-r from-jean to-dark-purple text-white rounded-xl font-bold text-lg hover:shadow-xl hover:shadow-jean/25 transition-all duration-300 hover:-translate-y-1"
+        >
+          See More Press
+        </button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const seeMoreButton = document.getElementById('see-more-press');
+    const fadeOverlay = document.getElementById('fade-overlay');
+    const hiddenItems = document.querySelectorAll('.hidden-press');
+    
+    if (seeMoreButton && fadeOverlay) {
+      seeMoreButton.addEventListener('click', () => {
+        // Show hidden press items
+        hiddenItems.forEach(item => {
+          item.classList.remove('hidden');
+          item.classList.add('animate-fade-in');
+        });
+        
+        // Hide the fade overlay and button
+        fadeOverlay.style.display = 'none';
+      });
+    }
+  });
+</script>
+
+<style>
+  @keyframes fade-in {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  
+  .animate-fade-in {
+    animation: fade-in 0.5s ease-out forwards;
+  }
+  
+  .press-item {
+    flex-shrink: 0;
+  }
+  
+  @media (max-width: 768px) {
+    .press-item {
+      width: 100% !important;
+      min-width: unset !important;
+      max-width: 400px;
+      height: 200px !important;
+    }
+  }
+</style>

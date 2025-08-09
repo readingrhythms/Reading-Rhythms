@@ -3,14 +3,32 @@ import { Image } from 'astro:assets';
 import quotes from '@assets/icons/quotes.svg';
 
 interface Props {
-	title: string;
+	quote: string;
 	author: string;
+	color: string;
+	index: number;
 };
 
-const { title, author } = Astro.props;
+const { quote, author, color, index } = Astro.props;
+
+// Map color names to Tailwind classes
+const colorClasses = {
+	jean: 'border-blue-500/40 bg-gradient-to-br from-blue-400/30 to-blue-300/20 shadow-lg shadow-blue-500/30',
+	rust: 'border-orange-400/40 bg-gradient-to-br from-orange-300/30 to-orange-200/20 shadow-lg shadow-orange-400/30',
+	'dark-purple': 'border-amber-200/50 bg-gradient-to-br from-amber-50/60 to-yellow-50/40 shadow-lg shadow-amber-200/25'
+};
+
+const borderColorClass = colorClasses[color] || 'border-gray-300/40 bg-gradient-to-br from-gray-200/30 to-gray-100/20 shadow-lg shadow-gray-300/35';
+
+// Create balanced tilt pattern based on index
+const tiltPattern = ['-rotate-2', 'rotate-1', '-rotate-1', 'rotate-2', 'rotate-0', '-rotate-3', 'rotate-3'];
+const tilt = tiltPattern[index % tiltPattern.length];
 ---
 
-<div class="p-6 border border-beaver rounded-xl shadow-sm">
-	<img src={quotes.src} alt="Quotes icon" class="w-8 mb-6" />
-	<p class="text-dark-gray text-l font-bold italic">{title} <span class="ml-1.5 font-normal not-italic">-{author}</span></p>
+<div class={`p-6 border transition-all duration-300 hover:shadow-2xl hover:-translate-y-2 h-fit break-inside-avoid organic-border ${borderColorClass} ${tilt} hover:rotate-0`}>
+	<div class="flex items-center justify-between mb-4">
+		<img src={quotes.src} alt="Quotes icon" class="w-6 opacity-60" />
+	</div>
+	<p class="text-dark-gray text-base leading-relaxed mb-4">"{quote}"</p>
+	<p class="text-dark-gray/70 text-sm font-medium">— {author}</p>
 </div>

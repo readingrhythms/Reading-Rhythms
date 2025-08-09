@@ -16,11 +16,13 @@ if (type === 'photo' && !images[src]) {
 }
 ---
 
-<div class="relative aspect-square border border-transparent rounded-xl shadow-sm overflow-hidden">
+<div class="relative w-full h-full overflow-hidden">
     {type === 'photo' ? (
-        <Image src={images[src]()} alt={caption} class="aspect-square w-full object-cover object-center" />
+        <Image src={images[src]()} alt={caption || ''} class="w-full h-full object-cover object-center" />
     ) : (
-        <video src={src} class="aspect-square w-full object-cover object-center" muted autoplay loop />
+        <video src={src} class="w-full h-full object-cover object-center" muted autoplay loop />
     )}
-    <p class="absolute bottom-3 left-3 inline-flex py-1.5 px-3 bg-white text-dark-gray rounded text-sm leading-none"><span class="mt-1">{caption}</span></p>
+    {caption && (
+        <p class="absolute bottom-3 left-3 inline-flex py-1.5 px-3 bg-white text-dark-gray rounded text-sm leading-none"><span class="mt-1">{caption}</span></p>
+    )}
 </div>

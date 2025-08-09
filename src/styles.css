@@ -56,27 +56,125 @@
   }
 }
 
-/* Load only if grid-template-rows: masonry is supported by the browser, else use the fallback */
-@supports (grid-template-rows: masonry) {
-  .masonry {
-    display: grid;
-    grid-template-columns: repeat(var(--masonry-columns), 1fr);
-    grid-gap: var(--masonry-gap);
-    grid-template-rows: masonry;
-  }
-
-  .masonry > * {
-    margin-bottom: 0;
-  }
+@keyframes floatSlow {
+	0%, 100% { transform: translateY(0px) rotate(0deg) scale(1); }
+	50% { transform: translateY(-2px) rotate(0deg) scale(1.01); }
 }
 
-/* Fallback */
-.masonry {
-  column-count: var(--masonry-columns);
-  column-gap: var(--masonry-gap);
+@keyframes floatFast {
+	0%, 100% { transform: translateY(0px) rotate(0deg) scale(1); }
+	33% { transform: translateY(-1px) rotate(0deg) scale(0.99); }
+	66% { transform: translateY(-2px) rotate(0deg) scale(1.01); }
 }
 
-.masonry > div {
-  margin-bottom: var(--masonry-gap);
-  break-inside: avoid;
+/* Gradient animation for hero text */
+@keyframes gradientShift {
+	0% { background-position: 0% 50%; }
+	50% { background-position: 100% 50%; }
+	100% { background-position: 0% 50%; }
+}
+
+.gradient-animate {
+	background-size: 200% 200%;
+	animation: gradientShift 3s ease infinite;
+}
+
+/* Floating animation for partner logos */
+@keyframes float {
+	0%, 100% { transform: translateY(0px) rotate(var(--rotation, 0deg)) scale(1); }
+	25% { transform: translateY(-8px) rotate(calc(var(--rotation, 0deg) + 1deg)) scale(1.02); }
+	50% { transform: translateY(-12px) rotate(calc(var(--rotation, 0deg) - 0.5deg)) scale(0.98); }
+	75% { transform: translateY(-6px) rotate(calc(var(--rotation, 0deg) + 0.8deg)) scale(1.01); }
+}
+
+/* Enhanced floating animations with more variety */
+@keyframes gentleFloat {
+	0%, 100% { 
+		transform: translateY(0px) translateX(0px) rotate(var(--rotation, 0deg)) scale(1); 
+	}
+	25% { 
+		transform: translateY(-4px) translateX(2px) rotate(calc(var(--rotation, 0deg) + 1deg)) scale(1.01); 
+	}
+	50% { 
+		transform: translateY(-6px) translateX(-1px) rotate(calc(var(--rotation, 0deg) - 0.5deg)) scale(0.99); 
+	}
+	75% { 
+		transform: translateY(-3px) translateX(3px) rotate(calc(var(--rotation, 0deg) + 0.8deg)) scale(1.02); 
+	}
+}
+
+/* Organic hand-drawn style borders */
+.organic-border {
+	border-radius: 15px 25px 20px 18px / 18px 20px 25px 15px;
+	position: relative;
+}
+
+.organic-border::before {
+	content: '';
+	position: absolute;
+	top: -1px;
+	left: -1px;
+	right: -1px;
+	bottom: -1px;
+	border: 2px solid currentColor;
+	border-radius: 16px 26px 21px 19px / 19px 21px 26px 16px;
+	opacity: 0.3;
+	pointer-events: none;
+	z-index: -1;
+}
+
+/* Slight variations for different cards */
+.organic-border:nth-child(2n)::before {
+	border-radius: 20px 15px 25px 18px / 22px 16px 20px 24px;
+}
+
+.organic-border:nth-child(3n)::before {
+	border-radius: 18px 22px 16px 26px / 25px 18px 22px 15px;
+}
+
+.organic-border:nth-child(4n)::before {
+	border-radius: 25px 18px 20px 22px / 16px 25px 18px 20px;
+}
+/* Apply different animations to create organic movement */
+.floating-logo:nth-child(4n+1) {
+	animation: gentleFloat 12s ease-in-out infinite;
+}
+
+.floating-logo:nth-child(4n+2) {
+	animation: floatSlow 15s ease-in-out infinite;
+	animation-direction: reverse;
+}
+
+.floating-logo:nth-child(4n+3) {
+	animation: floatFast 10s ease-in-out infinite;
+	animation-delay: 2s;
+}
+
+.floating-logo:nth-child(4n) {
+	animation: gentleFloat 14s ease-in-out infinite;
+	animation-direction: reverse;
+	animation-delay: 1s;
+}
+
+/* Hover pause effect */
+.floating-logo:hover {
+	animation-play-state: paused;
+}
+
+/* Masonry layout for testimonials */
+.masonry-container {
+	column-fill: balance;
+}
+
+.masonry-container > div {
+	display: inline-block;
+	width: 100%;
+	margin-bottom: 1rem;
+}
+
+/* Hide fallback grid when masonry is supported */
+@supports (columns: 2) {
+	.masonry-fallback {
+		display: none !important;
+	}
 }

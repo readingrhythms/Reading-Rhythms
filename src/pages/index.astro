@@ -1,127 +1,1659 @@
 ---
-import { Image } from 'astro:assets';
 import BaseLayout from '@layouts/BaseLayout.astro';
 import News from '@components/index/News.astro';
 import Media from '@components/index/Media.astro';
 import Quote from '@components/index/Quote.astro';
 import Spotify from '@components/index/Spotify.astro';
 import Instagram from '@components/index/Instagram.astro';
+import PressMediaSection from '@components/index/PressMediaSection.astro';
 import logo from '@assets/images/logo.svg';
 import pressNyt from '@assets/images/press-nyt.svg';
 import pressNyp from '@assets/images/press-nyp.svg';
 import pressTodayShow from '@assets/images/press-today_show.svg';
 import pressFox5 from '@assets/images/press-fox5.svg';
-import rollingStone from '@assets/images/rolling-stone.svg'
+import rollingStone from '@assets/images/rolling-stone.svg';
+import gma from '@assets/images/GMA.svg';
+import guardian from '@assets/images/guardian.jpg';
+import thrillist from '@assets/images/thrillest.png';
+import washpost from '@assets/images/washpost.png';
+import cbs from '@assets/images/cbs.jpg';
+import forbes from '@assets/images/forbes.jpg';
+import london from '@assets/images/london.svg';
+import nbc from '@assets/images/nbc.jpg';
+import techcrunch from '@assets/images/techcrunch.png';
+import cbsNew from '@assets/images/cbs.png';
+import forbesNew from '@assets/images/forbes.png';
+import londonNew from '@assets/images/london copy.svg';
+import nbcNew from '@assets/images/nbc.png';
+import techcrunchNew from '@assets/images/techcrunch copy.png';
 import arrowright from '@assets/icons/arrow-right.svg';
+
+// Import chapter photos
+import chapterPhoto1 from '@assets/images/chapter_photos/25F4AA6E-1E1D-479C-810E-1DFBDD3CCABA_1_105_c.jpeg';
+import chapterPhoto2 from '@assets/images/chapter_photos/8H6A2918-Enhanced-NR.jpg';
+import chapterPhoto3 from '@assets/images/chapter_photos/DSC00318.JPG';
+import chapterPhoto4 from '@assets/images/chapter_photos/DSC00384.JPG';
+import chapterPhoto5 from '@assets/images/chapter_photos/DSC00860.JPG';
+import chapterPhoto6 from '@assets/images/chapter_photos/DSC01088.JPG';
+import chapterPhoto7 from '@assets/images/chapter_photos/DSC01309.JPG';
+import chapterPhoto8 from '@assets/images/chapter_photos/DSC01395.JPG';
+import chapterPhoto9 from '@assets/images/chapter_photos/DSC01567.JPG';
+import chapterPhoto10 from '@assets/images/chapter_photos/DSC01616.JPG';
+import chapterPhoto11 from '@assets/images/chapter_photos/DSC01870.JPG';
+import chapterPhoto12 from '@assets/images/chapter_photos/DSC01872.JPG';
+import chapterPhoto13 from '@assets/images/chapter_photos/DSC01910.JPG';
+import chapterPhoto14 from '@assets/images/chapter_photos/DSC02352.JPG';
+import chapterPhoto15 from '@assets/images/chapter_photos/DSC02354.JPG';
+import chapterPhoto16 from '@assets/images/chapter_photos/DSC02645.JPG';
+import chapterPhoto17 from '@assets/images/chapter_photos/DSC02916.JPG';
+import chapterPhoto18 from '@assets/images/chapter_photos/E64763A1-1BE1-44A0-9C5C-C88C1B18B794.JPG';
+import chapterPhoto19 from '@assets/images/chapter_photos/IG1A7830.JPG';
+import chapterPhoto20 from '@assets/images/chapter_photos/ReadingRythms-55.jpg';
+import chapterPhoto21 from '@assets/images/chapter_photos/ReadingRythms-61.jpg';
+
+// Import hero images
+import heroImage1 from '@assets/images/hero_images/32156EDC-725C-4AC2-9666-D316D8462676_1_105_c.jpeg';
+import heroImage2 from '@assets/images/hero_images/Copy of LPA_2025_07_24_Reading Rhythms-06307.jpeg';
+import heroImage3 from '@assets/images/hero_images/DSC00868.jpg';
+import heroImage4 from '@assets/images/hero_images/FD5E9199-A104-4005-9993-FF2CE6301FBC_1_105_c.jpeg';
+import heroImage5 from '@assets/images/hero_images/DSC01853.JPG';
+import heroImage6 from '@assets/images/hero_images/Screenshot 2025-08-07 at 15.29.39.png';
+import heroImage7 from '@assets/images/hero_images/8H6A2307-Enhanced-NR.jpg';
+import heroImage8 from '@assets/images/hero_images/DSC00303.JPG';
+import heroImage9 from '@assets/images/hero_images/Copy of Lumii_20250729_170410515.jpg';
+import heroImage10 from '@assets/images/hero_images/Copy of _JNG0553.jpg';
+
+// Import existing media photos
+import chapterMaisonMono from '@assets/media/Chapter_10_Maison_Mono.webp';
+import chapterOnRoof from '@assets/media/Chapter_3_on_the_Roof.webp';
+import readersFourFiveSix from '@assets/media/Readers_FourFiveSix_Bar.webp';
+
+// Mock data for chapters/cities with pagination
+const allChapters = [
+  // Popular cities first, starting with Williamsburg
+  { name: 'Williamsburg', image: chapterPhoto1, location: 'Brooklyn, NY' },
+  { name: 'Lower Manhattan', image: chapterMaisonMono, location: 'New York City' },
+  { name: 'Upper West Side', image: chapterPhoto2, location: 'New York City' },
+  { name: 'Midtown', image: chapterPhoto3, location: 'New York City' },
+  { name: 'Los Angeles', image: chapterOnRoof, location: 'California' },
+  { name: 'Chicago', image: chapterPhoto4, location: 'Illinois' },
+  { name: 'Toronto', image: chapterPhoto5, location: 'Ontario, Canada' },
+  { name: 'South London', image: readersFourFiveSix, location: 'London, UK' },
+  { name: 'Prospect Heights', image: chapterPhoto6, location: 'Brooklyn, NY' },
+  { name: 'Upper East Side', image: chapterPhoto7, location: 'New York City' },
+  { name: 'Washington Heights', image: chapterPhoto8, location: 'New York City' },
+  { name: 'Harlem', image: chapterPhoto9, location: 'New York City' },
+  { name: 'Greenpoint', image: chapterPhoto10, location: 'Brooklyn, NY' },
+  { name: 'Bushwick', image: chapterPhoto11, location: 'Brooklyn, NY' },
+  { name: 'Astoria', image: chapterPhoto12, location: 'Queens, NY' },
+  { name: 'Long Island City', image: chapterPhoto13, location: 'Queens, NY' },
+  { name: 'Queens', image: chapterPhoto14, location: 'New York' },
+  { name: 'Philadelphia', image: chapterPhoto15, location: 'Pennsylvania' },
+  { name: 'Washington DC', image: chapterPhoto16, location: 'District of Columbia' },
+  { name: 'Austin', image: chapterPhoto17, location: 'Texas' },
+  { name: 'San Diego', image: chapterPhoto18, location: 'California' },
+  { name: 'Denver', image: chapterPhoto19, location: 'Colorado' },
+  { name: 'Jersey City', image: chapterPhoto20, location: 'New Jersey' },
+  { name: 'Long Island', image: chapterPhoto21, location: 'New York' },
+  { name: 'Princeton', image: chapterPhoto1, location: 'New Jersey' },
+  { name: 'Morristown', image: chapterPhoto3, location: 'New Jersey' },
+  { name: 'Atlantic City', image: chapterPhoto5, location: 'New Jersey' },
+  { name: 'Rome', image: chapterPhoto7, location: 'Italy' },
+  { name: 'Milan', image: chapterPhoto9, location: 'Italy' },
+  { name: 'Florence', image: chapterPhoto11, location: 'Italy' },
+  { name: 'Naples', image: chapterPhoto13, location: 'Italy' },
+  { name: 'Barcelona', image: chapterPhoto15, location: 'Spain' },
+  { name: 'Charleston', image: chapterPhoto17, location: 'South Carolina' },
+  { name: 'Detroit', image: chapterPhoto19, location: 'Michigan' },
+  { name: 'Algiers', image: chapterPhoto21, location: 'Algeria' }
+];
+
+// Carousel images for hero section
+
+// Combined partners (publishers + brands)
+const partners = [
+  { name: 'Penguin Random House', logo: '/src/assets/images/partners/PRH.jpeg', type: 'publisher', size: 'large', url: 'https://www.penguinrandomhouse.com' },
+  { name: 'HarperCollins', logo: '/src/assets/images/partners/HarperCollins Logo.png', type: 'publisher', size: 'medium', url: 'https://www.harpercollins.com' },
+  { name: 'Simon & Schuster', logo: '/src/assets/images/partners/simon schuster.webp', type: 'publisher', size: 'small', url: 'https://www.simonandschuster.com' },
+  { name: 'Hachette Books', logo: '/src/assets/images/partners/Hachette Books Logo.png', type: 'publisher', size: 'medium', url: 'https://www.hachettebookgroup.com' },
+  { name: 'Macmillan', logo: '/src/assets/images/partners/macimillan.png', type: 'publisher', size: 'small', url: 'https://us.macmillan.com' },
+  { name: 'Hudson Yards', logo: '/src/assets/images/partners/Hudson yards.svg', type: 'venue', size: 'large', url: 'https://www.hudsonyardsnewyork.com' },
+  { name: 'NYPL', logo: '/src/assets/images/partners/nypl.png', type: 'venue', size: 'medium', url: 'https://www.nypl.org' },
+  { name: 'Tomorrowland', logo: '/src/assets/images/partners/tomorrowland.svg', type: 'brand', size: 'small', url: 'https://www.tomorrowland.com' },
+  { name: 'Rivian', logo: '/src/assets/images/partners/rivian.png', type: 'brand', size: 'medium', url: 'https://rivian.com' },
+  { name: 'Immi', logo: '/src/assets/images/partners/immi.webp', type: 'brand', size: 'small', url: 'https://immieats.com/' },
+  { name: 'Naked Life', logo: '/src/assets/images/partners/naked life.webp', type: 'brand', size: 'small', url: 'https://drinknakedlife.com/pages/age-gate' },
+  { name: 'Threads', logo: '/src/assets/images/partners/threads.avif', type: 'brand', size: 'medium', url: 'https://www.threads.net' }
+];
+
+// Extended press coverage
+const pressLogos = [
+	{ name: 'Rolling Stone', logo: rollingStone },
+	{ name: 'The Washington Post', logo: washpost },
+	{ name: 'The Guardian', logo: '/src/assets/images/guardian.png' },
+	{ name: 'Thrillist', logo: thrillist },
+	{ name: 'GMA', logo: gma },
+	{ name: 'FOX5', logo: pressFox5 },
+	{ name: 'CBS', logo: cbsNew },
+	{ name: 'Forbes', logo: forbesNew },
+	{ name: 'London Evening Standard', logo: londonNew },
+	{ name: 'NBC', logo: nbcNew },
+	{ name: 'TechCrunch', logo: techcrunchNew }
+];
+
+// Community testimonials with brand colors
+const testimonials = [
+  { quote: "I leave every single Reading Rhythms party feeling like **skipping all the way home** even if the work day preceding it makes me tired or kind of cranky. I love seeing the stars in all your eyes as you depart as well, **gives me goosebumps!**", author: "Regular Attendee", color: "jean", boldPhrases: ["skipping all the way home", "gives me goosebumps"] },
+  { quote: "I'm 88 years old and moved to Hudson Yards to be closer to my grandkids. I think this is a wonderful idea.", author: "Judith", color: "beige", boldPhrases: [] },
+  { quote: "We're embedded with everyday superficial conversations, the kind of small talk that is essentially bland, useless and tasteless. **RR gives people the chance to connect similar people together** in the same room.", author: "Community Member", color: "jean", boldPhrases: ["RR gives people the chance to connect similar people together"] },
+  { quote: "That first event I attended was **really cool** for me because I'd been wanting to just read more often and making a plan to just go somewhere and read **really kept me accountable** to that.", author: "NYC Newcomer", color: "dark-purple", boldPhrases: ["really cool", "really kept me accountable"] },
+  { quote: "I'm so glad I found Reading Rhythms! I had no idea how much I **needed and wanted to connect** with other readers. Last night was another **exceptional experience**, full of connection, laughter, and community.", author: "Stacee", color: "jean", boldPhrases: ["needed and wanted to connect", "exceptional experience"] },
+  { quote: "Event space was great. Host brought **great energy**. Really enjoyed the quiet time reading and the conversation in the middle. Did get slightly distracted by the music (but only because it was good and I was Shazam'ing it).", author: "Bradley Layton", color: "rust", boldPhrases: ["great energy"] },
+  { quote: "It reminded me why I attend Reading Rhythms in the first place. Not only do they **care about the readers**, but they also **champion the small businesses** that helped shape this community in the first place.", author: "Andres", color: "rust", boldPhrases: ["care about the readers", "champion the small businesses"] },
+  { quote: "I really enjoyed the choice to read by the sea, the atmosphere, and **the connection that was created** with the other readers.", author: "Bernardina (Amalfi Coast)", color: "dark-purple", boldPhrases: ["the connection that was created"] },
+  { quote: "I am **so back into reading** thanks to Reading Rhythms—I even bought a Kindle.", author: "Community Member", color: "rust", boldPhrases: ["so back into reading"] },
+  { quote: "Always a great time joining any reading party. Thank you for hosting one of my fave authors.", author: "Ellen", color: "jean" },
+  { quote: "But SO thrilled to meet you and to have these books again 📚 SO much kindness in this community. I think today is the first day I've felt so uplifted, truly.", author: "Community Member", color: "rust" },
+  { quote: "Happy New Year. 2024 was really special. I came to NYC and met you guys. I look forward to attending more Reading Rhythms events this year.", author: "Community Member", color: "dark-purple" },
+  { quote: "It was such an amazing event and I could see the Art of Gathering woven throughout the night, which was so fun. I absolutely loved it.", author: "Katie Dulka, Priya Parker's Chief of Staff (The Art of Gathering)", color: "jean" },
+  { quote: "A millennial library", author: "Barstool Sports", color: "rust" }
+];
+
+// Stringify the chapters data for client-side use
+const chaptersDataJson = JSON.stringify(allChapters);
+const pressLogosJson = JSON.stringify(pressLogos);
+const arrowRightSrc = arrowright.src;
 ---
 
-<BaseLayout title='Reading Rhythms | Not a book club. A reading party.' description='We throw the world’s best reading parties. Bringing reading, ambient music, and cozy venues together to create a one of a kind experience. Bring any book you want. As seen on TV &amp; in major media.'>
-	<div class="md:fixed md:top-0 md:left-0 w-full md:h-full md:max-w-[375px] lg:max-w-[475px] mb-8 md:mb-0 md:py-16 md:pl-16">
-		<img src={logo.src} alt="Reading Rhythms logo" class="w-32 md:w-44 h-32 md:h-44 mb-6 md:mb-8" />
-		<h1 class="mb-4 text-4xl text-dark-gray font-display tracking-wider">Reading Rhythms</h1>
-		<p class="my-1 md:text-xl text-dark-gray/75 font-light">Not a book club. A reading party.™</p>
-		<p class="my-1 md:text-xl text-dark-gray/75 font-light">Read with friends to curated music.</p>
-		<br><p class="my-1 md:text-xl text-dark-gray/75 font-light"><b>Get in touch 👉 press@readingrhythms.co</b></p>
-		<p class="my-1 md:text-xl text-dark-gray/75 font-light"><b>sponsors@readingrhythms.co</b></p><br>
-		<div class="flex flex-nowrap items-center gap-5">
-			<div class="w-1/2"><img src={pressNyt.src} alt="NYT logo" class="w-full h-auto" /></div>
-			<div class="w-1/2"><img src={pressNyp.src} alt="NYP logo" class="w-full h-auto" /></div>
-			<div class="w-1/4"><img src={pressTodayShow.src} alt="Today Show logo" class="w-full h-auto" /></div>
-			<div class="w-1/4"><img src={pressFox5.src} alt="FOX5 logo" class="w-full h-auto" /></div>
-			<div class="w-1/4"><img src={rollingStone.src} alt="Rolling Stone logo" class="w-full h-auto" /></div>
-		</div>
-<div class="w-full flex justify-start md:mt-56 mb-20 hidden md:flex">
-    <div class="max-w-4xl flex flex-col items-center justify-center">
-        <p class="md:text-sm text-dark-gray/75 font-light text-center">
-            Not a book club™ &nbsp;|&nbsp; Reading Rhythms LLC 2024 <br>
-            <a href="/privacy-policy" class="text-blue-500 underline">Privacy Policy</a> | <a href="/terms" class="text-blue-500 underline">Terms & Conditions</a> | <a href="/ticketing-agreement" class="text-blue-500 underline">Ticketing Agreement</a>
-        </p>
-    </div>
-</div>
-	</div>
-	
-	<div class="md:w-[calc(100%-375px)] lg:w-[calc(100%-475px)] md:h-full md:ml-[375px] lg:ml-[475px]">
-		<div class="masonry">
-<div>
-    <p class="my-1 md:text-xl text-dark-gray/75 font-light flex items-center justify-center">Reading Party™ Tickets</p>
-    <br>
-    <a href="https://www.bento.me/read" rel="noopener" id="manhattanTicketsBtn" class="group flex items-center justify-between mb-4 p-4 md:py-6 md:px-8 bg-dark-purple text-white rounded-xl font-bold leading-snug">
-        <span class="mt-0.5">Global Event Tickets 🎟️ </span>
-        <img src={arrowright.src} alt="Arrow right" class="w-4 ml-2 group-hover:rotate-0 transition duration-250 ease-in-out -rotate-45" />
-    </a>
-    <a href="https://form.fillout.com/t/hxpyHGZs3Aus" id="applyBtn" class="group flex items-center justify-between p-4 md:py-6 md:px-8 bg-jean text-white rounded-xl font-bold leading-snug">
-        <span class="mt-0.5">Bring RR to your City! ✨</span>
-        <img src={arrowright.src} alt="Arrow right" class="w-4 ml-2 group-hover:rotate-0 transition duration-250 ease-in-out -rotate-45" />
-    </a>
-</div>
-			<Instagram />
-			<News
-				title="Reading Rhythms in the NYT!: It’s My Party and I’ll Read If I Want To"
-				source="nytimes.com"
-				href="https://www.nytimes.com/2023/12/19/books/reading-rhythms.html"
-				thumb="/src/assets/media/New_York_Times.webp"
-			/>
-			<Quote
-				title="A millennial library"
-				author="Barstool Sports"
-			/>
-			<Spotify
-				title="RR: Lo-Fi & Piano"
-				songs="629"
-				href="https://open.spotify.com/playlist/6xEAVQ9006ReaFeeSfR06x?si=UzKBA6J4RiS1ZKVAAzARew&pi=u-elLm48hsQ9ee"
-			/>
-			<Quote
-				title="Literally one of the best events I’ve been to in a really long time!"
-				author="Aagam"
-			/>
-			<Media
-				type="photo"
-				src="/src/assets/media/Chapter_10_Maison_Mono.webp"
-				caption="Chapter 10 @ Maison Mono"
-			/>
-			<Quote
-				title="It was such an amazing event and I could see the Art of Gathering woven throughout the night, which was so fun. I absolutely loved it."
-				author="Katie Dulka, Priya Parker’s Chief of Staff (The Art of Gathering)"
-			/>
-			
-			<Media
-				type="video"
-				src="https://storage.googleapis.com/creatorspace-public/users%2Fcln66jsyk02gwp301vjhpzgpb%2Fo2IiXETcTwo9owRa-IMG_3727.MOV"
-				caption="The Big Read @ FourFiveSix Bar"
-			/>
-			<Quote
-				title="I feel like I might meet my husband at this event!"
-				author="Allie"
-			/>
-			<Media
-				type="photo"
-				src="/src/assets/media/Chapter_3_on_the_Roof.webp"
-				caption="Chapter 3 on the Roof"
-			/>
-			<Quote
-				title="I have my met absolute best friends at this event…"
-				author="Jacey"
-			/>
-			<Media
-				type="video"
-				src="https://storage.googleapis.com/creatorspace-public/users%2Fcln66jsyk02gwp301vjhpzgpb%2FNOZsvPuKS7s9wRIo-IMG_7150.MP4"
-				caption="Reading in The Park"
-			/>
-			<Media
-				type="photo"
-				src="/src/assets/media/Readers_FourFiveSix_Bar.webp"
-				caption="Readers @ FourFiveSix Bar"
-			/>
-		</div>
-	</div>
+<BaseLayout title='Reading Rhythms | Not a book club. A reading party.' description='We throw the world's best reading parties. Bringing reading, ambient music, and cozy venues together to create a one of a kind experience. Bring any book you want. As seen on TV & in major media.' showNavbar={true}>
+	<!-- Hero Section - Redesigned Desktop Layout -->
+	<section class="relative overflow-hidden pt-16 pb-12">
+		<!-- Background gradient -->
+		<div class="absolute inset-0 w-full h-full bg-gradient-to-br from-white via-gray-50/50 to-jean/5" style="left: -100vw; right: -100vw; width: 300vw; margin-left: 0; margin-right: 0;"></div>
+		
+		<!-- Content Container -->
+		<div class="relative z-10 max-w-7xl mx-auto px-6 lg:px-8">
+			<div class="grid lg:grid-cols-12 gap-8 lg:gap-12 items-start">
+				
+				<!-- Left Column - Hero Content (6 columns on desktop) -->
+				<div class="lg:col-span-6 text-center lg:text-left space-y-6">
+					<!-- Logo -->
+					<div class="flex justify-center lg:justify-start">
+						<img src={logo.src} alt="Reading Rhythms logo" class="w-20 md:w-24 lg:w-28 h-20 md:h-24 lg:h-28 drop-shadow-lg transform hover:rotate-3 transition-transform duration-300" />
+					</div>
+					
+					<!-- Main Heading -->
+					<div class="space-y-4">
+						<h1 class="text-4xl md:text-5xl lg:text-5xl text-dark-gray font-display tracking-wider leading-tight">
+							Reading<br>
+							<span class="bg-gradient-to-r from-jean via-rust to-dark-purple bg-clip-text text-transparent gradient-animate">
+								Rhythms
+							</span>
+						</h1>
+						<div class="bg-white rounded-xl p-4 border border-gray-300 shadow-sm max-w-sm mx-auto lg:mx-0">
+							<p class="text-lg md:text-xl text-dark-gray font-bold tracking-wide leading-snug">
+								Bring your favorite chapter, discover your favorite people.
+							</p>
+						</div>
+					</div>
 
-	<a href="mailto:hello@readingrhythms.co" class="flex md:hidden items-center justify-center mt-4 p-4 bg-dark-gray text-white rounded-xl font-bold leading-snug">
-  <span class="mt-0.5">Feedback Or Ideas? Email us!</span>
-</a>
-	
-	<div class="md:hidden items-center justify-center mt-4 p-4 text-center">
-    	<p class="my-1 md:text-sm text-dark-gray/75 font-light">Not a book club™<br>
-		<p class="my-1 md:text-sm text-dark-gray/75 font-light">Reading Rhythms LLC 2024</p> 
-		<a href="/privacy-policy" class="text-blue-500 underline">Privacy Policy</a> | <a href="/terms" class="text-blue-500 underline">Terms & Conditions</a> | <a href="/ticketing-agreement" class="text-blue-500 underline">Ticketing Agreement </a></p>
-	</div>
+					<!-- Social Proof -->
+					<div class="flex flex-col sm:flex-row gap-4 sm:gap-6 justify-center lg:justify-start text-center lg:text-left">
+						<div class="flex items-center justify-center lg:justify-start space-x-6">
+							<div class="text-center group cursor-pointer">
+								<div class="text-2xl md:text-4xl font-bold text-jean group-hover:scale-110 transition-transform duration-300">320+</div>
+								<div class="text-xs md:text-sm text-dark-gray/60 group-hover:text-dark-gray transition-colors duration-300">Events</div>
+							</div>
+							<div class="w-px h-8 md:h-10 bg-gradient-to-b from-transparent via-gray-300 to-transparent"></div>
+							<div class="text-center group cursor-pointer">
+								<div class="text-2xl md:text-4xl font-bold text-rust group-hover:scale-110 transition-transform duration-300">25k+</div>
+								<div class="text-xs md:text-sm text-dark-gray/60 group-hover:text-dark-gray transition-colors duration-300">Attendees</div>
+							</div>
+							<div class="w-px h-8 md:h-10 bg-gradient-to-b from-transparent via-gray-300 to-transparent"></div>
+							<div class="text-center group cursor-pointer">
+								<div class="text-2xl md:text-4xl font-bold text-dark-purple group-hover:scale-110 transition-transform duration-300">20+</div>
+								<div class="text-xs md:text-sm text-dark-gray/60 group-hover:text-dark-gray transition-colors duration-300">Cities</div>
+							</div>
+						</div>
+					</div>
+
+					<!-- CTA Buttons -->
+					<div class="flex flex-col sm:flex-row gap-3 justify-center lg:justify-start">
+						<a href="/events" class="group relative overflow-hidden bg-gradient-to-r from-jean to-dark-purple text-white px-6 py-3 md:px-7 md:py-3 rounded-xl font-bold text-base md:text-lg shadow-xl shadow-jean/25 hover:shadow-2xl hover:shadow-jean/40 transition-all duration-300 hover:-translate-y-1">
+							<span class="relative z-10 flex items-center justify-center mt-0.5">
+								Buy Tickets! ✨
+							</span>
+							<div class="absolute inset-0 bg-gradient-to-r from-dark-purple to-jean opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+						</a>
+						<a href="/apply" class="group relative overflow-hidden bg-white border-2 border-gray-200 text-dark-gray px-6 py-3 md:px-8 md:py-3 rounded-xl font-semibold text-base md:text-lg hover:border-jean hover:shadow-lg hover:shadow-gray-200/50 transition-all duration-300 hover:-translate-y-1 inline-flex items-center justify-center">
+							<span class="relative z-10 flex items-center">
+								Join the Team
+							</span>
+						</a>
+					</div>
+
+				</div>
+
+				<!-- Right Column - Illustrated Book Carousel (6 columns on desktop) -->
+				<div class="lg:col-span-6 space-y-4">
+					<div class="book-carousel-container relative">
+						<!-- Instagram Rotating Square -->
+						<div class="instagram-square-container relative w-full max-w-lg mx-auto">
+							<!-- Main rotating square -->
+							<div class="instagram-square w-full aspect-square mx-auto relative overflow-hidden rounded-2xl shadow-2xl">
+								<!-- Hero image carousel -->
+								<div class="rotating-image active absolute inset-0">
+									<img src={chapterMaisonMono.src} alt="Chapter 10 @ Maison Mono" class="w-full h-full object-cover" />
+								</div>
+								<div class="rotating-image absolute inset-0 opacity-0">
+									<img src={heroImage1.src} alt="Reading Rhythms Event" class="w-full h-full object-cover" />
+								</div>
+								<div class="rotating-image absolute inset-0 opacity-0">
+									<img src={chapterOnRoof.src} alt="Chapter 3 on the Roof" class="w-full h-full object-cover" />
+								</div>
+								<div class="rotating-image absolute inset-0 opacity-0">
+									<img src={heroImage2.src} alt="Reading Rhythms Gathering" class="w-full h-full object-cover" />
+								</div>
+								<div class="rotating-image absolute inset-0 opacity-0">
+									<img src={readersFourFiveSix.src} alt="Readers @ FourFiveSix Bar" class="w-full h-full object-cover" />
+								</div>
+								<div class="rotating-image absolute inset-0 opacity-0">
+									<img src={heroImage3.src} alt="Reading Session" class="w-full h-full object-cover" />
+								</div>
+								<div class="rotating-image absolute inset-0 opacity-0">
+									<img src={heroImage4.src} alt="Community Reading" class="w-full h-full object-cover" />
+								</div>
+								<div class="rotating-image absolute inset-0 opacity-0">
+									<img src={heroImage5.src} alt="Book Club Meeting" class="w-full h-full object-cover" />
+								</div>
+								<div class="rotating-image absolute inset-0 opacity-0">
+									<img src={heroImage6.src} alt="Reading Event" class="w-full h-full object-cover" />
+								</div>
+								<div class="rotating-image absolute inset-0 opacity-0">
+									<img src={heroImage7.src} alt="Literary Gathering" class="w-full h-full object-cover" />
+								</div>
+								<div class="rotating-image absolute inset-0 opacity-0">
+									<img src={heroImage8.src} alt="Reading Community" class="w-full h-full object-cover" />
+								</div>
+								<div class="rotating-image absolute inset-0 opacity-0">
+									<img src={heroImage9.src} alt="Book Event" class="w-full h-full object-cover" />
+								</div>
+								<div class="rotating-image absolute inset-0 opacity-0">
+									<img src={heroImage10.src} alt="Reading Party" class="w-full h-full object-cover" />
+								</div>
+							</div>
+							
+							<!-- Instagram branding -->
+							<div class="text-center mt-4">
+								<a href="https://www.instagram.com/reading_rhythms/" target="_blank" rel="noopener" class="hidden md:inline-flex items-center text-dark-gray/60 hover:text-dark-gray transition-colors duration-300">
+									<svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 24 24">
+										<path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+									</svg>
+									@reading_rhythms
+								</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			
+			<!-- Press Logos - Full Width Centered Below Both Columns -->
+			<div class="hidden md:block mt-8 md:mt-12 w-full py-4">
+				<p class="text-sm text-dark-gray/50 mb-6 text-center">As featured in:</p>
+				<div class="press-carousel-container relative overflow-hidden py-4">
+					<div class="press-carousel flex items-center space-x-6 lg:space-x-8 opacity-70 hover:opacity-100 transition-opacity duration-300" style="width: max-content;">
+						{pressLogos.map((press, index) => (
+							<img 
+								src={press.logo.src || press.logo} 
+								alt={`${press.name} logo`} 
+								class="press-logo h-8 lg:h-10 w-auto max-w-none filter grayscale hover:grayscale-0 transition-all duration-500 hover:scale-125 flex-shrink-0" 
+								data-index={index}
+							/>
+						))}
+						<!-- Duplicate logos for seamless loop -->
+						{pressLogos.map((press, index) => (
+							<img 
+								src={press.logo.src || press.logo} 
+								alt={`${press.name} logo`} 
+								class="press-logo h-8 lg:h-10 w-auto max-w-none filter grayscale hover:grayscale-0 transition-all duration-500 hover:scale-125 flex-shrink-0" 
+								data-index={index + pressLogos.length}
+							/>
+						))}
+						<!-- Additional duplicates for smoother infinite scroll -->
+						{pressLogos.map((press, index) => (
+							<img 
+								src={press.logo.src || press.logo} 
+								alt={`${press.name} logo`} 
+								class="press-logo h-8 lg:h-10 w-auto max-w-none filter grayscale hover:grayscale-0 transition-all duration-500 hover:scale-125 flex-shrink-0" 
+								data-index={index + pressLogos.length * 2}
+							/>
+						))}
+						<!-- Fourth set for smoother infinite scroll -->
+						{pressLogos.map((press, index) => (
+							<img 
+								src={press.logo.src || press.logo} 
+								alt={`${press.name} logo`} 
+								class="press-logo h-8 lg:h-10 w-auto max-w-none filter grayscale hover:grayscale-0 transition-all duration-500 hover:scale-125 flex-shrink-0" 
+								data-index={index + pressLogos.length * 3}
+							/>
+						))}
+					</div>
+				</div>
+			</div>
+			
+			<!-- Mobile Press Logos - Static Layout -->
+			<div class="md:hidden mt-2 w-full py-1">
+				<p class="text-sm text-dark-gray/50 mb-2 text-center">As featured in:</p>
+				<div class="flex flex-wrap justify-center gap-4 items-center opacity-70">
+					{pressLogos.map((press) => (
+						<img 
+							src={press.logo.src || press.logo} 
+							alt={`${press.name} logo`} 
+							class="h-6 w-auto filter grayscale hover:grayscale-0 transition-all duration-500 hover:scale-125" 
+						/>
+					))}
+				</div>
+			</div>
+			
+			<!-- Quote Section - Inside Hero -->
+			<div class="mt-12 md:mt-16 lg:mt-20 w-full text-center">
+				<blockquote class="text-xl md:text-2xl lg:text-3xl font-serif text-dark-gray italic leading-relaxed max-w-3xl mx-auto hover:text-jean transition-colors duration-300">
+					"Curated evenings mixing epic venues, silent reading, and lively chats."
+				</blockquote>
+			</div>
+		</div>
+
+		<!-- Enhanced Decorative Elements -->
+
+		<div class="absolute top-20 right-10 w-32 h-32 bg-gradient-to-br from-jean/10 to-rust/10 rounded-full blur-3xl animate-pulse"></div>
+		<div class="absolute bottom-20 left-10 w-48 h-48 bg-gradient-to-br from-rust/10 to-dark-purple/10 rounded-full blur-3xl animate-pulse" style="animation-delay: 2s;"></div>
+		<div class="absolute top-1/2 left-1/4 w-20 h-20 bg-gradient-to-br from-dark-purple/5 to-jean/5 rounded-full blur-2xl animate-pulse" style="animation-delay: 4s;"></div>
+	</section>
+
+	<!-- Global Chapters Section with Pagination -->
+	<section class="py-16 lg:py-24 bg-gradient-to-b from-gray-50/30 to-white relative overflow-hidden">
+		<div class="max-w-7xl mx-auto px-6 lg:px-8 relative z-10">
+			<!-- Section Header -->
+			<div class="text-center mb-12">
+				<h2 class="text-3xl md:text-4xl lg:text-5xl font-display text-dark-gray mb-6 tracking-wide">
+					Our <span class="bg-gradient-to-r from-jean to-rust bg-clip-text text-transparent">Global Community</span>
+				</h2>
+				<p class="text-xl text-dark-gray/70 max-w-3xl mx-auto">
+					Join thousands of readers across the world in our growing network of chapters.
+				</p>
+			</div>
+
+			<!-- Mobile Swipable Chapters -->
+			<div class="md:hidden -mx-6 lg:-mx-8 py-2 mb-8">
+				<div class="flex gap-8 overflow-x-auto pb-6 pt-2 px-6 lg:px-8 scrollbar-hide">
+					<!-- Black Intro Card -->
+					<div class="flex-shrink-0 w-64 sm:w-72">
+						<div class="bg-dark-gray rounded-2xl shadow-lg p-6 text-left h-full flex flex-col justify-center min-h-[87px]">
+							<h3 class="text-4xl font-display text-white mb-4 leading-tight tracking-widest">Join a chapter near you!</h3>
+							<div class="flex items-center mt-auto">
+								<div class="w-16 h-16 bg-white rounded-full flex items-center justify-center">
+									<svg class="w-8 h-8 text-dark-gray" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="3">
+										<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+									</svg>
+								</div>
+							</div>
+						</div>
+					</div>
+					<!-- All Chapter Cards -->
+					{allChapters.map(chapter => (
+						<div class="flex-shrink-0 w-64 sm:w-72">
+							<div class="group relative overflow-hidden bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 h-full flex flex-col justify-center min-h-[70px]">
+								<div class="h-2/3 overflow-hidden">
+									<img src={chapter.image.src || chapter.image} alt={chapter.name} class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
+								</div>
+								<div class="px-2 py-1 h-1/3 flex flex-col justify-center">
+									<div class="text-center flex flex-col items-center">
+										<h3 class="text-xl font-serif text-dark-gray mb-1">{chapter.name}</h3>
+										<p class="text-dark-gray/60 text-base mb-3">{chapter.location}</p>
+										<a href={`/events?chapterId=${chapter.name.toLowerCase().replace(/\s+/g, '-')}`} class="flex items-center justify-center text-jean text-sm font-semibold underline hover:text-dark-purple transition-all duration-300 group/link">
+											<span>View Events →</span>
+										</a>
+									</div>
+								</div>
+							</div>
+						</div>
+					))}
+				</div>
+				<p class="text-center text-sm text-dark-gray/60 mt-6 px-6">← Swipe to explore all chapters →</p>
+			</div>
+
+			<!-- Desktop Grid Display -->
+			<div id="desktop-chapters-grid" class="hidden md:block">
+				<!-- Desktop grid will be populated by JavaScript -->
+			</div>
+
+			<!-- Navigation Arrows - Desktop Only -->
+			<div class="hidden md:flex justify-center items-center gap-4 mb-8 mt-12">
+				<button id="prev-chapters" class="p-3 bg-white border border-gray-300 rounded-full shadow-sm hover:shadow-md transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed">
+					<svg class="w-5 h-5 text-dark-gray" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+						<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+					</svg>
+				</button>
+				<span id="chapter-counter" class="text-sm text-dark-gray/60 font-medium">1 of {allChapters.length}</span>
+				<button id="next-chapters" class="p-3 bg-white border border-gray-300 rounded-full shadow-sm hover:shadow-md transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed">
+					<svg class="w-5 h-5 text-dark-gray" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+						<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+					</svg>
+				</button>
+			</div>
+
+			<!-- CTA to Join -->
+			<div class="text-center mt-12">
+				<a href="/events" class="inline-flex items-center px-6 py-3 md:px-8 md:py-4 bg-gradient-to-r from-jean to-dark-purple text-white rounded-2xl font-bold text-base md:text-lg hover:shadow-xl hover:shadow-jean/25 transition-all duration-300 hover:-translate-y-1">
+					<span>Find Events Near You</span>
+					<img src={arrowright.src} alt="Arrow right" class="w-5 ml-3 group-hover:translate-x-1 transition-transform duration-300" />
+				</a>
+			</div>
+		</div>
+	</section>
+
+	<!-- Combined Partners Section -->
+	<section class="py-16 lg:py-24 bg-gradient-to-b from-white to-gray-50/30">
+		<div class="max-w-7xl mx-auto px-6 lg:px-8">
+			<div class="text-center mb-12">
+				<h2 class="text-3xl md:text-4xl lg:text-5xl font-display text-dark-gray mb-4 tracking-wide">
+					Trusted <span class="bg-gradient-to-r from-jean to-rust bg-clip-text text-transparent">Partners</span>
+				</h2>
+				<p class="text-xl text-dark-gray/70 max-w-3xl mx-auto">
+					We work with select publishers & innovative brands to elevate every reading party.
+				</p>
+			</div>
+			
+			<!-- Innovative Floating Logo Layout -->
+			<div class="relative max-w-6xl mx-auto mb-8">
+				<!-- Multiple focal points for visual interest -->
+				<div class="absolute top-1/3 left-1/4 w-24 h-24 bg-gradient-to-br from-jean/15 to-rust/10 rounded-full blur-3xl animate-pulse"></div>
+				<div class="absolute bottom-1/4 right-1/3 w-32 h-32 bg-gradient-to-br from-rust/10 to-dark-purple/15 rounded-full blur-2xl animate-pulse" style="animation-delay: 2s;"></div>
+				<div class="absolute top-1/2 right-1/4 w-20 h-20 bg-gradient-to-br from-dark-purple/10 to-jean/15 rounded-full blur-xl animate-pulse" style="animation-delay: 4s;"></div>
+				
+				<!-- Creative constellation-style logo layout -->
+				<!-- Desktop Constellation Layout (md and up) -->
+				<div class="hidden md:block mb-8">
+					<div class="grid grid-cols-3 lg:grid-cols-4 gap-6 lg:gap-8 max-w-6xl mx-auto">
+						{partners.map((partner, index) => {
+							// Size variations based on partner size property
+							const containerSizes = {
+								small: 'p-3 lg:p-4',
+								medium: 'p-4 lg:p-5',
+								large: 'p-5 lg:p-6'
+							};
+							
+							return (
+								<a href={partner.url} target="_blank" rel="noopener" class="group transform hover:scale-105 transition-all duration-300 cursor-pointer floating-logo">
+									<div class="relative">
+										<!-- Logo container with varying sizes -->
+										<div class={`bg-white rounded-2xl ${containerSizes[partner.size]} shadow-lg hover:shadow-xl transition-shadow duration-300 border border-gray-200 flex items-center justify-center min-h-[100px] lg:min-h-[120px] ${partner.name === 'Hachette Books' ? 'p-2 lg:p-3' : ''}`}>
+											<img 
+												src={partner.logo} 
+												alt={`${partner.name} logo`} 
+												class={`${partner.name === 'Hachette Books' ? 'max-w-[85%] max-h-[70%]' : 'max-w-[80%] max-h-[75%]'} w-full h-full object-contain`}
+											/>
+										</div>
+									</div>
+								</a>
+							);
+						})}
+					</div>
+				</div>
+				
+				<!-- Mobile Grid Layout (sm and below) -->
+				<div class="md:hidden mb-8">
+					<div class="grid grid-cols-2 gap-4 max-w-lg mx-auto">
+						{partners.map((partner) => {
+							// Mobile-specific sizing
+							const mobileContainerSizes = {
+								small: 'p-2',
+								medium: 'p-3',
+								large: 'p-4'
+							};
+							
+							return (
+								<a href={partner.url} target="_blank" rel="noopener" class="group transform hover:scale-105 transition-all duration-300 cursor-pointer" data-name={partner.name.toLowerCase()}>
+									<div class="relative">
+										<div class={`bg-white rounded-xl ${mobileContainerSizes[partner.size]} shadow-md hover:shadow-lg transition-shadow duration-300 border border-gray-200 flex items-center justify-center min-h-[100px]`}>
+											<img 
+												src={partner.logo} 
+												alt={`${partner.name} logo`} 
+												class={`${partner.name === 'Hachette Books' ? 'max-w-[85%] max-h-[70%]' : 'max-w-[80%] max-h-[75%]'} w-full h-full object-contain`}
+											/>
+										</div>
+									</div>
+								</a>
+							);
+						})}
+					</div>
+				</div>
+			</div>
+			
+			<!-- Partner with us CTA -->
+			<div class="text-center mt-8 md:mt-12">
+				<a 
+					href="/partnerships" 
+					class="group inline-flex items-center justify-center px-6 py-3 md:px-8 md:py-4 bg-gradient-to-r from-jean to-dark-purple text-white rounded-2xl font-bold text-base md:text-lg hover:shadow-xl hover:shadow-jean/25 transition-all duration-300 hover:-translate-y-1"
+				>
+					<span>Partner with us!</span>
+					<img src={arrowright.src} alt="Arrow right" class="w-5 ml-3 group-hover:translate-x-1 transition-transform duration-300" />
+				</a>
+			</div>
+		</div>
+	</section>
+
+	<!-- Community Testimonials -->
+	<section class="pt-12 pb-20 md:py-16 lg:py-24 bg-gradient-to-b from-white to-gray-50/30">
+		<div class="max-w-7xl mx-auto px-6 lg:px-8">
+			<div class="text-center mb-12">
+				<h2 class="text-3xl md:text-4xl lg:text-5xl font-display text-dark-gray mb-6 tracking-wide">
+					What <span class="bg-gradient-to-r from-jean to-rust bg-clip-text text-transparent">Readers</span> are saying
+				</h2>
+				<p class="text-xl text-dark-gray/70 max-w-3xl mx-auto">
+					Real stories from readers who've experienced the magic of Reading Rhythms.
+				</p>
+			</div>
+
+			<!-- Testimonials Grid -->
+			<!-- Desktop Grid -->
+			<div class="hidden md:block">
+				<div id="testimonials-grid" class="masonry-container columns-2 lg:columns-3 gap-8 space-y-8">
+					<!-- Initial 9 testimonials -->
+					{testimonials.slice(0, 9).map((testimonial, index) => (
+						<div class="break-inside-avoid mb-4 testimonial-card">
+							<Quote
+								quote={testimonial.quote}
+								author={testimonial.author}
+								color={testimonial.color}
+								boldPhrases={testimonial.boldPhrases}
+								index={index}
+							/>
+						</div>
+					))}
+					<!-- Remaining testimonials (hidden initially) -->
+					{testimonials.slice(9).map((testimonial, index) => (
+						<div class="break-inside-avoid mb-4 testimonial-card testimonial-hidden" style="display: none;">
+							<Quote
+								quote={testimonial.quote}
+								author={testimonial.author}
+								color={testimonial.color}
+								boldPhrases={testimonial.boldPhrases}
+								index={index + 9}
+							/>
+						</div>
+					))}
+				</div>
+				
+				<!-- Show More/Less Button -->
+				<div class="text-center mt-8">
+					<button 
+						id="testimonials-toggle"
+						class="group inline-flex items-center justify-center px-6 py-3 bg-white border-2 border-gray-200 text-dark-gray rounded-xl font-semibold text-base hover:border-jean hover:shadow-lg hover:shadow-gray-200/50 transition-all duration-300 hover:-translate-y-1"
+					>
+						<span id="toggle-text">Show More Testimonials</span>
+						<svg id="toggle-arrow" class="w-4 h-4 ml-2 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+							<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+						</svg>
+					</button>
+				</div>
+			</div>
+			
+			<!-- Fallback Grid for older browsers -->
+			<div class="hidden md:grid md:grid-cols-2 lg:grid-cols-3 gap-8 items-start masonry-fallback">
+				<!-- Initial 9 testimonials -->
+				{testimonials.slice(0, 9).map((testimonial, index) => (
+					<div class="testimonial-card">
+						<Quote
+							quote={testimonial.quote}
+							author={testimonial.author}
+							color={testimonial.color}
+							boldPhrases={testimonial.boldPhrases}
+							index={index}
+						/>
+					</div>
+				))}
+				<!-- Remaining testimonials (hidden initially) -->
+				{testimonials.slice(9).map((testimonial, index) => (
+					<div class="testimonial-card testimonial-hidden" style="display: none;">
+						<Quote
+							quote={testimonial.quote}
+							author={testimonial.author}
+							color={testimonial.color}
+							boldPhrases={testimonial.boldPhrases}
+							index={index + 9}
+						/>
+					</div>
+				))}
+			</div>
+			
+			<!-- Fallback Show More/Less Button -->
+			<div class="hidden md:block text-center mt-8 masonry-fallback">
+				<button 
+					id="testimonials-toggle-fallback"
+					class="group inline-flex items-center justify-center px-6 py-3 bg-white border-2 border-gray-200 text-dark-gray rounded-xl font-semibold text-base hover:border-jean hover:shadow-lg hover:shadow-gray-200/50 transition-all duration-300 hover:-translate-y-1"
+				>
+					<span id="toggle-text-fallback">Show More Testimonials</span>
+					<svg id="toggle-arrow-fallback" class="w-4 h-4 ml-2 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+						<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+					</svg>
+				</button>
+			</div>
+			
+			<!-- Mobile Horizontal Scroll -->
+			<div class="md:hidden -mx-6 lg:-mx-8 py-4">
+				<div class="flex gap-8 overflow-x-auto pb-6 pt-2 px-6 lg:px-8 scrollbar-hide">
+					{testimonials.map((testimonial, index) => (
+						<div class="flex-shrink-0 w-72 sm:w-80">
+							<Quote
+								quote={testimonial.quote}
+								author={testimonial.author}
+								color={testimonial.color}
+								boldPhrases={testimonial.boldPhrases}
+								index={index}
+							/>
+						</div>
+					))}
+				</div>
+				<p class="text-center text-sm text-dark-gray/60 mt-6 px-6">← Swipe to see more testimonials →</p>
+			</div>
+		</div>
+	</section>
+
+<!-- Media & News Section (Masonry + Fade + Desktop Toggle + Mobile Swipe) -->
+<section id="press-media" class="py-12 lg:py-20 bg-gradient-to-b from-gray-50/30 to-white relative overflow-visible">
+  <div class="max-w-7xl mx-auto px-6 lg:px-8 relative">
+
+    <!-- Section Header -->
+    <div class="text-center mb-8">
+      <h2 class="text-3xl md:text-4xl lg:text-5xl font-display text-dark-gray mb-4 tracking-wide">
+        Press & <span class="bg-gradient-to-r from-jean to-rust bg-clip-text text-transparent">Media</span>
+      </h2>
+      <p class="text-lg text-dark-gray/70 max-w-3xl mx-auto">Reading Rhythms in the news</p>
+    </div>
+
+    <!-- ========== DESKTOP/TABLET (masonry) ========== -->
+    <div class="hidden md:block relative">
+      <div class="masonry columns-2 lg:columns-3 gap-6 pb-24">
+
+        <!-- 1) NYT -->
+<div class="press-card mb-6">
+  <div class="transform hover:scale-[1.02] transition-transform duration-300">
+    <div class="p-6 border border-beaver rounded-xl shadow-sm">
+      <a href="https://www.nytimes.com/2023/12/19/books/reading-rhythms.html" target="_blank" rel="noopener">
+        <div class="press-favicon mb-3"><img src={pressNyt.src} alt="New York Times logo" /></div>
+
+        <!-- Added quote -->
+        <blockquote class="mb-4 p-4 bg-jean/5 border-l-4 border-jean rounded-r-lg">
+          <p class="text-lg font-semibold italic text-dark-gray leading-relaxed">
+            “There are hardly any environments where we get to read in unison,” Adam said. “It’s kind of beautiful”.
+          </p>
+        </blockquote>
+
+        <h3 class="mb-1 text-dark-gray text-sm leading-snug">It's My Party and I'll Read If I Want To</h3>
+        <p class="text-dark-gray/50 text-xs mb-4">nytimes.com</p>
+        <img src="/src/assets/media/New_York_Times.webp" alt="New York Times story thumbnail" class="w-full rounded-xl" />
+      </a>
+    </div>
+  </div>
+</div>
+
+        <!-- 2) Rolling Stone -->
+        <div class="press-card mb-6">
+          <div class="transform hover:scale-[1.02] transition-transform duration-300">
+            <div class="p-6 border border-beaver rounded-xl shadow-sm">
+              <a href="https://www.rollingstone.com/culture-council/articles/are-reading-parties-the-new-wellness-activity-creative-leaders-1234969533/" target="_blank" rel="noopener">
+                <div class="press-favicon mb-3"><img src="/src/assets/images/press_section/rollingstonefav.webp" alt="Rolling Stone logo" /></div>
+                <blockquote class="mb-4 p-4 bg-dark-purple/5 border-l-4 border-dark-purple rounded-r-lg">
+                  <p class="text-lg font-semibold italic text-dark-gray leading-relaxed">"Are reading parties the new wellness activity?"</p>
+                </blockquote>
+                <h3 class="mb-1 text-dark-gray text-sm leading-snug">Are Reading Parties the New Wellness Activity?</h3>
+                <p class="text-dark-gray/50 text-xs mb-4">rollingstone.com</p>
+                <img src="/src/assets/images/press_section/rollingstoneimage.webp" alt="Rolling Stone story thumbnail" class="w-full rounded-xl" />
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- 3) The Guardian -->
+        <div class="press-card mb-6">
+          <div class="transform hover:scale-[1.02] transition-transform duration-300">
+            <div class="p-6 border border-beaver rounded-xl shadow-sm">
+              <a href="https://www.theguardian.com/books/2024/jan/26/books-and-looks-gen-z-is-rediscovering-the-public-library" target="_blank" rel="noopener">
+                <div class="press-favicon mb-3"><img src="/src/assets/images/press_section/guardian_favicon.ico" alt="The Guardian logo" /></div>
+                <h3 class="mb-1 text-dark-gray text-sm leading-snug">Books and looks: Gen Z is rediscovering the public library</h3>
+                <p class="text-dark-gray/50 text-xs mb-4">theguardian.com</p>
+                <img src="/src/assets/images/press_section/guardian_article.jpg" alt="The Guardian story thumbnail" class="w-full rounded-xl" />
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- 4) Forbes -->
+        <div class="press-card mb-6">
+          <div class="transform hover:scale-[1.02] transition-transform duration-300">
+            <div class="p-6 border border-beaver rounded-xl shadow-sm">
+              <a href="https://www.forbes.com/sites/annahaines/2025/05/06/mothers-day-gift-guide-the-best-gifts-for-community-minded-moms/" target="_blank" rel="noopener">
+                <div class="press-favicon mb-3"><img src="/src/assets/images/press_section/forbesfav.jpeg" alt="Forbes logo" /></div>
+                <blockquote class="mb-4 p-4 bg-jean/5 border-l-4 border-jean rounded-r-lg">
+                  <p class="text-lg font-semibold italic text-dark-gray leading-relaxed">"One of the best ways to meet new people is through shared interests, so if mom likes to read, this is the gift for her."</p>
+                </blockquote>
+                <h3 class="mb-1 text-dark-gray text-sm leading-snug">Mother's Day Gift Guide: The Best Gifts for Community Minded Moms</h3>
+                <p class="text-dark-gray/50 text-xs mb-4">forbes.com</p>
+                <img src="/src/assets/images/press_section/forbes_image.webp" alt="Forbes story thumbnail" class="w-full rounded-xl" />
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- 5) The I -->
+        <div class="press-card mb-6">
+          <div class="transform hover:scale-[1.02] transition-transform duration-300">
+            <div class="p-6 border border-beaver rounded-xl shadow-sm">
+              <a href="https://inews.co.uk/news/world/gen-z-making-reading-parties-cool-in-new-york-3446123" target="_blank" rel="noopener">
+                <div class="press-favicon mb-3"><img src="/src/assets/images/press_section/theIfav.jpg" alt="The I logo" /></div>
+                <blockquote class="mb-4 p-4 bg-jean/5 border-l-4 border-jean rounded-r-lg">
+                  <p class="text-lg font-semibold italic text-dark-gray leading-relaxed">"New York's book lovers are finding community in bars and at quiet reading parties"</p>
+                </blockquote>
+                <h3 class="mb-1 text-dark-gray text-sm leading-snug">Gen Z making reading parties cool in New York</h3>
+                <p class="text-dark-gray/50 text-xs mb-4">inews.co.uk</p>
+                <img src="/src/assets/images/press_section/theIimage.webp" alt="The I story thumbnail" class="w-full rounded-xl" />
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- 6) TimeOut -->
+        <div class="press-card mb-6">
+          <div class="transform hover:scale-[1.02] transition-transform duration-300">
+            <div class="p-6 border border-beaver rounded-xl shadow-sm">
+              <a href="https://www.timeout.com/newyork/news/forget-the-apps-nyc-singles-are-finding-love-and-lust-at-these-in-person-events-020224" target="_blank" rel="noopener">
+                <div class="press-favicon mb-3"><img src="/src/assets/images/press_section/timeoutfav.png" alt="TimeOut logo" /></div>
+                <h3 class="mb-1 text-dark-gray text-sm leading-snug">Forget the apps: NYC singles are finding love and lust at these in-person events</h3>
+                <p class="text-dark-gray/50 text-xs mb-4">timeout.com</p>
+                <img src="/src/assets/images/press_section/timeoutimage.webp" alt="TimeOut story thumbnail" class="w-full rounded-xl" />
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- 7) TODAY Show -->
+        <div class="press-card mb-6">
+          <div class="transform hover:scale-[1.02] transition-transform duration-300">
+            <div class="p-6 border border-beaver rounded-xl shadow-sm">
+              <a href="https://www.today.com/video/move-over-book-clubs-it-s-reading-parties-that-are-lit-202835013954" target="_blank" rel="noopener">
+                <div class="press-favicon mb-3"><img src="/src/assets/images/press_section/todayshowfav.svg" alt="TODAY Show logo" /></div>
+                <h3 class="mb-1 text-dark-gray text-sm leading-snug">Move over book clubs, it's reading parties that are lit</h3>
+                <p class="text-dark-gray/50 text-xs mb-4">today.com</p>
+                <img src="/src/assets/images/press_section/todayshowimage.png" alt="TODAY Show story thumbnail" class="w-full rounded-xl" />
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- 8) WNBC -->
+        <div class="press-card mb-6">
+          <div class="transform hover:scale-[1.02] transition-transform duration-300">
+            <div class="p-6 border border-beaver rounded-xl shadow-sm">
+              <a href="https://www.nbcnewyork.com/entertainment/the-scene/new-york-live/attend-a-reading-party-in-nyc/5170513/" target="_blank" rel="noopener">
+                <div class="press-favicon mb-3"><img src="/src/assets/images/press_section/wnbc_favicon.png" alt="WNBC logo" /></div>
+                <blockquote class="mb-4 p-4 bg-jean/5 border-l-4 border-jean rounded-r-lg">
+                  <p class="text-lg font-semibold italic text-dark-gray leading-relaxed">“It’s not a book club… it’s a reading party.”</p>
+                </blockquote>
+                <h3 class="mb-1 text-dark-gray text-sm leading-snug">Attend a Reading Party in NYC</h3>
+                <p class="text-dark-gray/50 text-xs mb-4">nbcnewyork.com</p>
+                <img src="/src/assets/images/press_section/wnbc_article.png" alt="WNBC story thumbnail" class="w-full rounded-xl" />
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- ===== Hidden until expand (DESKTOP) ===== -->
+
+        <!-- TechCrunch / DryBaby (HIDDEN INITIALLY) -->
+        <div class="press-card mb-6 hidden hidden-press-desktop">
+          <div class="transform hover:scale-[1.02] transition-transform duration-300">
+            <div class="p-6 border border-beaver rounded-xl shadow-sm">
+              <a href="https://techcrunch.com/2024/09/10/drybaby-new-sober-dating-app-betting-on-surge-in-sober-curious-movement/" target="_blank" rel="noopener">
+                <div class="press-favicon mb-3"><img src="/src/assets/images/press_section/techcrunch_favicon.png" alt="TechCrunch logo" /></div>
+                <h3 class="mb-1 text-dark-gray text-sm leading-snug">DryBaby: New sober dating app betting on surge in sober curious movement</h3>
+                <p class="text-dark-gray/50 text-xs mb-4">techcrunch.com</p>
+                <img src="/src/assets/images/press_section/techcrunch_article.jpg" alt="TechCrunch story thumbnail" class="w-full rounded-xl" />
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- CBS Los Angeles (HIDDEN) -->
+        <div class="press-card mb-6 hidden hidden-press-desktop">
+          <div class="transform hover:scale-[1.02] transition-transform duration-300">
+            <div class="p-6 border border-beaver rounded-xl shadow-sm">
+              <a href="https://www.cbsnews.com/losangeles/news/inside-socal-community-connection-316/" target="_blank" rel="noopener">
+                <div class="press-favicon mb-3"><img src="/src/assets/images/press_section/cbs_favicon.png" alt="CBS logo" /></div>
+                <blockquote class="mb-4 p-4 bg-rust/5 border-l-4 border-rust rounded-r-lg">
+                  <p class="text-lg font-semibold italic text-dark-gray leading-relaxed">“It’s incredibly safe and special.”</p>
+                </blockquote>
+                <h3 class="mb-1 text-dark-gray text-sm leading-snug">Inside SoCal: Community Connection</h3>
+                <p class="text-dark-gray/50 text-xs mb-4">cbsnews.com</p>
+                <img src="/src/assets/images/press_section/cbs_article.png" alt="CBS story thumbnail" class="w-full rounded-xl" />
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Toronto Today (HIDDEN) -->
+        <div class="press-card mb-6 hidden hidden-press-desktop">
+          <div class="transform hover:scale-[1.02] transition-transform duration-300">
+            <div class="p-6 border border-beaver rounded-xl shadow-sm">
+              <a href="https://www.torontotoday.ca/local/arts-culture/loneliness-in-toronto-byobook-read-with-stranger-10410387" target="_blank" rel="noopener">
+                <div class="press-favicon mb-3"><img src="/src/assets/images/press_section/toronto_today_favicon.png" alt="Toronto Today logo" /></div>
+                <blockquote class="mb-4 p-4 bg-jean/5 border-l-4 border-jean rounded-r-lg">
+                  <p class="text-lg font-semibold italic text-dark-gray leading-relaxed">“Something deeper than just reading… connect more deeply with themselves and the world around them.”</p>
+                </blockquote>
+                <h3 class="mb-1 text-dark-gray text-sm leading-snug">Loneliness in Toronto: BYOB(ook), read with stranger</h3>
+                <p class="text-dark-gray/50 text-xs mb-4">torontotoday.ca</p>
+                <img src="/src/assets/images/press_section/toronto_today_article.jpg" alt="Toronto Today story thumbnail" class="w-full rounded-xl" />
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Condé Nast Traveler (HIDDEN) -->
+        <div class="press-card mb-6 hidden hidden-press-desktop">
+          <div class="transform hover:scale-[1.02] transition-transform duration-300">
+            <div class="p-6 border border-beaver rounded-xl shadow-sm">
+              <a href="https://www.traveler.es/articulos/reading-rhythms-fiestas-de-lectura-nueva-york" target="_blank" rel="noopener">
+                <div class="press-favicon mb-3"><img src="/src/assets/images/press_section/conde_nast_traveler_favicon.ico" alt="Conde Nast Traveler logo" /></div>
+                <blockquote class="mb-4 p-4 bg-dark-purple/5 border-l-4 border-dark-purple rounded-r-lg">
+                  <p class="text-lg font-semibold italic text-dark-gray leading-relaxed">“Crear pertenencia a través de la lectura.” / “La soledad de la lectura con el elemento social de la conexión.”</p>
+                </blockquote>
+                <h3 class="mb-1 text-dark-gray text-sm leading-snug">Reading Rhythms: fiestas de lectura Nueva York</h3>
+                <p class="text-dark-gray/50 text-xs mb-4">traveler.es</p>
+                <img src="/src/assets/images/press_section/conde_nast_traveler_article.JPG" alt="Conde Nast Traveler story thumbnail" class="w-full rounded-xl" />
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- LA Spectrum News (HIDDEN) -->
+        <div class="press-card mb-6 hidden hidden-press-desktop">
+          <div class="transform hover:scale-[1.02] transition-transform duration-300">
+            <div class="p-6 border border-beaver rounded-xl shadow-sm">
+              <a href="https://spectrumnews1.com/ca/southern-california/education/2024/12/20/reading--books--parties--holiday--reading-rhythms" target="_blank" rel="noopener">
+                <div class="press-favicon mb-3"><img src="/src/assets/images/press_section/la_spectrum_news_favicon.png" alt="LA Spectrum News logo" /></div>
+                <blockquote class="mb-4 p-4 bg-rust/5 border-l-4 border-rust rounded-r-lg">
+                  <p class="text-lg font-semibold italic text-dark-gray leading-relaxed">“Good vibes and good reads.”</p>
+                </blockquote>
+                <h3 class="mb-1 text-dark-gray text-sm leading-snug">Reading, books, parties, holiday: Reading Rhythms</h3>
+                <p class="text-dark-gray/50 text-xs mb-4">spectrumnews1.com</p>
+                <img src="/src/assets/images/press_section/la_spectrum_news_article.jpg" alt="LA Spectrum News story thumbnail" class="w-full rounded-xl" />
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Sky TG24 (HIDDEN) -->
+        <div class="press-card mb-6 hidden hidden-press-desktop">
+          <div class="transform hover:scale-[1.02] transition-transform duration-300">
+            <div class="p-6 border border-beaver rounded-xl shadow-sm">
+              <a href="https://video.sky.it/news/cronaca/video/reading-party-dagli-stati-uniti-per-combattere-la-solitudine-957970" target="_blank" rel="noopener">
+                <div class="press-favicon mb-3"><img src="/src/assets/images/press_section/sky_favicon.png" alt="Sky logo" /></div>
+                <blockquote class="mb-4 p-4 bg-dark-purple/5 border-l-4 border-dark-purple rounded-r-lg">
+                  <p class="text-lg font-semibold italic text-dark-gray leading-relaxed">“Una festa in cui si legge.” / “Un ambiente un po’ più freddo.” / “Veramente qualcosa di innovativo.”</p>
+                </blockquote>
+                <h3 class="mb-1 text-dark-gray text-sm leading-snug">Reading party dagli Stati Uniti per combattere la solitudine</h3>
+                <p class="text-dark-gray/50 text-xs mb-4">sky.it</p>
+                <img src="/src/assets/images/press_section/sky_article.jpg" alt="Sky story thumbnail" class="w-full rounded-xl" />
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Radio New Zealand (HIDDEN) -->
+        <div class="press-card mb-6 hidden hidden-press-desktop">
+          <div class="transform hover:scale-[1.02] transition-transform duration-300">
+            <div class="p-6 border border-beaver rounded-xl shadow-sm">
+              <a href="https://www.rnz.co.nz/national/programmes/afternoons/audio/2018936527/not-book-club-not-a-library-but-a-great-night-out-reading" target="_blank" rel="noopener">
+                <div class="press-favicon mb-3"><img src="/src/assets/images/press_section/rnz_favicon.png" alt="Radio New Zealand logo" /></div>
+                <blockquote class="mb-4 p-4 bg-jean/5 border-l-4 border-jean rounded-r-lg">
+                  <p class="text-lg font-semibold italic text-dark-gray leading-relaxed">“Not book club, not a library but a great night out reading.”</p>
+                </blockquote>
+                <h3 class="mb-1 text-dark-gray text-sm leading-snug">Not book club, not a library, but a great night out reading</h3>
+                <p class="text-dark-gray/50 text-xs mb-4">rnz.co.nz</p>
+                <img src="/src/assets/images/press_section/rnz_article.jpg" alt="Radio New Zealand story thumbnail" class="w-full rounded-xl" />
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Fade overlay (desktop) -->
+      <div id="press-fade-new" class="pointer-events-none absolute bottom-24 left-0 right-0 h-40 bg-gradient-to-t from-white via-white/90 to-transparent"></div>
+
+      <!-- Toggle (desktop) -->
+      <div id="press-toggle-container" class="text-center mt-2">
+        <button
+          id="press-toggle"
+          class="group inline-flex items-center justify-center px-6 py-3 bg-white border-2 border-gray-200 text-dark-gray rounded-xl font-semibold text-base hover:border-jean hover:shadow-lg hover:shadow-gray-200/50 transition-all duration-300 hover:-translate-y-1"
+        >
+          <span id="press-toggle-text">Show More Press</span>
+          <svg id="press-toggle-arrow" class="w-4 h-4 ml-2 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+          </svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- ========== MOBILE (horizontal swipe — all visible, no toggle) ========== -->
+    <div class="md:hidden -mx-6 py-4">
+      <div id="press-mobile" class="flex gap-6 overflow-x-auto pb-8 pt-2 px-6 scrollbar-hide">
+        <!-- NYT -->
+<div class="press-card-mobile w-72 flex-shrink-0">
+  <div class="p-6 border border-beaver rounded-xl shadow-sm">
+    <a href="https://www.nytimes.com/2023/12/19/books/reading-rhythms.html" target="_blank" rel="noopener">
+      <div class="press-favicon mb-3"><img src={pressNyt.src} alt="New York Times logo" /></div>
+
+      <!-- Added quote -->
+      <blockquote class="mb-4 p-3 bg-jean/5 border-l-4 border-jean rounded-r-lg">
+        <p class="text-base font-semibold italic text-dark-gray leading-relaxed">
+          “There are hardly any environments where we get to read in unison,” Adam said. “It’s kind of beautiful”.
+        </p>
+      </blockquote>
+
+      <h3 class="mb-1 text-dark-gray text-sm leading-snug">It's My Party and I'll Read If I Want To</h3>
+      <p class="text-dark-gray/50 text-xs mb-4">nytimes.com</p>
+      <img src="/src/assets/media/New_York_Times.webp" alt="NYT" class="w-full rounded-xl" />
+    </a>
+  </div>
+</div>
+        <!-- Rolling Stone -->
+        <div class="press-card-mobile w-72 flex-shrink-0">
+          <div class="p-6 border border-beaver rounded-xl shadow-sm">
+            <a href="https://www.rollingstone.com/culture-council/articles/are-reading-parties-the-new-wellness-activity-creative-leaders-1234969533/" target="_blank" rel="noopener">
+              <div class="press-favicon mb-3"><img src="/src/assets/images/press_section/rollingstonefav.webp" alt="Rolling Stone" /></div>
+              <blockquote class="mb-4 p-3 bg-dark-purple/5 border-l-4 border-dark-purple rounded-r-lg">
+                <p class="text-base font-semibold italic text-dark-gray leading-relaxed">"Are reading parties the new wellness activity?"</p>
+              </blockquote>
+              <h3 class="mb-1 text-dark-gray text-sm leading-snug">Are Reading Parties the New Wellness Activity?</h3>
+              <p class="text-dark-gray/50 text-xs mb-4">rollingstone.com</p>
+              <img src="/src/assets/images/press_section/rollingstoneimage.webp" alt="Rolling Stone" class="w-full rounded-xl" />
+            </a>
+          </div>
+        </div>
+        <!-- Guardian -->
+        <div class="press-card-mobile w-72 flex-shrink-0">
+          <div class="p-6 border border-beaver rounded-xl shadow-sm">
+            <a href="https://www.theguardian.com/books/2024/jan/26/books-and-looks-gen-z-is-rediscovering-the-public-library" target="_blank" rel="noopener">
+              <div class="press-favicon mb-3"><img src="/src/assets/images/press_section/guardian_favicon.ico" alt="The Guardian" /></div>
+              <h3 class="mb-1 text-dark-gray text-sm leading-snug">Books and looks: Gen Z is rediscovering the public library</h3>
+              <p class="text-dark-gray/50 text-xs mb-4">theguardian.com</p>
+              <img src="/src/assets/images/press_section/guardian_article.jpg" alt="Guardian" class="w-full rounded-xl" />
+            </a>
+          </div>
+        </div>
+        <!-- Forbes -->
+        <div class="press-card-mobile w-72 flex-shrink-0">
+          <div class="p-6 border border-beaver rounded-xl shadow-sm">
+            <a href="https://www.forbes.com/sites/annahaines/2025/05/06/mothers-day-gift-guide-the-best-gifts-for-community-minded-moms/" target="_blank" rel="noopener">
+              <div class="press-favicon mb-3"><img src="/src/assets/images/press_section/forbesfav.jpeg" alt="Forbes" /></div>
+              <blockquote class="mb-4 p-3 bg-jean/5 border-l-4 border-jean rounded-r-lg">
+                <p class="text-base font-semibold italic text-dark-gray leading-relaxed">"One of the best ways to meet new people is through shared interests..."</p>
+              </blockquote>
+              <h3 class="mb-1 text-dark-gray text-sm leading-snug">Mother's Day Gift Guide</h3>
+              <p class="text-dark-gray/50 text-xs mb-4">forbes.com</p>
+              <img src="/src/assets/images/press_section/forbes_image.webp" alt="Forbes" class="w-full rounded-xl" />
+            </a>
+          </div>
+        </div>
+        <!-- (HIDE The I on mobile) -->
+        <!-- TimeOut -->
+        <div class="press-card-mobile w-72 flex-shrink-0">
+          <div class="p-6 border border-beaver rounded-xl shadow-sm">
+            <a href="https://www.timeout.com/newyork/news/forget-the-apps-nyc-singles-are-finding-love-and-lust-at-these-in-person-events-020224" target="_blank" rel="noopener">
+              <div class="press-favicon mb-3"><img src="/src/assets/images/press_section/timeoutfav.png" alt="TimeOut" /></div>
+              <h3 class="mb-1 text-dark-gray text-sm leading-snug">Forget the apps...</h3>
+              <p class="text-dark-gray/50 text-xs mb-4">timeout.com</p>
+              <img src="/src/assets/images/press_section/timeoutimage.webp" alt="TimeOut" class="w-full rounded-xl" />
+            </a>
+          </div>
+        </div>
+        <!-- TODAY Show -->
+        <div class="press-card-mobile w-72 flex-shrink-0">
+          <div class="p-6 border border-beaver rounded-xl shadow-sm">
+            <a href="https://www.today.com/video/move-over-book-clubs-it-s-reading-parties-that-are-lit-202835013954" target="_blank" rel="noopener">
+              <div class="press-favicon mb-3"><img src="/src/assets/images/press_section/todayshowfav.svg" alt="TODAY" /></div>
+              <h3 class="mb-1 text-dark-gray text-sm leading-snug">Move over book clubs...</h3>
+              <p class="text-dark-gray/50 text-xs mb-4">today.com</p>
+              <img src="/src/assets/images/press_section/todayshowimage.png" alt="TODAY" class="w-full rounded-xl" />
+            </a>
+          </div>
+        </div>
+        <!-- WNBC -->
+        <div class="press-card-mobile w-72 flex-shrink-0">
+          <div class="p-6 border border-beaver rounded-xl shadow-sm">
+            <a href="https://www.nbcnewyork.com/entertainment/the-scene/new-york-live/attend-a-reading-party-in-nyc/5170513/" target="_blank" rel="noopener">
+              <div class="press-favicon mb-3"><img src="/src/assets/images/press_section/wnbc_favicon.png" alt="WNBC" /></div>
+              <blockquote class="mb-4 p-3 bg-jean/5 border-l-4 border-jean rounded-r-lg">
+                <p class="text-base font-semibold italic text-dark-gray leading-relaxed">“It’s not a book club… it’s a reading party.”</p>
+              </blockquote>
+              <h3 class="mb-1 text-dark-gray text-sm leading-snug">Attend a Reading Party in NYC</h3>
+              <p class="text-dark-gray/50 text-xs mb-4">nbcnewyork.com</p>
+              <img src="/src/assets/images/press_section/wnbc_article.png" alt="WNBC" class="w-full rounded-xl" />
+            </a>
+          </div>
+        </div>
+        <!-- TechCrunch / DryBaby -->
+        <div class="press-card-mobile w-72 flex-shrink-0">
+          <div class="p-6 border border-beaver rounded-xl shadow-sm">
+            <a href="https://techcrunch.com/2024/09/10/drybaby-new-sober-dating-app-betting-on-surge-in-sober-curious-movement/" target="_blank" rel="noopener">
+              <div class="press-favicon mb-3"><img src="/src/assets/images/press_section/techcrunch_favicon.png" alt="TechCrunch" /></div>
+              <h3 class="mb-1 text-dark-gray text-sm leading-snug">DryBaby: sober curious movement</h3>
+              <p class="text-dark-gray/50 text-xs mb-4">techcrunch.com</p>
+              <img src="/src/assets/images/press_section/techcrunch_article.jpg" alt="TechCrunch" class="w-full rounded-xl" />
+            </a>
+          </div>
+        </div>
+        <!-- Toronto Today -->
+        <div class="press-card-mobile w-72 flex-shrink-0">
+          <div class="p-6 border border-beaver rounded-xl shadow-sm">
+            <a href="https://www.torontotoday.ca/local/arts-culture/loneliness-in-toronto-byobook-read-with-stranger-10410387" target="_blank" rel="noopener">
+              <div class="press-favicon mb-3"><img src="/src/assets/images/press_section/toronto_today_favicon.png" alt="Toronto Today" /></div>
+              <blockquote class="mb-4 p-3 bg-jean/5 border-l-4 border-jean rounded-r-lg">
+                <p class="text-base font-semibold italic text-dark-gray leading-relaxed">“Something deeper than just reading… connect more deeply with themselves and the world around them.”</p>
+              </blockquote>
+              <h3 class="mb-1 text-dark-gray text-sm leading-snug">Loneliness in Toronto</h3>
+              <p class="text-dark-gray/50 text-xs mb-4">torontotoday.ca</p>
+              <img src="/src/assets/images/press_section/toronto_today_article.jpg" alt="Toronto Today" class="w-full rounded-xl" />
+            </a>
+          </div>
+        </div>
+        <!-- Conde Nast Traveler -->
+        <div class="press-card-mobile w-72 flex-shrink-0">
+          <div class="p-6 border border-beaver rounded-xl shadow-sm">
+            <a href="https://www.traveler.es/articulos/reading-rhythms-fiestas-de-lectura-nueva-york" target="_blank" rel="noopener">
+              <div class="press-favicon mb-3"><img src="/src/assets/images/press_section/conde_nast_traveler_favicon.ico" alt="Traveler" /></div>
+              <blockquote class="mb-4 p-3 bg-dark-purple/5 border-l-4 border-dark-purple rounded-r-lg">
+                <p class="text-base font-semibold italic text-dark-gray leading-relaxed">“Crear pertenencia a través de la lectura.”</p>
+              </blockquote>
+              <h3 class="mb-1 text-dark-gray text-sm leading-snug">Fiestas de lectura Nueva York</h3>
+              <p class="text-dark-gray/50 text-xs mb-4">traveler.es</p>
+              <img src="/src/assets/images/press_section/conde_nast_traveler_article.JPG" alt="Traveler" class="w-full rounded-xl" />
+            </a>
+          </div>
+        </div>
+        <!-- LA Spectrum -->
+        <div class="press-card-mobile w-72 flex-shrink-0">
+          <div class="p-6 border border-beaver rounded-xl shadow-sm">
+            <a href="https://spectrumnews1.com/ca/southern-california/education/2024/12/20/reading--books--parties--holiday--reading-rhythms" target="_blank" rel="noopener">
+              <div class="press-favicon mb-3"><img src="/src/assets/images/press_section/la_spectrum_news_favicon.png" alt="Spectrum" /></div>
+              <blockquote class="mb-4 p-3 bg-rust/5 border-l-4 border-rust rounded-r-lg">
+                <p class="text-base font-semibold italic text-dark-gray leading-relaxed">“Good vibes and good reads.”</p>
+              </blockquote>
+              <h3 class="mb-1 text-dark-gray text-sm leading-snug">Reading Rhythms</h3>
+              <p class="text-dark-gray/50 text-xs mb-4">spectrumnews1.com</p>
+              <img src="/src/assets/images/press_section/la_spectrum_news_article.jpg" alt="Spectrum" class="w-full rounded-xl" />
+            </a>
+          </div>
+        </div>
+        <!-- Sky TG24 -->
+        <div class="press-card-mobile w-72 flex-shrink-0">
+          <div class="p-6 border border-beaver rounded-xl shadow-sm">
+            <a href="https://video.sky.it/news/cronaca/video/reading-party-dagli-stati-uniti-per-combattere-la-solitudine-957970" target="_blank" rel="noopener">
+              <div class="press-favicon mb-3"><img src="/src/assets/images/press_section/sky_favicon.png" alt="Sky TG24" /></div>
+              <blockquote class="mb-4 p-3 bg-dark-purple/5 border-l-4 border-dark-purple rounded-r-lg">
+                <p class="text-base font-semibold italic text-dark-gray leading-relaxed">“Una festa in cui si legge.”</p>
+              </blockquote>
+              <h3 class="mb-1 text-dark-gray text-sm leading-snug">Reading party</h3>
+              <p class="text-dark-gray/50 text-xs mb-4">sky.it</p>
+              <img src="/src/assets/images/press_section/sky_article.jpg" alt="Sky" class="w-full rounded-xl" />
+            </a>
+          </div>
+        </div>
+        <!-- RNZ -->
+        <div class="press-card-mobile w-72 flex-shrink-0">
+          <div class="p-6 border border-beaver rounded-xl shadow-sm">
+            <a href="https://www.rnz.co.nz/national/programmes/afternoons/audio/2018936527/not-book-club-not-a-library-but-a-great-night-out-reading" target="_blank" rel="noopener">
+              <div class="press-favicon mb-3"><img src="/src/assets/images/press_section/rnz_favicon.png" alt="RNZ" /></div>
+              <blockquote class="mb-4 p-3 bg-jean/5 border-l-4 border-jean rounded-r-lg">
+                <p class="text-base font-semibold italic text-dark-gray leading-relaxed">“Not book club, not a library but a great night out reading.”</p>
+              </blockquote>
+              <h3 class="mb-1 text-dark-gray text-sm leading-snug">Great night out reading</h3>
+              <p class="text-dark-gray/50 text-xs mb-4">rnz.co.nz</p>
+              <img src="/src/assets/images/press_section/rnz_article.jpg" alt="RNZ" class="w-full rounded-xl" />
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <p class="text-center text-sm text-dark-gray/60 -mt-2 px-6">← Swipe to see more press →</p>
+    </div>
+  </div>
+</section>
+
+<!-- Desktop-only JS (mobile has no toggle now) -->
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const desktopHidden = document.querySelectorAll('#press-media .hidden-press-desktop');
+    const fade = document.getElementById('press-fade-new');
+    const btn = document.getElementById('press-toggle');
+    const btnText = document.getElementById('press-toggle-text');
+    const btnArrow = document.getElementById('press-toggle-arrow');
+    let expanded = false;
+
+    function setDesktop(state) {
+      expanded = state;
+      desktopHidden.forEach(el => el.classList.toggle('hidden', !state));
+      if (fade) fade.style.display = state ? 'none' : 'block';
+      if (btnText) btnText.textContent = state ? 'Show Less' : 'Show More Press';
+      if (btnArrow) btnArrow.style.transform = state ? 'rotate(180deg)' : 'rotate(0deg)';
+    }
+    if (btn) {
+      btn.addEventListener('click', () => {
+        setDesktop(!expanded);
+        if (!expanded) {
+          document.getElementById('press-media')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      });
+    }
+    setDesktop(false);
+  });
+</script>
+
+<!-- Scoped helpers -->
+<style is:global>
+  #press-media .press-card { break-inside: avoid; width: 100%; }
+  #press-media .masonry { column-gap: 1.5rem; }
+  #press-media .press-favicon {
+    width: 2.5rem; height: 2.5rem;
+    border-radius: 0.75rem;
+    background: #1F2937; /* dark gray */
+    display: inline-flex; align-items: center; justify-content: center;
+  }
+  #press-media .press-favicon img {
+    width: 1.25rem;
+    /* normalize to white-on-black */
+    filter: grayscale(1) invert(1) contrast(1.1) brightness(1);
+  }
+  /* hide mobile scrollbar */
+  #press-mobile::-webkit-scrollbar { display: none; }
+  #press-mobile { -ms-overflow-style: none; scrollbar-width: none; }
+</style>
+
+<!-- Final CTA Section (compact rounded card, increased letter spacing) -->
+<section class="py-10 lg:py-14">
+  <div class="max-w-5xl mx-auto px-6">
+    <div
+      class="mx-auto max-w-3xl rounded-2xl bg-gradient-to-r from-[#151218] via-[#1b1420] to-[#20131a]
+                 border border-white/10 shadow-xl text-center p-8 md:p-10"
+    >
+      <h2 class="text-2xl md:text-3xl lg:text-4xl font-display text-white mb-3 tracking-wider">
+        Ready to join the community?
+      </h2>
+      <p class="text-base md:text-lg text-white/85 mb-6">
+        Come read with us, meet great people, and help grow the movement.
+      </p>
+
+      <div class="flex flex-col sm:flex-row gap-3 justify-center">
+        <a
+          href="/events"
+          class="inline-flex items-center justify-center rounded-xl bg-white text-dark-gray
+                 px-5 py-3 md:px-6 md:py-3 font-medium hover:shadow-2xl transition-all duration-300 hover:-translate-y-0.5"
+        >
+          Find an Event
+        </a>
+
+        <a
+          href="/apply"
+          class="inline-flex items-center justify-center rounded-xl border-2 border-white text-white
+                 px-5 py-3 md:px-6 md:py-3 font-medium hover:bg-white hover:text-dark-gray
+                 transition-all duration-300 hover:-translate-y-0.5"
+        >
+          Join the team
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
 </BaseLayout>
+
+<!-- Hidden data container for client-side JavaScript -->
+<div id="chapters-data" data-chapters={chaptersDataJson} style="display: none;"></div>
+<div id="arrow-right-data" data-arrow={arrowRightSrc} style="display: none;"></div>
+
+<script>
+	// Simple image rotation functionality
+	let currentImageIndex = 0;
+	const images = document.querySelectorAll('.rotating-image');
+	
+	function rotateImages() {
+		// Hide all images
+		images.forEach(img => {
+			img.classList.remove('active');
+			img.style.opacity = '0';
+		});
+		
+		// Show current image
+		setTimeout(() => {
+			images[currentImageIndex].classList.add('active');
+			images[currentImageIndex].style.opacity = '1';
+			
+			// Move to next image
+			currentImageIndex = (currentImageIndex + 1) % images.length;
+		}, 300);
+	}
+	
+	// Start rotation when page loads
+	document.addEventListener('DOMContentLoaded', () => {
+		setInterval(rotateImages, 4000); // Change every 4 seconds
+		
+		// Load chapters data from hidden element
+		const chaptersDataElement = document.getElementById('chapters-data');
+		if (!chaptersDataElement || !chaptersDataElement.dataset.chapters) {
+			console.log('No chapters data found');
+			return;
+		}
+		
+		const allChapters = JSON.parse(chaptersDataElement.dataset.chapters);
+		
+		// Get arrow right source
+		const arrowRightData = document.getElementById('arrow-right-data');
+		const arrowRightSrc = arrowRightData ? arrowRightData.dataset.arrow : '';
+		
+		// Chapter navigation for desktop only
+		let currentPage = 0;
+		const chaptersPerPage = 6;
+		
+		const prevButton = document.getElementById('prev-chapters');
+		const nextButton = document.getElementById('next-chapters');
+		const counter = document.getElementById('chapter-counter');
+		const desktopGrid = document.getElementById('desktop-chapters-grid');
+		
+		function updateChaptersDisplay() {
+			const totalPages = Math.ceil(allChapters.length / chaptersPerPage);
+			const startIndex = currentPage * chaptersPerPage;
+			const endIndex = Math.min(startIndex + chaptersPerPage, allChapters.length);
+			const currentChapters = allChapters.slice(startIndex, endIndex);
+			
+			// Add fade out animation (direction will be set by button click)
+			if (desktopGrid) {
+				desktopGrid.style.opacity = '0';
+				// Transform is set by the button click handler
+			}
+			
+			// Update content after a short delay for smooth transition
+			setTimeout(() => {
+			// Update desktop grid
+			if (desktopGrid) {
+				desktopGrid.innerHTML = `
+					<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+						${currentChapters.map(chapter => `
+							<div class="group relative overflow-hidden bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2">
+								<div class="aspect-video overflow-hidden">
+									<img src="${chapter.image.src || chapter.image}" alt="${chapter.name}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
+								</div>
+								<div class="p-6">
+									<h3 class="text-2xl font-serif text-dark-gray mb-2">${chapter.name}</h3>
+									<p class="text-dark-gray/60 text-sm mb-4">${chapter.location}</p>
+									<a href="/events?chapterId=${chapter.name.toLowerCase().replace(/\s+/g, '-')}" class="inline-flex items-center text-jean text-sm font-semibold hover:text-dark-purple transition-colors duration-300">
+										<span>View Events</span>
+										<img src="${arrowRightSrc}" alt="Arrow right" class="w-3 ml-2 group-hover:translate-x-1 transition-transform duration-300" />
+									</a>
+								</div>
+							</div>
+						`).join('')}
+					</div>
+				`;
+					
+					// Fade in animation
+					setTimeout(() => {
+						desktopGrid.style.opacity = '1';
+						desktopGrid.style.transform = 'translateX(0)';
+					}, 50);
+			}
+			}, 200);
+			
+			// Update counter
+			if (counter) {
+				counter.textContent = `${startIndex + 1}-${endIndex} of ${allChapters.length}`;
+			}
+			
+			// Update button states
+			if (prevButton && nextButton) {
+				prevButton.disabled = currentPage === 0;
+				nextButton.disabled = currentPage >= totalPages - 1;
+			}
+		}
+		
+		// Event listeners
+		if (prevButton && nextButton) {
+			prevButton.addEventListener('click', () => {
+				const totalPages = Math.ceil(allChapters.length / chaptersPerPage);
+				if (currentPage > 0) {
+					// Set slide direction for previous (slide left)
+					if (desktopGrid) {
+						desktopGrid.style.transform = 'translateX(-20px)';
+					}
+					currentPage--;
+					updateChaptersDisplay();
+				}
+			});
+			
+			nextButton.addEventListener('click', () => {
+				const totalPages = Math.ceil(allChapters.length / chaptersPerPage);
+				if (currentPage < totalPages - 1) {
+					// Set slide direction for next (slide right)
+					if (desktopGrid) {
+						desktopGrid.style.transform = 'translateX(20px)';
+					}
+					currentPage++;
+					updateChaptersDisplay();
+				}
+			});
+		}
+		
+		// Initialize
+		updateChaptersDisplay();
+		
+		// Testimonials show more/less functionality
+		function setupTestimonialsToggle(toggleId, textId, arrowId, isMainGrid = true) {
+			const toggleButton = document.getElementById(toggleId);
+			const toggleText = document.getElementById(textId);
+			const toggleArrow = document.getElementById(arrowId);
+			
+			if (!toggleButton || !toggleText || !toggleArrow) return;
+			
+			let isExpanded = false;
+			
+			toggleButton.addEventListener('click', () => {
+				const hiddenTestimonials = document.querySelectorAll('.testimonial-hidden');
+				
+				if (isExpanded) {
+					// Collapse
+					hiddenTestimonials.forEach(testimonial => {
+						testimonial.style.display = 'none';
+					});
+					toggleText.textContent = 'Show More Testimonials';
+					toggleArrow.style.transform = 'rotate(0deg)';
+					isExpanded = false;
+					
+					// Smooth scroll to testimonials section
+					document.querySelector('#testimonials-grid, .masonry-fallback').scrollIntoView({
+						behavior: 'smooth',
+						block: 'start'
+					});
+				} else {
+					// Expand
+					hiddenTestimonials.forEach(testimonial => {
+						testimonial.style.display = 'block';
+					});
+					toggleText.textContent = 'Show Less';
+					toggleArrow.style.transform = 'rotate(180deg)';
+					isExpanded = true;
+				}
+			});
+		}
+		
+		// Setup both toggle buttons (main and fallback)
+		setupTestimonialsToggle('testimonials-toggle', 'toggle-text', 'toggle-arrow');
+		setupTestimonialsToggle('testimonials-toggle-fallback', 'toggle-text-fallback', 'toggle-arrow-fallback', false);
+		
+		// Press carousel animation
+		const pressCarousel = document.querySelector('.press-carousel');
+		if (pressCarousel) {
+			let scrollAmount = 0;
+			const scrollSpeed = 0.2; // Slower speed for smoother animation
+			
+			function animateCarousel() {
+				scrollAmount += scrollSpeed;
+				pressCarousel.style.transform = `translateX(-${scrollAmount}px)`;
+				
+				// Reset when we've scrolled through half the content (since we have duplicates)
+				const totalWidth = pressCarousel.scrollWidth / 4; // Divide by 4 since we have 4 sets
+				if (scrollAmount >= totalWidth) {
+					scrollAmount = 0;
+				}
+				
+				requestAnimationFrame(animateCarousel);
+			}
+			
+			// Start animation
+			animateCarousel();
+			
+			// Pause on hover
+			let isPaused = false;
+			pressCarousel.addEventListener('mouseenter', () => {
+				isPaused = true;
+			});
+			
+			pressCarousel.addEventListener('mouseleave', () => {
+				isPaused = false;
+			});
+			
+			// Modified animation function to respect pause
+			function animateCarouselWithPause() {
+				if (!isPaused) {
+					scrollAmount += scrollSpeed;
+					pressCarousel.style.transform = `translateX(-${scrollAmount}px)`;
+					
+					const totalWidth = pressCarousel.scrollWidth / 4;
+					if (scrollAmount >= totalWidth) {
+						scrollAmount = 0;
+					}
+				}
+				
+				requestAnimationFrame(animateCarouselWithPause);
+			}
+			
+			// Start the pauseable animation
+			animateCarouselWithPause();
+		}
+		
+		const seeMoreButton = document.getElementById('see-more-press');
+		const fadeOverlay = document.getElementById('press-fade');
+		const buttonContainer = document.getElementById('press-button-container');
+		const hiddenCards = document.querySelectorAll('.hidden-press');
+		
+		if (seeMoreButton && hiddenCards.length > 0) {
+			seeMoreButton.addEventListener('click', () => {
+				// Show all hidden cards
+				hiddenCards.forEach(card => {
+					card.classList.remove('hidden-press');
+					card.style.display = 'block';
+				});
+				
+				// Hide the fade overlay and button
+				if (fadeOverlay) fadeOverlay.style.display = 'none';
+				if (buttonContainer) buttonContainer.style.display = 'none';
+			});
+		} else if (hiddenCards.length === 0) {
+			// If no hidden cards, hide the button and fade
+			if (fadeOverlay) fadeOverlay.style.display = 'none';
+			if (buttonContainer) buttonContainer.style.display = 'none';
+		}
+	});
+
+</script>
+
+<style>
+	/* Gradient animation for hero text */
+	.gradient-animate {
+		background-size: 200% 200%;
+		animation: gradientShift 3s ease infinite;
+	}
+
+	@keyframes gradientShift {
+		0% { background-position: 0% 50%; }
+		50% { background-position: 100% 50%; }
+		100% { background-position: 0% 50%; }
+	}
+
+	/* Instagram square styling */
+
+	.rotating-image {
+		transition: opacity 0.5s ease-in-out;
+	}
+
+	/* Press carousel styling */
+	.press-carousel-container {
+		padding: 8px 0; /* Extra space for hover scaling */
+	}
+
+	.press-logo {
+		transition: all 0.3s ease;
+		margin: 4px 0; /* Vertical margin for hover scaling */
+	}
+
+	/* Chapter cards styling */
+
+	/* Desktop grid animation */
+	#desktop-chapters-grid {
+		transition: opacity 0.3s ease, transform 0.3s ease;
+	}
+
+	/* Responsive adjustments */
+	@media (max-width: 768px) {
+		.instagram-square {
+			max-width: 300px;
+		}
+		
+		.press-logo {
+			height: 1.5rem;
+		}
+	}
+
+	/* Enhanced hover effects */
+
+	/* Floating animation for partner logos */
+	@keyframes float {
+		0%, 100% { transform: translateY(0px) rotate(var(--rotation, 0deg)) scale(1); }
+		25% { transform: translateY(-8px) rotate(calc(var(--rotation, 0deg) + 1deg)) scale(1.02); }
+		50% { transform: translateY(-12px) rotate(calc(var(--rotation, 0deg) - 0.5deg)) scale(0.98); }
+		75% { transform: translateY(-6px) rotate(calc(var(--rotation, 0deg) + 0.8deg)) scale(1.01); }
+	}
+
+	/* Enhanced floating animations with more variety */
+	@keyframes floatSlow {
+		0%, 100% { transform: translateY(0px) rotate(var(--rotation, 0deg)) scale(1); }
+		50% { transform: translateY(-15px) rotate(calc(var(--rotation, 0deg) + 2deg)) scale(1.03); }
+	}
+
+	@keyframes floatFast {
+		0%, 100% { transform: translateY(0px) rotate(var(--rotation, 0deg)) scale(1); }
+		33% { transform: translateY(-6px) rotate(calc(var(--rotation, 0deg) - 1deg)) scale(0.99); }
+		66% { transform: translateY(-10px) rotate(calc(var(--rotation, 0deg) + 1.5deg)) scale(1.02); }
+	}
+
+	@keyframes gentleFloat {
+		0%, 100% { 
+			transform: translateY(0px) translateX(0px) rotate(var(--rotation, 0deg)) scale(1); 
+		}
+		25% { 
+			transform: translateY(-4px) translateX(2px) rotate(calc(var(--rotation, 0deg) + 1deg)) scale(1.01); 
+		}
+		50% { 
+			transform: translateY(-6px) translateX(-1px) rotate(calc(var(--rotation, 0deg) - 0.5deg)) scale(0.99); 
+		}
+		75% { 
+			transform: translateY(-3px) translateX(3px) rotate(calc(var(--rotation, 0deg) + 0.8deg)) scale(1.02); 
+		}
+	}
+
+	/* Apply different animations to create organic movement */
+	.floating-logo:nth-child(4n+1) {
+		animation: gentleFloat 12s ease-in-out infinite;
+	}
+	
+	.floating-logo:nth-child(4n+2) {
+		animation: floatSlow 15s ease-in-out infinite;
+		animation-direction: reverse;
+	}
+	
+	.floating-logo:nth-child(4n+3) {
+		animation: floatFast 10s ease-in-out infinite;
+		animation-delay: 2s;
+	}
+	
+	.floating-logo:nth-child(4n) {
+		animation: gentleFloat 14s ease-in-out infinite;
+		animation-direction: reverse;
+		animation-delay: 1s;
+	}
+	
+	/* Hover pause effect */
+	.floating-logo:hover {
+		animation-play-state: paused;
+	}
+
+	/* Mobile partner logo reordering */
+	@media (max-width: 767px) {
+		[data-name="threads"] {
+			order: 12;
+		}
+		[data-name="naked life"] {
+			order: 10;
+		}
+	}
+
+	/* Swipable chapters styling */
+	.scrollbar-hide {
+		-ms-overflow-style: none;
+		scrollbar-width: none;
+	}
+	
+	.scrollbar-hide::-webkit-scrollbar {
+		display: none;
+	}
+
+	.snap-x {
+		scroll-snap-type: x mandatory;
+	}
+
+	.snap-mandatory > * {
+		scroll-snap-align: center;
+	}
+
+	/* Testimonials show/hide animation */
+	.testimonial-hidden {
+		transition: opacity 0.3s ease, transform 0.3s ease;
+	}
+
+	.testimonial-hidden[style*="display: block"] {
+		animation: fadeInUp 0.5s ease forwards;
+	}
+
+	@keyframes fadeInUp {
+		from {
+			opacity: 0;
+			transform: translateY(20px);
+		}
+		to {
+			opacity: 1;
+			transform: translateY(0);
+		}
+	}
+	
+	.hidden-press {
+		display: none;
+	}
+	
+	.line-clamp-2 {
+		display: -webkit-box;
+		-webkit-line-clamp: 2;
+		-webkit-box-orient: vertical;
+		overflow: hidden;
+	}
+	
+	.press-card {
+		flex-shrink: 0;
+		min-width: 250px;
+		max-width: 350px;
+	}
+	
+	@media (max-width: 768px) {
+		.press-card {
+			width: 100% !important;
+			max-width: 100% !important;
+			min-width: 100% !important;
+		}
+	}
+</style>

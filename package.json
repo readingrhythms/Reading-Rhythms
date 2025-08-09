@@ -4,9 +4,9 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
-    "dev": "astro dev",
-    "start": "astro dev",
-    "build": "astro build",
+    "dev": "SHARP_IGNORE_GLOBAL_ARRAY_BUFFER_VIEW=1 SHARP_AVOID_EXTERNAL_BUFFERS=1 astro dev",
+    "start": "SHARP_IGNORE_GLOBAL_ARRAY_BUFFER_VIEW=1 SHARP_AVOID_EXTERNAL_BUFFERS=1 astro dev",
+    "build": "SHARP_IGNORE_GLOBAL_ARRAY_BUFFER_VIEW=1 SHARP_AVOID_EXTERNAL_BUFFERS=1 astro build",
     "preview": "astro preview",
     "astro": "astro"
   },

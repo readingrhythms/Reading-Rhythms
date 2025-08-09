@@ -1,0 +1,442 @@
+---
+import BaseLayout from '@layouts/BaseLayout.astro';
+import { Image } from 'astro:assets';
+import arrowright from '@assets/icons/arrow-right.svg';
+import logo from '@assets/images/logo.svg';
+import pressNyt from '@assets/images/press-nyt.svg';
+import pressNyp from '@assets/images/press-nyp.svg';
+import pressTodayShow from '@assets/images/press-today_show.svg';
+import pressFox5 from '@assets/images/press-fox5.svg';
+import rollingStone from '@assets/images/rolling-stone.svg';
+import gma from '@assets/images/GMA.svg';
+import guardian from '@assets/images/guardian.jpg';
+import thrillist from '@assets/images/thrillest.png';
+import washpost from '@assets/images/washpost.png';
+import cbs from '@assets/images/cbs.jpg';
+import forbes from '@assets/images/forbes.jpg';
+import london from '@assets/images/london.svg';
+import nbc from '@assets/images/nbc.jpg';
+import techcrunch from '@assets/images/techcrunch.png';
+import cbsNew from '@assets/images/cbs.png';
+import forbesNew from '@assets/images/forbes.png';
+import londonNew from '@assets/images/london copy.svg';
+import nbcNew from '@assets/images/nbc.png';
+import techcrunchNew from '@assets/images/techcrunch copy.png';
+
+// Combined partners (publishers + brands) - same as homepage
+const partners = [
+  { name: 'Penguin Random House', logo: '/src/assets/images/partners/PRH.jpeg', type: 'publisher', size: 'large', url: 'https://www.penguinrandomhouse.com' },
+  { name: 'HarperCollins', logo: '/src/assets/images/partners/HarperCollins Logo.png', type: 'publisher', size: 'medium', url: 'https://www.harpercollins.com' },
+  { name: 'Simon & Schuster', logo: '/src/assets/images/partners/simon schuster.webp', type: 'publisher', size: 'small', url: 'https://www.simonandschuster.com' },
+  { name: 'Hachette Books', logo: '/src/assets/images/partners/Hachette Books Logo.png', type: 'publisher', size: 'medium', url: 'https://www.hachettebookgroup.com' },
+  { name: 'Macmillan', logo: '/src/assets/images/partners/macimillan.png', type: 'publisher', size: 'small', url: 'https://us.macmillan.com' },
+  { name: 'Hudson Yards', logo: '/src/assets/images/partners/Hudson yards.svg', type: 'venue', size: 'large', url: 'https://www.hudsonyardsnewyork.com' },
+  { name: 'NYPL', logo: '/src/assets/images/partners/nypl.png', type: 'venue', size: 'medium', url: 'https://www.nypl.org' },
+  { name: 'Tomorrowland', logo: '/src/assets/images/partners/tomorrowland.svg', type: 'brand', size: 'small', url: 'https://www.tomorrowland.com' },
+  { name: 'Rivian', logo: '/src/assets/images/partners/rivian.png', type: 'brand', size: 'medium', url: 'https://rivian.com' },
+  { name: 'Immi', logo: '/src/assets/images/partners/immi.webp', type: 'brand', size: 'small', url: 'https://immieats.com/' },
+  { name: 'Naked Life', logo: '/src/assets/images/partners/naked life.webp', type: 'brand', size: 'small', url: 'https://drinknakedlife.com/pages/age-gate' },
+  { name: 'Threads', logo: '/src/assets/images/partners/threads.avif', type: 'brand', size: 'medium', url: 'https://www.threads.net' }
+];
+
+// Extended press coverage - same as homepage
+const pressLogos = [
+  { name: 'Rolling Stone', logo: rollingStone },
+  { name: 'The Washington Post', logo: washpost },
+  { name: 'The Guardian', logo: '/src/assets/images/guardian.png' },
+  { name: 'Thrillist', logo: thrillist },
+  { name: 'GMA', logo: gma },
+  { name: 'FOX5', logo: pressFox5 },
+  { name: 'CBS', logo: cbsNew },
+  { name: 'Forbes', logo: forbesNew },
+  { name: 'London Evening Standard', logo: londonNew },
+  { name: 'NBC', logo: nbcNew },
+  { name: 'TechCrunch', logo: techcrunchNew }
+];
+---
+
+<BaseLayout title='Reading Rhythms | Partner with Us' description='Partner with Reading Rhythms. Create authentic brand experiences woven seamlessly into our reading parties.' showNavbar={true}>
+  <!-- Hero Section -->
+  <section class="relative overflow-hidden pt-4 md:pt-8 pb-8 md:pb-12 bg-gradient-to-br from-white via-gray-50/30 to-jean/5">
+    <div class="max-w-4xl mx-auto px-4 md:px-6 lg:px-8 text-center">
+      <h1 class="text-2xl md:text-3xl lg:text-4xl xl:text-5xl text-dark-gray font-display tracking-wider leading-tight mb-4 md:mb-6">
+        <span class="bg-gradient-to-r from-jean via-rust to-dark-purple bg-clip-text text-transparent">Partner with us!</span>
+      </h1>
+      
+      <div class="max-w-2xl mx-auto mb-4 md:mb-6">
+        <p class="text-base md:text-lg lg:text-xl text-dark-gray/80 font-light leading-relaxed">
+          Our brand partners work with our talented hosts and marketers to ensure that we create authentic brand experiences
+        </p>
+      </div>
+      
+      <!-- NPS Score below description -->
+      <div class="inline-flex items-center px-2 md:px-3 py-1 bg-white rounded-full border border-jean/20 shadow-sm">
+        <span class="text-base md:text-lg font-bold text-jean mr-1">9.2</span>
+        <span class="text-dark-gray text-xs md:text-sm">Partner NPS</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Partnership Inquiry Form -->
+  <section id="partnership-form" class="py-8 md:py-12 bg-gradient-to-b from-gray-50/30 to-white">
+    <div class="max-w-3xl mx-auto px-3 md:px-6 lg:px-8">
+      <div class="bg-white rounded-2xl md:rounded-3xl shadow-xl border border-gray-100 p-4 md:p-8 lg:p-12">
+        <h3 class="text-lg md:text-xl lg:text-2xl font-semibold text-dark-gray mb-4 md:mb-6 text-center">
+          Share your vision and let's create something amazing together!
+        </h3>
+        <form class="space-y-4" name="partnership-inquiry" method="POST" data-netlify="true">
+          <input type="hidden" name="form-name" value="partnership-inquiry" />
+          
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-4">
+            <div>
+              <label for="contact-name" class="block text-sm font-semibold text-dark-gray mb-1 md:mb-2">Contact Name *</label>
+              <input type="text" id="contact-name" name="contact-name" required class="w-full px-3 py-2 md:py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-jean focus:border-transparent">
+            </div>
+            <div>
+              <label for="company" class="block text-sm font-semibold text-dark-gray mb-1 md:mb-2">Company *</label>
+              <input type="text" id="company" name="company" required class="w-full px-3 py-2 md:py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-jean focus:border-transparent">
+            </div>
+          </div>
+          
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-4">
+            <div>
+              <label for="email" class="block text-sm font-semibold text-dark-gray mb-1 md:mb-2">Email *</label>
+              <input type="email" id="email" name="email" required class="w-full px-3 py-2 md:py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-jean focus:border-transparent">
+            </div>
+            <div>
+              <label for="phone" class="block text-sm font-semibold text-dark-gray mb-1 md:mb-2">Phone</label>
+              <input type="tel" id="phone" name="phone" class="w-full px-3 py-2 md:py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-jean focus:border-transparent">
+            </div>
+          </div>
+          
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-4">
+            <div>
+              <label for="business-type" class="block text-sm font-semibold text-dark-gray mb-1 md:mb-2">Business Type *</label>
+              <select id="business-type" name="business-type" required class="w-full px-3 py-2 md:py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-jean focus:border-transparent">
+                <option value="">Select business type</option>
+                <option value="publishing">Publishing</option>
+                <option value="consumer">Consumer</option>
+                <option value="agency">Agency</option>
+                <option value="other">Other</option>
+              </select>
+            </div>
+            <div>
+              <label for="partnership-interest" class="block text-sm font-semibold text-dark-gray mb-1 md:mb-2">Partnership Interest *</label>
+              <select id="partnership-interest" name="partnership-interest" required class="w-full px-3 py-2 md:py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-jean focus:border-transparent">
+                <option value="">Select partnership interest</option>
+                <option value="digital">Digital</option>
+                <option value="experiential">Experiential</option>
+                <option value="both">Both</option>
+              </select>
+            </div>
+          </div>
+          
+          <div>
+            <label for="timeline" class="block text-sm font-semibold text-dark-gray mb-1 md:mb-2">Timeline *</label>
+            <select id="timeline" name="timeline" required class="w-full px-3 py-2 md:py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-jean focus:border-transparent">
+              <option value="">Select timeline</option>
+              <option value="3-months">In the next 3 months</option>
+              <option value="3-6-months">3–6 months</option>
+              <option value="6-plus-months">6+ months</option>
+            </select>
+          </div>
+          
+          <div>
+            <label for="partnership-vision" class="block text-sm font-semibold text-dark-gray mb-1 md:mb-2">Tell us about your partnership vision *</label>
+            <textarea id="partnership-vision" name="partnership-vision" rows="8" required placeholder="Describe your campaign partnership goals and any specific ideas you have in mind." class="w-full px-3 py-2 md:py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-jean focus:border-transparent resize-none"></textarea>
+          </div>
+          
+          <div class="text-center">
+            <button type="submit" class="group inline-flex items-center justify-center px-6 py-3 md:px-8 md:py-4 bg-gradient-to-r from-jean to-dark-purple text-white rounded-xl font-bold text-base md:text-lg hover:shadow-lg hover:shadow-jean/25 transition-all duration-300 hover:-translate-y-1 w-full md:w-auto">
+              <span>Submit Inquiry</span>
+              <img src={arrowright.src} alt="Arrow right" class="w-4 ml-2 group-hover:translate-x-1 transition-transform duration-300" />
+            </button>
+          </div>
+        </form>
+      </div>
+      </div>
+      
+  </section>
+
+  <!-- Combined Partners Section - Same as Homepage -->
+  <section class="py-12 lg:py-16 bg-gradient-to-b from-white to-gray-50/30">
+    <div class="max-w-7xl mx-auto px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl md:text-4xl font-display text-dark-gray mb-4 tracking-wide">
+          Our <span class="bg-gradient-to-r from-jean to-rust bg-clip-text text-transparent">Partners</span>
+        </h2>
+      </div>
+      
+      <!-- Innovative Floating Logo Layout -->
+      <div class="relative max-w-6xl mx-auto mb-8">
+        <!-- Multiple focal points for visual interest -->
+        <div class="absolute top-1/3 left-1/4 w-24 h-24 bg-gradient-to-br from-jean/15 to-rust/10 rounded-full blur-3xl animate-pulse"></div>
+        <div class="absolute bottom-1/4 right-1/3 w-32 h-32 bg-gradient-to-br from-rust/10 to-dark-purple/15 rounded-full blur-2xl animate-pulse" style="animation-delay: 2s;"></div>
+        <div class="absolute top-1/2 right-1/4 w-20 h-20 bg-gradient-to-br from-dark-purple/10 to-jean/15 rounded-full blur-xl animate-pulse" style="animation-delay: 4s;"></div>
+        
+        <!-- Desktop Constellation Layout (md and up) -->
+        <div class="hidden md:block mb-8">
+          <div class="grid grid-cols-3 lg:grid-cols-4 gap-6 lg:gap-8 max-w-6xl mx-auto">
+            {partners.map((partner, index) => {
+              // Size variations based on partner size property
+              const containerSizes = {
+                small: 'p-3 lg:p-4',
+                medium: 'p-4 lg:p-5',
+                large: 'p-5 lg:p-6'
+              };
+              
+              return (
+                <a href={partner.url} target="_blank" rel="noopener" class="group transform hover:scale-105 transition-all duration-300 cursor-pointer floating-logo">
+                  <div class="relative">
+                    <!-- Logo container with varying sizes -->
+                    <div class={`bg-white rounded-2xl ${containerSizes[partner.size]} shadow-lg hover:shadow-xl transition-shadow duration-300 border border-gray-200 flex items-center justify-center min-h-[100px] lg:min-h-[120px] ${partner.name === 'Hachette Books' ? 'p-2 lg:p-3' : ''}`}>
+                      <img 
+                        src={partner.logo} 
+                        alt={`${partner.name} logo`} 
+                        class={`${partner.name === 'Hachette Books' ? 'max-w-[85%] max-h-[70%]' : 'max-w-[80%] max-h-[75%]'} w-full h-full object-contain`}
+                      />
+                    </div>
+                  </div>
+                </a>
+              );
+            })}
+          </div>
+        </div>
+        
+        <!-- Mobile Grid Layout (sm and below) -->
+        <div class="md:hidden mb-8">
+          <div class="grid grid-cols-2 gap-4 max-w-lg mx-auto">
+            {partners.map((partner) => {
+              // Mobile-specific sizing
+              const mobileContainerSizes = {
+                small: 'p-2',
+                medium: 'p-3',
+                large: 'p-4'
+              };
+              
+              return (
+                <a href={partner.url} target="_blank" rel="noopener" class="group transform hover:scale-105 transition-all duration-300 cursor-pointer" data-name={partner.name.toLowerCase()}>
+                  <div class="relative">
+                    <div class={`bg-white rounded-xl ${mobileContainerSizes[partner.size]} shadow-md hover:shadow-lg transition-shadow duration-300 border border-gray-200 flex items-center justify-center min-h-[100px]`}>
+                      <img 
+                        src={partner.logo} 
+                        alt={`${partner.name} logo`} 
+                        class={`${partner.name === 'Hachette Books' ? 'max-w-[85%] max-h-[70%]' : 'max-w-[80%] max-h-[75%]'} w-full h-full object-contain`}
+                      />
+                    </div>
+                  </div>
+                </a>
+              );
+            })}
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Case Studies Section - Hidden for now -->
+  <section id="case-studies" class="py-16 bg-gradient-to-b from-white to-gray-50/30 hidden">
+    <div class="max-w-6xl mx-auto px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <h2 class="text-2xl md:text-3xl font-display text-dark-gray mb-3">
+          A Taste of Our <span class="bg-gradient-to-r from-jean to-rust bg-clip-text text-transparent">Partnerships</span>
+        </h2>
+      </div>
+      
+      <div class="space-y-12">
+        <!-- Hudson Yards Case Study -->
+        <div class="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
+          <div class="md:flex">
+            <div class="md:w-1/3">
+              <img src="https://images.pexels.com/photos/2041540/pexels-photo-2041540.jpeg?auto=compress&cs=tinysrgb&w=400&h=300" alt="Hudson Yards partnership" class="w-full h-48 md:h-full object-cover" />
+            </div>
+            <div class="md:w-2/3 p-6">
+              <img src="https://images.pexels.com/photos/2041540/pexels-photo-2041540.jpeg?auto=compress&cs=tinysrgb&w=120&h=80" alt="Hudson Yards logo" class="w-16 h-10 object-contain mb-3" />
+              <h3 class="text-lg font-semibold text-dark-gray mb-3">Transforming urban spaces into literary sanctuaries</h3>
+              <p class="text-dark-gray/80 text-sm leading-relaxed mb-4">Hudson Yards partnered with Reading Rhythms to create an immersive literary experience in the heart of Manhattan. Over three months, we transformed their public spaces into cozy reading nooks, complete with curated book selections and ambient soundscapes. The activation drew thousands of visitors and created a new model for urban cultural programming.</p>
+              
+              <!-- Stats Pills -->
+              <div class="flex flex-wrap gap-2 mb-4">
+                <span class="inline-flex px-2 py-1 bg-jean/10 text-jean text-xs font-semibold rounded-full">15K+ visitors</span>
+                <span class="inline-flex px-2 py-1 bg-jean/10 text-jean text-xs font-semibold rounded-full">3 month activation</span>
+                <span class="inline-flex px-2 py-1 bg-jean/10 text-jean text-xs font-semibold rounded-full">92% satisfaction</span>
+                <span class="inline-flex px-2 py-1 bg-jean/10 text-jean text-xs font-semibold rounded-full">40+ events</span>
+                <span class="inline-flex px-2 py-1 bg-jean/10 text-jean text-xs font-semibold rounded-full">25 local authors</span>
+              </div>
+              
+              <!-- Quote -->
+              <blockquote class="text-dark-gray/70 text-sm italic border-l-2 border-jean/30 pl-3">
+                "Reading Rhythms brought our vision of community-centered spaces to life in ways we never imagined."
+              </blockquote>
+            </div>
+          </div>
+        </div>
+
+        <!-- Nicholas Sparks Case Study -->
+        <div class="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
+          <div class="md:flex">
+            <div class="md:w-1/3">
+              <img src="https://images.pexels.com/photos/159711/books-bookstore-book-reading-159711.jpeg?auto=compress&cs=tinysrgb&w=400&h=300" alt="Nicholas Sparks Times Square event" class="w-full h-48 md:h-full object-cover" />
+            </div>
+            <div class="md:w-2/3 p-6">
+              <img src="https://images.pexels.com/photos/159711/books-bookstore-book-reading-159711.jpeg?auto=compress&cs=tinysrgb&w=120&h=80" alt="Publisher logo" class="w-16 h-10 object-contain mb-3" />
+              <h3 class="text-lg font-semibold text-dark-gray mb-3">A Times Square literary moment with bestselling author</h3>
+              <p class="text-dark-gray/80 text-sm leading-relaxed mb-4">For the launch of Nicholas Sparks' latest novel, we created an intimate reading experience in the heart of Times Square. Despite the bustling environment, we crafted a serene literary oasis where fans could connect with the author's work in a meaningful way. The event garnered significant media attention and set a new standard for book launches.</p>
+              
+              <!-- Stats Pills -->
+              <div class="flex flex-wrap gap-2 mb-4">
+                <span class="inline-flex px-2 py-1 bg-jean/10 text-jean text-xs font-semibold rounded-full">500+ attendees</span>
+                <span class="inline-flex px-2 py-1 bg-jean/10 text-jean text-xs font-semibold rounded-full">2M+ social reach</span>
+                <span class="inline-flex px-2 py-1 bg-jean/10 text-jean text-xs font-semibold rounded-full">50+ media mentions</span>
+                <span class="inline-flex px-2 py-1 bg-jean/10 text-jean text-xs font-semibold rounded-full">95% NPS score</span>
+                <span class="inline-flex px-2 py-1 bg-jean/10 text-jean text-xs font-semibold rounded-full">3 hour event</span>
+              </div>
+              
+              <!-- Quote -->
+              <blockquote class="text-dark-gray/70 text-sm italic border-l-2 border-jean/30 pl-3">
+                "The most memorable book launch I've ever been part of. Pure magic in the middle of chaos."
+              </blockquote>
+            </div>
+          </div>
+        </div>
+
+        <!-- Rivian Case Study -->
+        <div class="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
+          <div class="md:flex">
+            <div class="md:w-1/3">
+              <img src="https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&cs=tinysrgb&w=400&h=300" alt="Rivian partnership" class="w-full h-48 md:h-full object-cover" />
+            </div>
+            <div class="md:w-2/3 p-6">
+              <img src="https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&cs=tinysrgb&w=120&h=80" alt="Rivian logo" class="w-16 h-10 object-contain mb-3" />
+              <h3 class="text-lg font-semibold text-dark-gray mb-3">Sustainable storytelling meets electric adventure</h3>
+              <p class="text-dark-gray/80 text-sm leading-relaxed mb-4">Rivian and Reading Rhythms collaborated to showcase the intersection of sustainability and storytelling. We curated a selection of environmental literature and hosted reading sessions in Rivian vehicles across scenic locations. The campaign highlighted both brands' commitment to mindful living and created authentic connections with eco-conscious consumers.</p>
+              
+              <!-- Stats Pills -->
+              <div class="flex flex-wrap gap-2 mb-4">
+                <span class="inline-flex px-2 py-1 bg-jean/10 text-jean text-xs font-semibold rounded-full">8 cities</span>
+                <span class="inline-flex px-2 py-1 bg-jean/10 text-jean text-xs font-semibold rounded-full">1.2M impressions</span>
+                <span class="inline-flex px-2 py-1 bg-jean/10 text-jean text-xs font-semibold rounded-full">85% brand lift</span>
+                <span class="inline-flex px-2 py-1 bg-jean/10 text-jean text-xs font-semibold rounded-full">12 vehicles</span>
+                <span class="inline-flex px-2 py-1 bg-jean/10 text-jean text-xs font-semibold rounded-full">200+ participants</span>
+              </div>
+              
+              <!-- Quote -->
+              <blockquote class="text-dark-gray/70 text-sm italic border-l-2 border-jean/30 pl-3">
+                "A perfect blend of our values - sustainability, adventure, and meaningful human connection."
+              </blockquote>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Press Logos - Same as Homepage -->
+  <section class="py-10 bg-white">
+    <div class="max-w-6xl mx-auto px-6 lg:px-8">
+      <div class="text-center mb-8">
+        <h2 class="text-xl md:text-2xl font-display text-dark-gray mb-3">
+          In the <span class="bg-gradient-to-r from-jean to-rust bg-clip-text text-transparent">Press</span>
+        </h2>
+      </div>
+      
+      <!-- Press Logos - Full Width Centered -->
+      <div class="hidden md:block w-full py-4">
+        <div class="press-carousel-container relative overflow-hidden py-4">
+          <div class="press-carousel flex items-center space-x-6 lg:space-x-8 opacity-70 hover:opacity-100 transition-opacity duration-300" style="width: max-content;">
+            {pressLogos.map((press, index) => (
+              <img 
+                src={press.logo.src || press.logo} 
+                alt={`${press.name} logo`} 
+                class="press-logo h-8 lg:h-10 w-auto max-w-none filter grayscale hover:grayscale-0 transition-all duration-500 hover:scale-125 flex-shrink-0" 
+                data-index={index}
+              />
+            ))}
+            <!-- Duplicate logos for seamless loop -->
+            {pressLogos.map((press, index) => (
+              <img 
+                src={press.logo.src || press.logo} 
+                alt={`${press.name} logo`} 
+                class="press-logo h-8 lg:h-10 w-auto max-w-none filter grayscale hover:grayscale-0 transition-all duration-500 hover:scale-125 flex-shrink-0" 
+                data-index={index + pressLogos.length}
+              />
+            ))}
+          </div>
+        </div>
+      </div>
+      
+      <!-- Mobile Press Logos - Static Layout -->
+      <div class="md:hidden w-full py-1">
+        <div class="flex flex-wrap justify-center gap-4 items-center opacity-70">
+          {pressLogos.map((press) => (
+            <img 
+              src={press.logo.src || press.logo} 
+              alt={`${press.name} logo`} 
+              class="h-6 w-auto filter grayscale hover:grayscale-0 transition-all duration-500 hover:scale-125" 
+            />
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    // Press carousel animation (desktop only)
+    const carousel = document.querySelector('.press-carousel');
+    if (carousel && window.innerWidth >= 768) {
+      let scrollAmount = 0;
+      const scrollSpeed = 0.5;
+      
+      function animateCarousel() {
+        scrollAmount += scrollSpeed;
+        carousel.style.transform = `translateX(-${scrollAmount}px)`;
+        
+        // Reset when we've scrolled through one full set
+        if (scrollAmount >= carousel.scrollWidth / 4) {
+          scrollAmount = 0;
+        }
+        
+        requestAnimationFrame(animateCarousel);
+      }
+      
+      animateCarousel();
+    }
+  });
+</script>
+
+<style>
+  /* Form styling enhancements */
+  input:focus, select:focus, textarea:focus {
+    box-shadow: 0 0 0 3px rgba(45, 73, 113, 0.1);
+  }
+  
+  /* Smooth scrolling */
+  html {
+    scroll-behavior: smooth;
+  }
+  
+  /* Press carousel animation */
+  .press-carousel-container {
+    mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+    -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+  }
+  
+  .press-carousel {
+    animation: scroll-left 60s linear infinite;
+  }
+  
+  .press-carousel:hover {
+    animation-play-state: paused;
+  }
+  
+  @keyframes scroll-left {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(-25%);
+    }
+  }
+</style>

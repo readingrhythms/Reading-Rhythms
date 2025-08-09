@@ -1,0 +1,290 @@
+---
+import BaseLayout from '@layouts/BaseLayout.astro';
+import { Image } from 'astro:assets';
+import arrowright from '@assets/icons/arrow-right.svg';
+
+// Active chapters with Luma calendar embeds - 4 main regions
+const activeChapters = [
+  {
+    id: 'ny',
+    name: 'NY',
+    fullName: 'Reading Rhythms New York',
+    location: 'New York State',
+    calendarId: 'cal-Q8l315UsVMWb6h6',
+    description: 'Events across New York State',
+    status: 'active'
+  },
+  {
+    id: 'nj',
+    name: 'NJ',
+    fullName: 'Reading Rhythms New Jersey',
+    location: 'New Jersey',
+    calendarId: 'cal-4yEtAsPtiPI0Nwi',
+    description: 'Events across New Jersey',
+    status: 'active'
+  },
+  {
+    id: 'ca',
+    name: 'CA',
+    fullName: 'Reading Rhythms California',
+    location: 'California',
+    calendarId: 'cal-Eo35suMbTdQnr20',
+    description: 'Events across California',
+    status: 'active'
+  },
+  {
+    id: 'global',
+    name: 'Global',
+    fullName: 'Reading Rhythms Global',
+    location: 'Special Events Worldwide',
+    calendarId: 'cal-CDoX2WaI5IHD5xs',
+    description: 'Exclusive global events and virtual sessions',
+    status: 'active'
+  }
+];
+---
+
+<BaseLayout title='Reading Rhythms | Events & Tickets' description='Buy tickets for Reading Rhythms events worldwide. Join active chapters or waitlists for launching cities.' showNavbar={true}>
+  <!-- Main Content - Direct to Tickets -->
+  <div class="w-full px-0 pt-4 lg:pt-8">
+    <!-- Single Header -->
+    <div class="text-center mb-6 max-w-4xl mx-auto px-4">
+      <h1 class="text-3xl md:text-4xl lg:text-5xl text-dark-gray font-display tracking-wider leading-tight mb-2 md:mb-4">
+        Find Your Next <span class="bg-gradient-to-r from-jean via-rust to-dark-purple bg-clip-text text-transparent">Reading Party</span>
+      </h1>
+      <p class="text-base md:text-lg text-dark-gray/70 font-light max-w-2xl mx-auto">
+        Buy tickets for upcoming events
+      </p>
+    </div>
+
+    <!-- Mobile-First Tab Navigation - Horizontal Scroll -->
+    <div class="flex justify-center mb-4 md:mb-6 px-4">
+      <div class="bg-gray-100 rounded-2xl p-2 overflow-x-auto scrollbar-hide inline-flex">
+        <div class="flex gap-1">
+          {activeChapters.map((chapter, index) => (
+            <button 
+              class={`tab-button flex-shrink-0 px-4 sm:px-6 lg:px-8 py-2 sm:py-3 lg:py-4 rounded-xl font-semibold text-sm sm:text-base transition-all duration-300 whitespace-nowrap ${
+                index === 0 
+                  ? 'bg-white text-dark-gray shadow-md' 
+                  : 'text-dark-gray/60 hover:text-dark-gray hover:bg-white/50'
+              }`}
+              data-tab={chapter.id}
+            >
+              {chapter.name}
+            </button>
+          ))}
+        </div>
+      </div>
+    </div>
+
+    <!-- Tab Content - Nearly Full Width Luma Embeds -->
+    <div class="tab-content-container mb-8 md:mb-12 px-0 mx-0 max-w-6xl md:mx-auto">
+      {activeChapters.map((chapter, index) => (
+        <div 
+          class={`tab-content ${index === 0 ? 'active' : 'hidden'}`}
+          data-content={chapter.id}
+        >
+          <!-- Full Width Container -->
+          <div class="w-full bg-white rounded-xl shadow-xl shadow-black/5 overflow-hidden md:mx-0" style="margin-left: -8px; margin-right: -8px; width: calc(100% + 16px);">
+            <!-- Minimal Padding for Maximum Calendar Space -->
+            <div class="p-0">
+              <!-- Maximum Width Luma Calendar -->
+              <div class="w-full">
+                <div class="calendar-container w-full" style="min-height: 900px;">
+                  <iframe
+                    src={`https://lu.ma/embed/calendar/${chapter.calendarId}/events?lt=light`}
+                    width="100%"
+                    height="900"
+                    frameborder="0"
+                    style="border: none; min-height: 900px; width: 100%; max-width: 100%;"
+                    allowfullscreen=""
+                    aria-hidden="false"
+                    tabindex="0"
+                    class=""
+                    loading="lazy"
+                  ></iframe>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+
+    <!-- Host Application CTA -->
+    <div class="bg-gradient-to-r from-dark-gray to-dark-purple rounded-2xl p-6 lg:p-8 text-center max-w-4xl mx-auto">
+      <h3 class="text-2xl lg:text-3xl font-display text-white mb-3 tracking-widest">
+        Want to Host in Your City?
+      </h3>
+      <p class="text-white/80 mb-4 max-w-xl mx-auto text-sm">
+        We're always looking for passionate community builders to bring Reading Rhythms to new cities.
+      </p>
+      
+      <a 
+        href="/apply" 
+        class="inline-flex items-center justify-center px-8 py-4 bg-white text-dark-gray rounded-xl font-bold text-base hover:shadow-xl hover:shadow-white/25 transition-all duration-300 hover:-translate-y-1"
+      >
+        Join the Team!
+      </a>
+    </div>
+  </div>
+</BaseLayout>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    // Check for chapterId parameter in URL and activate corresponding tab
+    const urlParams = new URLSearchParams(window.location.search);
+    const chapterId = urlParams.get('chapterId');
+    
+    if (chapterId) {
+      // Find the tab button with matching data-tab attribute
+      const targetButton = document.querySelector(`[data-tab="${chapterId}"]`);
+      if (targetButton) {
+        // Trigger click on the target tab
+        targetButton.click();
+      }
+    }
+
+    // Tab functionality
+    const tabButtons = document.querySelectorAll('.tab-button');
+    const tabContents = document.querySelectorAll('.tab-content');
+
+    function showTab(targetId) {
+      // Hide all tab contents
+      tabContents.forEach(content => {
+        content.classList.add('hidden');
+        content.classList.remove('active');
+      });
+
+      // Remove active state from all buttons
+      tabButtons.forEach(button => {
+        button.classList.remove('bg-white', 'text-dark-gray', 'shadow-md');
+        button.classList.add('text-dark-gray/60', 'hover:text-dark-gray', 'hover:bg-white/50');
+      });
+
+      // Show target tab content
+      const targetContent = document.querySelector(`[data-content="${targetId}"]`);
+      if (targetContent) {
+        targetContent.classList.remove('hidden');
+        targetContent.classList.add('active');
+      }
+
+      // Activate clicked button
+      const activeButton = document.querySelector(`[data-tab="${targetId}"]`);
+      if (activeButton) {
+        activeButton.classList.add('bg-white', 'text-dark-gray', 'shadow-md');
+        activeButton.classList.remove('text-dark-gray/60', 'hover:text-dark-gray', 'hover:bg-white/50');
+      }
+    }
+
+    // Add click event listeners to tab buttons
+    tabButtons.forEach(button => {
+      button.addEventListener('click', () => {
+        const tabId = button.getAttribute('data-tab');
+        showTab(tabId);
+      });
+    });
+  });
+</script>
+
+<style>
+  /* Hide scrollbar but keep functionality */
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* Tab transitions */
+  .tab-content {
+    transition: opacity 0.3s ease-in-out;
+  }
+
+  .tab-content.hidden {
+    opacity: 0;
+  }
+
+  .tab-content.active {
+    opacity: 1;
+  }
+
+  /* Full width iframe optimization */
+  iframe {
+    max-width: 100% !important;
+    width: 100% !important;
+    min-width: 100% !important;
+  }
+
+  /* Desktop centering */
+  @media (min-width: 768px) {
+    .tab-content-container {
+      max-width: 1200px;
+    }
+    
+    .tab-content > div {
+      margin-left: 0 !important;
+      margin-right: 0 !important;
+      width: 100% !important;
+    }
+  }
+
+  /* Mobile responsive adjustments - Nearly full width */
+  @media (max-width: 640px) {
+    .calendar-container {
+      min-height: 800px !important;
+    }
+    
+    .calendar-container iframe {
+      height: 800px !important;
+      min-height: 800px !important;
+    }
+  }
+
+  /* Tablet adjustments */
+  @media (min-width: 641px) and (max-width: 1024px) {
+    .calendar-container {
+      min-height: 850px !important;
+    }
+    
+    .calendar-container iframe {
+      height: 850px !important;
+      min-height: 850px !important;
+    }
+  }
+
+  /* Desktop - maximum height */
+  @media (min-width: 1025px) {
+    .calendar-container {
+      min-height: 900px !important;
+    }
+    
+    .calendar-container iframe {
+      height: 900px !important;
+      min-height: 900px !important;
+    }
+  }
+
+  /* Loading state for iframes */
+  .calendar-container {
+    position: relative;
+  }
+
+  .calendar-container::before {
+    content: "Loading events...";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: #6b7280;
+    font-size: 1rem;
+    z-index: 1;
+  }
+
+  .calendar-container iframe {
+    position: relative;
+    z-index: 2;
+  }
+</style>

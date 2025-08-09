@@ -22,61 +22,111 @@ const { title, description, showNavbar, bodyClasses, mainClasses } = Astro.props
 		<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-PS29M37L"
 		height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 		<!-- End Google Tag Manager (noscript) -->
-		<div id="loaderWrapper">
-			<div class="loader"></div>
-		</div>
 		{showNavbar && <Navbar />}
-		<main class={`relative w-full h-full mb-4 md:mb-0 p-6 md:p-16 ${mainClasses ?? ''}`}>
+		<main class={`relative w-full h-full mb-4 md:mb-0 px-6 md:px-16 pt-[80px] lg:pt-[96px] pb-6 md:pb-16 ${mainClasses ?? ''}`}>
       <slot />
     </main>
+
+	<!-- Newsletter Signup Section -->
+	<section class="bg-gradient-to-r from-jean/10 to-rust/10 py-12 border-t border-gray-200">
+		<div class="max-w-4xl mx-auto px-6 lg:px-8 text-center">
+			<h3 class="text-2xl lg:text-3xl font-display text-dark-gray mb-3 tracking-widest">
+				Stay in the Loop
+			</h3>
+			<p class="text-dark-gray/70 mb-6 max-w-2xl mx-auto">
+				Get notified about new events in your chapter and exclusive Reading Rhythms updates.
+			</p>
+			
+			<form class="flex flex-col gap-4 max-w-lg mx-auto" action="#" method="POST">
+				<!-- Chapter Selection -->
+				<div class="flex flex-col sm:flex-row gap-4">
+					<select 
+						name="chapter" 
+						required
+						class="flex-1 px-4 py-3 rounded-xl border border-gray-300 focus:outline-none focus:ring-2 focus:ring-jean focus:border-transparent text-dark-gray bg-white"
+					>
+						<option value="">Select your chapter</option>
+						<option value="algiers">Algiers, Algeria</option>
+						<option value="astoria">Astoria, NY</option>
+						<option value="atlantic-city">Atlantic City, NJ</option>
+						<option value="austin">Austin, TX</option>
+						<option value="barcelona">Barcelona, Spain</option>
+						<option value="bushwick">Bushwick, NY</option>
+						<option value="charleston">Charleston, SC</option>
+						<option value="chicago">Chicago, IL</option>
+						<option value="denver">Denver, CO</option>
+						<option value="detroit">Detroit, MI</option>
+						<option value="florence">Florence, Italy</option>
+						<option value="greenpoint">Greenpoint, NY</option>
+						<option value="harlem">Harlem, NY</option>
+						<option value="jersey-city">Jersey City, NJ</option>
+						<option value="long-island">Long Island, NY</option>
+						<option value="long-island-city">Long Island City, NY</option>
+						<option value="los-angeles">Los Angeles, CA</option>
+						<option value="lower-manhattan">Lower Manhattan, NY</option>
+						<option value="midtown">Midtown, NY</option>
+						<option value="milan">Milan, Italy</option>
+						<option value="morristown">Morristown, NJ</option>
+						<option value="naples">Naples, Italy</option>
+						<option value="philadelphia">Philadelphia, PA</option>
+						<option value="princeton">Princeton, NJ</option>
+						<option value="prospect-heights">Prospect Heights, NY</option>
+						<option value="queens">Queens, NY</option>
+						<option value="rome">Rome, Italy</option>
+						<option value="san-diego">San Diego, CA</option>
+						<option value="south-london">South London, UK</option>
+						<option value="toronto">Toronto, Canada</option>
+						<option value="upper-east-side">Upper East Side, NY</option>
+						<option value="upper-west-side">Upper West Side, NY</option>
+						<option value="washington-dc">Washington DC</option>
+						<option value="washington-heights">Washington Heights, NY</option>
+					</select>
+					<input 
+						type="email" 
+						name="email"
+						placeholder="Enter your email" 
+						required
+						class="flex-1 px-4 py-3 rounded-xl border border-gray-300 focus:outline-none focus:ring-2 focus:ring-jean focus:border-transparent text-dark-gray"
+					/>
+				</div>
+				
+				<button 
+					type="submit"
+					class="px-6 py-3 bg-gradient-to-r from-jean to-dark-purple text-white rounded-xl font-bold hover:shadow-lg hover:shadow-jean/25 transition-all duration-300 hover:-translate-y-1"
+				>
+					Subscribe to Chapter
+				</button>
+			</form>
+			
+			<p class="text-xs text-dark-gray/50 mt-4">
+				We respect your privacy. Unsubscribe at any time.
+			</p>
+		</div>
+	</section>
+
+	<!-- Footer Section -->
+	<footer class="bg-dark-gray text-white py-16 relative overflow-hidden">
+		<!-- Footer background decoration -->
+		<div class="absolute inset-0 bg-gradient-to-t from-dark-gray via-dark-gray to-dark-gray/95"></div>
+		<div class="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-white/20 to-transparent"></div>
+		
+		<div class="max-w-7xl mx-auto px-6 lg:px-8 relative z-10">
+			<div class="text-center space-y-8">
+				<div class="space-y-4">
+					<p class="text-white/80 text-lg">Not a book club. A Reading Party. ™</p>
+					<p class="text-white/60">Reading Rhythms LLC 2024</p>
+					<div class="flex flex-wrap justify-center gap-6 text-sm">
+						<a href="/privacy-policy" class="text-white/60 hover:text-white transition-colors duration-200 underline decoration-white/30 hover:decoration-white">Privacy Policy</a>
+						<span class="text-white/40">•</span>
+						<a href="/terms" class="text-white/60 hover:text-white transition-colors duration-200 underline decoration-white/30 hover:decoration-white">Terms & Conditions</a>
+						<span class="text-white/40">•</span>
+						<a href="/ticketing-agreement" class="text-white/60 hover:text-white transition-colors duration-200 underline decoration-white/30 hover:decoration-white">Ticketing Agreement</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</footer>
+
+
 	</body>
 </html>
-
-<script is:inline>
-function setFullHeight() {
-	const vh = window.innerHeight;
-	document.documentElement.style.setProperty('--full-vh', `${vh}px`);
-}
-
-window.addEventListener('resize', setFullHeight);
-
-// When the window loads, hide the loader
-window.addEventListener('load', function() {
-	setFullHeight();
-	document.getElementById('loaderWrapper').style.display = 'none';
-});
-</script>
-
-<!-- Using scopes styles to eliminate any FOUT with loading tailwind -->
-<style>
-#loaderWrapper {
-	position: fixed;
-	top: 0;
-	right: 0;
-	bottom: 0;
-	left: 0;
-	background-color: white;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	z-index: 50;
-}
-
-:global(.loader) {
-	width: 2.5rem; 
-	height: 2.5rem;
-	border: 4px solid #4B5563;
-	border-radius: 50%;
-	border-top-color: transparent;
-	animation: spin 1s linear infinite;
-}
-
-@keyframes spin {
-  0% {
-    transform: rotate(0deg);
-  }
-  100% {
-    transform: rotate(360deg);
-  }
-}
-</style>
