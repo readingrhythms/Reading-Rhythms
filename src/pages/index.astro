@@ -28,6 +28,7 @@ import nbcNew from '@assets/images/nbc.png';
 import techcrunchNew from '@assets/images/techcrunch copy.png';
 import arrowright from '@assets/icons/arrow-right.svg';
 import rollingStonesThumbnail from '@assets/images/press_section/rollingstoneimage.webp'
+import rollingStonesFavIcon from '@assets/images/press_section/rollingstonefav.webp'
 
 // Import chapter photos
 import chapterPhoto1 from '@assets/images/chapter_photos/25F4AA6E.jpeg';
@@ -63,6 +64,21 @@ import heroImage7 from '@assets/images/hero_images/8H6A2307-Enhanced-NR.jpg';
 import heroImage8 from '@assets/images/hero_images/DSC00303.JPG';
 import heroImage9 from '@assets/images/hero_images/Copy of Lumii_20250729_170410515.jpg';
 import heroImage10 from '@assets/images/hero_images/Copy of _JNG0553.jpg';
+
+
+// Import partner images
+import penguinRandomHouse from '@assets/images/partners/PRH.jpeg'
+import harperCollins from '@assets/images/partners/HarperCollins Logo.png'
+import simonAndSchuster from '@assets/images/partners/simon schuster.webp'
+import hachetteBooks from '@assets/images/partners/Hachette Books Logo.png'
+import macmillan from '@assets/images/partners/macimillan.png'
+import hudsonYards from '@assets/images/partners/Hudson yards.svg'
+import nypl from '@assets/images/partners/nypl.png'
+import tomrrowland from '@assets/images/partners/tomorrowland.svg'
+import rivian from '@assets/images/partners/rivian.png'
+import immi from '@assets/images/partners/immi.webp'
+import nakedLife from '@assets/images/partners/naked life.webp'
+import threads from '@assets/images/partners/threads.avif'
 
 // Import existing media photos
 import chapterMaisonMono from '@assets/media/Chapter_10_Maison_Mono.webp';
@@ -113,25 +129,25 @@ const allChapters = [
 
 // Combined partners (publishers + brands)
 const partners = [
-  { name: 'Penguin Random House', logo: '/src/assets/images/partners/PRH.jpeg', type: 'publisher', size: 'large', url: 'https://www.penguinrandomhouse.com' },
-  { name: 'HarperCollins', logo: '/src/assets/images/partners/HarperCollins Logo.png', type: 'publisher', size: 'medium', url: 'https://www.harpercollins.com' },
-  { name: 'Simon & Schuster', logo: '/src/assets/images/partners/simon schuster.webp', type: 'publisher', size: 'small', url: 'https://www.simonandschuster.com' },
-  { name: 'Hachette Books', logo: '/src/assets/images/partners/Hachette Books Logo.png', type: 'publisher', size: 'medium', url: 'https://www.hachettebookgroup.com' },
-  { name: 'Macmillan', logo: '/src/assets/images/partners/macimillan.png', type: 'publisher', size: 'small', url: 'https://us.macmillan.com' },
-  { name: 'Hudson Yards', logo: '/src/assets/images/partners/Hudson yards.svg', type: 'venue', size: 'large', url: 'https://www.hudsonyardsnewyork.com' },
-  { name: 'NYPL', logo: '/src/assets/images/partners/nypl.png', type: 'venue', size: 'medium', url: 'https://www.nypl.org' },
-  { name: 'Tomorrowland', logo: '/src/assets/images/partners/tomorrowland.svg', type: 'brand', size: 'small', url: 'https://www.tomorrowland.com' },
-  { name: 'Rivian', logo: '/src/assets/images/partners/rivian.png', type: 'brand', size: 'medium', url: 'https://rivian.com' },
-  { name: 'Immi', logo: '/src/assets/images/partners/immi.webp', type: 'brand', size: 'small', url: 'https://immieats.com/' },
-  { name: 'Naked Life', logo: '/src/assets/images/partners/naked life.webp', type: 'brand', size: 'small', url: 'https://drinknakedlife.com/pages/age-gate' },
-  { name: 'Threads', logo: '/src/assets/images/partners/threads.avif', type: 'brand', size: 'medium', url: 'https://www.threads.net' }
+  { name: 'Penguin Random House', logo: penguinRandomHouse.src, type: 'publisher', size: 'large', url: 'https://www.penguinrandomhouse.com' },
+  { name: 'HarperCollins', logo: harperCollins.src, type: 'publisher', size: 'medium', url: 'https://www.harpercollins.com' },
+  { name: 'Simon & Schuster', logo: simonAndSchuster.src, type: 'publisher', size: 'small', url: 'https://www.simonandschuster.com' },
+  { name: 'Hachette Books', logo: hachetteBooks.src, type: 'publisher', size: 'medium', url: 'https://www.hachettebookgroup.com' },
+  { name: 'Macmillan', logo: macmillan.src, type: 'publisher', size: 'small', url: 'https://us.macmillan.com' },
+  { name: 'Hudson Yards', logo: hudsonYards.src, type: 'venue', size: 'large', url: 'https://www.hudsonyardsnewyork.com' },
+  { name: 'NYPL', logo: nypl.src, type: 'venue', size: 'medium', url: 'https://www.nypl.org' },
+  { name: 'Tomorrowland', logo: tomrrowland.src, type: 'brand', size: 'small', url: 'https://www.tomorrowland.com' },
+  { name: 'Rivian', logo: rivian.src, type: 'brand', size: 'medium', url: 'https://rivian.com' },
+  { name: 'Immi', logo: immi.src, type: 'brand', size: 'small', url: 'https://immieats.com/' },
+  { name: 'Naked Life', logo: nakedLife.src, type: 'brand', size: 'small', url: 'https://drinknakedlife.com/pages/age-gate' },
+  { name: 'Threads', logo: threads.src, type: 'brand', size: 'medium', url: 'https://www.threads.net' }
 ];
 
 // Extended press coverage
 const pressLogos = [
 	{ name: 'Rolling Stone', logo: rollingStone },
 	{ name: 'The Washington Post', logo: washpost },
-	{ name: 'The Guardian', logo: '/src/assets/images/guardian.png' },
+	{ name: 'The Guardian', logo: guardian },
 	{ name: 'Thrillist', logo: thrillist },
 	{ name: 'GMA', logo: gma },
 	{ name: 'FOX5', logo: pressFox5 },
@@ -704,7 +720,7 @@ const arrowRightSrc = arrowright.src;
           <div class="transform hover:scale-[1.02] transition-transform duration-300">
             <div class="p-6 border border-beaver rounded-xl shadow-sm">
               <a href="https://www.rollingstone.com/culture-council/articles/are-reading-parties-the-new-wellness-activity-creative-leaders-1234969533/" target="_blank" rel="noopener">
-                <div class="press-favicon mb-3"><img src="/src/assets/images/press_section/rollingstonefav.webp" alt="Rolling Stone logo" /></div>
+                <div class="press-favicon mb-3"><img src={rollingStonesFavIcon.src} alt="Rolling Stone logo" /></div>
                 <blockquote class="mb-4 p-4 bg-dark-purple/5 border-l-4 border-dark-purple rounded-r-lg">
                   <p class="text-lg font-semibold italic text-dark-gray leading-relaxed">"Are reading parties the new wellness activity?"</p>
                 </blockquote>
