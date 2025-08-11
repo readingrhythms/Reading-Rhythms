@@ -6,7 +6,7 @@ import Quote from '@components/index/Quote.astro';
 import Spotify from '@components/index/Spotify.astro';
 import Instagram from '@components/index/Instagram.astro';
 import PressMediaSection from '@components/index/PressMediaSection.astro';
-import logo from '@assets/images/logo.svg';
+import icon from '@assets/images/icon.png';
 import pressNyt from '@assets/images/press-nyt.svg';
 import pressNyp from '@assets/images/press-nyp.svg';
 import pressTodayShow from '@assets/images/press-today_show.svg';
@@ -27,6 +27,7 @@ import londonNew from '@assets/images/london copy.svg';
 import nbcNew from '@assets/images/nbc.png';
 import techcrunchNew from '@assets/images/techcrunch copy.png';
 import arrowright from '@assets/icons/arrow-right.svg';
+import rollingStonesThumbnail from '@assets/images/press_section/rollingstoneimage.webp'
 
 // Import chapter photos
 import chapterPhoto1 from '@assets/images/chapter_photos/25F4AA6E.jpeg';
@@ -178,9 +179,9 @@ const arrowRightSrc = arrowright.src;
 				<!-- Left Column - Hero Content (6 columns on desktop) -->
 				<div class="lg:col-span-6 text-center lg:text-left space-y-6">
 					<!-- Logo -->
-					<div class="flex justify-center lg:justify-start">
+				<!-- 	<div class="flex justify-center lg:justify-start">
 						<img src={logo.src} alt="Reading Rhythms logo" class="w-20 md:w-24 lg:w-28 h-20 md:h-24 lg:h-28 drop-shadow-lg transform hover:rotate-3 transition-transform duration-300" />
-					</div>
+					</div> -->
 					
 					<!-- Main Heading -->
 					<div class="space-y-4">
@@ -709,7 +710,7 @@ const arrowRightSrc = arrowright.src;
                 </blockquote>
                 <h3 class="mb-1 text-dark-gray text-sm leading-snug">Are Reading Parties the New Wellness Activity?</h3>
                 <p class="text-dark-gray/50 text-xs mb-4">rollingstone.com</p>
-                <img src="/src/assets/images/press_section/rollingstoneimage.webp" alt="Rolling Stone story thumbnail" class="w-full rounded-xl" />
+                <img src={rollingStonesThumbnail.src} alt="Rolling Stone story thumbnail" class="w-full rounded-xl" />
               </a>
             </div>
           </div>

@@ -1,6 +1,5 @@
 ---
-import { Image } from 'astro:assets';
-import textLogo from '@assets/images/reading_rhythms-knockout copy.png';
+import logo from '@assets/images/reading_rhythms-knockout copy.png';
 
 const currentPath = Astro.url.pathname;
 ---
@@ -11,10 +10,10 @@ const currentPath = Astro.url.pathname;
       <!-- Logo Section -->
       <div class="flex-shrink-0">
         <a href="/" class="flex items-center group">
-          <Image 
-            src={textLogo} 
+          <img 
+            src={logo.src} 
             alt="Reading Rhythms" 
-            class="h-8 md:h-10 lg:h-12 w-auto transition-all duration-300 group-hover:scale-105 brightness-0 invert" 
+            class="h-8 md:h-10 lg:h-12 w-auto transition-all duration-300 group-hover:scale-105"
           />
         </a>
       </div>
