@@ -27,8 +27,6 @@ import londonNew from '@assets/images/london copy.svg';
 import nbcNew from '@assets/images/nbc.png';
 import techcrunchNew from '@assets/images/techcrunch copy.png';
 import arrowright from '@assets/icons/arrow-right.svg';
-import rollingStonesThumbnail from '@assets/images/press_section/rollingstoneimage.webp'
-import rollingStonesFavIcon from '@assets/images/press_section/rollingstonefav.webp'
 
 // Import chapter photos
 import chapterPhoto1 from '@assets/images/chapter_photos/25F4AA6E.jpeg';
@@ -65,7 +63,6 @@ import heroImage8 from '@assets/images/hero_images/DSC00303.JPG';
 import heroImage9 from '@assets/images/hero_images/Copy of Lumii_20250729_170410515.jpg';
 import heroImage10 from '@assets/images/hero_images/Copy of _JNG0553.jpg';
 
-
 // Import partner images
 import penguinRandomHouse from '@assets/images/partners/PRH.jpeg'
 import harperCollins from '@assets/images/partners/HarperCollins Logo.png'
@@ -79,6 +76,32 @@ import rivian from '@assets/images/partners/rivian.png'
 import immi from '@assets/images/partners/immi.webp'
 import nakedLife from '@assets/images/partners/naked life.webp'
 import threads from '@assets/images/partners/threads.avif'
+
+//Import press media
+import rollingStonesThumbnail from '@assets/images/press_section/rollingstoneimage.webp'
+import rollingStonesFavIcon from '@assets/images/press_section/rollingstonefav.webp'
+import guardianFavIcon from '@assets/images/press_section/guardian_favicon.ico'
+import guardianThumbnail from '@assets/images/press_section/guardian_article.jpg'
+import forbesFavIcon from '@assets/images/press_section/forbesfav.jpeg' 
+import forbesThumbnail from '@assets/images/press_section/forbes_image.webp'
+import timeoutIcon from '@assets/images/press_section/timeoutfav.png'
+import timeoutThumbnail from '@assets/images/press_section/timeoutimage.webp'
+import todayShowFavIcon from '@assets/images/press_section/todayshowfav.svg'
+import wnbcFavIcon from '@assets/images/press_section/wnbc_favicon.png'
+import wnbcThumbnail from '@assets/images/press_section/wnbc_article.png'
+import techCrunchFavIcon from '@assets/images/press_section/techcrunch_favicon.png'
+import techCrunchThumbnail from '@assets/images/press_section/techcrunch_article.jpg'
+import torontoTodayFavIcon from '@assets/images/press_section/toronto_today_favicon.png'
+import torontoTodayThumbnail from '@assets/images/press_section/toronto_today_article.jpg'
+import condoNastTravelerFavIcon from '@assets/images/press_section/conde_nast_traveler_favicon.ico'
+import condoNastTravelerThumbnail from '@assets/images/press_section/conde_nast_traveler_article.JPG'
+import LASpectrumFavIcon from '@assets/images/press_section/la_spectrum_news_favicon.png'
+import LASpectrumThumbnail from '@assets/images/press_section/la_spectrum_news_article.jpg'
+import skyFavIcon from '@assets/images/press_section/sky_favicon.png'
+import skyThumbnail from '@assets/images/press_section/sky_article.jpg'
+import rnzFavIcon from '@assets/images/press_section/rnz_favicon.png'
+import rnzThumbnail from '@assets/images/press_section/rnz_article.jpg'
+
 
 // Import existing media photos
 import chapterMaisonMono from '@assets/media/Chapter_10_Maison_Mono.webp';
@@ -737,10 +760,10 @@ const arrowRightSrc = arrowright.src;
           <div class="transform hover:scale-[1.02] transition-transform duration-300">
             <div class="p-6 border border-beaver rounded-xl shadow-sm">
               <a href="https://www.theguardian.com/books/2024/jan/26/books-and-looks-gen-z-is-rediscovering-the-public-library" target="_blank" rel="noopener">
-                <div class="press-favicon mb-3"><img src="/src/assets/images/press_section/guardian_favicon.ico" alt="The Guardian logo" /></div>
+                <div class="press-favicon mb-3"><img src={guardianFavIcon.src} alt="The Guardian logo" /></div>
                 <h3 class="mb-1 text-dark-gray text-sm leading-snug">Books and looks: Gen Z is rediscovering the public library</h3>
                 <p class="text-dark-gray/50 text-xs mb-4">theguardian.com</p>
-                <img src="/src/assets/images/press_section/guardian_article.jpg" alt="The Guardian story thumbnail" class="w-full rounded-xl" />
+                <img src={guardianThumbnail.src} alt="The Guardian story thumbnail" class="w-full rounded-xl" />
               </a>
             </div>
           </div>
@@ -751,13 +774,13 @@ const arrowRightSrc = arrowright.src;
           <div class="transform hover:scale-[1.02] transition-transform duration-300">
             <div class="p-6 border border-beaver rounded-xl shadow-sm">
               <a href="https://www.forbes.com/sites/annahaines/2025/05/06/mothers-day-gift-guide-the-best-gifts-for-community-minded-moms/" target="_blank" rel="noopener">
-                <div class="press-favicon mb-3"><img src="/src/assets/images/press_section/forbesfav.jpeg" alt="Forbes logo" /></div>
+                <div class="press-favicon mb-3"><img src={forbesFavIcon.src} alt="Forbes logo" /></div>
                 <blockquote class="mb-4 p-4 bg-jean/5 border-l-4 border-jean rounded-r-lg">
                   <p class="text-lg font-semibold italic text-dark-gray leading-relaxed">"One of the best ways to meet new people is through shared interests, so if mom likes to read, this is the gift for her."</p>
                 </blockquote>
                 <h3 class="mb-1 text-dark-gray text-sm leading-snug">Mother's Day Gift Guide: The Best Gifts for Community Minded Moms</h3>
                 <p class="text-dark-gray/50 text-xs mb-4">forbes.com</p>
-                <img src="/src/assets/images/press_section/forbes_image.webp" alt="Forbes story thumbnail" class="w-full rounded-xl" />
+                <img src={forbesThumbnail.src} alt="Forbes story thumbnail" class="w-full rounded-xl" />
               </a>
             </div>
           </div>
@@ -785,10 +808,10 @@ const arrowRightSrc = arrowright.src;
           <div class="transform hover:scale-[1.02] transition-transform duration-300">
             <div class="p-6 border border-beaver rounded-xl shadow-sm">
               <a href="https://www.timeout.com/newyork/news/forget-the-apps-nyc-singles-are-finding-love-and-lust-at-these-in-person-events-020224" target="_blank" rel="noopener">
-                <div class="press-favicon mb-3"><img src="/src/assets/images/press_section/timeoutfav.png" alt="TimeOut logo" /></div>
+                <div class="press-favicon mb-3"><img src={timeoutIcon.src} alt="TimeOut logo" /></div>
                 <h3 class="mb-1 text-dark-gray text-sm leading-snug">Forget the apps: NYC singles are finding love and lust at these in-person events</h3>
                 <p class="text-dark-gray/50 text-xs mb-4">timeout.com</p>
-                <img src="/src/assets/images/press_section/timeoutimage.webp" alt="TimeOut story thumbnail" class="w-full rounded-xl" />
+                <img src={timeoutThumbnail.src} alt="TimeOut story thumbnail" class="w-full rounded-xl" />
               </a>
             </div>
           </div>
@@ -799,7 +822,7 @@ const arrowRightSrc = arrowright.src;
           <div class="transform hover:scale-[1.02] transition-transform duration-300">
             <div class="p-6 border border-beaver rounded-xl shadow-sm">
               <a href="https://www.today.com/video/move-over-book-clubs-it-s-reading-parties-that-are-lit-202835013954" target="_blank" rel="noopener">
-                <div class="press-favicon mb-3"><img src="/src/assets/images/press_section/todayshowfav.svg" alt="TODAY Show logo" /></div>
+                <div class="press-favicon mb-3"><img src={todayShowFavIcon.src} alt="TODAY Show logo" /></div>
                 <h3 class="mb-1 text-dark-gray text-sm leading-snug">Move over book clubs, it's reading parties that are lit</h3>
                 <p class="text-dark-gray/50 text-xs mb-4">today.com</p>
                 <img src="/src/assets/images/press_section/todayshowimage.png" alt="TODAY Show story thumbnail" class="w-full rounded-xl" />
@@ -813,13 +836,13 @@ const arrowRightSrc = arrowright.src;
           <div class="transform hover:scale-[1.02] transition-transform duration-300">
             <div class="p-6 border border-beaver rounded-xl shadow-sm">
               <a href="https://www.nbcnewyork.com/entertainment/the-scene/new-york-live/attend-a-reading-party-in-nyc/5170513/" target="_blank" rel="noopener">
-                <div class="press-favicon mb-3"><img src="/src/assets/images/press_section/wnbc_favicon.png" alt="WNBC logo" /></div>
+                <div class="press-favicon mb-3"><img src={wnbcFavIcon.src} alt="WNBC logo" /></div>
                 <blockquote class="mb-4 p-4 bg-jean/5 border-l-4 border-jean rounded-r-lg">
                   <p class="text-lg font-semibold italic text-dark-gray leading-relaxed">“It’s not a book club… it’s a reading party.”</p>
                 </blockquote>
                 <h3 class="mb-1 text-dark-gray text-sm leading-snug">Attend a Reading Party in NYC</h3>
                 <p class="text-dark-gray/50 text-xs mb-4">nbcnewyork.com</p>
-                <img src="/src/assets/images/press_section/wnbc_article.png" alt="WNBC story thumbnail" class="w-full rounded-xl" />
+                <img src={wnbcThumbnail.src} alt="WNBC story thumbnail" class="w-full rounded-xl" />
               </a>
             </div>
           </div>
@@ -832,10 +855,10 @@ const arrowRightSrc = arrowright.src;
           <div class="transform hover:scale-[1.02] transition-transform duration-300">
             <div class="p-6 border border-beaver rounded-xl shadow-sm">
               <a href="https://techcrunch.com/2024/09/10/drybaby-new-sober-dating-app-betting-on-surge-in-sober-curious-movement/" target="_blank" rel="noopener">
-                <div class="press-favicon mb-3"><img src="/src/assets/images/press_section/techcrunch_favicon.png" alt="TechCrunch logo" /></div>
+                <div class="press-favicon mb-3"><img src={techCrunchFavIcon.src} alt="TechCrunch logo" /></div>
                 <h3 class="mb-1 text-dark-gray text-sm leading-snug">DryBaby: New sober dating app betting on surge in sober curious movement</h3>
                 <p class="text-dark-gray/50 text-xs mb-4">techcrunch.com</p>
-                <img src="/src/assets/images/press_section/techcrunch_article.jpg" alt="TechCrunch story thumbnail" class="w-full rounded-xl" />
+                <img src={techCrunchThumbnail.src} alt="TechCrunch story thumbnail" class="w-full rounded-xl" />
               </a>
             </div>
           </div>
@@ -863,13 +886,13 @@ const arrowRightSrc = arrowright.src;
           <div class="transform hover:scale-[1.02] transition-transform duration-300">
             <div class="p-6 border border-beaver rounded-xl shadow-sm">
               <a href="https://www.torontotoday.ca/local/arts-culture/loneliness-in-toronto-byobook-read-with-stranger-10410387" target="_blank" rel="noopener">
-                <div class="press-favicon mb-3"><img src="/src/assets/images/press_section/toronto_today_favicon.png" alt="Toronto Today logo" /></div>
+                <div class="press-favicon mb-3"><img src={torontoTodayFavIcon.src} alt="Toronto Today logo" /></div>
                 <blockquote class="mb-4 p-4 bg-jean/5 border-l-4 border-jean rounded-r-lg">
                   <p class="text-lg font-semibold italic text-dark-gray leading-relaxed">“Something deeper than just reading… connect more deeply with themselves and the world around them.”</p>
                 </blockquote>
                 <h3 class="mb-1 text-dark-gray text-sm leading-snug">Loneliness in Toronto: BYOB(ook), read with stranger</h3>
                 <p class="text-dark-gray/50 text-xs mb-4">torontotoday.ca</p>
-                <img src="/src/assets/images/press_section/toronto_today_article.jpg" alt="Toronto Today story thumbnail" class="w-full rounded-xl" />
+                <img src={torontoTodayThumbnail.src} alt="Toronto Today story thumbnail" class="w-full rounded-xl" />
               </a>
             </div>
           </div>
@@ -880,13 +903,13 @@ const arrowRightSrc = arrowright.src;
           <div class="transform hover:scale-[1.02] transition-transform duration-300">
             <div class="p-6 border border-beaver rounded-xl shadow-sm">
               <a href="https://www.traveler.es/articulos/reading-rhythms-fiestas-de-lectura-nueva-york" target="_blank" rel="noopener">
-                <div class="press-favicon mb-3"><img src="/src/assets/images/press_section/conde_nast_traveler_favicon.ico" alt="Conde Nast Traveler logo" /></div>
+                <div class="press-favicon mb-3"><img src={condoNastTravelerFavIcon.src} alt="Conde Nast Traveler logo" /></div>
                 <blockquote class="mb-4 p-4 bg-dark-purple/5 border-l-4 border-dark-purple rounded-r-lg">
                   <p class="text-lg font-semibold italic text-dark-gray leading-relaxed">“Crear pertenencia a través de la lectura.” / “La soledad de la lectura con el elemento social de la conexión.”</p>
                 </blockquote>
                 <h3 class="mb-1 text-dark-gray text-sm leading-snug">Reading Rhythms: fiestas de lectura Nueva York</h3>
                 <p class="text-dark-gray/50 text-xs mb-4">traveler.es</p>
-                <img src="/src/assets/images/press_section/conde_nast_traveler_article.JPG" alt="Conde Nast Traveler story thumbnail" class="w-full rounded-xl" />
+                <img src={condoNastTravelerThumbnail.src} alt="Conde Nast Traveler story thumbnail" class="w-full rounded-xl" />
               </a>
             </div>
           </div>
@@ -897,13 +920,13 @@ const arrowRightSrc = arrowright.src;
           <div class="transform hover:scale-[1.02] transition-transform duration-300">
             <div class="p-6 border border-beaver rounded-xl shadow-sm">
               <a href="https://spectrumnews1.com/ca/southern-california/education/2024/12/20/reading--books--parties--holiday--reading-rhythms" target="_blank" rel="noopener">
-                <div class="press-favicon mb-3"><img src="/src/assets/images/press_section/la_spectrum_news_favicon.png" alt="LA Spectrum News logo" /></div>
+                <div class="press-favicon mb-3"><img src={LASpectrumFavIcon.src} alt="LA Spectrum News logo" /></div>
                 <blockquote class="mb-4 p-4 bg-rust/5 border-l-4 border-rust rounded-r-lg">
                   <p class="text-lg font-semibold italic text-dark-gray leading-relaxed">“Good vibes and good reads.”</p>
                 </blockquote>
                 <h3 class="mb-1 text-dark-gray text-sm leading-snug">Reading, books, parties, holiday: Reading Rhythms</h3>
                 <p class="text-dark-gray/50 text-xs mb-4">spectrumnews1.com</p>
-                <img src="/src/assets/images/press_section/la_spectrum_news_article.jpg" alt="LA Spectrum News story thumbnail" class="w-full rounded-xl" />
+                <img src={LASpectrumThumbnail.src} alt="LA Spectrum News story thumbnail" class="w-full rounded-xl" />
               </a>
             </div>
           </div>
@@ -914,13 +937,13 @@ const arrowRightSrc = arrowright.src;
           <div class="transform hover:scale-[1.02] transition-transform duration-300">
             <div class="p-6 border border-beaver rounded-xl shadow-sm">
               <a href="https://video.sky.it/news/cronaca/video/reading-party-dagli-stati-uniti-per-combattere-la-solitudine-957970" target="_blank" rel="noopener">
-                <div class="press-favicon mb-3"><img src="/src/assets/images/press_section/sky_favicon.png" alt="Sky logo" /></div>
+                <div class="press-favicon mb-3"><img src={skyFavIcon.src} alt="Sky logo" /></div>
                 <blockquote class="mb-4 p-4 bg-dark-purple/5 border-l-4 border-dark-purple rounded-r-lg">
                   <p class="text-lg font-semibold italic text-dark-gray leading-relaxed">“Una festa in cui si legge.” / “Un ambiente un po’ più freddo.” / “Veramente qualcosa di innovativo.”</p>
                 </blockquote>
                 <h3 class="mb-1 text-dark-gray text-sm leading-snug">Reading party dagli Stati Uniti per combattere la solitudine</h3>
                 <p class="text-dark-gray/50 text-xs mb-4">sky.it</p>
-                <img src="/src/assets/images/press_section/sky_article.jpg" alt="Sky story thumbnail" class="w-full rounded-xl" />
+                <img src={skyThumbnail} alt="Sky story thumbnail" class="w-full rounded-xl" />
               </a>
             </div>
           </div>
@@ -931,13 +954,13 @@ const arrowRightSrc = arrowright.src;
           <div class="transform hover:scale-[1.02] transition-transform duration-300">
             <div class="p-6 border border-beaver rounded-xl shadow-sm">
               <a href="https://www.rnz.co.nz/national/programmes/afternoons/audio/2018936527/not-book-club-not-a-library-but-a-great-night-out-reading" target="_blank" rel="noopener">
-                <div class="press-favicon mb-3"><img src="/src/assets/images/press_section/rnz_favicon.png" alt="Radio New Zealand logo" /></div>
+                <div class="press-favicon mb-3"><img src={rnzFavIcon.src} alt="Radio New Zealand logo" /></div>
                 <blockquote class="mb-4 p-4 bg-jean/5 border-l-4 border-jean rounded-r-lg">
                   <p class="text-lg font-semibold italic text-dark-gray leading-relaxed">“Not book club, not a library but a great night out reading.”</p>
                 </blockquote>
                 <h3 class="mb-1 text-dark-gray text-sm leading-snug">Not book club, not a library, but a great night out reading</h3>
                 <p class="text-dark-gray/50 text-xs mb-4">rnz.co.nz</p>
-                <img src="/src/assets/images/press_section/rnz_article.jpg" alt="Radio New Zealand story thumbnail" class="w-full rounded-xl" />
+                <img src={rnzThumbnail.src} alt="Radio New Zealand story thumbnail" class="w-full rounded-xl" />
               </a>
             </div>
           </div>
@@ -987,13 +1010,13 @@ const arrowRightSrc = arrowright.src;
         <div class="press-card-mobile w-72 flex-shrink-0">
           <div class="p-6 border border-beaver rounded-xl shadow-sm">
             <a href="https://www.rollingstone.com/culture-council/articles/are-reading-parties-the-new-wellness-activity-creative-leaders-1234969533/" target="_blank" rel="noopener">
-              <div class="press-favicon mb-3"><img src="/src/assets/images/press_section/rollingstonefav.webp" alt="Rolling Stone" /></div>
+              <div class="press-favicon mb-3"><img src={rollingStonesFavIcon.src} alt="Rolling Stone" /></div>
               <blockquote class="mb-4 p-3 bg-dark-purple/5 border-l-4 border-dark-purple rounded-r-lg">
                 <p class="text-base font-semibold italic text-dark-gray leading-relaxed">"Are reading parties the new wellness activity?"</p>
               </blockquote>
               <h3 class="mb-1 text-dark-gray text-sm leading-snug">Are Reading Parties the New Wellness Activity?</h3>
               <p class="text-dark-gray/50 text-xs mb-4">rollingstone.com</p>
-              <img src="/src/assets/images/press_section/rollingstoneimage.webp" alt="Rolling Stone" class="w-full rounded-xl" />
+              <img src={rollingStonesThumbnail.src} alt="Rolling Stone" class="w-full rounded-xl" />
             </a>
           </div>
         </div>
@@ -1001,10 +1024,10 @@ const arrowRightSrc = arrowright.src;
         <div class="press-card-mobile w-72 flex-shrink-0">
           <div class="p-6 border border-beaver rounded-xl shadow-sm">
             <a href="https://www.theguardian.com/books/2024/jan/26/books-and-looks-gen-z-is-rediscovering-the-public-library" target="_blank" rel="noopener">
-              <div class="press-favicon mb-3"><img src="/src/assets/images/press_section/guardian_favicon.ico" alt="The Guardian" /></div>
+              <div class="press-favicon mb-3"><img src={guardianFavIcon.src} alt="The Guardian" /></div>
               <h3 class="mb-1 text-dark-gray text-sm leading-snug">Books and looks: Gen Z is rediscovering the public library</h3>
               <p class="text-dark-gray/50 text-xs mb-4">theguardian.com</p>
-              <img src="/src/assets/images/press_section/guardian_article.jpg" alt="Guardian" class="w-full rounded-xl" />
+              <img src={guardianThumbnail.src} alt="Guardian" class="w-full rounded-xl" />
             </a>
           </div>
         </div>
@@ -1012,13 +1035,13 @@ const arrowRightSrc = arrowright.src;
         <div class="press-card-mobile w-72 flex-shrink-0">
           <div class="p-6 border border-beaver rounded-xl shadow-sm">
             <a href="https://www.forbes.com/sites/annahaines/2025/05/06/mothers-day-gift-guide-the-best-gifts-for-community-minded-moms/" target="_blank" rel="noopener">
-              <div class="press-favicon mb-3"><img src="/src/assets/images/press_section/forbesfav.jpeg" alt="Forbes" /></div>
+              <div class="press-favicon mb-3"><img src={forbesFavIcon.src} alt="Forbes" /></div>
               <blockquote class="mb-4 p-3 bg-jean/5 border-l-4 border-jean rounded-r-lg">
                 <p class="text-base font-semibold italic text-dark-gray leading-relaxed">"One of the best ways to meet new people is through shared interests..."</p>
               </blockquote>
               <h3 class="mb-1 text-dark-gray text-sm leading-snug">Mother's Day Gift Guide</h3>
               <p class="text-dark-gray/50 text-xs mb-4">forbes.com</p>
-              <img src="/src/assets/images/press_section/forbes_image.webp" alt="Forbes" class="w-full rounded-xl" />
+              <img src={forbesThumbnail.src} alt="Forbes" class="w-full rounded-xl" />
             </a>
           </div>
         </div>
@@ -1027,10 +1050,10 @@ const arrowRightSrc = arrowright.src;
         <div class="press-card-mobile w-72 flex-shrink-0">
           <div class="p-6 border border-beaver rounded-xl shadow-sm">
             <a href="https://www.timeout.com/newyork/news/forget-the-apps-nyc-singles-are-finding-love-and-lust-at-these-in-person-events-020224" target="_blank" rel="noopener">
-              <div class="press-favicon mb-3"><img src="/src/assets/images/press_section/timeoutfav.png" alt="TimeOut" /></div>
+              <div class="press-favicon mb-3"><img src={timeoutIcon.src} alt="TimeOut" /></div>
               <h3 class="mb-1 text-dark-gray text-sm leading-snug">Forget the apps...</h3>
               <p class="text-dark-gray/50 text-xs mb-4">timeout.com</p>
-              <img src="/src/assets/images/press_section/timeoutimage.webp" alt="TimeOut" class="w-full rounded-xl" />
+              <img src={timeoutThumbnail.src} alt="TimeOut" class="w-full rounded-xl" />
             </a>
           </div>
         </div>
@@ -1038,7 +1061,7 @@ const arrowRightSrc = arrowright.src;
         <div class="press-card-mobile w-72 flex-shrink-0">
           <div class="p-6 border border-beaver rounded-xl shadow-sm">
             <a href="https://www.today.com/video/move-over-book-clubs-it-s-reading-parties-that-are-lit-202835013954" target="_blank" rel="noopener">
-              <div class="press-favicon mb-3"><img src="/src/assets/images/press_section/todayshowfav.svg" alt="TODAY" /></div>
+              <div class="press-favicon mb-3"><img src={todayShowFavIcon.src} alt="TODAY" /></div>
               <h3 class="mb-1 text-dark-gray text-sm leading-snug">Move over book clubs...</h3>
               <p class="text-dark-gray/50 text-xs mb-4">today.com</p>
               <img src="/src/assets/images/press_section/todayshowimage.png" alt="TODAY" class="w-full rounded-xl" />
@@ -1049,13 +1072,13 @@ const arrowRightSrc = arrowright.src;
         <div class="press-card-mobile w-72 flex-shrink-0">
           <div class="p-6 border border-beaver rounded-xl shadow-sm">
             <a href="https://www.nbcnewyork.com/entertainment/the-scene/new-york-live/attend-a-reading-party-in-nyc/5170513/" target="_blank" rel="noopener">
-              <div class="press-favicon mb-3"><img src="/src/assets/images/press_section/wnbc_favicon.png" alt="WNBC" /></div>
+              <div class="press-favicon mb-3"><img src={wnbcFavIcon.src} alt="WNBC" /></div>
               <blockquote class="mb-4 p-3 bg-jean/5 border-l-4 border-jean rounded-r-lg">
                 <p class="text-base font-semibold italic text-dark-gray leading-relaxed">“It’s not a book club… it’s a reading party.”</p>
               </blockquote>
               <h3 class="mb-1 text-dark-gray text-sm leading-snug">Attend a Reading Party in NYC</h3>
               <p class="text-dark-gray/50 text-xs mb-4">nbcnewyork.com</p>
-              <img src="/src/assets/images/press_section/wnbc_article.png" alt="WNBC" class="w-full rounded-xl" />
+              <img src={wnbcThumbnail.src} alt="WNBC" class="w-full rounded-xl" />
             </a>
           </div>
         </div>
@@ -1063,10 +1086,10 @@ const arrowRightSrc = arrowright.src;
         <div class="press-card-mobile w-72 flex-shrink-0">
           <div class="p-6 border border-beaver rounded-xl shadow-sm">
             <a href="https://techcrunch.com/2024/09/10/drybaby-new-sober-dating-app-betting-on-surge-in-sober-curious-movement/" target="_blank" rel="noopener">
-              <div class="press-favicon mb-3"><img src="/src/assets/images/press_section/techcrunch_favicon.png" alt="TechCrunch" /></div>
+              <div class="press-favicon mb-3"><img src={techCrunchFavIcon.src} alt="TechCrunch" /></div>
               <h3 class="mb-1 text-dark-gray text-sm leading-snug">DryBaby: sober curious movement</h3>
               <p class="text-dark-gray/50 text-xs mb-4">techcrunch.com</p>
-              <img src="/src/assets/images/press_section/techcrunch_article.jpg" alt="TechCrunch" class="w-full rounded-xl" />
+              <img src={techCrunchThumbnail.src} alt="TechCrunch" class="w-full rounded-xl" />
             </a>
           </div>
         </div>
@@ -1074,13 +1097,13 @@ const arrowRightSrc = arrowright.src;
         <div class="press-card-mobile w-72 flex-shrink-0">
           <div class="p-6 border border-beaver rounded-xl shadow-sm">
             <a href="https://www.torontotoday.ca/local/arts-culture/loneliness-in-toronto-byobook-read-with-stranger-10410387" target="_blank" rel="noopener">
-              <div class="press-favicon mb-3"><img src="/src/assets/images/press_section/toronto_today_favicon.png" alt="Toronto Today" /></div>
+              <div class="press-favicon mb-3"><img src={torontoTodayFavIcon.src} alt="Toronto Today" /></div>
               <blockquote class="mb-4 p-3 bg-jean/5 border-l-4 border-jean rounded-r-lg">
                 <p class="text-base font-semibold italic text-dark-gray leading-relaxed">“Something deeper than just reading… connect more deeply with themselves and the world around them.”</p>
               </blockquote>
               <h3 class="mb-1 text-dark-gray text-sm leading-snug">Loneliness in Toronto</h3>
               <p class="text-dark-gray/50 text-xs mb-4">torontotoday.ca</p>
-              <img src="/src/assets/images/press_section/toronto_today_article.jpg" alt="Toronto Today" class="w-full rounded-xl" />
+              <img src={torontoTodayThumbnail.src} alt="Toronto Today" class="w-full rounded-xl" />
             </a>
           </div>
         </div>
@@ -1088,13 +1111,13 @@ const arrowRightSrc = arrowright.src;
         <div class="press-card-mobile w-72 flex-shrink-0">
           <div class="p-6 border border-beaver rounded-xl shadow-sm">
             <a href="https://www.traveler.es/articulos/reading-rhythms-fiestas-de-lectura-nueva-york" target="_blank" rel="noopener">
-              <div class="press-favicon mb-3"><img src="/src/assets/images/press_section/conde_nast_traveler_favicon.ico" alt="Traveler" /></div>
+              <div class="press-favicon mb-3"><img src={condoNastTravelerFavIcon.src} alt="Traveler" /></div>
               <blockquote class="mb-4 p-3 bg-dark-purple/5 border-l-4 border-dark-purple rounded-r-lg">
                 <p class="text-base font-semibold italic text-dark-gray leading-relaxed">“Crear pertenencia a través de la lectura.”</p>
               </blockquote>
               <h3 class="mb-1 text-dark-gray text-sm leading-snug">Fiestas de lectura Nueva York</h3>
               <p class="text-dark-gray/50 text-xs mb-4">traveler.es</p>
-              <img src="/src/assets/images/press_section/conde_nast_traveler_article.JPG" alt="Traveler" class="w-full rounded-xl" />
+              <img src={condoNastTravelerThumbnail.src} alt="Traveler" class="w-full rounded-xl" />
             </a>
           </div>
         </div>
@@ -1102,13 +1125,13 @@ const arrowRightSrc = arrowright.src;
         <div class="press-card-mobile w-72 flex-shrink-0">
           <div class="p-6 border border-beaver rounded-xl shadow-sm">
             <a href="https://spectrumnews1.com/ca/southern-california/education/2024/12/20/reading--books--parties--holiday--reading-rhythms" target="_blank" rel="noopener">
-              <div class="press-favicon mb-3"><img src="/src/assets/images/press_section/la_spectrum_news_favicon.png" alt="Spectrum" /></div>
+              <div class="press-favicon mb-3"><img src={LASpectrumFavIcon.src} alt="Spectrum" /></div>
               <blockquote class="mb-4 p-3 bg-rust/5 border-l-4 border-rust rounded-r-lg">
                 <p class="text-base font-semibold italic text-dark-gray leading-relaxed">“Good vibes and good reads.”</p>
               </blockquote>
               <h3 class="mb-1 text-dark-gray text-sm leading-snug">Reading Rhythms</h3>
               <p class="text-dark-gray/50 text-xs mb-4">spectrumnews1.com</p>
-              <img src="/src/assets/images/press_section/la_spectrum_news_article.jpg" alt="Spectrum" class="w-full rounded-xl" />
+              <img src={LASpectrumThumbnail.src} alt="Spectrum" class="w-full rounded-xl" />
             </a>
           </div>
         </div>
@@ -1116,13 +1139,13 @@ const arrowRightSrc = arrowright.src;
         <div class="press-card-mobile w-72 flex-shrink-0">
           <div class="p-6 border border-beaver rounded-xl shadow-sm">
             <a href="https://video.sky.it/news/cronaca/video/reading-party-dagli-stati-uniti-per-combattere-la-solitudine-957970" target="_blank" rel="noopener">
-              <div class="press-favicon mb-3"><img src="/src/assets/images/press_section/sky_favicon.png" alt="Sky TG24" /></div>
+              <div class="press-favicon mb-3"><img src={skyFavIcon.src} alt="Sky TG24" /></div>
               <blockquote class="mb-4 p-3 bg-dark-purple/5 border-l-4 border-dark-purple rounded-r-lg">
                 <p class="text-base font-semibold italic text-dark-gray leading-relaxed">“Una festa in cui si legge.”</p>
               </blockquote>
               <h3 class="mb-1 text-dark-gray text-sm leading-snug">Reading party</h3>
               <p class="text-dark-gray/50 text-xs mb-4">sky.it</p>
-              <img src="/src/assets/images/press_section/sky_article.jpg" alt="Sky" class="w-full rounded-xl" />
+              <img src={skyThumbnail} alt="Sky" class="w-full rounded-xl" />
             </a>
           </div>
         </div>
@@ -1130,13 +1153,13 @@ const arrowRightSrc = arrowright.src;
         <div class="press-card-mobile w-72 flex-shrink-0">
           <div class="p-6 border border-beaver rounded-xl shadow-sm">
             <a href="https://www.rnz.co.nz/national/programmes/afternoons/audio/2018936527/not-book-club-not-a-library-but-a-great-night-out-reading" target="_blank" rel="noopener">
-              <div class="press-favicon mb-3"><img src="/src/assets/images/press_section/rnz_favicon.png" alt="RNZ" /></div>
+              <div class="press-favicon mb-3"><img src={rnzFavIcon.src} alt="RNZ" /></div>
               <blockquote class="mb-4 p-3 bg-jean/5 border-l-4 border-jean rounded-r-lg">
                 <p class="text-base font-semibold italic text-dark-gray leading-relaxed">“Not book club, not a library but a great night out reading.”</p>
               </blockquote>
               <h3 class="mb-1 text-dark-gray text-sm leading-snug">Great night out reading</h3>
               <p class="text-dark-gray/50 text-xs mb-4">rnz.co.nz</p>
-              <img src="/src/assets/images/press_section/rnz_article.jpg" alt="RNZ" class="w-full rounded-xl" />
+              <img src={rnzThumbnail.src} alt="RNZ" class="w-full rounded-xl" />
             </a>
           </div>
         </div>
