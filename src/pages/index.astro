@@ -87,6 +87,7 @@ import forbesThumbnail from '@assets/images/press_section/forbes_image.webp'
 import timeoutIcon from '@assets/images/press_section/timeoutfav.png'
 import timeoutThumbnail from '@assets/images/press_section/timeoutimage.webp'
 import todayShowFavIcon from '@assets/images/press_section/todayshowfav.svg'
+import todayShowThumbnail from '@assets/images/press_section/todayshowimage.png'
 import wnbcFavIcon from '@assets/images/press_section/wnbc_favicon.png'
 import wnbcThumbnail from '@assets/images/press_section/wnbc_article.png'
 import techCrunchFavIcon from '@assets/images/press_section/techcrunch_favicon.png'
@@ -101,6 +102,8 @@ import skyFavIcon from '@assets/images/press_section/sky_favicon.png'
 import skyThumbnail from '@assets/images/press_section/sky_article.jpg'
 import rnzFavIcon from '@assets/images/press_section/rnz_favicon.png'
 import rnzThumbnail from '@assets/images/press_section/rnz_article.jpg'
+import cbsFavIcon from '@assets/images/press_section/cbs_favicon.png'
+import cbsThumbnail from '@assets/images/press_section/cbs_article.png'
 
 
 // Import existing media photos
@@ -825,7 +828,7 @@ const arrowRightSrc = arrowright.src;
                 <div class="press-favicon mb-3"><img src={todayShowFavIcon.src} alt="TODAY Show logo" /></div>
                 <h3 class="mb-1 text-dark-gray text-sm leading-snug">Move over book clubs, it's reading parties that are lit</h3>
                 <p class="text-dark-gray/50 text-xs mb-4">today.com</p>
-                <img src="/src/assets/images/press_section/todayshowimage.png" alt="TODAY Show story thumbnail" class="w-full rounded-xl" />
+                <img src={todayShowThumbnail.src} alt="TODAY Show story thumbnail" class="w-full rounded-xl" />
               </a>
             </div>
           </div>
@@ -869,13 +872,13 @@ const arrowRightSrc = arrowright.src;
           <div class="transform hover:scale-[1.02] transition-transform duration-300">
             <div class="p-6 border border-beaver rounded-xl shadow-sm">
               <a href="https://www.cbsnews.com/losangeles/news/inside-socal-community-connection-316/" target="_blank" rel="noopener">
-                <div class="press-favicon mb-3"><img src="/src/assets/images/press_section/cbs_favicon.png" alt="CBS logo" /></div>
+                <div class="press-favicon mb-3"><img src={cbsFavIcon.src} alt="CBS logo" /></div>
                 <blockquote class="mb-4 p-4 bg-rust/5 border-l-4 border-rust rounded-r-lg">
                   <p class="text-lg font-semibold italic text-dark-gray leading-relaxed">“It’s incredibly safe and special.”</p>
                 </blockquote>
                 <h3 class="mb-1 text-dark-gray text-sm leading-snug">Inside SoCal: Community Connection</h3>
                 <p class="text-dark-gray/50 text-xs mb-4">cbsnews.com</p>
-                <img src="/src/assets/images/press_section/cbs_article.png" alt="CBS story thumbnail" class="w-full rounded-xl" />
+                <img src={cbsThumbnail.src} alt="CBS story thumbnail" class="w-full rounded-xl" />
               </a>
             </div>
           </div>
@@ -1064,7 +1067,7 @@ const arrowRightSrc = arrowright.src;
               <div class="press-favicon mb-3"><img src={todayShowFavIcon.src} alt="TODAY" /></div>
               <h3 class="mb-1 text-dark-gray text-sm leading-snug">Move over book clubs...</h3>
               <p class="text-dark-gray/50 text-xs mb-4">today.com</p>
-              <img src="/src/assets/images/press_section/todayshowimage.png" alt="TODAY" class="w-full rounded-xl" />
+              <img src={todayShowThumbnail.src} alt="TODAY" class="w-full rounded-xl" />
             </a>
           </div>
         </div>
