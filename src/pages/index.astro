@@ -104,7 +104,9 @@ import rnzFavIcon from '@assets/images/press_section/rnz_favicon.png'
 import rnzThumbnail from '@assets/images/press_section/rnz_article.jpg'
 import cbsFavIcon from '@assets/images/press_section/cbs_favicon.png'
 import cbsThumbnail from '@assets/images/press_section/cbs_article.png'
-
+import nytThumbnail from '@assets/media/New_York_Times.webp'
+import theIFavIcon from '@assets/images/press_section/theIfav.jpg'
+import theFavThumbnail from '@assets/images/press_section/theIimage.webp'
 
 // Import existing media photos
 import chapterMaisonMono from '@assets/media/Chapter_10_Maison_Mono.webp';
@@ -734,7 +736,7 @@ const arrowRightSrc = arrowright.src;
 
         <h3 class="mb-1 text-dark-gray text-sm leading-snug">It's My Party and I'll Read If I Want To</h3>
         <p class="text-dark-gray/50 text-xs mb-4">nytimes.com</p>
-        <img src="/src/assets/media/New_York_Times.webp" alt="New York Times story thumbnail" class="w-full rounded-xl" />
+        <img src={nytThumbnail.src} alt="New York Times story thumbnail" class="w-full rounded-xl" />
       </a>
     </div>
   </div>
@@ -793,13 +795,13 @@ const arrowRightSrc = arrowright.src;
           <div class="transform hover:scale-[1.02] transition-transform duration-300">
             <div class="p-6 border border-beaver rounded-xl shadow-sm">
               <a href="https://inews.co.uk/news/world/gen-z-making-reading-parties-cool-in-new-york-3446123" target="_blank" rel="noopener">
-                <div class="press-favicon mb-3"><img src="/src/assets/images/press_section/theIfav.jpg" alt="The I logo" /></div>
+                <div class="press-favicon mb-3"><img src={theIFavIcon.src} alt="The I logo" /></div>
                 <blockquote class="mb-4 p-4 bg-jean/5 border-l-4 border-jean rounded-r-lg">
                   <p class="text-lg font-semibold italic text-dark-gray leading-relaxed">"New York's book lovers are finding community in bars and at quiet reading parties"</p>
                 </blockquote>
                 <h3 class="mb-1 text-dark-gray text-sm leading-snug">Gen Z making reading parties cool in New York</h3>
                 <p class="text-dark-gray/50 text-xs mb-4">inews.co.uk</p>
-                <img src="/src/assets/images/press_section/theIimage.webp" alt="The I story thumbnail" class="w-full rounded-xl" />
+                <img src={theFavThumbnail.src} alt="The I story thumbnail" class="w-full rounded-xl" />
               </a>
             </div>
           </div>
@@ -945,7 +947,7 @@ const arrowRightSrc = arrowright.src;
                 </blockquote>
                 <h3 class="mb-1 text-dark-gray text-sm leading-snug">Reading party dagli Stati Uniti per combattere la solitudine</h3>
                 <p class="text-dark-gray/50 text-xs mb-4">sky.it</p>
-                <img src={skyThumbnail} alt="Sky story thumbnail" class="w-full rounded-xl" />
+                <img src={skyThumbnail.src} alt="Sky story thumbnail" class="w-full rounded-xl" />
               </a>
             </div>
           </div>
@@ -1004,7 +1006,7 @@ const arrowRightSrc = arrowright.src;
 
       <h3 class="mb-1 text-dark-gray text-sm leading-snug">It's My Party and I'll Read If I Want To</h3>
       <p class="text-dark-gray/50 text-xs mb-4">nytimes.com</p>
-      <img src="/src/assets/media/New_York_Times.webp" alt="NYT" class="w-full rounded-xl" />
+      <img src={nytThumbnail.src} alt="NYT" class="w-full rounded-xl" />
     </a>
   </div>
 </div>
@@ -1147,7 +1149,7 @@ const arrowRightSrc = arrowright.src;
               </blockquote>
               <h3 class="mb-1 text-dark-gray text-sm leading-snug">Reading party</h3>
               <p class="text-dark-gray/50 text-xs mb-4">sky.it</p>
-              <img src={skyThumbnail} alt="Sky" class="w-full rounded-xl" />
+              <img src={skyThumbnail.src} alt="Sky" class="w-full rounded-xl" />
             </a>
           </div>
         </div>
