@@ -9,31 +9,28 @@ import logo from '@assets/images/logo.svg';
   showNavbar={true}
 >
   <!-- Hero-ish header to mirror the index vibe -->
-  <section class="relative overflow-hidden pt-12 pb-8">
+  <section class="relative overflow-hidden pt-8 pb-8">
     <div
       class="absolute inset-0 w-full h-full bg-gradient-to-br from-white via-gray-50/50 to-jean/5"
       style="left:-100vw; right:-100vw; width:300vw;"
     ></div>
 
     <div class="relative z-10 max-w-xl mx-auto px-6">
-      <div class="text-center space-y-4">
-        <img
-          src={logo.src}
-          alt="Reading Rhythms logo"
-          class="w-16 h-16 mx-auto drop-shadow"
-        />
+      <div class="text-center space-y-2">
+        <!-- Removed top logo to bring H1 higher -->
 
-        <h1 class="text-3xl md:text-4xl font-display text-dark-gray tracking-wider leading-tight">
+        <h1 class="text-4xl md:text-5xl font-display text-dark-gray tracking-wider leading-tight">
           Reading<br />
           <span class="bg-gradient-to-r from-jean via-rust to-dark-purple bg-clip-text text-transparent gradient-animate">
             Rhythms
           </span>
         </h1>
 
-        <p class="text-dark-gray/70">
-          Not a book club. A Reading Party.
+        <!-- tightened spacing above/below the tagline -->
+        <p class="text-dark-gray/70 mt-2 mb-2">
+          Not a book club. A reading party.
         </p>
-
+        
         <!-- Socials -->
         <div class="flex items-center justify-center gap-4 pt-1">
           <!-- Instagram -->
