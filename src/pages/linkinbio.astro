@@ -1,0 +1,132 @@
+---
+import BaseLayout from '@layouts/BaseLayout.astro';
+import logo from '@assets/images/logo.svg';
+---
+
+<BaseLayout
+  title="Reading Rhythms | Links"
+  description="All the important Reading Rhythms links in one place."
+  showNavbar={true}
+>
+  <!-- Hero-ish header to mirror the index vibe -->
+  <section class="relative overflow-hidden pt-12 pb-8">
+    <div
+      class="absolute inset-0 w-full h-full bg-gradient-to-br from-white via-gray-50/50 to-jean/5"
+      style="left:-100vw; right:-100vw; width:300vw;"
+    ></div>
+
+    <div class="relative z-10 max-w-xl mx-auto px-6">
+      <div class="text-center space-y-4">
+        <img
+          src={logo.src}
+          alt="Reading Rhythms logo"
+          class="w-16 h-16 mx-auto drop-shadow"
+        />
+
+        <h1 class="text-3xl md:text-4xl font-display text-dark-gray tracking-wider leading-tight">
+          Reading<br />
+          <span class="bg-gradient-to-r from-jean via-rust to-dark-purple bg-clip-text text-transparent gradient-animate">
+            Rhythms
+          </span>
+        </h1>
+
+        <p class="text-dark-gray/70">
+          Your link hub for events, community, and more.
+        </p>
+
+        <!-- Socials -->
+        <div class="flex items-center justify-center gap-4 pt-1">
+          <!-- Instagram -->
+          <a
+            href="https://www.instagram.com/reading_rhythms/"
+            target="_blank"
+            rel="noopener"
+            aria-label="Reading Rhythms on Instagram"
+            class="inline-flex h-10 w-10 items-center justify-center rounded-lg bg-dark-gray text-white/90 hover:text-white hover:scale-105 transition"
+          >
+            <svg viewBox="0 0 24 24" class="h-5 w-5" fill="currentColor" aria-hidden="true">
+              <path d="M12 2.2c3.3 0 3.7.01 5 .07 3.3.15 4.8 1.7 5 5 .06 1.26.07 1.66.07 5s-.01 3.74-.07 5c-.2 3.3-1.7 4.85-5 5-1.26.06-1.66.07-5 .07s-3.74-.01-5-.07c-3.3-.15-4.85-1.7-5-5C2 15.74 2 15.34 2 12s.01-3.74.07-5c.15-3.3 1.7-4.85 5-5C8.26 2.21 8.66 2.2 12 2.2Zm0 2c-3.27 0-3.66.01-4.95.07-2.2.1-3.22 1.12-3.32 3.32C3.67 9.1 3.66 9.5 3.66 12c0 2.5.01 2.9.07 4.39.1 2.2 1.12 3.22 3.32 3.32 1.29.06 1.68.07 4.95.07s3.66-.01 4.95-.07c2.2-.1 3.22-1.12 3.32-3.32.06-1.49.07-1.89.07-4.39 0-2.5-.01-2.9-.07-4.39-.1-2.2-1.12-3.22-3.32-3.32C15.66 4.21 15.27 4.2 12 4.2Zm0 3.3a4.5 4.5 0 1 1 0 9.001 4.5 4.5 0 0 1 0-9Zm0 2a2.5 2.5 0 1 0 0 5.001 2.5 2.5 0 0 0 0-5Zm5.4-2.86a1.14 1.14 0 1 1 0 2.28 1.14 1.14 0 0 1 0-2.28Z"/>
+            </svg>
+          </a>
+
+          <!-- TikTok -->
+          <a
+            href="https://tiktok.com/@readingrhythms"
+            target="_blank"
+            rel="noopener"
+            aria-label="Reading Rhythms on TikTok"
+            class="inline-flex h-10 w-10 items-center justify-center rounded-lg bg-dark-gray text-white/90 hover:text-white hover:scale-105 transition"
+          >
+            <svg viewBox="0 0 48 48" class="h-5 w-5" fill="currentColor" aria-hidden="true">
+              <path d="M31.8 8.3c1.9 2 4.3 3.6 7.1 4.1v6.1c-2.8 0-5.5-.9-7.7-2.4v12.2c0 7-5.7 12.7-12.7 12.7S5.8 35.3 5.8 28.3s5.7-12.7 12.7-12.7c1 0 2 .1 2.9.4v6.4c-.9-.4-1.9-.7-2.9-.7-4.1 0-7.5 3.4-7.5 7.5S14.4 36.7 18.5 36.7s7.5-3.4 7.5-7.5V5h5.8v3.3Z"/>
+            </svg>
+          </a>
+        </div>
+      </div>
+
+      <!-- Link buttons -->
+      <div class="mt-8 space-y-4 sm:space-y-5">
+        <a
+          href="/events"
+          class="inline-flex items-center justify-center gap-2 w-full rounded-xl bg-gradient-to-r from-jean to-dark-purple text-white text-center px-5 py-4 font-semibold hover:shadow-xl hover:shadow-jean/25 transition-all hover:-translate-y-0.5"
+        >
+          <span>Buy Tickets! 🎟️</span>
+        </a>
+
+        <!-- Scroll to just below the last button (no changes to global newsletter) -->
+        <a
+          href="#links-bottom"
+          class="inline-flex items-center justify-center gap-2 w-full rounded-xl bg-white border-2 border-gray-200 text-dark-gray text-center px-5 py-4 font-semibold hover:border-jean hover:shadow-lg transition-all hover:-translate-y-0.5"
+        >
+          <span>Join our Newsletter 📰</span>
+        </a>
+
+        <a
+          href="https://discord.gg/8ez5DaQqJV"
+          target="_blank"
+          rel="noopener"
+          class="inline-flex items-center justify-center gap-2 w-full rounded-xl bg-white border-2 border-gray-200 text-dark-gray px-5 py-4 font-semibold hover:border-jean hover:shadow-lg transition-all hover:-translate-y-0.5"
+        >
+          <span>Join our Discord</span>
+          <!-- Discord icon -->
+          <svg viewBox="0 0 24 24" class="h-5 w-5" fill="currentColor" aria-hidden="true">
+            <path d="M20.3 4.4a19.3 19.3 0 0 0-4.9-1.6l-.23.47c1.34.33 2.6.84 3.78 1.52a12.8 12.8 0 0 0-12.9 0 12.7 12.7 0 0 1 3.78-1.52l-.24-.47c-1.7.3-3.35.85-4.9 1.62C2.1 8.4 1.4 12.3 1.6 16.1a19 19 0 0 0 5.9 2.9l.46-1.5c-1.1-.32-2.1-.77-3.1-1.35l.27-.17c2.03.95 4.27 1.43 6.53 1.38 2.26.05 4.5-.43 6.53-1.38l.27.17c-.95.58-2 1.03-3.1 1.35l.46 1.5c2.2-.7 4.2-1.7 5.9-2.9.3-3.8-.5-7.7-2.9-11.7ZM8.9 14.3c-.9 0-1.6-.86-1.6-1.9s.72-1.9 1.6-1.9 1.62.86 1.62 1.9-.73 1.9-1.62 1.9Zm6.2 0c-.9 0-1.62-.86-1.62-1.9s.73-1.9 1.62-1.9c.9 0 1.6.86 1.6 1.9s-.71 1.9-1.6 1.9Z"/>
+          </svg>          
+        </a>
+
+        <a
+          href="/partnerships"
+          class="inline-flex items-center justify-center gap-2 w-full rounded-xl bg-white border-2 border-gray-200 text-dark-gray text-center px-5 py-4 font-semibold hover:border-jean hover:shadow-lg transition-all hover:-translate-y-0.5"
+        >
+          <span>Partner with Us 🤝</span>
+        </a>
+
+        <a
+          href="/apply"
+          class="inline-flex items-center justify-center gap-2 w-full rounded-xl bg-white border-2 border-gray-200 text-dark-gray text-center px-5 py-4 font-semibold hover:border-jean hover:shadow-lg transition-all hover:-translate-y-0.5"
+        >
+          <span>Join the team in your city</span>
+        </a>
+
+        <!-- Anchor for newsletter scroll target -->
+        <div id="links-bottom"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- tiny bottom spacer so buttons aren't flush with edge on mobile -->
+  <div class="h-8"></div>
+
+  <style>
+    /* Reuse the animated gradient from index */
+    .gradient-animate {
+      background-size: 200% 200%;
+      animation: gradientShift 3s ease infinite;
+    }
+    @keyframes gradientShift {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+  </style>
+</BaseLayout>
