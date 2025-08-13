@@ -2,8 +2,13 @@
 import BaseLayout from '@layouts/BaseLayout.astro';
 ---
 
-<BaseLayout title='Reading Rhythms | Apply' description='Apply to bring Reading Rhythms to your city. Host application form for community builders.' showNavbar={true} mainClasses='full-height-mobile w-screen md:h-screen flex items-center justify-center'>
-  <div class="w-full h-full max-w-6xl mx-auto pt-8">
+<BaseLayout
+  title='Reading Rhythms | Apply'
+  description='Apply to bring Reading Rhythms to your city. Host application form for community builders.'
+  showNavbar={true}
+  mainClasses='w-screen min-h-screen flex justify-center items-start md:items-center'
+>
+  <div class="w-full max-w-6xl mx-auto pt-8 pb-16 md:pb-12">
     <div class="text-center mb-8 px-4">
       <h1 class="text-3xl md:text-4xl lg:text-5xl text-dark-gray font-display tracking-wider mb-4">
         Join the <span class="bg-gradient-to-r from-jean via-rust to-dark-purple bg-clip-text text-transparent">Team!</span>
@@ -12,8 +17,8 @@ import BaseLayout from '@layouts/BaseLayout.astro';
         Join our community of passionate Chapter Leads and create magical reading experiences in your area.
       </p>
     </div>
-    
-    <div class="fillout-wrapper w-full bg-white rounded-xl shadow-lg overflow-hidden mb-24 md:mb-0">
+
+    <div class="fillout-wrapper w-full bg-white rounded-xl shadow-lg">
       <iframe 
         src="https://form.fillout.com/t/hxpyHGZs3Aus" 
         width="100%" 
@@ -32,26 +37,25 @@ import BaseLayout from '@layouts/BaseLayout.astro';
 
 <style is:global>
 .fillout-wrapper iframe {
-  @apply w-full min-h-[550px] md:min-h-[900px] !important;
-  height: 550px !important;
+  @apply w-full min-h-[550px] md:min-h-[900px];
+  height: 550px;
 }
 
 @media (min-width: 768px) {
   .fillout-wrapper iframe {
-    height: 900px !important;
+    height: 900px;
   }
 }
 
 @media (max-width: 768px) {
   .fillout-wrapper iframe {
-    @apply min-h-[540px] !important;
-    height: 540px !important;
+    @apply min-h-[540px];
+    height: 540px;
   }
 }
 
-@media (min-width: 769px) {
-  .fillout-wrapper {
-    margin-bottom: 0 !important;
-  }
+/* Reduced bottom spacing so footer sits closer to the form */
+.fillout-wrapper {
+  margin-bottom: -1rem !important; /* was larger before */
 }
 </style>
