@@ -40,9 +40,13 @@ export const POST: APIRoute = async ({ request }) => {
         'x-luma-api-key': apiKey,              // ✅ correct header
         'Content-Type': 'application/json',
       },
+
       body: JSON.stringify({
-        calendar_id: cfg.calendarId,           // required: which calendar to add to
-        people: [{ email }],                   // minimal payload
+        "infos": [
+            {
+              "email": [{ email }]
+            }
+          ]                  // minimal payload
       }),
     });
 
