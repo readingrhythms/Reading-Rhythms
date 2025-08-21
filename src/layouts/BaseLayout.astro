@@ -129,4 +129,58 @@ const { title, description, showNavbar, bodyClasses, mainClasses } = Astro.props
 
 
 	</body>
+
+
+	<script>
+  (function () {
+    const form = document.querySelector('section form');
+    const button = form.querySelector('button[type="submit"]');
+
+    // Optional: simple message area
+    const msg = document.createElement('div');
+    msg.className = 'text-sm mt-2';
+    form.appendChild(msg);
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const fd = new FormData(form);
+      const email = (fd.get('email') || '').toString().trim();
+      const chapter = (fd.get('chapter') || '').toString().trim();
+
+      if (!email || !chapter) {
+        msg.textContent = 'Please select a chapter and enter a valid email.';
+        msg.className = 'text-sm mt-2 text-red-600';
+        return;
+      }
+
+      button.disabled = true;
+      button.classList.add('opacity-70', 'cursor-not-allowed');
+      msg.textContent = 'Subscribing...';
+      msg.className = 'text-sm mt-2 text-dark-gray/70';
+
+      try {
+        const res = await fetch('/api/luma-subscribe', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email, chapter })
+        });
+
+        const data = await res.json().catch(() => ({}));
+        if (!res.ok) throw new Error(data?.error || 'Subscription failed.');
+
+        msg.textContent = '🎉 You’re in! We’ll email you about new events.';
+        msg.className = 'text-sm mt-2 text-green-700';
+        form.reset();
+      } catch (err) {
+        console.error(err);
+        msg.textContent = err.message || 'Something went wrong. Please try again.';
+        msg.className = 'text-sm mt-2 text-red-600';
+      } finally {
+        button.disabled = false;
+        button.classList.remove('opacity-70', 'cursor-not-allowed');
+      }
+    });
+  })();
+</script>
+
 </html>
