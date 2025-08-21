@@ -28,7 +28,7 @@ export const POST: APIRoute = async ({ request }) => {
     if (!cfg) return new Response(JSON.stringify({ error: 'Unknown chapter.' }), { status: 400 });
 
     const env = import.meta.env as Record<string, string | undefined>;
-    const apiKey = env[cfg.apiKeyEnv];
+    const apiKey = import.meta.env[cfg.apiKeyEnv];
     if (!apiKey) {
       return new Response(JSON.stringify({ error: `Server misconfig: ${cfg.apiKeyEnv} not set.` }), { status: 500 });
     }
