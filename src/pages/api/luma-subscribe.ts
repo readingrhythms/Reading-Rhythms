@@ -14,6 +14,7 @@ const CHAPTERS: Record<ChapterKey, { calendarId: string; apiKeyEnv: string }> = 
   'los-angeles':     { calendarId: 'cal_XXXXXXXX', apiKeyEnv: 'LUMA_API_KEY_LA' },
   'upper-west-side': { calendarId: 'cal_XXXXXXXX', apiKeyEnv: 'LUMA_API_KEY_UWS' },
   'algiers': { calendarId: 'cal_XXXXXXXX', apiKeyEnv: 'LUMA_API_KEY_UWS' },
+  'astoria': { calendarId: 'cal_XXXXXXXX', apiKeyEnv: 'LUMA_API_KEY_UWS' }
   // ...add the rest...
 } as any;
 
