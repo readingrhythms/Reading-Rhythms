@@ -1,71 +1,52 @@
 ---
 import BaseLayout from '@layouts/BaseLayout.astro';
 import { Image } from 'astro:assets';
-import pressNyt from '@assets/images/press-nyt.svg';
-import pressNyp from '@assets/images/press-nyp.svg';
-import pressTodayShow from '@assets/images/press-today_show.svg';
-import pressFox5 from '@assets/images/press-fox5.svg';
-import rollingStone from '@assets/images/rolling-stone.svg';
-import gma from '@assets/images/GMA.svg';
-import guardian from '@assets/images/guardian.jpg';
-import thrillist from '@assets/images/thrillest.png';
-import washpost from '@assets/images/washpost.png';
-import cbs from '@assets/images/cbs.jpg';
-import forbes from '@assets/images/forbes.jpg';
-import london from '@assets/images/london.svg';
-import nbc from '@assets/images/nbc.jpg';
-import techcrunch from '@assets/images/techcrunch.png';
-import cbsNew from '@assets/images/cbs.png';
-import forbesNew from '@assets/images/forbes.png';
-import londonNew from '@assets/images/london copy.svg';
-import nbcNew from '@assets/images/nbc.png';
-import techcrunchNew from '@assets/images/techcrunch copy.png';
 import arrowright from '@assets/icons/arrow-right.svg';
 
 // Extended press coverage
 const pressLogos = [
-  { name: 'The New York Times', logo: pressNyt },
-  { name: 'New York Post', logo: pressNyp },
-  { name: 'Today Show', logo: pressTodayShow },
-  { name: 'FOX5', logo: pressFox5 },
-  { name: 'Rolling Stone', logo: rollingStone },
-  { name: 'GMA', logo: gma },
-  { name: 'The Guardian', logo: guardian },
-  { name: 'Thrillist', logo: thrillist },
-  { name: 'Washington Post', logo: washpost },
-  { name: 'CBS', logo: cbsNew },
-  { name: 'Forbes', logo: forbesNew },
-  { name: 'London Evening Standard', logo: londonNew },
-  { name: 'NBC', logo: nbcNew },
-  { name: 'TechCrunch', logo: techcrunchNew }
+  { name: 'The New York Times', logo: "https://res.cloudinary.com/daaznyhsu/image/upload/v1757710722/press-nyt_xksstb.svg" },
+  { name: 'New York Post', logo: "https://res.cloudinary.com/daaznyhsu/image/upload/v1757710730/press-nyp_vkun2n.svg" },
+  { name: 'Today Show', logo: "https://res.cloudinary.com/daaznyhsu/image/upload/v1757713267/press-today_show_rwvk3h.svg" },
+  { name: 'FOX5', logo: "https://res.cloudinary.com/daaznyhsu/image/upload/v1757710788/press-fox5_aghlmn.svg" },
+  { name: 'Rolling Stone', logo: "https://res.cloudinary.com/daaznyhsu/image/upload/v1757710906/rolling-stone_z3abfc.svg" },
+  { name: 'GMA', logo: "https://res.cloudinary.com/daaznyhsu/image/upload/v1757710954/GMA_x6bnus.svg" },
+  { name: 'The Guardian', logo: "https://res.cloudinary.com/daaznyhsu/image/upload/v1757713429/guardian_thxn20.jpg" },
+  { name: 'Thrillist', logo: "https://res.cloudinary.com/daaznyhsu/image/upload/v1757711071/thrillest_oymirf.png" },
+  { name: 'Washington Post', logo: "https://res.cloudinary.com/daaznyhsu/image/upload/v1757711113/washpost_rhz54n.png" },
+  { name: 'CBS', logo: "https://res.cloudinary.com/daaznyhsu/image/upload/v1757711543/cbs_peeaqz.png" },
+  { name: 'Forbes', logo: "https://res.cloudinary.com/daaznyhsu/image/upload/v1757711589/forbes_cnnhzc.png" },
+  { name: 'London Evening Standard', logo: "https://res.cloudinary.com/daaznyhsu/image/upload/v1757711630/london_copy_clnozr.svg" },
+  { name: 'NBC', logo: "https://res.cloudinary.com/daaznyhsu/image/upload/v1757711672/nbc_yijeyz.png" },
+  { name: 'TechCrunch', logo: "https://res.cloudinary.com/daaznyhsu/image/upload/v1757711718/techcrunch_copy_d9rz5v.png" }
 ];
 
 const pressLinks = [
   {
     title: "It's My Party and I'll Read If I Want To",
     source: "The New York Times",
-    logo: pressNyt,
+    logo: "https://res.cloudinary.com/daaznyhsu/image/upload/v1757710722/press-nyt_xksstb.svg",
     href: "https://www.nytimes.com/2023/12/19/books/reading-rhythms.html",
     date: "December 19, 2023"
   },
   {
     title: "The Reading Party Revolution",
     source: "Rolling Stone",
-    logo: rollingStone,
+    logo: "https://res.cloudinary.com/daaznyhsu/image/upload/v1757710906/rolling-stone_z3abfc.svg",
     href: "#",
     date: "November 15, 2023"
   },
   {
     title: "Silent Reading, Loud Impact",
     source: "The Guardian",
-    logo: guardian,
+    logo: "https://res.cloudinary.com/daaznyhsu/image/upload/v1757713429/guardian_thxn20.jpg",
     href: "#",
     date: "October 8, 2023"
   },
   {
     title: "NYC's Hottest Reading Trend",
     source: "Thrillist",
-    logo: thrillist,
+    logo: "https://res.cloudinary.com/daaznyhsu/image/upload/v1757711071/thrillest_oymirf.png",
     href: "#",
     date: "September 22, 2023"
   }

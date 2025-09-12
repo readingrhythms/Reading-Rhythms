@@ -3,69 +3,36 @@ import BaseLayout from '@layouts/BaseLayout.astro';
 import { Image } from 'astro:assets';
 import arrowright from '@assets/icons/arrow-right.svg';
 import logo from '@assets/images/logo.svg';
-import pressNyt from '@assets/images/press-nyt.svg';
-import pressNyp from '@assets/images/press-nyp.svg';
-import pressTodayShow from '@assets/images/press-today_show.svg';
-import pressFox5 from '@assets/images/press-fox5.svg';
-import rollingStone from '@assets/images/rolling-stone.svg';
-import gma from '@assets/images/GMA.svg';
-import guardian from '@assets/images/guardian.svg';
-import thrillist from '@assets/images/thrillest.png';
-import washpost from '@assets/images/washpost.png';
-import cbs from '@assets/images/cbs.jpg';
-import forbes from '@assets/images/forbes.jpg';
-import london from '@assets/images/london.svg';
-import nbc from '@assets/images/nbc.jpg';
-import techcrunch from '@assets/images/techcrunch.png';
-import cbsNew from '@assets/images/cbs.png';
-import forbesNew from '@assets/images/forbes.png';
-import londonNew from '@assets/images/london copy.svg';
-import nbcNew from '@assets/images/nbc.png';
-import techcrunchNew from '@assets/images/techcrunch copy.png';
-
-// Import partner images
-import penguinRandomHouse from '@assets/images/partners/PRH.jpeg'
-import harperCollins from '@assets/images/partners/HarperCollins Logo.png'
-import simonAndSchuster from '@assets/images/partners/simon schuster.webp'
-import hachetteBooks from '@assets/images/partners/Hachette Books Logo.png'
-import macmillan from '@assets/images/partners/macimillan.png'
-import hudsonYards from '@assets/images/partners/Hudson yards.svg'
-import nypl from '@assets/images/partners/nypl.png'
-import tomrrowland from '@assets/images/partners/tomorrowland.svg'
-import rivian from '@assets/images/partners/rivian.png'
-import immi from '@assets/images/partners/immi.webp'
-import nakedLife from '@assets/images/partners/naked life.webp'
-import threads from '@assets/images/partners/threads.avif'
 
 // Combined partners (publishers + brands) - same as homepage
 const partners = [
-  { name: 'Penguin Random House', logo: penguinRandomHouse.src, type: 'publisher', size: 'large', url: 'https://www.penguinrandomhouse.com' },
-  { name: 'HarperCollins', logo: harperCollins.src, type: 'publisher', size: 'medium', url: 'https://www.harpercollins.com' },
-  { name: 'Simon & Schuster', logo: simonAndSchuster.src, type: 'publisher', size: 'small', url: 'https://www.simonandschuster.com' },
-  { name: 'Hachette Books', logo: hachetteBooks.src, type: 'publisher', size: 'medium', url: 'https://www.hachettebookgroup.com' },
-  { name: 'Macmillan', logo: macmillan.src, type: 'publisher', size: 'small', url: 'https://us.macmillan.com' },
-  { name: 'Hudson Yards', logo: hudsonYards.src, type: 'venue', size: 'large', url: 'https://www.hudsonyardsnewyork.com' },
-  { name: 'NYPL', logo: nypl.src, type: 'venue', size: 'medium', url: 'https://www.nypl.org' },
-  { name: 'Tomorrowland', logo: tomrrowland.src, type: 'brand', size: 'small', url: 'https://www.tomorrowland.com' },
-  { name: 'Rivian', logo: rivian.src, type: 'brand', size: 'medium', url: 'https://rivian.com' },
-  { name: 'Immi', logo: immi.src, type: 'brand', size: 'small', url: 'https://immieats.com/' },
-  { name: 'Naked Life', logo: nakedLife.src, type: 'brand', size: 'small', url: 'https://drinknakedlife.com/pages/age-gate' },
-  { name: 'Threads', logo: threads.src, type: 'brand', size: 'medium', url: 'https://www.threads.net' }
+  { name: 'Penguin Random House', logo: "https://res.cloudinary.com/daaznyhsu/image/upload/v1757680532/PRH_wyyir7.jpg", type: 'publisher', size: 'large', url: 'https://www.penguinrandomhouse.com' },
+  { name: 'HarperCollins', logo: "https://res.cloudinary.com/daaznyhsu/image/upload/v1757680616/HarperCollins_Logo_exzjd0.png", type: 'publisher', size: 'medium', url: 'https://www.harpercollins.com' },
+  { name: 'Simon & Schuster', logo: "https://res.cloudinary.com/daaznyhsu/image/upload/v1757680664/simon_schuster_pu7ejn.webp", type: 'publisher', size: 'small', url: 'https://www.simonandschuster.com' },
+  { name: 'Hachette Books', logo: "https://res.cloudinary.com/daaznyhsu/image/upload/v1757680706/Hachette_Books_Logo_k25bpw.png", type: 'publisher', size: 'medium', url: 'https://www.hachettebookgroup.com' },
+  { name: 'Macmillan', logo: "https://res.cloudinary.com/daaznyhsu/image/upload/v1757680746/macimillan_ka4akk.png", type: 'publisher', size: 'small', url: 'https://us.macmillan.com' },
+  { name: 'Hudson Yards', logo: "https://res.cloudinary.com/daaznyhsu/image/upload/v1757680890/Hudson_yards_xyhhmn.svg", type: 'venue', size: 'large', url: 'https://www.hudsonyardsnewyork.com' },
+  { name: 'NYPL', logo: "https://res.cloudinary.com/daaznyhsu/image/upload/v1757680804/nypl_wakfrc.png", type: 'venue', size: 'medium', url: 'https://www.nypl.org' },
+  { name: 'Tomorrowland', logo: "https://res.cloudinary.com/daaznyhsu/image/upload/v1757680936/tomorrowland_od7ryd.svg", type: 'brand', size: 'small', url: 'https://www.tomorrowland.com' },
+  { name: 'Rivian', logo: "https://res.cloudinary.com/daaznyhsu/image/upload/v1757680853/rivian_wopyfl.png", type: 'brand', size: 'medium', url: 'https://rivian.com' },
+  { name: 'Immi', logo: "https://res.cloudinary.com/daaznyhsu/image/upload/v1757680995/immi_t6iyde.webp", type: 'brand', size: 'small', url: 'https://immieats.com/' },
+  { name: 'Naked Life', logo: "https://res.cloudinary.com/daaznyhsu/image/upload/v1757681031/naked_life_vmlkxu.webp", type: 'brand', size: 'small', url: 'https://drinknakedlife.com/pages/age-gate' },
+  { name: 'Threads', logo: "https://res.cloudinary.com/daaznyhsu/image/upload/v1757681143/threads_ksz0rq.avif", type: 'brand', size: 'medium', url: 'https://www.threads.net' }
 ];
 
 // Extended press coverage - same as homepage
 const pressLogos = [
-  { name: 'Rolling Stone', logo: rollingStone },
-  { name: 'The Washington Post', logo: washpost },
-  { name: 'The Guardian', logo: guardian },
-  { name: 'Thrillist', logo: thrillist },
-  { name: 'GMA', logo: gma },
-  { name: 'FOX5', logo: pressFox5 },
-  { name: 'CBS', logo: cbsNew },
-  { name: 'Forbes', logo: forbesNew },
-  { name: 'London Evening Standard', logo: londonNew },
-  { name: 'NBC', logo: nbcNew },
-  { name: 'TechCrunch', logo: techcrunchNew }
+  { name: 'Rolling Stone', logo: "https://res.cloudinary.com/daaznyhsu/image/upload/v1757710906/rolling-stone_z3abfc.svg" },
+  { name: 'The Washington Post', logo: "https://res.cloudinary.com/daaznyhsu/image/upload/v1757711113/washpost_rhz54n.png" },
+  { name: 'The Guardian', logo: "https://res.cloudinary.com/daaznyhsu/image/upload/v1757711005/guardian_zuhwph.svg" },
+  { name: 'Thrillist', logo: "https://res.cloudinary.com/daaznyhsu/image/upload/v1757711071/thrillest_oymirf.png" },
+  { name: 'GMA', logo: "https://res.cloudinary.com/daaznyhsu/image/upload/v1757710954/GMA_x6bnus.svg" },
+  { name: 'FOX5', logo: "https://res.cloudinary.com/daaznyhsu/image/upload/v1757710788/press-fox5_aghlmn.svg" },
+  { name: 'CBS', logo: "https://res.cloudinary.com/daaznyhsu/image/upload/v1757711543/cbs_peeaqz.png" },
+  { name: 'Forbes', logo: "https://res.cloudinary.com/daaznyhsu/image/upload/v1757711589/forbes_cnnhzc.png" },
+  { name: 'London Evening Standard', logo: "https://res.cloudinary.com/daaznyhsu/image/upload/v1757711630/london_copy_clnozr.svg" },
+  { name: 'NBC', logo: "https://res.cloudinary.com/daaznyhsu/image/upload/v1757711672/nbc_yijeyz.png" },
+  { name: 'TechCrunch', logo: "https://res.cloudinary.com/daaznyhsu/image/upload/v1757711718/techcrunch_copy_d9rz5v.png" }
 ];
 ---
 

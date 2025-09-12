@@ -5,29 +5,13 @@ import News from '@components/index/News.astro';
 import Spotify from '@components/index/Spotify.astro';
 import Instagram from '@components/index/Instagram.astro';
 
-// Import all press images
-import pressNyt from '@assets/images/press_section/bizinsiderimage.webp';
-import pressNyp from '@assets/images/press_section/rollingstoneimage.webp';
-import pressTodayShow from '@assets/images/press_section/todayshowimage.png';
-import pressFox5 from '@assets/images/press_section/fox5ny_article.jpg';
-import pressRollingStone from '@assets/images/press_section/rollingstoneimage.webp';
-import pressGma from '@assets/images/press_section/GMA.png';
-import pressGuardian from '@assets/images/press_section/guardian_article.jpg';
-import pressThrillist from '@assets/images/press_section/thrillist_article.jpg';
-import pressWashpost from '@assets/images/press_section/forbes_image.webp';
-import pressCbs from '@assets/images/press_section/cbs_article.png';
-import pressForbes from '@assets/images/press_section/forbes_image.webp';
-import pressLondon from '@assets/images/press_section/london_times_favicon.png';
-import pressNbc from '@assets/images/press_section/wnbc_article.png';
-import pressTechcrunch from '@assets/images/press_section/techcrunch_article.jpg';
-
 const pressItems = [
   {
     type: 'news',
     title: 'The Reading Party Revolution',
     source: 'Business Insider',
     href: '#',
-    thumb: '/src/assets/media/New_York_Times.webp',
+    thumb: 'https://res.cloudinary.com/daaznyhsu/image/upload/v1757710406/New_York_Times_t4w1id.webp',
     width: '300px',
     height: '280px'
   },
@@ -36,7 +20,7 @@ const pressItems = [
     title: 'Silent Reading, Loud Impact',
     source: 'Rolling Stone',
     href: '#',
-    thumb: '/src/assets/media/Chapter_3_on_the_Roof.webp',
+    thumb: 'https://res.cloudinary.com/daaznyhsu/image/upload/v1757676154/Chapter_3_on_the_Roof_ocldzj.webp',
     width: '280px',
     height: '200px'
   },
@@ -45,7 +29,7 @@ const pressItems = [
     title: 'NYC\'s Hottest Reading Trend',
     source: 'Today Show',
     href: '#',
-    thumb: '/src/assets/media/Chapter_10_Maison_Mono.webp',
+    thumb: 'https://res.cloudinary.com/daaznyhsu/image/upload/v1757668923/Chapter_10_Maison_Mono_vxiena.webp',
     width: '320px',
     height: '320px'
   },
@@ -54,7 +38,7 @@ const pressItems = [
     title: 'Book Clubs Are So Last Year',
     source: 'FOX5 NY',
     href: '#',
-    thumb: '/src/assets/media/Readers_FourFiveSix_Bar.webp',
+    thumb: 'https://res.cloudinary.com/daaznyhsu/image/upload/v1757676204/Readers_FourFiveSix_Bar_wo0bjq.webp',
     width: '270px',
     height: '240px'
   },
@@ -63,7 +47,7 @@ const pressItems = [
     title: 'The Future of Reading',
     source: 'The Guardian',
     href: '#',
-    thumb: '/src/assets/media/New_York_Times.webp',
+    thumb: 'https://res.cloudinary.com/daaznyhsu/image/upload/v1757710406/New_York_Times_t4w1id.webp',
     width: '290px',
     height: '300px'
   },
@@ -72,7 +56,7 @@ const pressItems = [
     title: 'Reading Parties Take Manhattan',
     source: 'Thrillist',
     href: '#',
-    thumb: '/src/assets/media/Chapter_3_on_the_Roof.webp',
+    thumb: 'https://res.cloudinary.com/daaznyhsu/image/upload/v1757676154/Chapter_3_on_the_Roof_ocldzj.webp',
     width: '310px',
     height: '210px'
   },
@@ -81,7 +65,7 @@ const pressItems = [
     title: 'Community Through Literature',
     source: 'Forbes',
     href: '#',
-    thumb: '/src/assets/media/Chapter_10_Maison_Mono.webp',
+    thumb: 'https://res.cloudinary.com/daaznyhsu/image/upload/v1757668923/Chapter_10_Maison_Mono_vxiena.webp',
     width: '285px',
     height: '290px'
   },
@@ -90,7 +74,7 @@ const pressItems = [
     title: 'The Social Reading Movement',
     source: 'CBS News',
     href: '#',
-    thumb: '/src/assets/media/Readers_FourFiveSix_Bar.webp',
+    thumb: 'https://res.cloudinary.com/daaznyhsu/image/upload/v1757676204/Readers_FourFiveSix_Bar_wo0bjq.webp',
     width: '295px',
     height: '220px'
   },
@@ -99,7 +83,7 @@ const pressItems = [
     title: 'Books and Beats',
     source: 'NBC New York',
     href: '#',
-    thumb: '/src/assets/media/New_York_Times.webp',
+    thumb: 'https://res.cloudinary.com/daaznyhsu/image/upload/v1757710406/New_York_Times_t4w1id.webp',
     width: '275px',
     height: '310px'
   },
@@ -108,7 +92,7 @@ const pressItems = [
     title: 'Reading Renaissance',
     source: 'TechCrunch',
     href: '#',
-    thumb: '/src/assets/media/Chapter_3_on_the_Roof.webp',
+    thumb: 'https://res.cloudinary.com/daaznyhsu/image/upload/v1757676154/Chapter_3_on_the_Roof_ocldzj.webp',
     width: '305px',
     height: '250px'
   },
@@ -117,7 +101,7 @@ const pressItems = [
     title: 'Literary Social Hours',
     source: 'Washington Post',
     href: '#',
-    thumb: '/src/assets/media/Chapter_10_Maison_Mono.webp',
+    thumb: 'https://res.cloudinary.com/daaznyhsu/image/upload/v1757668923/Chapter_10_Maison_Mono_vxiena.webp',
     width: '290px',
     height: '270px'
   },
@@ -126,7 +110,7 @@ const pressItems = [
     title: 'The Reading Revolution',
     source: 'London Times',
     href: '#',
-    thumb: '/src/assets/media/Readers_FourFiveSix_Bar.webp',
+    thumb: 'https://res.cloudinary.com/daaznyhsu/image/upload/v1757676204/Readers_FourFiveSix_Bar_wo0bjq.webp',
     width: '280px',
     height: '230px'
   }
