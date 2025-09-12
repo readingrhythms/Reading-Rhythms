@@ -29,29 +29,6 @@ import nbcNew from '@assets/images/nbc.png';
 import techcrunchNew from '@assets/images/techcrunch copy.png';
 import arrowright from '@assets/icons/arrow-right.svg';
 
-// Import chapter photos
-import chapterPhoto1 from '@assets/images/chapter_photos/25F4AA6E.jpeg';
-import chapterPhoto2 from '@assets/images/chapter_photos/8H6A2918-Enhanced-NR.jpg';
-import chapterPhoto3 from '@assets/images/chapter_photos/DSC00318.JPG';
-import chapterPhoto4 from '@assets/images/chapter_photos/DSC00384.JPG';
-import chapterPhoto5 from '@assets/images/chapter_photos/DSC00860.JPG';
-import chapterPhoto6 from '@assets/images/chapter_photos/DSC01088.JPG';
-import chapterPhoto7 from '@assets/images/chapter_photos/DSC01309.JPG';
-import chapterPhoto8 from '@assets/images/chapter_photos/DSC01395.JPG';
-import chapterPhoto9 from '@assets/images/chapter_photos/DSC01567.JPG';
-import chapterPhoto10 from '@assets/images/chapter_photos/DSC01616.JPG';
-import chapterPhoto11 from '@assets/images/chapter_photos/DSC01870.JPG';
-import chapterPhoto12 from '@assets/images/chapter_photos/DSC01872.JPG';
-import chapterPhoto13 from '@assets/images/chapter_photos/DSC01910.JPG';
-import chapterPhoto14 from '@assets/images/chapter_photos/DSC02352.JPG';
-import chapterPhoto15 from '@assets/images/chapter_photos/DSC02354.JPG';
-import chapterPhoto16 from '@assets/images/chapter_photos/DSC02645.JPG';
-import chapterPhoto17 from '@assets/images/chapter_photos/DSC02916.JPG';
-import chapterPhoto18 from '@assets/images/chapter_photos/E64763A1-1BE1-44A0-9C5C-C88C1B18B794.JPG';
-import chapterPhoto19 from '@assets/images/chapter_photos/IG1A7830.JPG';
-// import chapterPhoto20 from '@assets/images/chapter_photos/ReadingRythms-55.jpg';
-import chapterPhoto21 from '@assets/images/chapter_photos/ReadingRythms-61.jpg';
-
 // Import partner images
 import penguinRandomHouse from '@assets/images/partners/PRH.jpeg'
 import harperCollins from '@assets/images/partners/HarperCollins Logo.png'
@@ -98,48 +75,43 @@ import nytThumbnail from '@assets/media/New_York_Times.webp'
 import theIFavIcon from '@assets/images/press_section/theIfav.jpg'
 import theFavThumbnail from '@assets/images/press_section/theIimage.webp'
 
-// Import existing media photos
-// import chapterMaisonMono from '@assets/media/Chapter_10_Maison_Mono.webp';
-import chapterOnRoof from '@assets/media/Chapter_3_on_the_Roof.webp';
-import readersFourFiveSix from '@assets/media/Readers_FourFiveSix_Bar.webp';
-
 // Mock data for chapters/cities with pagination
 const allChapters = [
   // Popular cities first, starting with Williamsburg
-  { name: 'Williamsburg', image: chapterPhoto1, location: 'Brooklyn, NY' },
+  { name: 'Williamsburg', image: "https://res.cloudinary.com/daaznyhsu/image/upload/v1757674878/25F4AA6E_h5rfwd.jpg", location: 'Brooklyn, NY' },
   { name: 'Lower Manhattan', image: "https://res.cloudinary.com/daaznyhsu/image/upload/v1757668923/Chapter_10_Maison_Mono_vxiena.webp", location: 'New York City' },
-  { name: 'Upper West Side', image: chapterPhoto2, location: 'New York City' },
-  { name: 'Midtown', image: chapterPhoto3, location: 'New York City' },
-  { name: 'Los Angeles', image: chapterOnRoof, location: 'California' },
-  { name: 'Chicago', image: chapterPhoto4, location: 'Illinois' },
-  { name: 'Toronto', image: chapterPhoto5, location: 'Ontario, Canada' },
-  { name: 'South London', image: readersFourFiveSix, location: 'London, UK' },
-  { name: 'Prospect Heights', image: chapterPhoto6, location: 'Brooklyn, NY' },
-  { name: 'Upper East Side', image: chapterPhoto7, location: 'New York City' },
-  { name: 'Washington Heights', image: chapterPhoto8, location: 'New York City' },
-  { name: 'Harlem', image: chapterPhoto9, location: 'New York City' },
-  { name: 'Greenpoint', image: chapterPhoto10, location: 'Brooklyn, NY' },
-  { name: 'Bushwick', image: chapterPhoto11, location: 'Brooklyn, NY' },
-  { name: 'Astoria', image: chapterPhoto12, location: 'Queens, NY' },
-  { name: 'Long Island City', image: chapterPhoto13, location: 'Queens, NY' },
-  { name: 'Queens', image: chapterPhoto14, location: 'New York' },
-  { name: 'Philadelphia', image: chapterPhoto15, location: 'Pennsylvania' },
-  { name: 'Washington DC', image: chapterPhoto16, location: 'District of Columbia' },
-  { name: 'Austin', image: chapterPhoto17, location: 'Texas' },
-  { name: 'San Diego', image: chapterPhoto18, location: 'California' },
-  { name: 'Denver', image: chapterPhoto19, location: 'Colorado' },
-  { name: 'Long Island', image: chapterPhoto21, location: 'New York' },
-  { name: 'Princeton', image: chapterPhoto1, location: 'New Jersey' },
-  { name: 'Morristown', image: chapterPhoto3, location: 'New Jersey' },
-  { name: 'Atlantic City', image: chapterPhoto5, location: 'New Jersey' },
-  { name: 'Rome', image: chapterPhoto7, location: 'Italy' },
-  { name: 'Milan', image: chapterPhoto9, location: 'Italy' },
-  { name: 'Florence', image: chapterPhoto11, location: 'Italy' },
-  { name: 'Naples', image: chapterPhoto13, location: 'Italy' },
-  { name: 'Barcelona', image: chapterPhoto15, location: 'Spain' },
-  { name: 'Charleston', image: chapterPhoto17, location: 'South Carolina' },
-  { name: 'Detroit', image: chapterPhoto19, location: 'Michigan' },
-  { name: 'Algiers', image: chapterPhoto21, location: 'Algeria' }
+  { name: 'Upper West Side', image: "https://res.cloudinary.com/daaznyhsu/image/upload/v1757674921/8H6A2918-Enhanced-NR_l7tnux.jpg", location: 'New York City' },
+  { name: 'Midtown', image: "https://res.cloudinary.com/daaznyhsu/image/upload/v1757674986/DSC00318_tbmqlj.jpg", location: 'New York City' },
+  { name: 'Los Angeles', image: "https://res.cloudinary.com/daaznyhsu/image/upload/v1757676154/Chapter_3_on_the_Roof_ocldzj.webp", location: 'California' },
+  { name: 'Chicago', image: "https://res.cloudinary.com/daaznyhsu/image/upload/v1757675038/DSC00384_ekpfc4.jpg", location: 'Illinois' },
+  { name: 'Toronto', image: "https://res.cloudinary.com/daaznyhsu/image/upload/v1757675107/DSC00860_wzecvn.jpg", location: 'Ontario, Canada' },
+  { name: 'South London', image: "https://res.cloudinary.com/daaznyhsu/image/upload/v1757676204/Readers_FourFiveSix_Bar_wo0bjq.webp", location: 'London, UK' },
+  { name: 'Prospect Heights', image: "https://res.cloudinary.com/daaznyhsu/image/upload/v1757675209/DSC01088_cr8gma.jpg", location: 'Brooklyn, NY' },
+  { name: 'Upper East Side', image: "https://res.cloudinary.com/daaznyhsu/image/upload/v1757675255/DSC01309_jzybfb.jpg", location: 'New York City' },
+  { name: 'Washington Heights', image: "https://res.cloudinary.com/daaznyhsu/image/upload/v1757675313/DSC01395_l3c8ps.jpg", location: 'New York City' },
+  { name: 'Harlem', image: "https://res.cloudinary.com/daaznyhsu/image/upload/v1757675367/DSC01567_wzc1sh.jpg", location: 'New York City' },
+  { name: 'Greenpoint', image: "https://res.cloudinary.com/daaznyhsu/image/upload/v1757675418/DSC01616_odwgr4.jpg", location: 'Brooklyn, NY' },
+  { name: 'Bushwick', image: "https://res.cloudinary.com/daaznyhsu/image/upload/v1757675498/DSC01870_scqqer.jpg", location: 'Brooklyn, NY' },
+  { name: 'Astoria', image: "https://res.cloudinary.com/daaznyhsu/image/upload/v1757675553/DSC01872_pmou8v.jpg", location: 'Queens, NY' },
+  { name: 'Long Island City', image: "https://res.cloudinary.com/daaznyhsu/image/upload/v1757675590/DSC01910_atxhxx.jpg", location: 'Queens, NY' },
+  { name: 'Queens', image: "https://res.cloudinary.com/daaznyhsu/image/upload/v1757675642/DSC02352_l4lpbt.jpg", location: 'New York' },
+  { name: 'Philadelphia', image: "https://res.cloudinary.com/daaznyhsu/image/upload/v1757675692/DSC02354_tcvhia.jpg", location: 'Pennsylvania' },
+  { name: 'Washington DC', image: "https://res.cloudinary.com/daaznyhsu/image/upload/v1757675739/DSC02645_zkbsb2.jpg", location: 'District of Columbia' },
+  { name: 'Austin', image: "https://res.cloudinary.com/daaznyhsu/image/upload/v1757675778/DSC02916_gn1d6b.jpg", location: 'Texas' },
+  { name: 'San Diego', image: "https://res.cloudinary.com/daaznyhsu/image/upload/v1757675830/E64763A1-1BE1-44A0-9C5C-C88C1B18B794_xldohj.jpg", location: 'California' },
+  { name: 'Denver', image: "https://res.cloudinary.com/daaznyhsu/image/upload/v1757675876/IG1A7830_ngyt3p.jpg", location: 'Colorado' },
+  { name: 'Long Island', image: "https://res.cloudinary.com/daaznyhsu/image/upload/v1757676039/ReadingRythms-55_1_nszzxf.jpg", location: 'New York' },
+  { name: 'Princeton', image: "https://res.cloudinary.com/daaznyhsu/image/upload/v1757674878/25F4AA6E_h5rfwd.jpg", location: 'New Jersey' },
+  { name: 'Morristown', image: "https://res.cloudinary.com/daaznyhsu/image/upload/v1757674986/DSC00318_tbmqlj.jpg", location: 'New Jersey' },
+  { name: 'Atlantic City', image: "https://res.cloudinary.com/daaznyhsu/image/upload/v1757675107/DSC00860_wzecvn.jpg", location: 'New Jersey' },
+  { name: 'Rome', image: "https://res.cloudinary.com/daaznyhsu/image/upload/v1757675255/DSC01309_jzybfb.jpg", location: 'Italy' },
+  { name: 'Milan', image: "https://res.cloudinary.com/daaznyhsu/image/upload/v1757675367/DSC01567_wzc1sh.jpg", location: 'Italy' },
+  { name: 'Florence', image: "https://res.cloudinary.com/daaznyhsu/image/upload/v1757675498/DSC01870_scqqer.jpg", location: 'Italy' },
+  { name: 'Naples', image: "https://res.cloudinary.com/daaznyhsu/image/upload/v1757675590/DSC01910_atxhxx.jpg", location: 'Italy' },
+  { name: 'Barcelona', image: "https://res.cloudinary.com/daaznyhsu/image/upload/v1757675692/DSC02354_tcvhia.jpg", location: 'Spain' },
+  { name: 'Charleston', image: "https://res.cloudinary.com/daaznyhsu/image/upload/v1757675778/DSC02916_gn1d6b.jpg", location: 'South Carolina' },
+  { name: 'Detroit', image: "https://res.cloudinary.com/daaznyhsu/image/upload/v1757675876/IG1A7830_ngyt3p.jpg", location: 'Michigan' },
+  { name: 'Algiers', image: "https://res.cloudinary.com/daaznyhsu/image/upload/v1757676051/ReadingRythms-61_1_spmdj5.jpg", location: 'Algeria' }
 ];
 
 // Carousel images for hero section
@@ -283,13 +255,13 @@ const arrowRightSrc = arrowright.src;
 									<img src="https://res.cloudinary.com/daaznyhsu/image/upload/v1757669112/32156EDC-725C-4AC2-9666-D316D8462676_1_105_c_lfxfmq.jpg" alt="Reading Rhythms Event" class="w-full h-full object-cover" />
 								</div>
 								<div class="rotating-image absolute inset-0 opacity-0">
-									<img src={chapterOnRoof.src} alt="Chapter 3 on the Roof" class="w-full h-full object-cover" />
+									<img src="https://res.cloudinary.com/daaznyhsu/image/upload/v1757676154/Chapter_3_on_the_Roof_ocldzj.webp" alt="Chapter 3 on the Roof" class="w-full h-full object-cover" />
 								</div>
 								<div class="rotating-image absolute inset-0 opacity-0">
 									<img src="https://res.cloudinary.com/daaznyhsu/image/upload/v1757669278/Copy_of_LPA_2025_07_24_Reading_Rhythms-06307_dapcm1.jpg" alt="Reading Rhythms Gathering" class="w-full h-full object-cover" />
 								</div>
 								<div class="rotating-image absolute inset-0 opacity-0">
-									<img src={readersFourFiveSix.src} alt="Readers @ FourFiveSix Bar" class="w-full h-full object-cover" />
+									<img src="https://res.cloudinary.com/daaznyhsu/image/upload/v1757676204/Readers_FourFiveSix_Bar_wo0bjq.webp" alt="Readers @ FourFiveSix Bar" class="w-full h-full object-cover" />
 								</div>
 								<div class="rotating-image absolute inset-0 opacity-0">
 									<img src="https://res.cloudinary.com/daaznyhsu/image/upload/v1757669341/DSC00868_hfmy6m.jpg" alt="Reading Session" class="w-full h-full object-cover" />
