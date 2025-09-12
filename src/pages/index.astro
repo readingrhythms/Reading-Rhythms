@@ -52,18 +52,6 @@ import chapterPhoto19 from '@assets/images/chapter_photos/IG1A7830.JPG';
 // import chapterPhoto20 from '@assets/images/chapter_photos/ReadingRythms-55.jpg';
 import chapterPhoto21 from '@assets/images/chapter_photos/ReadingRythms-61.jpg';
 
-// Import hero images
-import heroImage1 from '@assets/images/hero_images/32156EDC-725C-4AC2-9666-D316D8462676_1_105_c.jpeg';
-import heroImage2 from '@assets/images/hero_images/Copy of LPA_2025_07_24_Reading Rhythms-06307.jpeg';
-import heroImage3 from '@assets/images/hero_images/DSC00868.jpg';
-import heroImage4 from '@assets/images/hero_images/FD5E9199-A104-4005-9993-FF2CE6301FBC_1_105_c.jpeg';
-import heroImage5 from '@assets/images/hero_images/DSC01853.JPG';
-import heroImage6 from '@assets/images/hero_images/Screenshot 2025-08-07 at 15.29.39.png';
-import heroImage7 from '@assets/images/hero_images/8H6A2307-Enhanced-NR.jpg';
-import heroImage8 from '@assets/images/hero_images/DSC00303.JPG';
-import heroImage9 from '@assets/images/hero_images/Copy of Lumii_20250729_170410515.jpg';
-import heroImage10 from '@assets/images/hero_images/Copy of _JNG0553.jpg';
-
 // Import partner images
 import penguinRandomHouse from '@assets/images/partners/PRH.jpeg'
 import harperCollins from '@assets/images/partners/HarperCollins Logo.png'
@@ -111,7 +99,7 @@ import theIFavIcon from '@assets/images/press_section/theIfav.jpg'
 import theFavThumbnail from '@assets/images/press_section/theIimage.webp'
 
 // Import existing media photos
-import chapterMaisonMono from '@assets/media/Chapter_10_Maison_Mono.webp';
+// import chapterMaisonMono from '@assets/media/Chapter_10_Maison_Mono.webp';
 import chapterOnRoof from '@assets/media/Chapter_3_on_the_Roof.webp';
 import readersFourFiveSix from '@assets/media/Readers_FourFiveSix_Bar.webp';
 
@@ -119,7 +107,7 @@ import readersFourFiveSix from '@assets/media/Readers_FourFiveSix_Bar.webp';
 const allChapters = [
   // Popular cities first, starting with Williamsburg
   { name: 'Williamsburg', image: chapterPhoto1, location: 'Brooklyn, NY' },
-  { name: 'Lower Manhattan', image: chapterMaisonMono, location: 'New York City' },
+  { name: 'Lower Manhattan', image: "https://res.cloudinary.com/daaznyhsu/image/upload/v1757668923/Chapter_10_Maison_Mono_vxiena.webp", location: 'New York City' },
   { name: 'Upper West Side', image: chapterPhoto2, location: 'New York City' },
   { name: 'Midtown', image: chapterPhoto3, location: 'New York City' },
   { name: 'Los Angeles', image: chapterOnRoof, location: 'California' },
@@ -289,43 +277,43 @@ const arrowRightSrc = arrowright.src;
 							<div class="instagram-square w-full aspect-square mx-auto relative overflow-hidden rounded-2xl shadow-2xl">
 								<!-- Hero image carousel -->
 								<div class="rotating-image active absolute inset-0">
-									<img src={chapterMaisonMono.src} alt="Chapter 10 @ Maison Mono" class="w-full h-full object-cover" />
+									<img src="https://res.cloudinary.com/daaznyhsu/image/upload/v1757668923/Chapter_10_Maison_Mono_vxiena.webp" alt="Chapter 10 @ Maison Mono" class="w-full h-full object-cover" />
 								</div>
 								<div class="rotating-image absolute inset-0 opacity-0">
-									<img src={heroImage1.src} alt="Reading Rhythms Event" class="w-full h-full object-cover" />
+									<img src="https://res.cloudinary.com/daaznyhsu/image/upload/v1757669112/32156EDC-725C-4AC2-9666-D316D8462676_1_105_c_lfxfmq.jpg" alt="Reading Rhythms Event" class="w-full h-full object-cover" />
 								</div>
 								<div class="rotating-image absolute inset-0 opacity-0">
 									<img src={chapterOnRoof.src} alt="Chapter 3 on the Roof" class="w-full h-full object-cover" />
 								</div>
 								<div class="rotating-image absolute inset-0 opacity-0">
-									<img src={heroImage2.src} alt="Reading Rhythms Gathering" class="w-full h-full object-cover" />
+									<img src="https://res.cloudinary.com/daaznyhsu/image/upload/v1757669278/Copy_of_LPA_2025_07_24_Reading_Rhythms-06307_dapcm1.jpg" alt="Reading Rhythms Gathering" class="w-full h-full object-cover" />
 								</div>
 								<div class="rotating-image absolute inset-0 opacity-0">
 									<img src={readersFourFiveSix.src} alt="Readers @ FourFiveSix Bar" class="w-full h-full object-cover" />
 								</div>
 								<div class="rotating-image absolute inset-0 opacity-0">
-									<img src={heroImage3.src} alt="Reading Session" class="w-full h-full object-cover" />
+									<img src="https://res.cloudinary.com/daaznyhsu/image/upload/v1757669341/DSC00868_hfmy6m.jpg" alt="Reading Session" class="w-full h-full object-cover" />
 								</div>
 								<div class="rotating-image absolute inset-0 opacity-0">
-									<img src={heroImage4.src} alt="Community Reading" class="w-full h-full object-cover" />
+									<img src="https://res.cloudinary.com/daaznyhsu/image/upload/v1757669384/FD5E9199-A104-4005-9993-FF2CE6301FBC_1_105_c_uvg1fv.jpg" alt="Community Reading" class="w-full h-full object-cover" />
 								</div>
 								<div class="rotating-image absolute inset-0 opacity-0">
-									<img src={heroImage5.src} alt="Book Club Meeting" class="w-full h-full object-cover" />
+									<img src="https://res.cloudinary.com/daaznyhsu/image/upload/v1757669464/DSC01853_acc2jb.jpg" alt="Book Club Meeting" class="w-full h-full object-cover" />
 								</div>
 								<div class="rotating-image absolute inset-0 opacity-0">
-									<img src={heroImage6.src} alt="Reading Event" class="w-full h-full object-cover" />
+									<img src="https://res.cloudinary.com/daaznyhsu/image/upload/v1757669510/Screenshot_2025-08-07_at_15.29.39_jes6iv.png" alt="Reading Event" class="w-full h-full object-cover" />
 								</div>
 								<div class="rotating-image absolute inset-0 opacity-0">
-									<img src={heroImage7.src} alt="Literary Gathering" class="w-full h-full object-cover" />
+									<img src="https://res.cloudinary.com/daaznyhsu/image/upload/v1757669569/8H6A2307-Enhanced-NR_t3xh6a.jpg" alt="Literary Gathering" class="w-full h-full object-cover" />
 								</div>
 								<div class="rotating-image absolute inset-0 opacity-0">
-									<img src={heroImage8.src} alt="Reading Community" class="w-full h-full object-cover" />
+									<img src="https://res.cloudinary.com/daaznyhsu/image/upload/v1757669619/DSC00303_wxys9v.jpg" alt="Reading Community" class="w-full h-full object-cover" />
 								</div>
 								<div class="rotating-image absolute inset-0 opacity-0">
-									<img src={heroImage9.src} alt="Book Event" class="w-full h-full object-cover" />
+									<img src="https://res.cloudinary.com/daaznyhsu/image/upload/v1757669789/Copy_of_Lumii_20250729_170410515_1_tbrqhm.jpg" alt="Book Event" class="w-full h-full object-cover" />
 								</div>
 								<div class="rotating-image absolute inset-0 opacity-0">
-									<img src={heroImage10.src} alt="Reading Party" class="w-full h-full object-cover" />
+									<img src="https://res.cloudinary.com/daaznyhsu/image/upload/v1757669940/Copy_of__JNG0553_1_v1ootx.jpg" alt="Reading Party" class="w-full h-full object-cover" />
 								</div>
 							</div>
 							
