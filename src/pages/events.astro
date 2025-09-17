@@ -71,7 +71,7 @@ const activeChapters = [
               data-tab={chapter.id}
               role="tab"
               aria-selected={index === 0 ? 'true' : 'false'}
-              aria-controls={chapter.id}
+              aria-controls={`panel-${chapter.id}`}
               type="button"
             >
               {chapter.name}
@@ -85,10 +85,12 @@ const activeChapters = [
     <div class="tab-content-container mb-8 md:mb-12 px-0 mx-0 max-w-6xl md:mx-auto">
       {activeChapters.map((chapter, index) => (
         <div 
-          id={chapter.id}
+          /* IMPORTANT: no id here to avoid browser hash-jump */
           class={`tab-content ${index === 0 ? 'active' : 'hidden'}`}
           data-content={chapter.id}
+          data-anchor={chapter.id}       /* we use this for our own logic only */
           role="tabpanel"
+          id={`panel-${chapter.id}`}
           aria-hidden={index === 0 ? 'false' : 'true'}
           tabindex="0"
         >
@@ -107,7 +109,7 @@ const activeChapters = [
                     style="border: none; min-height: 900px; width: 100%; max-width: 100%;"
                     allowfullscreen=""
                     aria-hidden="false"
-                    tabindex="-1"   {/* changed to -1 */}
+                    tabindex="-1"   /* keep iframe from taking focus/blue ring */
                     class=""
                     loading="lazy"
                   ></iframe>
@@ -174,10 +176,9 @@ const activeChapters = [
         activeButton.setAttribute('aria-selected', 'true');
       }
 
-      // Update URL hash without jump
+      // Update URL hash WITHOUT causing browser scroll (no element has that id)
       if (updateUrl) {
-        const newUrl = `${location.pathname}#${targetId}`;
-        history.replaceState(null, '', newUrl);
+        history.replaceState(null, '', `${location.pathname}#${targetId}`);
       }
     }
 
@@ -185,18 +186,24 @@ const activeChapters = [
     const urlParams = new URLSearchParams(window.location.search);
     const chapterIdParam = urlParams.get('chapterId');
     const hashId = window.location.hash ? window.location.hash.slice(1) : null;
-    const initialId = chapterIdParam || hashId || (tabButtons[0] && tabButtons[0].getAttribute('data-tab'));
+
+    // Choose initial tab (default to first if none provided)
+    const initialId =
+      chapterIdParam ||
+      hashId ||
+      (tabButtons[0] && tabButtons[0].getAttribute('data-tab'));
 
     if (initialId) {
+      // Normalize to #... for sharing if query param used
       if (chapterIdParam && (!hashId || hashId !== chapterIdParam)) {
-        // Normalize query param to hash for sharing
         history.replaceState(null, '', `${location.pathname}#${chapterIdParam}`);
       }
+      // Render initial tab and ensure we remain at very top
       showTab(initialId, { updateUrl: false });
-      window.scrollTo({ top: 0, behavior: 'auto' });
+      window.scrollTo(0, 0);
     }
 
-    // Add click event listeners to tab buttons
+    // Click -> change tab without jumping, keep top
     tabButtons.forEach(button => {
       button.addEventListener('click', (ev) => {
         ev.preventDefault();
@@ -206,7 +213,7 @@ const activeChapters = [
       });
     });
 
-    // React to manual hash changes
+    // Manual hash edits -> switch tab (no jump because no element id matches)
     window.addEventListener('hashchange', () => {
       const newId = window.location.hash.slice(1);
       if (newId) {
@@ -222,22 +229,14 @@ const activeChapters = [
   .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
   .scrollbar-hide::-webkit-scrollbar { display: none; }
 
-  /* Remove blue outline on tab focus */
+  /* Keep original look: remove focus ring on tabs (optional) */
   .tab-button { -webkit-tap-highlight-color: transparent; }
   .tab-button:focus,
-  .tab-button:focus-visible {
-    outline: none !important;
-    box-shadow: none !important;
-  }
+  .tab-button:focus-visible { outline: none !important; box-shadow: none !important; }
 
   /* Remove blue outline on Luma iframe on mobile */
-  .calendar-container iframe:focus {
-    outline: none !important;
-  }
-  .calendar-container,
-  .calendar-container * {
-    -webkit-tap-highlight-color: transparent;
-  }
+  .calendar-container iframe:focus { outline: none !important; }
+  .calendar-container, .calendar-container * { -webkit-tap-highlight-color: transparent; }
 
   /* Tab transitions */
   .tab-content { transition: opacity 0.3s ease-in-out; }
@@ -245,47 +244,30 @@ const activeChapters = [
   .tab-content.active { opacity: 1; }
 
   /* Full width iframe optimization */
-  iframe {
-    max-width: 100% !important;
-    width: 100% !important;
-    min-width: 100% !important;
-  }
+  iframe { max-width: 100% !important; width: 100% !important; min-width: 100% !important; }
 
   /* Desktop centering */
   @media (min-width: 768px) {
     .tab-content-container { max-width: 1200px; }
-    .tab-content > div {
-      margin-left: 0 !important;
-      margin-right: 0 !important;
-      width: 100% !important;
-    }
+    .tab-content > div { margin-left: 0 !important; margin-right: 0 !important; width: 100% !important; }
   }
 
   /* Mobile responsive adjustments - Nearly full width */
   @media (max-width: 640px) {
     .calendar-container { min-height: 800px !important; }
-    .calendar-container iframe {
-      height: 800px !important;
-      min-height: 800px !important;
-    }
+    .calendar-container iframe { height: 800px !important; min-height: 800px !important; }
   }
 
   /* Tablet adjustments */
   @media (min-width: 641px) and (max-width: 1024px) {
     .calendar-container { min-height: 850px !important; }
-    .calendar-container iframe {
-      height: 850px !important;
-      min-height: 850px !important;
-    }
+    .calendar-container iframe { height: 850px !important; min-height: 850px !important; }
   }
 
   /* Desktop - maximum height */
   @media (min-width: 1025px) {
     .calendar-container { min-height: 900px !important; }
-    .calendar-container iframe {
-      height: 900px !important;
-      min-height: 900px !important;
-    }
+    .calendar-container iframe { height: 900px !important; min-height: 900px !important; }
   }
 
   /* Loading state for iframes */
