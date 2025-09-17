@@ -60,7 +60,7 @@ const activeChapters = [
     <!-- Mobile-First Tab Navigation - Horizontal Scroll -->
     <div class="flex justify-center mb-4 md:mb-6 px-4">
       <div class="bg-gray-100 rounded-2xl p-2 overflow-x-auto scrollbar-hide inline-flex">
-        <div class="flex gap-1">
+        <div class="flex gap-1" role="tablist" aria-label="Chapters">
           {activeChapters.map((chapter, index) => (
             <button 
               class={`tab-button flex-shrink-0 px-4 sm:px-6 lg:px-8 py-2 sm:py-3 lg:py-4 rounded-xl font-semibold text-sm sm:text-base transition-all duration-300 whitespace-nowrap ${
@@ -69,6 +69,9 @@ const activeChapters = [
                   : 'text-dark-gray/60 hover:text-dark-gray hover:bg-white/50'
               }`}
               data-tab={chapter.id}
+              role="tab"
+              aria-selected={index === 0 ? 'true' : 'false'}
+              aria-controls={`panel-${chapter.id}`}
             >
               {chapter.name}
             </button>
@@ -81,8 +84,14 @@ const activeChapters = [
     <div class="tab-content-container mb-8 md:mb-12 px-0 mx-0 max-w-6xl md:mx-auto">
       {activeChapters.map((chapter, index) => (
         <div 
+          id={chapter.id}                                                   /* hash target */
           class={`tab-content ${index === 0 ? 'active' : 'hidden'}`}
           data-content={chapter.id}
+          role="tabpanel"
+          aria-labelledby={chapter.id}
+          aria-hidden={index === 0 ? 'false' : 'true'}
+          tabindex="0"
+          id={`panel-${chapter.id}`}
         >
           <!-- Full Width Container -->
           <div class="w-full bg-white rounded-xl shadow-xl shadow-black/5 overflow-hidden md:mx-0" style="margin-left: -8px; margin-right: -8px; width: calc(100% + 16px);">
@@ -132,34 +141,22 @@ const activeChapters = [
 
 <script>
   document.addEventListener('DOMContentLoaded', () => {
-    // Check for chapterId parameter in URL and activate corresponding tab
-    const urlParams = new URLSearchParams(window.location.search);
-    const chapterId = urlParams.get('chapterId');
-    
-    if (chapterId) {
-      // Find the tab button with matching data-tab attribute
-      const targetButton = document.querySelector(`[data-tab="${chapterId}"]`);
-      if (targetButton) {
-        // Trigger click on the target tab
-        targetButton.click();
-      }
-    }
-
-    // Tab functionality
     const tabButtons = document.querySelectorAll('.tab-button');
     const tabContents = document.querySelectorAll('.tab-content');
 
-    function showTab(targetId) {
+    function showTab(targetId, { updateUrl = true } = {}) {
       // Hide all tab contents
       tabContents.forEach(content => {
         content.classList.add('hidden');
         content.classList.remove('active');
+        content.setAttribute('aria-hidden', 'true');
       });
 
       // Remove active state from all buttons
       tabButtons.forEach(button => {
         button.classList.remove('bg-white', 'text-dark-gray', 'shadow-md');
         button.classList.add('text-dark-gray/60', 'hover:text-dark-gray', 'hover:bg-white/50');
+        button.setAttribute('aria-selected', 'false');
       });
 
       // Show target tab content
@@ -167,6 +164,7 @@ const activeChapters = [
       if (targetContent) {
         targetContent.classList.remove('hidden');
         targetContent.classList.add('active');
+        targetContent.setAttribute('aria-hidden', 'false');
       }
 
       // Activate clicked button
@@ -174,15 +172,51 @@ const activeChapters = [
       if (activeButton) {
         activeButton.classList.add('bg-white', 'text-dark-gray', 'shadow-md');
         activeButton.classList.remove('text-dark-gray/60', 'hover:text-dark-gray', 'hover:bg-white/50');
+        activeButton.setAttribute('aria-selected', 'true');
+        // Keep focus visible but prevent scroll jump
+        try { activeButton.focus({ preventScroll: true }); } catch(e) {}
       }
+
+      // Update URL hash without jumping or adding to history
+      if (updateUrl) {
+        const newUrl = `${location.pathname}#${targetId}`;
+        history.replaceState(null, '', newUrl);
+      }
+    }
+
+    // Initial selection: support ?chapterId=... OR #hash
+    const urlParams = new URLSearchParams(window.location.search);
+    const chapterIdParam = urlParams.get('chapterId');
+    const hashId = window.location.hash ? window.location.hash.slice(1) : null;
+
+    // Choose initial tab (default to first if none provided)
+    const initialId = chapterIdParam || hashId || (tabButtons[0] && tabButtons[0].getAttribute('data-tab'));
+
+    if (initialId) {
+      // Normalize ?chapterId=... to #... (keep compatibility)
+      if (chapterIdParam && (!hashId || hashId !== chapterIdParam)) {
+        history.replaceState(null, '', `${location.pathname}#${chapterIdParam}`);
+      }
+      // Render initial tab without rewriting URL again
+      showTab(initialId, { updateUrl: false });
     }
 
     // Add click event listeners to tab buttons
     tabButtons.forEach(button => {
-      button.addEventListener('click', () => {
+      button.addEventListener('click', (ev) => {
         const tabId = button.getAttribute('data-tab');
-        showTab(tabId);
+        // Prevent default button behavior from scrolling when an element with matching id exists
+        ev.preventDefault?.();
+        showTab(tabId); // updates hash via replaceState
       });
+    });
+
+    // React to manual hash changes (e.g., user edits URL or clicks a deep link)
+    window.addEventListener('hashchange', () => {
+      const newId = window.location.hash.slice(1);
+      if (newId) {
+        showTab(newId, { updateUrl: false });
+      }
     });
   });
 </script>
