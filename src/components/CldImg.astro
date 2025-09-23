@@ -1,18 +1,5 @@
 ---
-/**
- * Usage:
- *  <CldImg
- *    src="https://res.cloudinary.com/daaznyhsu/image/upload/v1757668923/Chapter_10_Maison_Mono_vxiena.webp"
- *    alt="..."
- *    width={800}               // "intrinsic" max width you expect at this slot
- *    heights={[320,480,640]}   // optional fixed heights for art-directed crops
- *    class="w-full h-full object-cover"
- *    priority={false}          // set true for 1–2 above-the-fold images
- *    crop="fill"               // or "fit" (default "fill")
- *    gravity="auto"            // smart focal point for fills
- *    quality="auto:eco"        // default "auto" | try "auto:eco" on grids
- *  />
- */
+
 const {
   src,
   alt = "",
@@ -23,29 +10,69 @@ const {
   gravity = "auto",
   quality = "auto",
   priority = false,
-  heights = []
+  heights = [],
+  aspectRatio = undefined               // NEW: "16:9" or number like 16/9
 } = Astro.props;
 
+// NEW: safe transform injector (no-op for non-Cloudinary URLs)
 function withTx(url: string, tx: string) {
-  // insert transformations right after '/upload/'
+  if (typeof url !== "string" || !url.includes("/upload/")) return url; // NEW
   return url.replace("/upload/", `/upload/${tx}/`);
 }
 
-const dprs = [1, 2]; // DPR-aware srcset
-const targetWidths = [320, 480, 640, 800, 1024, 1280, 1600].filter(w => w <= Math.max(1600, width));
+// Width candidates (1x pattern with width descriptors)
+const targetWidths = [320, 480, 640, 800, 1024, 1280, 1600].filter(
+  (w) => w <= Math.max(1600, width)
+);
 
-const baseTx = (w: number, dpr: number, h?: number) =>
-  `f_auto,q_${quality},dpr_${dpr},w_${w}${h ? `,h_${h},c_${crop},g_${gravity}` : ""}`;
+// NEW: normalize aspect ratio
+function parseAR(ar: unknown): number | undefined {
+  if (!ar) return undefined;
+  if (typeof ar === "number" && isFinite(ar) && ar > 0) return ar;
+  if (typeof ar === "string") {
+    const m = ar.trim().split(":");
+    if (m.length === 2) {
+      const a = Number(m[0]); const b = Number(m[1]);
+      if (isFinite(a) && isFinite(b) && a > 0 && b > 0) return a / b;
+    }
+    const n = Number(ar);
+    if (isFinite(n) && n > 0) return n;
+  }
+  return undefined;
+}
 
-const srcset = dprs
-  .map(dpr =>
-    targetWidths
-      .map(w => `${withTx(src, baseTx(w, dpr, heights.length ? heights.at(-1) : undefined))} ${w * dpr}w`)
-      .join(", ")
-  )
+const ar = parseAR(aspectRatio); // NEW
+
+// NEW: compute a per-width height either from aspect ratio or heights[]
+function heightForWidth(w: number, i: number): number | undefined {
+  if (ar) return Math.round(w / ar);
+  if (heights.length) {
+    // map by index if provided; fall back to last
+    return heights[Math.min(i, heights.length - 1)];
+  }
+  return undefined;
+}
+
+// NEW: base transformation uses dpr_auto to avoid mixing DPRs in srcset
+const baseTx = (w: number, h?: number) =>
+  `f_auto,q_${quality},dpr_auto,w_${w}` + (h ? `,h_${h},c_${crop},g_${gravity}` : "");
+
+// Build srcset with width descriptors only (no DPR loop)
+const srcset = targetWidths
+  .map((w, i) => {
+    const h = heightForWidth(w, i);            // NEW
+    return `${withTx(src, baseTx(w, h))} ${w}w`;
+  })
   .join(", ");
 
-const fallback = withTx(src, baseTx(Math.min(width, 1200), 1, heights.length ? heights.at(-1) : undefined));
+// Fallback URL at ~requested width
+const fallbackW = Math.min(width, 1200);
+const fallbackH = heightForWidth(fallbackW, targetWidths.indexOf(fallbackW)); // NEW
+const fallback = withTx(src, baseTx(fallbackW, fallbackH));
+
+// NEW: add width/height attributes to reduce CLS when we know them
+const attrWidth = fallbackW;                   // NEW
+const attrHeight = fallbackH || undefined;     // NEW
 ---
 
 <img
@@ -57,4 +84,6 @@ const fallback = withTx(src, baseTx(Math.min(width, 1200), 1, heights.length ? h
   fetchpriority={priority ? "high" : "auto"}
   decoding="async"
   class={klass}
+  width={attrWidth}                            <!-- NEW -->
+  height={attrHeight}                          <!-- NEW -->
 />
