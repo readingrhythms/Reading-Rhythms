@@ -6,6 +6,7 @@ import Quote from '@components/index/Quote.astro';
 import Spotify from '@components/index/Spotify.astro';
 import Instagram from '@components/index/Instagram.astro';
 import PressMediaSection from '@components/index/PressMediaSection.astro';
+import CldImg from '@components/CldImg.astro'
 
 import logo from '@assets/images/logo.svg'
 import arrowright from '@assets/icons/arrow-right.svg';
@@ -184,31 +185,121 @@ const arrowRightSrc = arrowright.src;
 							<div class="instagram-square w-full aspect-square mx-auto relative overflow-hidden rounded-2xl shadow-2xl">
 								<!-- Hero image carousel -->
 								<div class="rotating-image active absolute inset-0">
-									<img src="https://res.cloudinary.com/daaznyhsu/image/upload/v1757668923/Chapter_10_Maison_Mono_vxiena.webp" alt="Chapter 10 @ Maison Mono" class="w-full h-full object-cover" />
+								<CldImg
+									src="https://res.cloudinary.com/drubv3sin/image/upload/v1758621784/Chapter_10_Maison_Mono_vxiena_erpktu.webp"
+									alt="Chapter 10 @ Maison Mono"
+									width={900}                    // square ~900px is plenty for the card
+									heights={[900]}                // keep square, crop smartly
+									crop="fill"
+									gravity="auto"
+									quality="auto"
+									sizes="(max-width: 768px) 90vw, 540px"
+									class="w-full h-full object-cover"
+								/>
 								</div>
 								<div class="rotating-image absolute inset-0 opacity-0">
-									<img src="https://res.cloudinary.com/daaznyhsu/image/upload/v1757669112/32156EDC-725C-4AC2-9666-D316D8462676_1_105_c_lfxfmq.jpg" alt="Reading Rhythms Event" class="w-full h-full object-cover" />
+								<CldImg
+									src="https://res.cloudinary.com/drubv3sin/image/upload/v1758621784/32156EDC-725C-4AC2-9666-D316D8462676_1_105_c_lfxfmq_m75k3i.jpg"
+									alt="Reading Rhythms Event"
+									width={900}                    // square ~900px is plenty for the card
+									heights={[900]}                // keep square, crop smartly
+									crop="fill"
+									gravity="auto"
+									quality="auto"
+									sizes="(max-width: 768px) 90vw, 540px"
+									class="w-full h-full object-cover"
+								/>
 								</div>
 								<div class="rotating-image absolute inset-0 opacity-0">
-									<img src="https://res.cloudinary.com/daaznyhsu/image/upload/v1757676154/Chapter_3_on_the_Roof_ocldzj.webp" alt="Chapter 3 on the Roof" class="w-full h-full object-cover" />
+								<CldImg
+									src="https://res.cloudinary.com/drubv3sin/image/upload/v1758621624/Chapter_3_on_the_Roof_ocldzj_sqsncn.webp"
+									alt="Chapter 3 on the Roof"
+									width={900}                    // square ~900px is plenty for the card
+									heights={[900]}                // keep square, crop smartly
+									crop="fill"
+									gravity="auto"
+									quality="auto"
+									sizes="(max-width: 768px) 90vw, 540px"
+									class="w-full h-full object-cover"
+								/>
 								</div>
 								<div class="rotating-image absolute inset-0 opacity-0">
-									<img src="https://res.cloudinary.com/daaznyhsu/image/upload/v1757669278/Copy_of_LPA_2025_07_24_Reading_Rhythms-06307_dapcm1.jpg" alt="Reading Rhythms Gathering" class="w-full h-full object-cover" />
+								<CldImg
+									src="https://res.cloudinary.com/drubv3sin/image/upload/v1758621785/Copy_of_LPA_2025_07_24_Reading_Rhythms-06307_dapcm1_kqhu2k.jpg"
+									alt="Reading Rhythms Gathering"
+									width={900}                    // square ~900px is plenty for the card
+									heights={[900]}                // keep square, crop smartly
+									crop="fill"
+									gravity="auto"
+									quality="auto"
+									sizes="(max-width: 768px) 90vw, 540px"
+									class="w-full h-full object-cover"
+								/>
 								</div>
 								<div class="rotating-image absolute inset-0 opacity-0">
-									<img src="https://res.cloudinary.com/daaznyhsu/image/upload/v1757676204/Readers_FourFiveSix_Bar_wo0bjq.webp" alt="Readers @ FourFiveSix Bar" class="w-full h-full object-cover" />
+								<CldImg
+									src="https://res.cloudinary.com/drubv3sin/image/upload/v1758621624/Readers_FourFiveSix_Bar_wo0bjq_r777cx.webp"
+									alt="Readers @ FourFiveSix Bar"
+									width={900}                    // square ~900px is plenty for the card
+									heights={[900]}                // keep square, crop smartly
+									crop="fill"
+									gravity="auto"
+									quality="auto"
+									sizes="(max-width: 768px) 90vw, 540px"
+									class="w-full h-full object-cover"
+								/>
 								</div>
 								<div class="rotating-image absolute inset-0 opacity-0">
-									<img src="https://res.cloudinary.com/daaznyhsu/image/upload/v1757669341/DSC00868_hfmy6m.jpg" alt="Reading Session" class="w-full h-full object-cover" />
+								<CldImg
+									src="https://res.cloudinary.com/drubv3sin/image/upload/v1758621784/DSC00868_hfmy6m_z0160p.jpg"
+									alt="Reading Session"
+									width={900}                    // square ~900px is plenty for the card
+									heights={[900]}                // keep square, crop smartly
+									crop="fill"
+									gravity="auto"
+									quality="auto"
+									sizes="(max-width: 768px) 90vw, 540px"
+									class="w-full h-full object-cover"
+								/>
 								</div>
 								<div class="rotating-image absolute inset-0 opacity-0">
-									<img src="https://res.cloudinary.com/daaznyhsu/image/upload/v1757669384/FD5E9199-A104-4005-9993-FF2CE6301FBC_1_105_c_uvg1fv.jpg" alt="Community Reading" class="w-full h-full object-cover" />
+								<CldImg
+									src="https://res.cloudinary.com/drubv3sin/image/upload/v1758621783/FD5E9199-A104-4005-9993-FF2CE6301FBC_1_105_c_uvg1fv_ix0rhs.jpg"
+									alt="Community Reading"
+									width={900}                    // square ~900px is plenty for the card
+									heights={[900]}                // keep square, crop smartly
+									crop="fill"
+									gravity="auto"
+									quality="auto"
+									sizes="(max-width: 768px) 90vw, 540px"
+									class="w-full h-full object-cover"
+								/>
 								</div>
 								<div class="rotating-image absolute inset-0 opacity-0">
-									<img src="https://res.cloudinary.com/daaznyhsu/image/upload/v1757669464/DSC01853_acc2jb.jpg" alt="Book Club Meeting" class="w-full h-full object-cover" />
+								<CldImg
+									src="https://res.cloudinary.com/drubv3sin/image/upload/v1758628330/DSC01853_acc2jb_hpnd9w.jpg"
+									alt="Book Club Meeting"
+									width={900}                    // square ~900px is plenty for the card
+									heights={[900]}                // keep square, crop smartly
+									crop="fill"
+									gravity="auto"
+									quality="auto"
+									sizes="(max-width: 768px) 90vw, 540px"
+									class="w-full h-full object-cover"
+								/>
 								</div>
 								<div class="rotating-image absolute inset-0 opacity-0">
-									<img src="https://res.cloudinary.com/daaznyhsu/image/upload/v1757669510/Screenshot_2025-08-07_at_15.29.39_jes6iv.png" alt="Reading Event" class="w-full h-full object-cover" />
+								<CldImg
+									src="https://res.cloudinary.com/drubv3sin/image/upload/v1758628428/Screenshot_2025-08-07_at_15.29.39_jes6iv_tglcg7.png"
+									alt="Reading Event"
+									width={900}                    // square ~900px is plenty for the card
+									heights={[900]}                // keep square, crop smartly
+									crop="fill"
+									gravity="auto"
+									quality="auto"
+									sizes="(max-width: 768px) 90vw, 540px"
+									class="w-full h-full object-cover"
+								/>
 								</div>
 								<div class="rotating-image absolute inset-0 opacity-0">
 									<img src="https://res.cloudinary.com/daaznyhsu/image/upload/v1757669569/8H6A2307-Enhanced-NR_t3xh6a.jpg" alt="Literary Gathering" class="w-full h-full object-cover" />

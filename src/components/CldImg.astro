@@ -1,0 +1,60 @@
+---
+/**
+ * Usage:
+ *  <CldImg
+ *    src="https://res.cloudinary.com/daaznyhsu/image/upload/v1757668923/Chapter_10_Maison_Mono_vxiena.webp"
+ *    alt="..."
+ *    width={800}               // "intrinsic" max width you expect at this slot
+ *    heights={[320,480,640]}   // optional fixed heights for art-directed crops
+ *    class="w-full h-full object-cover"
+ *    priority={false}          // set true for 1–2 above-the-fold images
+ *    crop="fill"               // or "fit" (default "fill")
+ *    gravity="auto"            // smart focal point for fills
+ *    quality="auto:eco"        // default "auto" | try "auto:eco" on grids
+ *  />
+ */
+const {
+  src,
+  alt = "",
+  width = 1200,
+  class: klass = "",
+  sizes = "(max-width: 768px) 100vw, (max-width: 1280px) 50vw, 600px",
+  crop = "fill",
+  gravity = "auto",
+  quality = "auto",
+  priority = false,
+  heights = []
+} = Astro.props;
+
+function withTx(url: string, tx: string) {
+  // insert transformations right after '/upload/'
+  return url.replace("/upload/", `/upload/${tx}/`);
+}
+
+const dprs = [1, 2]; // DPR-aware srcset
+const targetWidths = [320, 480, 640, 800, 1024, 1280, 1600].filter(w => w <= Math.max(1600, width));
+
+const baseTx = (w: number, dpr: number, h?: number) =>
+  `f_auto,q_${quality},dpr_${dpr},w_${w}${h ? `,h_${h},c_${crop},g_${gravity}` : ""}`;
+
+const srcset = dprs
+  .map(dpr =>
+    targetWidths
+      .map(w => `${withTx(src, baseTx(w, dpr, heights.length ? heights.at(-1) : undefined))} ${w * dpr}w`)
+      .join(", ")
+  )
+  .join(", ");
+
+const fallback = withTx(src, baseTx(Math.min(width, 1200), 1, heights.length ? heights.at(-1) : undefined));
+---
+
+<img
+  src={fallback}
+  srcset={srcset}
+  sizes={sizes}
+  alt={alt}
+  loading={priority ? "eager" : "lazy"}
+  fetchpriority={priority ? "high" : "auto"}
+  decoding="async"
+  class={klass}
+/>
