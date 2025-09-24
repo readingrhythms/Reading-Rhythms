@@ -579,10 +579,12 @@ const arrowRightSrc = arrowright.src;
 									<div class="relative">
 										<!-- Logo container with varying sizes -->
 										<div class={`bg-white rounded-2xl ${containerSizes[partner.size]} shadow-lg hover:shadow-xl transition-shadow duration-300 border border-gray-200 flex items-center justify-center min-h-[100px] lg:min-h-[120px] ${partner.name === 'Hachette Books' ? 'p-2 lg:p-3' : ''}`}>
-											<img 
-												src={partner.logo} 
-												alt={`${partner.name} logo`} 
-												class={`${partner.name === 'Hachette Books' ? 'max-w-[85%] max-h-[70%]' : 'max-w-[80%] max-h-[75%]'} w-full h-full object-contain`}
+											<img
+											src={partner.logo}
+											alt={`${partner.name} logo`}
+											class="w-full h-full object-contain"
+											loading="lazy"
+											decoding="async"
 											/>
 										</div>
 									</div>
@@ -607,10 +609,12 @@ const arrowRightSrc = arrowright.src;
 								<a href={partner.url} target="_blank" rel="noopener" class="group transform hover:scale-105 transition-all duration-300 cursor-pointer" data-name={partner.name.toLowerCase()}>
 									<div class="relative">
 										<div class={`bg-white rounded-xl ${mobileContainerSizes[partner.size]} shadow-md hover:shadow-lg transition-shadow duration-300 border border-gray-200 flex items-center justify-center min-h-[100px]`}>
-											<img 
-												src={partner.logo} 
-												alt={`${partner.name} logo`} 
-												class={`${partner.name === 'Hachette Books' ? 'max-w-[85%] max-h-[70%]' : 'max-w-[80%] max-h-[75%]'} w-full h-full object-contain`}
+											<img
+											src={partner.logo}
+											alt={`${partner.name} logo`}
+											class="w-full h-full object-contain"
+											loading="lazy"
+											decoding="async"
 											/>
 										</div>
 									</div>
@@ -784,7 +788,8 @@ const arrowRightSrc = arrowright.src;
 
         <h3 class="mb-1 text-dark-gray text-sm leading-snug">It's My Party and I'll Read If I Want To</h3>
         <p class="text-dark-gray/50 text-xs mb-4">nytimes.com</p>
-        <img src="https://res.cloudinary.com/daaznyhsu/image/upload/v1757710406/New_York_Times_t4w1id.webp" alt="New York Times story thumbnail" class="w-full rounded-xl" />
+        <img src="https://res.cloudinary.com/daaznyhsu/image/upload/v1757710406/New_York_Times_t4w1id.webp" alt="New York Times story thumbnail" class="w-full rounded-xl" loading="lazy"
+											decoding="async"/>
       </a>
     </div>
   </div>
@@ -801,7 +806,8 @@ const arrowRightSrc = arrowright.src;
                 </blockquote>
                 <h3 class="mb-1 text-dark-gray text-sm leading-snug">Are Reading Parties the New Wellness Activity?</h3>
                 <p class="text-dark-gray/50 text-xs mb-4">rollingstone.com</p>
-                <img src="https://res.cloudinary.com/daaznyhsu/image/upload/v1757689082/rollingstoneimage_tdk8nb.webp" alt="Rolling Stone story thumbnail" class="w-full rounded-xl" />
+                <img src="https://res.cloudinary.com/daaznyhsu/image/upload/v1757689082/rollingstoneimage_tdk8nb.webp" alt="Rolling Stone story thumbnail" class="w-full rounded-xl" loading="lazy"
+											decoding="async" />
               </a>
             </div>
           </div>
@@ -815,7 +821,8 @@ const arrowRightSrc = arrowright.src;
                 <div class="press-favicon mb-3"><img src="https://res.cloudinary.com/daaznyhsu/image/upload/v1757689205/guardianFav_h3ejvs.png" alt="The Guardian logo" /></div>
                 <h3 class="mb-1 text-dark-gray text-sm leading-snug">Books and looks: Gen Z is rediscovering the public library</h3>
                 <p class="text-dark-gray/50 text-xs mb-4">theguardian.com</p>
-                <img src="https://res.cloudinary.com/daaznyhsu/image/upload/v1757689327/guardian_article_zwx7v4.jpg" alt="The Guardian story thumbnail" class="w-full rounded-xl" />
+                <img src="https://res.cloudinary.com/daaznyhsu/image/upload/v1757689327/guardian_article_zwx7v4.jpg" alt="The Guardian story thumbnail" class="w-full rounded-xl" loading="lazy"
+											decoding="async"/>
               </a>
             </div>
           </div>
@@ -832,7 +839,8 @@ const arrowRightSrc = arrowright.src;
                 </blockquote>
                 <h3 class="mb-1 text-dark-gray text-sm leading-snug">Mother's Day Gift Guide: The Best Gifts for Community Minded Moms</h3>
                 <p class="text-dark-gray/50 text-xs mb-4">forbes.com</p>
-                <img src="https://res.cloudinary.com/daaznyhsu/image/upload/v1757689469/forbes_image_fiyqda.webp" alt="Forbes story thumbnail" class="w-full rounded-xl" />
+                <img src="https://res.cloudinary.com/daaznyhsu/image/upload/v1757689469/forbes_image_fiyqda.webp" alt="Forbes story thumbnail" class="w-full rounded-xl" loading="lazy"
+											decoding="async" />
               </a>
             </div>
           </div>
