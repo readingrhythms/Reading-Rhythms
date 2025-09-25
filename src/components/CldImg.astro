@@ -43,6 +43,7 @@ function parseAR(ar: unknown): number | undefined {
 
 const ar = parseAR(aspectRatio); // NEW
 
+
 // NEW: compute a per-width height either from aspect ratio or heights[]
 function heightForWidth(w: number, i: number): number | undefined {
   if (ar) return Math.round(w / ar);
