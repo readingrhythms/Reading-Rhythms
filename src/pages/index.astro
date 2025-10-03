@@ -161,18 +161,45 @@ const arrowRightSrc = arrowright.src;
 
 					<!-- CTA Buttons -->
 					<div class="flex flex-col sm:flex-row gap-3 justify-center lg:justify-start">
-						<a href="/events" class="group relative overflow-hidden bg-gradient-to-r from-jean to-dark-purple text-white px-6 py-3 md:px-7 md:py-3 rounded-xl font-bold text-base md:text-lg shadow-xl shadow-jean/25 hover:shadow-2xl hover:shadow-jean/40 transition-all duration-300 hover:-translate-y-1">
-							<span class="relative z-10 flex items-center justify-center mt-0.5">
-								Buy Tickets! ✨
-							</span>
-							<div class="absolute inset-0 bg-gradient-to-r from-dark-purple to-jean opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+					<!-- Primary -->
+					<a
+						href="/events"
+						class="group relative isolate z-10 block cursor-pointer
+								overflow-hidden rounded-xl
+								bg-gradient-to-r from-jean to-dark-purple text-white
+								px-6 py-3 md:px-7 md:py-3
+								font-bold text-base md:text-lg
+								shadow-xl shadow-jean/25 hover:shadow-2xl hover:shadow-jean/40
+								transition-all duration-300 hover:-translate-y-1"
+						>
+						<span class="relative z-10 flex items-center justify-center">
+							Buy Tickets! ✨
+						</span>
+
+						<!-- Hover overlay lives below content, can’t catch clicks -->
+						<span
+							class="pointer-events-none absolute inset-0 z-0
+								bg-gradient-to-r from-dark-purple to-jean
+								opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+						</span>
 						</a>
-						<a href="/apply" class="group relative overflow-hidden bg-white border-2 border-gray-200 text-dark-gray px-6 py-3 md:px-8 md:py-3 rounded-xl font-semibold text-base md:text-lg hover:border-jean hover:shadow-lg hover:shadow-gray-200/50 transition-all duration-300 hover:-translate-y-1 inline-flex items-center justify-center">
-							<span class="relative z-10 flex items-center">
-								Join the Team
-							</span>
-						</a>
+
+
+					<!-- Secondary -->
+					<a
+						href="/apply"
+						class="group relative inline-flex items-center justify-center overflow-hidden
+							bg-white border-2 border-gray-200 text-dark-gray
+							px-6 py-3 md:px-8 md:py-3 rounded-xl font-semibold text-base md:text-lg
+							hover:border-jean hover:shadow-lg hover:shadow-gray-200/50
+							transition-all duration-300 hover:-translate-y-1"
+					>
+						<span class="relative z-10 flex items-center">
+						Join the Team
+						</span>
+					</a>
 					</div>
+
 
 				</div>
 
