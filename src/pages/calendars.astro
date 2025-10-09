@@ -31,7 +31,7 @@ const activeChapters = baseChapters;
       </p>
     </div>
 
-    <section class="mx-auto max-w-6xl px-4 md:px-0">
+    <section class="mx-auto max-w-7xl px-4 md:px-0">
       <!-- GRID -->
       <div id="events-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
         {activeChapters.map((chapter) => (
@@ -51,7 +51,9 @@ const activeChapters = baseChapters;
                     <path d="M10 20s6-5.686 6-10a6 6 0 10-12 0c0 4.314 6 10 6 10zM10 10a2 2 0 110-4 2 2 0 010 4z"/>
                   </svg>
                 </span>
-                <h3 class="text-lg md:text-xl font-semibold text-dark-gray truncate">{chapter.fullName}</h3>
+                <h3 class="text-lg md:text-xl font-semibold text-dark-gray whitespace-normal break-words leading-tight">
+                  {chapter.fullName}
+                </h3>
               </div>
               <span class="chev ml-4 shrink-0 transition-transform duration-300 group-aria-expanded:rotate-90">
                 <Image src={arrowright} alt="open" width={20} height={20} />
