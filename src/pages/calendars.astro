@@ -1,0 +1,228 @@
+---
+import BaseLayout from '@layouts/BaseLayout.astro';
+import { Image } from 'astro:assets';
+import arrowright from '@assets/icons/arrow-right.svg';
+
+const baseChapters = [
+  // Examples — replace with your real names/IDs/links
+  { id: 'ny',  name: 'NY',  fullName: 'Reading Rhythms New York',  calendarId: 'cal-Q8l315UsVMWb6h6', status: 'active' },
+  { id: 'nj',  name: 'NJ',  fullName: 'Reading Rhythms New Jersey', calendarId: 'cal-4yEtAsPtiPI0Nwi', status: 'active' },
+  { id: 'ca',  name: 'CA',  fullName: 'Reading Rhythms California', calendarId: 'cal-Eo35suMbTdQnr20', status: 'active' },
+  { id: 'global', name: 'Global', fullName: 'Reading Rhythms Global', calendarId: 'cal-CDoX2WaI5IHD5xs', status: 'active' },
+  { id: 'co', name: 'CO', fullName: 'Reading Rhythms Colorado',      calendarId: 'cal-I3B2j3FYVHj5Cbo', status: 'active' },
+  { id: 'dc', name: 'DC', fullName: 'Reading Rhythms D.C.', calendarId: 'cal-FXkCEyPQWDrP90H', status: 'active' },
+  { id: 'il', name: 'IL', fullName: 'Reading Rhythms Illinois', calendarId: 'cal-Xg3YY7XQOBQeoD7', status: 'active' },
+  { id: 'mi', name: 'MI', fullName: 'Reading Rhythms Michigan',       calendarId: 'cal-0Bc7tyTtORtrOoZ', status: 'active' },
+  { id: 'pa', name: 'PA', fullName: 'Reading Rhythms Pennsylvania', calendarId: 'cal-yeLDVE8DKDQUWtj', status: 'active' },
+  { id: 'sc', name: 'SC', fullName: 'Reading Rhythms South Carolina',  calendarId: 'cal-FTvxoUMCtupxy9F', status: 'active' },
+];
+
+const activeChapters = baseChapters;
+---
+
+<BaseLayout title='Reading Rhythms | Events & Tickets' description='Buy tickets for Reading Rhythms events worldwide. Join active chapters or waitlists for launching cities.' showNavbar={true}>
+  <div class="w-full px-0 pt-4 lg:pt-8">
+    <div class="text-center mb-6 max-w-4xl mx-auto px-4">
+      <h1 class="text-3xl md:text-4xl lg:text-5xl text-dark-gray font-display tracking-wider leading-tight mb-2 md:mb-4">
+        Find Your Next <span class="bg-gradient-to-r from-jean via-rust to-dark-purple bg-clip-text text-transparent">Reading Party</span>
+      </h1>
+      <p class="text-base md:text-lg text-dark-gray/70 font-light max-w-2xl mx-auto">
+        Buy tickets for upcoming events
+      </p>
+    </div>
+
+    <section class="mx-auto max-w-6xl px-4 md:px-0">
+      <!-- GRID -->
+      <div id="events-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
+        {activeChapters.map((chapter) => (
+          <article class="chapter-card group bg-gray-50 rounded-2xl shadow-sm overflow-hidden transition-shadow focus-within:ring-2 focus-within:ring-dark-purple/30" data-card>
+            <button 
+              class="w-full text-left px-5 py-4 md:py-5 flex items-center justify-between"
+              data-chapter={chapter.id}
+              data-calendar={chapter.calendarId}
+              data-embed={chapter.embedSrc || `https://lu.ma/embed/calendar/${chapter.calendarId}/events?lt=light`}
+              aria-expanded="false"
+              type="button"
+            >
+              <div class="min-w-0 flex items-center gap-3">
+                <!-- red pin icon -->
+                <span class="inline-flex h-6 w-6 items-center justify-center">
+                  <svg class="h-5 w-5 text-red-600" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                    <path d="M10 20s6-5.686 6-10a6 6 0 10-12 0c0 4.314 6 10 6 10zM10 10a2 2 0 110-4 2 2 0 010 4z"/>
+                  </svg>
+                </span>
+                <h3 class="text-lg md:text-xl font-semibold text-dark-gray truncate">{chapter.fullName}</h3>
+              </div>
+              <span class="chev ml-4 shrink-0 transition-transform duration-300 group-aria-expanded:rotate-90">
+                <Image src={arrowright} alt="open" width={20} height={20} />
+              </span>
+            </button>
+          </article>
+        ))}
+
+        <!-- EXPANDER: spans full row width at any breakpoint -->
+        <div id="calendar-expander" class="hidden" style="grid-column: 1 / -1;">
+          <div class="w-full bg-white rounded-2xl shadow-md border border-gray-100 overflow-hidden">
+            <div class="calendar-container w-full" style="min-height: 700px;">
+              <iframe id="calendar-iframe"
+                src=""
+                width="100%" height="700" frameborder="0"
+                style="border: none; min-height: 700px; width: 100%; max-width: 100%;"
+                allowfullscreen="" aria-hidden="false" tabindex="-1" loading="lazy"></iframe>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Spacer between grid and CTA -->
+      <div aria-hidden="true" class="h-10 sm:h-14 md:h-20 lg:h-24"></div>
+
+      <!-- CTA -->
+      <div class="bg-gradient-to-r from-dark-gray to-dark-purple rounded-2xl p-6 lg:p-8 text-center max-w-4xl mx-auto">
+        <h3 class="text-2xl lg:text-3xl font-display text-white mb-3 tracking-widest">Want to Host in Your City?</h3>
+        <p class="text-white/80 mb-4 max-w-xl mx-auto text-sm">We're always looking for passionate community builders to bring Reading Rhythms to new cities.</p>
+        <a href="/apply" class="inline-flex items-center justify-center px-8 py-4 bg-white text-dark-gray rounded-xl font-bold text-base hover:shadow-xl hover:shadow-white/25 transition-all duration-300 hover:-translate-y-1">Join the Team!</a>
+      </div>
+
+      <div aria-hidden="true" class="h-8 md:h-12 lg:h-16"></div>
+    </section>
+  </div>
+</BaseLayout>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const grid = document.getElementById('events-grid');
+    if (!grid) return;
+
+    const articles = Array.from(grid.querySelectorAll('article.chapter-card'));
+    const buttons = Array.from(grid.querySelectorAll('button[data-chapter]'));
+
+    const expander = document.getElementById('calendar-expander');
+    const iframe = document.getElementById('calendar-iframe');
+
+    let openChapterId = null;
+
+    function columns() {
+      if (window.matchMedia('(min-width: 1024px)').matches) return 3; // lg
+      if (window.matchMedia('(min-width: 640px)').matches) return 2;  // sm+
+      return 1;
+    }
+
+    function insertExpanderAfterRow(index) {
+      const cols = columns();
+      const rowStart = Math.floor(index / cols) * cols;
+      const rowEnd = Math.min(articles.length - 1, rowStart + cols - 1);
+      const afterEl = articles[rowEnd];
+      if (afterEl && expander) afterEl.after(expander);
+    }
+
+    function setActiveCard(idx) {
+  articles.forEach((card, i) => {
+    if (i === idx) {
+      card.classList.add('active');
+    } else {
+      card.classList.remove('active');
+    }
+  });
+}
+
+    function openCalendar(chapterId, _calendarId, articleIndex) {
+      insertExpanderAfterRow(articleIndex);
+      const src = buttons.find(b => b.dataset.chapter === chapterId)?.dataset.embed;
+      if (iframe && src && iframe.getAttribute('src') !== src) iframe.setAttribute('src', src);
+      expander.classList.remove('hidden');
+      openChapterId = chapterId;
+
+      buttons.forEach(btn => btn.setAttribute('aria-expanded', btn.dataset.chapter === chapterId ? 'true' : 'false'));
+      setActiveCard(articleIndex);
+
+      history.replaceState(null, '', `${location.pathname}#${chapterId}`);
+      if (window.innerWidth < 768) expander.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+
+    function closeCalendar() {
+      if (!expander.classList.contains('hidden')) expander.classList.add('hidden');
+      openChapterId = null;
+      buttons.forEach(btn => btn.setAttribute('aria-expanded', 'false'));
+articles.forEach(card => card.classList.remove('active'));
+
+      if (location.hash) history.replaceState(null, '', location.pathname);
+    }
+
+    // Clicks
+    buttons.forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const chapterId = btn.dataset.chapter;
+        const articleIndex = articles.findIndex(a => a.contains(btn));
+        if (openChapterId === chapterId) {
+          closeCalendar();
+        } else {
+          openCalendar(chapterId, null, articleIndex);
+        }
+      });
+    });
+
+    // Deep link by hash
+    function initFromHash() {
+      const id = location.hash ? location.hash.slice(1) : null;
+      if (!id) return;
+      const btnIndex = buttons.findIndex(b => b.dataset.chapter === id);
+      if (btnIndex !== -1) {
+        const btn = buttons[btnIndex];
+        openCalendar(id, null, articles.findIndex(a => a.contains(btn)));
+        window.scrollTo(0, 0);
+      }
+    }
+    initFromHash();
+    window.addEventListener('hashchange', initFromHash);
+
+    // Reposition expander on resize
+    window.addEventListener('resize', () => {
+      if (!openChapterId || expander.classList.contains('hidden')) return;
+      const btnIndex = buttons.findIndex(b => b.dataset.chapter === openChapterId);
+      if (btnIndex !== -1) insertExpanderAfterRow(articles.findIndex(a => a.contains(buttons[btnIndex])));
+    });
+  });
+</script>
+
+<style>
+  /* Arrow rotate when aria-expanded=true */
+  [aria-expanded="true"] + .chev, .group[aria-expanded="true"] .chev { transform: rotate(90deg); }
+
+  .calendar-container iframe:focus { outline: none !important; }
+  .calendar-container, .calendar-container * { -webkit-tap-highlight-color: transparent; }
+  iframe { max-width: 100% !important; width: 100% !important; min-width: 100% !important; }
+
+  @media (max-width: 640px) {
+    .calendar-container { min-height: 600px !important; }
+    .calendar-container iframe { height: 600px !important; min-height: 600px !important; }
+  }
+  @media (min-width: 641px) and (max-width: 1024px) {
+    .calendar-container { min-height: 650px !important; }
+    .calendar-container iframe { height: 650px !important; min-height: 650px !important; }
+  }
+  @media (min-width: 1025px) {
+    .calendar-container { min-height: 700px !important; }
+    .calendar-container iframe { height: 700px !important; min-height: 700px !important; }
+  }
+
+  .calendar-container { position: relative; }
+  .calendar-container::before {
+    content: "Loading events...";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: #6b7280;
+    font-size: 1rem;
+    z-index: 1;
+  }
+  .calendar-container iframe { position: relative; z-index: 2; }
+
+/* Visible outline for the active card */
+.chapter-card.active {
+  outline: 2px solid #000;
+  outline-offset: -2px; /* stays inside rounded corners */
+}
+
+</style>
