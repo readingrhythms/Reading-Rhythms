@@ -4,23 +4,29 @@ import { Image } from 'astro:assets';
 import arrowright from '@assets/icons/arrow-right.svg';
 
 const baseChapters = [
-  // Examples — replace with your real names/IDs/links
   { id: 'ny',  name: 'NY',  fullName: 'Reading Rhythms New York',  calendarId: 'cal-Q8l315UsVMWb6h6', status: 'active' },
   { id: 'nj',  name: 'NJ',  fullName: 'Reading Rhythms New Jersey', calendarId: 'cal-4yEtAsPtiPI0Nwi', status: 'active' },
   { id: 'ca',  name: 'CA',  fullName: 'Reading Rhythms California', calendarId: 'cal-Eo35suMbTdQnr20', status: 'active' },
   { id: 'global', name: 'Global', fullName: 'Reading Rhythms Global', calendarId: 'cal-CDoX2WaI5IHD5xs', status: 'active' },
   { id: 'co', name: 'CO', fullName: 'Reading Rhythms Colorado',      calendarId: 'cal-I3B2j3FYVHj5Cbo', status: 'active' },
-  { id: 'dc', name: 'DC', fullName: 'Reading Rhythms D.C.', calendarId: 'cal-FXkCEyPQWDrP90H', status: 'active' },
-  { id: 'il', name: 'IL', fullName: 'Reading Rhythms Illinois', calendarId: 'cal-Xg3YY7XQOBQeoD7', status: 'active' },
-  { id: 'mi', name: 'MI', fullName: 'Reading Rhythms Michigan',       calendarId: 'cal-0Bc7tyTtORtrOoZ', status: 'active' },
-  { id: 'pa', name: 'PA', fullName: 'Reading Rhythms Pennsylvania', calendarId: 'cal-yeLDVE8DKDQUWtj', status: 'active' },
-  { id: 'sc', name: 'SC', fullName: 'Reading Rhythms South Carolina',  calendarId: 'cal-FTvxoUMCtupxy9F', status: 'active' },
+  { id: 'dc', name: 'DC', fullName: 'Reading Rhythms D.C.',          calendarId: 'cal-FXkCEyPQWDrP90H', status: 'active' },
+  { id: 'il', name: 'IL', fullName: 'Reading Rhythms Illinois',      calendarId: 'cal-Xg3YY7XQOBQeoD7', status: 'active' },
+  { id: 'mi', name: 'MI', fullName: 'Reading Rhythms Michigan',      calendarId: 'cal-0Bc7tyTtORtrOoZ', status: 'active' },
+  { id: 'pa', name: 'PA', fullName: 'Reading Rhythms Pennsylvania',  calendarId: 'cal-yeLDVE8DKDQUWtj', status: 'active' },
+  { id: 'sc', name: 'SC', fullName: 'Reading Rhythms South Carolina',calendarId: 'cal-FTvxoUMCtupxy9F', status: 'active' },
 ];
 
 const activeChapters = baseChapters;
 ---
 
 <BaseLayout title='Reading Rhythms | Events & Tickets' description='Buy tickets for Reading Rhythms events worldwide. Join active chapters or waitlists for launching cities.' showNavbar={true}>
+
+  <!-- Preconnect to reduce initial paint latency -->
+  <link rel="preconnect" href="https://lu.ma">
+  <link rel="preconnect" href="https://embed-cdn.lu.ma">
+  <link rel="dns-prefetch" href="https://lu.ma">
+  <link rel="dns-prefetch" href="https://embed-cdn.lu.ma">
+
   <div class="w-full px-0 pt-4 lg:pt-8">
     <div class="text-center mb-6 max-w-4xl mx-auto px-4">
       <h1 class="text-3xl md:text-4xl lg:text-5xl text-dark-gray font-display tracking-wider leading-tight mb-2 md:mb-4">
@@ -64,13 +70,18 @@ const activeChapters = baseChapters;
 
         <!-- EXPANDER: spans full row width at any breakpoint -->
         <div id="calendar-expander" class="hidden" style="grid-column: 1 / -1;">
-          <div class="w-full bg-white rounded-2xl shadow-md border border-gray-100 overflow-hidden">
+          <div class="w-full bg-white rounded-2xl shadow-md border border-gray-100 overflow-hidden relative">
+            <!-- Our single loader: neutral bg + text (no animated skeleton) -->
+            <div id="calendar-loader" class="absolute inset-0 flex items-center justify-center opacity-0 pointer-events-none transition-opacity duration-150">
+              <span class="text-sm text-gray-500">Loading events…</span>
+            </div>
+
             <div class="calendar-container w-full" style="min-height: 700px;">
               <iframe id="calendar-iframe"
                 src=""
                 width="100%" height="700" frameborder="0"
-                style="border: none; min-height: 700px; width: 100%; max-width: 100%;"
-                allowfullscreen="" aria-hidden="false" tabindex="-1" loading="lazy"></iframe>
+                style="border: none; min-height: 700px; width: 100%; max-width: 100%; opacity:0; transition:opacity .18s ease;"
+                allowfullscreen="" aria-hidden="false" tabindex="-1" loading="eager" fetchpriority="high"></iframe>
             </div>
           </div>
         </div>
@@ -97,10 +108,11 @@ const activeChapters = baseChapters;
     if (!grid) return;
 
     const articles = Array.from(grid.querySelectorAll('article.chapter-card'));
-    const buttons = Array.from(grid.querySelectorAll('button[data-chapter]'));
+    const buttons  = Array.from(grid.querySelectorAll('button[data-chapter]'));
 
     const expander = document.getElementById('calendar-expander');
-    const iframe = document.getElementById('calendar-iframe');
+    const iframe   = document.getElementById('calendar-iframe');
+    const loader   = document.getElementById('calendar-loader');
 
     let openChapterId = null;
 
@@ -113,29 +125,48 @@ const activeChapters = baseChapters;
     function insertExpanderAfterRow(index) {
       const cols = columns();
       const rowStart = Math.floor(index / cols) * cols;
-      const rowEnd = Math.min(articles.length - 1, rowStart + cols - 1);
-      const afterEl = articles[rowEnd];
+      const rowEnd   = Math.min(articles.length - 1, rowStart + cols - 1);
+      const afterEl  = articles[rowEnd];
       if (afterEl && expander) afterEl.after(expander);
     }
 
     function setActiveCard(idx) {
-  articles.forEach((card, i) => {
-    if (i === idx) {
-      card.classList.add('active');
-    } else {
-      card.classList.remove('active');
+      articles.forEach((card, i) => {
+        if (i === idx) card.classList.add('active');
+        else card.classList.remove('active');
+      });
     }
-  });
-}
 
     function openCalendar(chapterId, _calendarId, articleIndex) {
       insertExpanderAfterRow(articleIndex);
-      const src = buttons.find(b => b.dataset.chapter === chapterId)?.dataset.embed;
-      if (iframe && src && iframe.getAttribute('src') !== src) iframe.setAttribute('src', src);
+
+      // Build src and force reload on switch (fixes mobile stale iframe)
+      const btn  = buttons.find(b => b.dataset.chapter === chapterId);
+      const base = btn ? btn.dataset.embed : '';
+      if (iframe && base) {
+        // Show our single loader and hide the iframe until loaded
+        loader.style.opacity = '1';
+        loader.classList.remove('pointer-events-none');
+        iframe.style.opacity = '0';
+
+        const src = base + (base.includes('?') ? '&' : '?') + 'ts=' + Date.now();
+
+        const onLoad = () => {
+          iframe.style.opacity = '1';
+          loader.style.opacity = '0';
+          loader.classList.add('pointer-events-none');
+          iframe.removeEventListener('load', onLoad);
+        };
+        iframe.addEventListener('load', onLoad, { once: true });
+
+        // Defer src set to next frame for layout stability
+        requestAnimationFrame(() => iframe.setAttribute('src', src));
+      }
+
       expander.classList.remove('hidden');
       openChapterId = chapterId;
 
-      buttons.forEach(btn => btn.setAttribute('aria-expanded', btn.dataset.chapter === chapterId ? 'true' : 'false'));
+      buttons.forEach(b => b.setAttribute('aria-expanded', b.dataset.chapter === chapterId ? 'true' : 'false'));
       setActiveCard(articleIndex);
 
       history.replaceState(null, '', `${location.pathname}#${chapterId}`);
@@ -146,7 +177,7 @@ const activeChapters = baseChapters;
       if (!expander.classList.contains('hidden')) expander.classList.add('hidden');
       openChapterId = null;
       buttons.forEach(btn => btn.setAttribute('aria-expanded', 'false'));
-articles.forEach(card => card.classList.remove('active'));
+      setActiveCard(-1);
 
       if (location.hash) history.replaceState(null, '', location.pathname);
     }
@@ -154,13 +185,10 @@ articles.forEach(card => card.classList.remove('active'));
     // Clicks
     buttons.forEach((btn) => {
       btn.addEventListener('click', () => {
-        const chapterId = btn.dataset.chapter;
+        const chapterId   = btn.dataset.chapter;
         const articleIndex = articles.findIndex(a => a.contains(btn));
-        if (openChapterId === chapterId) {
-          closeCalendar();
-        } else {
-          openCalendar(chapterId, null, articleIndex);
-        }
+        if (openChapterId === chapterId) closeCalendar();
+        else openCalendar(chapterId, null, articleIndex);
       });
     });
 
@@ -188,6 +216,9 @@ articles.forEach(card => card.classList.remove('active'));
 </script>
 
 <style>
+
+#calendar-loader { z-index: 3; }
+
   /* Arrow rotate when aria-expanded=true */
   [aria-expanded="true"] + .chev, .group[aria-expanded="true"] .chev { transform: rotate(90deg); }
 
@@ -208,23 +239,16 @@ articles.forEach(card => card.classList.remove('active'));
     .calendar-container iframe { height: 700px !important; min-height: 700px !important; }
   }
 
-  .calendar-container { position: relative; }
-  .calendar-container::before {
-    content: "Loading events...";
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    color: #6b7280;
-    font-size: 1rem;
-    z-index: 1;
+  .calendar-container {
+    position: relative;
+    background: #f7f7f8; /* neutral bg to avoid white flash while iframe is hidden */
   }
+
   .calendar-container iframe { position: relative; z-index: 2; }
 
-/* Visible outline for the active card */
-.chapter-card.active {
-  outline: 2px solid #000;
-  outline-offset: -2px; /* stays inside rounded corners */
-}
-
+  /* Visible outline for the active card */
+  .chapter-card.active {
+    outline: 2px solid #000;
+    outline-offset: -2px; /* stays inside rounded corners */
+  }
 </style>
