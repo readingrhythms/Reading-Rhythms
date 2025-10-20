@@ -14,40 +14,177 @@ import arrowright from '@assets/icons/arrow-right.svg';
 // Mock data for chapters/cities with pagination
 const allChapters = [
   // Popular cities first, starting with Williamsburg
-  { name: 'Williamsburg', image: "https://res.cloudinary.com/daaznyhsu/image/upload/v1757674878/25F4AA6E_h5rfwd.jpg", location: 'Brooklyn, NY' },
-  { name: 'Lower Manhattan', image: "https://res.cloudinary.com/daaznyhsu/image/upload/v1757668923/Chapter_10_Maison_Mono_vxiena.webp", location: 'New York City' },
-  { name: 'Upper West Side', image: "https://res.cloudinary.com/daaznyhsu/image/upload/v1758816811/8H6A2918-Enhanced-NR_l7tnux.jpg", location: 'New York City' },
-  { name: 'Midtown', image: "https://res.cloudinary.com/daaznyhsu/image/upload/v1758816907/DSC00318_tbmqlj.jpg", location: 'New York City' },
-  { name: 'Los Angeles', image: "https://res.cloudinary.com/daaznyhsu/image/upload/v1757676154/Chapter_3_on_the_Roof_ocldzj.webp", location: 'California' },
-  { name: 'Chicago', image: "https://res.cloudinary.com/daaznyhsu/image/upload/v1758817020/DSC00384_ekpfc4.jpg", location: 'Illinois' },
-  { name: 'Toronto', image: "https://res.cloudinary.com/daaznyhsu/image/upload/v1758817143/DSC00860_wzecvn.jpg", location: 'Ontario, Canada' },
-  { name: 'South London', image: "https://res.cloudinary.com/daaznyhsu/image/upload/v1757676204/Readers_FourFiveSix_Bar_wo0bjq.webp", location: 'London, UK' },
-  { name: 'Prospect Heights', image: "https://res.cloudinary.com/daaznyhsu/image/upload/v1758833591/DSC01088_cr8gma.jpg", location: 'Brooklyn, NY' },
-  { name: 'Upper East Side', image: "https://res.cloudinary.com/daaznyhsu/image/upload/v1758833697/DSC01309_jzybfb.jpg", location: 'New York City' },
-  { name: 'Washington Heights', image: "https://res.cloudinary.com/daaznyhsu/image/upload/v1758833821/DSC01395_l3c8ps.jpg", location: 'New York City' },
-  { name: 'Harlem', image: "https://res.cloudinary.com/daaznyhsu/image/upload/v1758833922/DSC01567_wzc1sh.jpg", location: 'New York City' },
-  { name: 'Greenpoint', image: "https://res.cloudinary.com/daaznyhsu/image/upload/v1758834034/DSC01616_odwgr4.jpg", location: 'Brooklyn, NY' },
-  { name: 'Bushwick', image: "https://res.cloudinary.com/daaznyhsu/image/upload/v1758834126/DSC01870_scqqer.jpg", location: 'Brooklyn, NY' },
-  { name: 'Astoria', image: "https://res.cloudinary.com/daaznyhsu/image/upload/v1757675553/DSC01872_pmou8v.jpg", location: 'Queens, NY' },
-  { name: 'Long Island City', image: "https://res.cloudinary.com/daaznyhsu/image/upload/v1758834256/DSC01910_atxhxx.jpg", location: 'Queens, NY' },
-  { name: 'Queens', image: "https://res.cloudinary.com/daaznyhsu/image/upload/v1758835460/DSC02352_l4lpbt.jpg", location: 'New York' },
-  { name: 'Philadelphia', image: "https://res.cloudinary.com/daaznyhsu/image/upload/v1757675692/DSC02354_tcvhia.jpg", location: 'Pennsylvania' },
-  { name: 'Washington DC', image: "https://res.cloudinary.com/daaznyhsu/image/upload/v1757675739/DSC02645_zkbsb2.jpg", location: 'District of Columbia' },
-  { name: 'Austin', image: "https://res.cloudinary.com/daaznyhsu/image/upload/v1757675778/DSC02916_gn1d6b.jpg", location: 'Texas' },
-  { name: 'San Diego', image: "https://res.cloudinary.com/daaznyhsu/image/upload/v1757675830/E64763A1-1BE1-44A0-9C5C-C88C1B18B794_xldohj.jpg", location: 'California' },
-  { name: 'Denver', image: "https://res.cloudinary.com/daaznyhsu/image/upload/v1757675876/IG1A7830_ngyt3p.jpg", location: 'Colorado' },
-  { name: 'Long Island', image: "https://res.cloudinary.com/daaznyhsu/image/upload/v1757676039/ReadingRythms-55_1_nszzxf.jpg", location: 'New York' },
-  { name: 'Princeton', image: "https://res.cloudinary.com/daaznyhsu/image/upload/v1757674878/25F4AA6E_h5rfwd.jpg", location: 'New Jersey' },
-  { name: 'Morristown', image: "https://res.cloudinary.com/daaznyhsu/image/upload/v1758816907/DSC00318_tbmqlj.jpg", location: 'New Jersey' },
-  { name: 'Atlantic City', image: "https://res.cloudinary.com/daaznyhsu/image/upload/v1758817143/DSC00860_wzecvn.jpg", location: 'New Jersey' },
-  { name: 'Rome', image: "https://res.cloudinary.com/daaznyhsu/image/upload/v1758833697/DSC01309_jzybfb.jpg", location: 'Italy' },
-  { name: 'Milan', image: "https://res.cloudinary.com/daaznyhsu/image/upload/v1758833922/DSC01567_wzc1sh.jpg", location: 'Italy' },
-  { name: 'Florence', image: "https://res.cloudinary.com/daaznyhsu/image/upload/v1758834126/DSC01870_scqqer.jpg", location: 'Italy' },
-  { name: 'Naples', image: "https://res.cloudinary.com/daaznyhsu/image/upload/v1758834256/DSC01910_atxhxx.jpg", location: 'Italy' },
-  { name: 'Barcelona', image: "https://res.cloudinary.com/daaznyhsu/image/upload/v1757675692/DSC02354_tcvhia.jpg", location: 'Spain' },
-  { name: 'Charleston', image: "https://res.cloudinary.com/daaznyhsu/image/upload/v1757675778/DSC02916_gn1d6b.jpg", location: 'South Carolina' },
-  { name: 'Detroit', image: "https://res.cloudinary.com/daaznyhsu/image/upload/v1757675876/IG1A7830_ngyt3p.jpg", location: 'Michigan' },
-  { name: 'Algiers', image: "https://res.cloudinary.com/daaznyhsu/image/upload/v1757676051/ReadingRythms-61_1_spmdj5.jpg", location: 'Algeria' }
+  { name: 'Williamsburg', 
+  	image: "https://res.cloudinary.com/daaznyhsu/image/upload/v1757674878/25F4AA6E_h5rfwd.jpg", 
+	location: 'Brooklyn, NY',
+	eventsHref: '/events#ny' },
+
+  { name: 'Lower Manhattan', 
+  image: "https://res.cloudinary.com/daaznyhsu/image/upload/v1757668923/Chapter_10_Maison_Mono_vxiena.webp", 
+  location: 'New York City', 
+  eventsHref: '/events#ny'},
+
+  { name: 'Upper West Side', 
+  image: "https://res.cloudinary.com/daaznyhsu/image/upload/v1758816811/8H6A2918-Enhanced-NR_l7tnux.jpg", 
+  location: 'New York City',
+  eventsHref: '/events#ny' },
+
+  { name: 'Midtown', 
+  image: "https://res.cloudinary.com/daaznyhsu/image/upload/v1758816907/DSC00318_tbmqlj.jpg", 
+  location: 'New York City',
+  eventsHref: '/events#ny' },
+
+  { name: 'Los Angeles', 
+  image: "https://res.cloudinary.com/daaznyhsu/image/upload/v1757676154/Chapter_3_on_the_Roof_ocldzj.webp", 
+  location: 'California', 
+  eventsHref: '/events#ca'},
+
+  { name: 'Chicago', 
+  image: "https://res.cloudinary.com/daaznyhsu/image/upload/v1758817020/DSC00384_ekpfc4.jpg", 
+  location: 'Illinois', 
+  eventsHref: '/events#global'},
+
+  { name: 'Toronto', 
+  image: "https://res.cloudinary.com/daaznyhsu/image/upload/v1758817143/DSC00860_wzecvn.jpg", 
+  location: 'Ontario, Canada', 
+  eventsHref: '/events#global'},
+
+  { name: 'South London', 
+  image: "https://res.cloudinary.com/daaznyhsu/image/upload/v1757676204/Readers_FourFiveSix_Bar_wo0bjq.webp", 
+  location: 'London, UK', 
+  eventsHref: '/events#global'},
+
+  { name: 'Prospect Heights', 
+  image: "https://res.cloudinary.com/daaznyhsu/image/upload/v1758833591/DSC01088_cr8gma.jpg", 
+  location: 'Brooklyn, NY',
+  eventsHref: '/events#ny' },
+
+  { name: 'Upper East Side', 
+  image: "https://res.cloudinary.com/daaznyhsu/image/upload/v1758833697/DSC01309_jzybfb.jpg", 
+  location: 'New York City',
+  eventsHref: '/events#ny' },
+
+  { name: 'Washington Heights', 
+  image: "https://res.cloudinary.com/daaznyhsu/image/upload/v1758833821/DSC01395_l3c8ps.jpg", 
+  location: 'New York City', 
+  eventsHref: '/events#ny' },
+
+  { name: 'Harlem', 
+  image: "https://res.cloudinary.com/daaznyhsu/image/upload/v1758833922/DSC01567_wzc1sh.jpg", 
+  location: 'New York City',
+  eventsHref: '/events#ny' },
+
+  { name: 'Greenpoint', 
+  image: "https://res.cloudinary.com/daaznyhsu/image/upload/v1758834034/DSC01616_odwgr4.jpg", 
+  location: 'Brooklyn, NY',
+  eventsHref: '/events#ny' },
+
+  { name: 'Bushwick', 
+  image: "https://res.cloudinary.com/daaznyhsu/image/upload/v1758834126/DSC01870_scqqer.jpg", 
+  location: 'Brooklyn, NY',
+  eventsHref: '/events#ny' },
+
+  { name: 'Astoria', 
+  image: "https://res.cloudinary.com/daaznyhsu/image/upload/v1757675553/DSC01872_pmou8v.jpg", 
+  location: 'Queens, NY',
+  eventsHref: '/events#ny' },
+
+  { name: 'Long Island City', 
+  image: "https://res.cloudinary.com/daaznyhsu/image/upload/v1758834256/DSC01910_atxhxx.jpg", 
+  location: 'Queens, NY',
+  eventsHref: '/events#ny' },
+
+  { name: 
+  'Queens', 
+  image: "https://res.cloudinary.com/daaznyhsu/image/upload/v1758835460/DSC02352_l4lpbt.jpg", 
+  location: 'New York',
+  eventsHref: '/events#ny' },
+  
+  { name: 'Philadelphia', 
+  image: "https://res.cloudinary.com/daaznyhsu/image/upload/v1757675692/DSC02354_tcvhia.jpg", 
+  location: 'Pennsylvania',
+  eventsHref: '/events#global' },
+  
+  { name: 'Washington DC', 
+  image: "https://res.cloudinary.com/daaznyhsu/image/upload/v1757675739/DSC02645_zkbsb2.jpg", 
+  location: 'District of Columbia',
+  eventsHref: '/events#global' },
+  
+  { name: 'Austin', 
+  image: "https://res.cloudinary.com/daaznyhsu/image/upload/v1757675778/DSC02916_gn1d6b.jpg", 
+  location: 'Texas',
+  eventsHref: '/events#global' },
+  
+  { name: 'San Diego', 
+  image: "https://res.cloudinary.com/daaznyhsu/image/upload/v1757675830/E64763A1-1BE1-44A0-9C5C-C88C1B18B794_xldohj.jpg", 
+  location: 'California',
+  eventsHref: '/events#ca' },
+  
+  { name: 'Denver', 
+  image: "https://res.cloudinary.com/daaznyhsu/image/upload/v1757675876/IG1A7830_ngyt3p.jpg", 
+  location: 'Colorado',
+  eventsHref: '/events#global' },
+  
+  { name: 'Long Island', 
+  image: "https://res.cloudinary.com/daaznyhsu/image/upload/v1757676039/ReadingRythms-55_1_nszzxf.jpg", 
+  location: 'New York',
+  eventsHref: '/events#ny' },
+  
+  { name: 'Princeton', 
+  image: "https://res.cloudinary.com/daaznyhsu/image/upload/v1757674878/25F4AA6E_h5rfwd.jpg", 
+  location: 'New Jersey',
+  eventsHref: '/events#nj' },
+  
+  { name: 'Morristown', 
+  image: "https://res.cloudinary.com/daaznyhsu/image/upload/v1758816907/DSC00318_tbmqlj.jpg", 
+  location: 'New Jersey',
+  eventsHref: '/events#nj' },
+  
+  { name: 'Atlantic City', 
+  image: "https://res.cloudinary.com/daaznyhsu/image/upload/v1758817143/DSC00860_wzecvn.jpg", 
+  location: 'New Jersey',
+  eventsHref: '/events#nj' },
+  
+  { name: 'Rome', 
+  image: "https://res.cloudinary.com/daaznyhsu/image/upload/v1758833697/DSC01309_jzybfb.jpg", 
+  location: 'Italy',
+  eventsHref: '/events#global' },
+  
+  { name: 'Milan', 
+  image: "https://res.cloudinary.com/daaznyhsu/image/upload/v1758833922/DSC01567_wzc1sh.jpg", 
+  location: 'Italy',
+  eventsHref: '/events#global' },
+  
+  { name: 'Florence', 
+  image: "https://res.cloudinary.com/daaznyhsu/image/upload/v1758834126/DSC01870_scqqer.jpg", 
+  location: 'Italy',
+  eventsHref: '/events#global' },
+  
+  { name: 'Naples', 
+  image: "https://res.cloudinary.com/daaznyhsu/image/upload/v1758834256/DSC01910_atxhxx.jpg", 
+  location: 'Italy',
+  eventsHref: '/events#global' },
+  
+  { name: 'Barcelona', 
+  image: "https://res.cloudinary.com/daaznyhsu/image/upload/v1757675692/DSC02354_tcvhia.jpg", 
+  location: 'Spain',
+  eventsHref: '/events#global'
+   },
+  
+  { name: 'Charleston', 
+  image: "https://res.cloudinary.com/daaznyhsu/image/upload/v1757675778/DSC02916_gn1d6b.jpg", 
+  location: 'South Carolina',
+  eventsHref: '/events#global' },
+  
+  { name: 'Detroit', 
+  image: "https://res.cloudinary.com/daaznyhsu/image/upload/v1757675876/IG1A7830_ngyt3p.jpg",
+  location: 'Michigan',
+  eventsHref: '/events#global' },
+  
+  { name: 'Algiers', 
+  image: "https://res.cloudinary.com/daaznyhsu/image/upload/v1757676051/ReadingRythms-61_1_spmdj5.jpg", 
+  location: 'Algeria',
+  eventsHref: '/events#global' }
 ];
 
 // Carousel images for hero section
@@ -507,33 +644,37 @@ const arrowRightSrc = arrowright.src;
 
 					<!-- All Chapter Cards -->
 						{allChapters.map(chapter => (
-						<div class="flex-shrink-0 w-64 sm:w-72">
-							<div class="group relative overflow-hidden bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 h-full flex flex-col justify-center min-h-[70px]">
-							<div class="h-2/3 overflow-hidden">
-								<CldImg
-								src={chapter.image.src || chapter.image}
-								alt={chapter.name}
-								width={480}                 // CHANGED: was 640; 2× DPR for ~280px card
-								heights={[300]}             // CHANGED: was 400; smaller crop
-								crop="fill"
-								gravity="auto"
-								quality="auto:eco"          // keep lightweight for grid/thumbs
-								sizes="90vw"                // CHANGED: mobile-only container
-								class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-								/>
-							</div>
-							<div class="px-2 py-1 h-1/3 flex flex-col justify-center">
-								<div class="text-center flex flex-col items-center">
-								<h3 class="text-xl font-serif text-dark-gray mb-1">{chapter.name}</h3>
-								<p class="text-dark-gray/60 text-base mb-3">{chapter.location}</p>
-								<a href={`/events?chapterId=${chapter.name.toLowerCase().replace(/\s+/g, '-')}`} class="flex items-center justify-center text-jean text-sm font-semibold underline hover:text-dark-purple transition-all duration-300 group/link">
-									<span>View Events →</span>
-								</a>
-								</div>
-							</div>
-							</div>
-						</div>
-						))}
+  <div class="flex-shrink-0 w-64 sm:w-72">
+    <div class="group relative overflow-hidden bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 h-full flex flex-col justify-center min-h-[70px]">
+      <div class="h-2/3 overflow-hidden">
+        <CldImg
+          src={chapter.image.src || chapter.image}
+          alt={chapter.name}
+          width={480}
+          heights={[300]}
+          crop="fill"
+          gravity="auto"
+          quality="auto:eco"
+          sizes="90vw"
+          class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+        />
+      </div>
+      <div class="px-2 py-1 h-1/3 flex flex-col justify-center">
+        <div class="text-center flex flex-col items-center">
+          <h3 class="text-xl font-serif text-dark-gray mb-1">{chapter.name}</h3>
+          <p class="text-dark-gray/60 text-base mb-3">{chapter.location}</p>
+          <a
+            href={chapter.eventsHref}
+            class="flex items-center justify-center text-jean text-sm font-semibold underline hover:text-dark-purple transition-all duration-300 group/link"
+          >
+            <span>View Events →</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+))}
+
 
 				</div>
 				<p class="text-center text-sm text-dark-gray/60 mt-6 px-6">← Swipe to explore all chapters →</p>
@@ -1499,7 +1640,7 @@ const arrowRightSrc = arrowright.src;
                 <div class="p-6">
                   <h3 class="text-2xl font-serif text-dark-gray mb-2">${chapter.name}</h3>
                   <p class="text-dark-gray/60 text-sm mb-4">${chapter.location}</p>
-                  <a href="/events?chapterId=${chapter.name.toLowerCase().replace(/\s+/g, '-')}" class="inline-flex items-center text-jean text-sm font-semibold hover:text-dark-purple transition-colors duration-300">
+                  <a href="${chapter.eventsHref}" class="inline-flex items-center text-jean text-sm font-semibold hover:text-dark-purple transition-colors duration-300">
                     <span>View Events</span>
                     <img src="${arrowRightSrc}" alt="Arrow right" class="w-3 ml-2 group-hover:translate-x-1 transition-transform duration-300" />
                   </a>
