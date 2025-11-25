@@ -199,16 +199,16 @@ const partners = [
   { name: 'Hudson Yards', logo: "https://res.cloudinary.com/daaznyhsu/image/upload/v1757680890/Hudson_yards_xyhhmn.svg", type: 'venue', size: 'large', url: 'https://www.hudsonyardsnewyork.com' },
   { name: 'NYPL', logo: "https://res.cloudinary.com/daaznyhsu/image/upload/v1757680804/nypl_wakfrc.png", type: 'venue', size: 'medium', url: 'https://www.nypl.org' },
   { name: 'Audible', logo: "https://res.cloudinary.com/daaznyhsu/image/upload/v1763818104/audible-logo_jtch82.png", type: 'brand', size: 'medium', url: 'https://www.audible.com/' },
-  { name: 'Tomorrowland', logo: "https://res.cloudinary.com/daaznyhsu/image/upload/v1757680936/tomorrowland_od7ryd.svg", type: 'brand', size: 'small', url: 'https://www.tomorrowland.com' },
+  { name: 'Tomorrowland', logo: "https://res.cloudinary.com/daaznyhsu/image/upload/v1757680936/tomorrowland_od7ryd.svg", type: 'brand', size: 'medium', url: 'https://www.tomorrowland.com' },
   { name: 'Rivian', logo: "https://res.cloudinary.com/daaznyhsu/image/upload/v1757680853/rivian_wopyfl.png", type: 'brand', size: 'medium', url: 'https://rivian.com' },
-  { name: 'Naked Life', logo: "https://res.cloudinary.com/daaznyhsu/image/upload/v1757681031/naked_life_vmlkxu.webp", type: 'brand', size: 'small', url: 'https://drinknakedlife.com/pages/age-gate' },
+  { name: 'Naked Life', logo: "https://res.cloudinary.com/daaznyhsu/image/upload/v1757681031/naked_life_vmlkxu.webp", type: 'brand', size: 'medium', url: 'https://drinknakedlife.com/pages/age-gate' },
   { name: 'Bookshop.org', logo: "https://res.cloudinary.com/daaznyhsu/image/upload/v1763610971/bookshop-logo_zoeimx.svg", type: 'brand', size: 'medium', url: 'https://bookshop.org/' },
   { name: 'TIFA', logo: "https://res.cloudinary.com/daaznyhsu/image/upload/v1763611489/tifa-logo_dgllma.png", type: 'brand', size: 'medium', url: 'https://festivalofauthors.ca/' },
   { name: 'City Point BKLYN', logo: "https://res.cloudinary.com/daaznyhsu/image/upload/v1763611164/citypoint-logo_hab8i7.avif", type: 'brand', size: 'small', url: 'https://www.citypointbrooklyn.com/' },
   {name: 'Brooklyn Book Festival', logo: "https://res.cloudinary.com/daaznyhsu/image/upload/v1763611848/BKBF-logo_eoq22j.png", type: 'brand', size: 'small', url: 'https://brooklynbookfestival.org/'},
   {name: 'Hinge', logo: "https://res.cloudinary.com/daaznyhsu/image/upload/v1763611726/hinge-logo_iyopa6.png", type: 'brand', size: 'small', url: 'https://hinge.co/'},
-  { name: 'Threads', logo: "https://res.cloudinary.com/daaznyhsu/image/upload/v1757681143/threads_ksz0rq.avif", type: 'brand', size: 'medium', url: 'https://www.threads.net' },
-  { name: 'Immi', logo: "https://res.cloudinary.com/daaznyhsu/image/upload/v1757680995/immi_t6iyde.webp", type: 'brand', size: 'medium', url: 'https://immieats.com/' },
+  { name: 'Threads', logo: "https://res.cloudinary.com/daaznyhsu/image/upload/v1757681143/threads_ksz0rq.avif", type: 'brand', size: 'medium', url: 'https://www.threads.net', square: true },
+  { name: 'Immi', logo: "https://res.cloudinary.com/daaznyhsu/image/upload/v1757680995/immi_t6iyde.webp", type: 'brand', size: 'large', url: 'https://immieats.com/', square: true },
 ];
 
 // Extended press coverage
@@ -740,30 +740,34 @@ const arrowRightSrc = arrowright.src;
 				<div class="hidden md:block mb-8">
 					<div class="grid grid-cols-3 lg:grid-cols-4 gap-6 lg:gap-8 max-w-6xl mx-auto">
 						{partners.map((partner, index) => {
-							// Size variations based on partner size property
 							const containerSizes = {
 								small: 'p-3 lg:p-4',
 								medium: 'p-4 lg:p-5',
 								large: 'p-5 lg:p-6'
 							};
-							
+
 							return (
 								<a href={partner.url} target="_blank" rel="noopener" class="group transform hover:scale-105 transition-all duration-300 cursor-pointer floating-logo">
-									<div class="relative">
-										<!-- Logo container with varying sizes -->
-										<div class={`bg-white rounded-2xl ${containerSizes[partner.size]} shadow-lg hover:shadow-xl transition-shadow duration-300 border border-gray-200 flex items-center justify-center min-h-[100px] lg:min-h-[120px] ${partner.name === 'Hachette Books' ? 'p-2 lg:p-3' : ''}`}>
-											<img
-											src={partner.logo}
-											alt={`${partner.name} logo`}
-											class="w-full h-full object-contain"
-											loading="lazy"
-											decoding="async"
-											/>
-										</div>
+								<div class="relative">
+									<div class={`bg-white rounded-2xl ${containerSizes[partner.size]} shadow-lg hover:shadow-xl transition-shadow duration-300 border border-gray-200 flex items-center justify-center min-h-[100px] lg:min-h-[120px] ${partner.name === 'Hachette Books' ? 'p-2 lg:p-3' : ''}`}>
+
+									<!-- UPDATED LOGO SIZING -->
+									<img
+										src={partner.logo}
+										alt={`${partner.name} logo`}
+										class={`object-contain w-auto
+										${partner.size === 'small' ? 'max-h-10 md:max-h-14' : 'max-h-20 md:max-h-24'}
+										`}
+										loading="lazy"
+										decoding="async"
+									/>
+
 									</div>
+								</div>
 								</a>
 							);
-						})}
+							})}
+
 					</div>
 				</div>
 				
@@ -771,29 +775,34 @@ const arrowRightSrc = arrowright.src;
 				<div class="md:hidden mb-8">
 					<div class="grid grid-cols-2 gap-4 max-w-lg mx-auto">
 						{partners.map((partner) => {
-							// Mobile-specific sizing
-							const mobileContainerSizes = {
-								small: 'p-2',
-								medium: 'p-3',
-								large: 'p-4'
-							};
-							
-							return (
-								<a href={partner.url} target="_blank" rel="noopener" class="group transform hover:scale-105 transition-all duration-300 cursor-pointer" data-name={partner.name.toLowerCase()}>
-									<div class="relative">
-										<div class={`bg-white rounded-xl ${mobileContainerSizes[partner.size]} shadow-md hover:shadow-lg transition-shadow duration-300 border border-gray-200 flex items-center justify-center min-h-[100px]`}>
-											<img
-											src={partner.logo}
-											alt={`${partner.name} logo`}
-											class="w-full h-full object-contain"
-											loading="lazy"
-											decoding="async"
-											/>
-										</div>
-									</div>
-								</a>
-							);
+						const mobileContainerSizes = {
+							small: 'p-2',
+							medium: 'p-3',
+							large: 'p-4'
+						};
+
+						return (
+							<a href={partner.url} target="_blank" rel="noopener" class="group transform hover:scale-105 transition-all duration-300 cursor-pointer" data-name={partner.name.toLowerCase()}>
+							<div class="relative">
+								<div class={`bg-white rounded-xl ${mobileContainerSizes[partner.size]} shadow-md hover:shadow-lg transition-shadow duration-300 border border-gray-200 flex items-center justify-center min-h-[100px]`}>
+
+								<!-- UPDATED LOGO SIZING -->
+								<img
+									src={partner.logo}
+									alt={`${partner.name} logo`}
+									class={`object-contain w-auto
+									${partner.size === 'small' ? 'max-h-10' : 'max-h-16'}
+									`}
+									loading="lazy"
+									decoding="async"
+								/>
+
+								</div>
+							</div>
+							</a>
+						);
 						})}
+
 					</div>
 				</div>
 			</div>
