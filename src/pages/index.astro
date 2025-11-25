@@ -736,40 +736,92 @@ const arrowRightSrc = arrowright.src;
 				<div class="absolute top-1/2 right-1/4 w-20 h-20 bg-gradient-to-br from-dark-purple/10 to-jean/15 rounded-full blur-xl animate-pulse" style="animation-delay: 4s;"></div>
 				
 				<!-- Creative constellation-style logo layout -->
+				
 				<!-- Desktop Constellation Layout (md and up) -->
-				<div class="hidden md:block mb-8">
+					<div class="hidden md:block mb-8">
 					<div class="grid grid-cols-3 lg:grid-cols-4 gap-6 lg:gap-8 max-w-6xl mx-auto">
 						{partners.map((partner, index) => {
-							const containerSizes = {
-								small: 'p-3 lg:p-4',
-								medium: 'p-4 lg:p-5',
-								large: 'p-5 lg:p-6'
-							};
+						const containerSizes = {
+							small: 'p-3 lg:p-4',
+							medium: 'p-4 lg:p-5',
+							large: 'p-5 lg:p-6'
+						};
 
-							return (
-								<a href={partner.url} target="_blank" rel="noopener" class="group transform hover:scale-105 transition-all duration-300 cursor-pointer floating-logo">
-								<div class="relative">
-									<div class={`bg-white rounded-2xl ${containerSizes[partner.size]} shadow-lg hover:shadow-xl transition-shadow duration-300 border border-gray-200 flex items-center justify-center min-h-[100px] lg:min-h-[120px] ${partner.name === 'Hachette Books' ? 'p-2 lg:p-3' : ''}`}>
+						// ====== NEW: logic to center the last row ======
+						const total = partners.length;
 
-									<!-- UPDATED LOGO SIZING -->
-									<img
-										src={partner.logo}
-										alt={`${partner.name} logo`}
-										class={`object-contain w-auto
-										${partner.size === 'small' ? 'max-h-10 md:max-h-14' : 'max-h-20 md:max-h-24'}
-										`}
-										loading="lazy"
-										decoding="async"
-									/>
+						// md breakpoint: 3 columns
+						const mdCols = 3;
+						const mdRemainder = total % mdCols;
+						const mdRowIndex = Math.floor(index / mdCols);
+						const mdLastRowIndex = Math.floor((total - 1) / mdCols);
+						const mdIndexInRow = index % mdCols;
 
-									</div>
+						// lg breakpoint: 4 columns
+						const lgCols = 4;
+						const lgRemainder = total % lgCols;
+						const lgRowIndex = Math.floor(index / lgCols);
+						const lgLastRowIndex = Math.floor((total - 1) / lgCols);
+						const lgIndexInRow = index % lgCols;
+
+						let lastRowClasses = '';
+
+						// Center last row on md (3-col grid) when only 1 or 2 items
+						if (mdRowIndex === mdLastRowIndex && mdRemainder !== 0) {
+							if (mdRemainder === 1 && mdIndexInRow === 0) {
+							// 1 item -> center it in col 2
+							lastRowClasses += ' md:col-start-2';
+							} else if (mdRemainder === 2 && mdIndexInRow === 0) {
+							// 2 items -> start in col 2 (so they sit in 2 & 3)
+							lastRowClasses += ' md:col-start-2';
+							}
+						}
+
+						// Center last row on lg (4-col grid) when 1, 2, or 3 items
+						if (lgRowIndex === lgLastRowIndex && lgRemainder !== 0) {
+							if (lgRemainder === 1 && lgIndexInRow === 0) {
+							// 1 item -> span middle two columns
+							lastRowClasses += ' lg:col-start-2 lg:col-span-2';
+							} else if (lgRemainder === 2 && lgIndexInRow === 0) {
+							// 2 items -> start in col 2 (so they sit in 2 & 3)
+							lastRowClasses += ' lg:col-start-2';
+							} else if (lgRemainder === 3 && lgIndexInRow === 0) {
+							// 3 items -> shift the trio slightly to the center (cols 2–4)
+							lastRowClasses += ' lg:col-start-2';
+							}
+						}
+						// ====== END NEW ======
+
+						return (
+							<a
+							href={partner.url}
+							target="_blank"
+							rel="noopener"
+							class={`group transform hover:scale-105 transition-all duration-300 cursor-pointer floating-logo ${lastRowClasses}`}
+							>
+							<div class="relative">
+								<div
+								class={`bg-white rounded-2xl ${containerSizes[partner.size]} shadow-lg hover:shadow-xl transition-shadow duration-300 border border-gray-200 flex items-center justify-center min-h-[100px] lg:min-h-[120px] ${partner.name === 'Hachette Books' ? 'p-2 lg:p-3' : ''}`}
+								>
+								<img
+									src={partner.logo}
+									alt={`${partner.name} logo`}
+									class={`object-contain w-auto ${
+									partner.size === 'small'
+										? 'max-h-10 md:max-h-14'
+										: 'max-h-20 md:max-h-24'
+									}`}
+									loading="lazy"
+									decoding="async"
+								/>
 								</div>
-								</a>
-							);
-							})}
-
+							</div>
+							</a>
+						);
+						})}
 					</div>
-				</div>
+					</div>
+
 				
 				<!-- Mobile Grid Layout (sm and below) -->
 				<div class="md:hidden mb-8">
