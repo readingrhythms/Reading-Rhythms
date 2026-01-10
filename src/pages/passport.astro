@@ -1,0 +1,1956 @@
+---
+import BaseLayout from '@layouts/BaseLayout.astro';
+
+const serifFont = "https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;0,9..144,800;1,9..144,400;1,9..144,500;1,9..144,600&display=swap";
+
+const faqs = [
+  {
+    question: "Do I have to live in New York City to join?",
+    answer: "Nope! Our Global Connection Passport is fully virtual - if you have Wi-Fi and a book, you're in. The NYC tiers are best if you're in or near NYC and want to actually attend in-person events."
+  },
+  {
+    question: "How long does the Passport last?",
+    answer: "Each Passport covers one season - roughly three months of reading parties, book recommendations, and community connections. Your membership renews automatically so you never miss out."
+  },
+  {
+    question: "How often will I be charged for my Passport?",
+    answer: "It depends on your tier! Global Connection is billed monthly ($9/month after your free trial). NYC Reader and NYC All-Access are billed quarterly at the start of each new season. You can cancel anytime before your renewal date."
+  },
+  {
+    question: "What if I want to skip a season?",
+    answer: "No problem! Just cancel your subscription before the renewal date. You can rejoin anytime for the next season without any penalty. We'll send you a reminder email before your renewal so you don't forget."
+  },
+  {
+    question: "What exactly is a virtual reading party?",
+    answer: "A live Zoom session following our in-person format: guided breathwork, 30 min reading, 1:1 conversations, more reading, group discussions, and a closing moment. Your first month is free with the Global Connection passport!"
+  },
+  {
+    question: "I'm shy / introverted. Can I join?",
+    answer: "Absolutely! Most of our community identifies as bookish introverts. Hosts use gentle prompts, you can keep your camera off, and our small group discussions feel more like a cozy coffee hang than a networking event."
+  },
+  {
+    question: "What if I can't make every event?",
+    answer: "No problem! Life happens. The Passport is here to make connection easier, not add pressure. Come when you can."
+  },
+  {
+    question: "Can I bring a friend to events?",
+    answer: "Yes! NYC Reader passport holders can bring guests at regular ticket prices, while NYC All-Access members get 3 free friend tickets each season."
+  }
+];
+
+const tiers = [
+  {
+    name: "Global Connection",
+    badge: "VIRTUAL",
+    price: "$9",
+    period: "/month",
+    description: "For readers anywhere who want to connect virtually",
+    color: "beaber",
+    features: [
+      "Reading Rhythms mobile app",
+      "Personalized taste quiz",
+      "Monthly book recommendations",
+      "Community book picks",
+      "Unlimited virtual reading parties"
+    ],
+    cta: "Start Free Trial",
+    popular: false,
+    trial: "First month free"
+  },
+  {
+    name: "NYC Reader",
+    badge: "NEW YORK",
+    price: "$69",
+    period: "/season",
+    description: "Unlimited NYC events all winter long",
+    color: "jean",
+    features: [
+      "Everything in Global, plus:",
+      "Unlimited NYC reading events",
+      "Early merch access",
+      "Quarterly book giveaway entry"
+    ],
+    cta: "Get My Passport",
+    popular: true
+  },
+  {
+    name: "NYC All-Access",
+    badge: "VIP",
+    price: "$119",
+    period: "/season",
+    description: "The complete experience with VIP perks",
+    color: "rust",
+    features: [
+      "Everything in NYC Reader, plus:",
+      "Guest list for sold-out events",
+      "3 free friend tickets per season",
+      "Exclusive tote bag",
+      "Priority event RSVPs"
+    ],
+    cta: "Get My Passport",
+    popular: false
+  }
+];
+---
+
+<BaseLayout title='Reading Rhythms | Winter Passport' description='The Winter Passport: Join a seasonal reading community and make real bookish friendships.' showNavbar={true} fullWidth={true}>
+
+  <style is:global>
+    @import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;0,9..144,800;1,9..144,400;1,9..144,500;1,9..144,600&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap');
+
+    .passport-page {
+      font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    }
+
+    .passport-page .font-display {
+      font-family: 'Fraunces', Georgia, 'Times New Roman', serif !important;
+      font-weight: 600;
+      font-optical-sizing: auto;
+    }
+
+    @keyframes marquee {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+
+    .animate-marquee {
+      animation: marquee 40s linear infinite;
+    }
+
+    @keyframes spin-slow {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+
+    .animate-spin-slow {
+      animation: spin-slow 20s linear infinite;
+    }
+
+    @keyframes float-slow {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-8px); }
+    }
+
+    @keyframes float-medium {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-12px); }
+    }
+
+    .animate-float-slow { animation: float-slow 6s ease-in-out infinite; }
+    .animate-float-medium { animation: float-medium 5s ease-in-out infinite; }
+
+    @keyframes pulse-soft {
+      0%, 100% { opacity: 0.6; }
+      50% { opacity: 0.9; }
+    }
+
+    .animate-pulse-soft {
+      animation: pulse-soft 4s ease-in-out infinite;
+    }
+
+    @keyframes map-dot-pulse {
+      0%, 100% {
+        transform: scale(1);
+        opacity: 0.8;
+      }
+      50% {
+        transform: scale(1.5);
+        opacity: 0.4;
+      }
+    }
+
+    .map-dot {
+      animation: map-dot-pulse 2s ease-in-out infinite;
+    }
+
+    .scroll-fade-up {
+      opacity: 0;
+      transform: translateY(60px);
+      transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .scroll-fade-up.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .scroll-slide-left {
+      opacity: 0;
+      transform: translateX(-80px);
+      transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .scroll-slide-left.visible {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    .scroll-slide-right {
+      opacity: 0;
+      transform: translateX(80px);
+      transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .scroll-slide-right.visible {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    .scroll-scale-in {
+      opacity: 0;
+      transform: scale(0.9);
+      transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .scroll-scale-in.visible {
+      opacity: 1;
+      transform: scale(1);
+    }
+
+    .stagger-children > *:nth-child(1) { transition-delay: 0s; }
+    .stagger-children > *:nth-child(2) { transition-delay: 0.1s; }
+    .stagger-children > *:nth-child(3) { transition-delay: 0.2s; }
+    .stagger-children > *:nth-child(4) { transition-delay: 0.3s; }
+    .stagger-children > *:nth-child(5) { transition-delay: 0.4s; }
+    .stagger-children > *:nth-child(6) { transition-delay: 0.5s; }
+
+    .parallax-float {
+      transition: transform 0.1s ease-out;
+    }
+
+    @keyframes gentle-float {
+      0%, 100% { transform: translateY(0) rotate(0deg); }
+      25% { transform: translateY(-10px) rotate(1deg); }
+      50% { transform: translateY(-5px) rotate(0deg); }
+      75% { transform: translateY(-15px) rotate(-1deg); }
+    }
+
+    .animate-gentle-float {
+      animation: gentle-float 8s ease-in-out infinite;
+    }
+
+    @keyframes float-rotate {
+      0%, 100% { transform: translateY(0) rotate(-6deg); }
+      50% { transform: translateY(-20px) rotate(-3deg); }
+    }
+
+    .animate-float-rotate {
+      animation: float-rotate 6s ease-in-out infinite;
+    }
+
+    .unified-cream-section {
+      background: #F8F2E6;
+    }
+  </style>
+
+  <div class="passport-page">
+
+  <!-- Hero Section - Bold Dark -->
+  <section class="relative min-h-screen overflow-hidden flex items-center pt-[80px] lg:pt-[96px]" style="background: #111111;">
+    <div class="absolute inset-0 overflow-hidden pointer-events-none">
+      <div class="absolute top-20 left-[10%] w-2 h-2 bg-parchment/20 rounded-full"></div>
+      <div class="absolute top-40 right-[20%] w-1.5 h-1.5 bg-khaki/30 rounded-full"></div>
+      <div class="absolute bottom-32 left-[25%] w-2 h-2 bg-parchment/15 rounded-full"></div>
+      <div class="absolute bottom-20 right-[15%] w-1 h-1 bg-khaki/25 rounded-full"></div>
+    </div>
+
+    <div class="relative w-full max-w-7xl mx-auto px-6 lg:px-8 py-12 lg:py-20">
+      <div class="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+
+        <!-- Left: Content -->
+        <div class="text-center lg:text-left order-2 lg:order-1">
+          <!-- Urgency Badge -->
+          <div class="flex justify-center lg:justify-start mb-4">
+            <div class="inline-flex items-center gap-2 px-4 py-2 bg-rust/20 border border-rust/30 rounded-full">
+              <span class="w-2 h-2 bg-rust rounded-full animate-pulse"></span>
+              <span class="text-sm text-cream-warm font-medium">Only 500 passports available!</span>
+            </div>
+          </div>
+
+          <h1 class="text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-display text-cream-warm leading-[1.1] mb-6">
+            Make Friends Through Your Favorite Books, <span class="italic">Wherever You Are</span>
+          </h1>
+
+          <p class="text-lg md:text-xl text-cream-warm/80 mb-6 leading-relaxed max-w-xl mx-auto lg:mx-0 font-sans">
+            Cozy reading parties and real connections, season after season. Turn "I wish I had bookish friends" into "these are my people."
+          </p>
+
+          <!-- Season badge -->
+          <p class="text-center lg:text-left text-sm text-cream-warm/70 mb-4 tracking-wide font-medium">Winter 2026 Season <span class="text-cream-warm/50">|</span> Jan 18 - Apr 18</p>
+
+          <!-- Countdown Timer -->
+          <div class="mb-8 flex justify-center lg:justify-start">
+            <div class="inline-flex items-center gap-4 px-6 py-4 bg-white/5 backdrop-blur-sm border border-cream-warm/15 rounded-2xl">
+              <span class="text-sm text-cream-warm/70 uppercase tracking-wider">Sign up closes</span>
+              <div id="hero-countdown" class="flex items-baseline gap-1 font-sans text-cream-warm">
+                <span id="hero-days" class="text-lg md:text-xl font-semibold">00</span>
+                <span class="text-sm text-cream-warm/60">d</span>
+                <span class="text-cream-warm/40 mx-1">:</span>
+                <span id="hero-hours" class="text-lg md:text-xl font-semibold">00</span>
+                <span class="text-sm text-cream-warm/60">h</span>
+                <span class="text-cream-warm/40 mx-1">:</span>
+                <span id="hero-mins" class="text-lg md:text-xl font-semibold">00</span>
+                <span class="text-sm text-cream-warm/60">m</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- CTA Buttons -->
+          <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start mb-6">
+            <button type="button" data-passport-cta class="px-8 py-4 bg-cream-warm text-night font-medium text-base rounded-xl transition-all duration-300 hover:bg-cream hover:shadow-lg hover:shadow-cream-warm/30 hover:-translate-y-0.5 cursor-pointer">
+              Get My Passport
+            </button>
+            <a href="#how-it-works" class="px-8 py-4 border-2 border-cream-warm/30 text-cream-warm font-medium text-base rounded-xl transition-all duration-300 hover:bg-cream-warm/10 hover:border-cream-warm/50">
+              See How It Works
+            </a>
+          </div>
+
+          <!-- Social proof -->
+          <div class="flex items-center gap-3 justify-center lg:justify-start text-sm text-cream-warm/60 mb-6">
+            <div class="flex -space-x-2">
+              <img src="https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg?auto=compress&cs=tinysrgb&w=100&h=100&fit=crop" alt="Reader" class="w-8 h-8 rounded-full object-cover border-2 border-night shadow-sm" />
+              <img src="https://images.pexels.com/photos/1222271/pexels-photo-1222271.jpeg?auto=compress&cs=tinysrgb&w=100&h=100&fit=crop" alt="Reader" class="w-8 h-8 rounded-full object-cover border-2 border-night shadow-sm" />
+              <img src="https://images.pexels.com/photos/1239291/pexels-photo-1239291.jpeg?auto=compress&cs=tinysrgb&w=100&h=100&fit=crop" alt="Reader" class="w-8 h-8 rounded-full object-cover border-2 border-night shadow-sm" />
+              <img src="https://images.pexels.com/photos/91227/pexels-photo-91227.jpeg?auto=compress&cs=tinysrgb&w=100&h=100&fit=crop" alt="Reader" class="w-8 h-8 rounded-full object-cover border-2 border-night shadow-sm" />
+            </div>
+            <p>Join 25,000+ readers</p>
+          </div>
+
+          <p class="text-center lg:text-left text-cream-warm/50 text-xs mb-2">Starting at $9/mo</p>
+          <p class="text-center lg:text-left text-cream-warm/40 text-xs">7-day money back guarantee</p>
+        </div>
+
+        <!-- Right: Phone Mockup with App Screenshot -->
+        <div class="relative order-1 lg:order-2 flex flex-col items-center">
+          <div class="relative">
+            <div class="absolute inset-0 bg-cream-warm/30 blur-[80px] rounded-full scale-150 -z-10"></div>
+            <div class="absolute inset-0 bg-khaki/20 blur-[60px] rounded-full scale-125 -z-10"></div>
+            <div class="relative w-[280px] md:w-[320px] lg:w-[340px] mx-auto">
+              <div class="relative bg-[#1a1a1a] rounded-[3rem] p-2 shadow-2xl shadow-black/50">
+                <div class="relative bg-black rounded-[2.5rem] overflow-hidden">
+                  <div class="absolute top-3 left-1/2 -translate-x-1/2 w-20 h-6 bg-black rounded-full z-20"></div>
+                  <div class="relative aspect-[9/19.5] overflow-hidden rounded-[2.3rem]">
+                    <img
+                      src="/assets/app-screenshot.png"
+                      alt="Reading Rhythms App"
+                      class="w-full h-full object-cover object-top"
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- App Store Badges with QR Code -->
+      <div class="flex flex-col items-center mt-10 lg:mt-12">
+        <p class="text-sm text-cream-warm/60 mb-4">Download the app</p>
+        <div class="flex items-center justify-center gap-5 p-4 bg-white/5 backdrop-blur-sm rounded-2xl border border-cream-warm/15">
+          <div class="flex items-center gap-4">
+            <a href="#" class="transition-all duration-300 hover:scale-105 hover:opacity-100 opacity-90">
+              <img src="https://developer.apple.com/assets/elements/badges/download-on-the-app-store.svg" alt="Download on the App Store" class="h-11 rounded-lg" />
+            </a>
+            <a href="#" class="transition-all duration-300 hover:scale-105 hover:opacity-100 opacity-90">
+              <img src="https://upload.wikimedia.org/wikipedia/commons/7/78/Google_Play_Store_badge_EN.svg" alt="Get it on Google Play" class="h-11 rounded-lg" />
+            </a>
+          </div>
+          <div class="hidden md:flex items-center gap-3 pl-4 border-l border-cream-warm/20">
+            <div class="bg-white rounded-lg p-1.5">
+              <svg class="w-10 h-10 text-night" viewBox="0 0 100 100" fill="currentColor">
+                <rect x="0" y="0" width="28" height="8"/><rect x="36" y="0" width="8" height="8"/><rect x="52" y="0" width="8" height="8"/><rect x="72" y="0" width="28" height="8"/>
+                <rect x="0" y="8" width="8" height="8"/><rect x="20" y="8" width="8" height="8"/><rect x="44" y="8" width="8" height="8"/><rect x="60" y="8" width="8" height="8"/><rect x="72" y="8" width="8" height="8"/><rect x="92" y="8" width="8" height="8"/>
+                <rect x="0" y="16" width="8" height="8"/><rect x="20" y="16" width="8" height="8"/><rect x="36" y="16" width="8" height="8"/><rect x="52" y="16" width="16" height="8"/><rect x="72" y="16" width="8" height="8"/><rect x="92" y="16" width="8" height="8"/>
+                <rect x="0" y="24" width="8" height="8"/><rect x="20" y="24" width="8" height="8"/><rect x="44" y="24" width="8" height="8"/><rect x="72" y="24" width="8" height="8"/><rect x="92" y="24" width="8" height="8"/>
+                <rect x="0" y="32" width="28" height="8"/><rect x="36" y="32" width="8" height="8"/><rect x="52" y="32" width="8" height="8"/><rect x="72" y="32" width="28" height="8"/>
+                <rect x="36" y="40" width="8" height="8"/><rect x="52" y="40" width="8" height="8"/>
+                <rect x="0" y="48" width="8" height="8"/><rect x="20" y="48" width="8" height="8"/><rect x="36" y="48" width="16" height="8"/><rect x="60" y="48" width="8" height="8"/><rect x="76" y="48" width="24" height="8"/>
+                <rect x="8" y="56" width="8" height="8"/><rect x="28" y="56" width="8" height="8"/><rect x="44" y="56" width="8" height="8"/><rect x="60" y="56" width="8" height="8"/><rect x="84" y="56" width="8" height="8"/>
+                <rect x="36" y="64" width="8" height="8"/><rect x="52" y="64" width="8" height="8"/><rect x="68" y="64" width="16" height="8"/><rect x="92" y="64" width="8" height="8"/>
+                <rect x="0" y="72" width="28" height="8"/><rect x="36" y="72" width="8" height="8"/><rect x="52" y="72" width="8" height="8"/><rect x="68" y="72" width="8" height="8"/><rect x="84" y="72" width="8" height="8"/>
+                <rect x="0" y="80" width="8" height="8"/><rect x="20" y="80" width="8" height="8"/><rect x="44" y="80" width="16" height="8"/><rect x="68" y="80" width="8" height="8"/><rect x="84" y="80" width="8" height="8"/>
+                <rect x="0" y="88" width="8" height="8"/><rect x="20" y="88" width="8" height="8"/><rect x="36" y="88" width="8" height="8"/><rect x="52" y="88" width="24" height="8"/><rect x="84" y="88" width="16" height="8"/>
+                <rect x="0" y="96" width="28" height="4"/><rect x="44" y="96" width="8" height="4"/><rect x="60" y="96" width="8" height="4"/><rect x="76" y="96" width="8" height="4"/><rect x="92" y="96" width="8" height="4"/>
+              </svg>
+            </div>
+            <span class="text-xs text-cream-warm/50">Scan to<br/>download</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- How It Works Section - Visual Cards -->
+  <section id="how-it-works" class="py-16 lg:py-24 unified-cream-section relative overflow-hidden">
+    <div class="absolute top-20 left-10 w-64 h-64 rounded-full bg-walnut/5 blur-3xl"></div>
+    <div class="absolute bottom-20 right-10 w-48 h-48 rounded-full bg-rust/5 blur-3xl"></div>
+    <div class="max-w-7xl mx-auto px-6 lg:px-8 relative">
+      <div class="text-center mb-16 lg:mb-20 scroll-fade-up">
+        <span class="inline-block px-4 py-2 bg-white border border-walnut/15 text-sm text-walnut mb-6 font-medium rounded-full shadow-sm">The Journey</span>
+        <h2 class="text-2xl md:text-3xl lg:text-4xl font-display text-night mb-4">
+          How it works
+        </h2>
+        <p class="text-lg text-dark-gray/70 max-w-2xl mx-auto">Five simple steps from download to <em class="not-italic text-dark-gray">real</em> friendships</p>
+      </div>
+
+      <!-- Horizontal Timeline -->
+      <div class="relative scroll-fade-up">
+        <!-- Connecting line behind steps -->
+        <div class="hidden lg:block absolute top-12 left-[10%] right-[10%] h-1 bg-gradient-to-r from-walnut/20 via-rust/30 to-jean/40 rounded-full z-0"></div>
+
+        <!-- Steps Grid -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6 lg:gap-4 relative z-10">
+          <!-- Step 1 -->
+          <div class="group text-center">
+            <div class="relative inline-block mb-4">
+              <div class="w-20 h-20 lg:w-24 lg:h-24 bg-walnut/10 rounded-full flex items-center justify-center group-hover:scale-110 transition-transform duration-300 shadow-lg border border-walnut/15 mx-auto bg-[#F5EFE0]">
+                <svg class="w-9 h-9 lg:w-10 lg:h-10 text-walnut" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z"></path>
+                </svg>
+              </div>
+              <span class="absolute -top-1 -right-1 w-7 h-7 bg-white rounded-full flex items-center justify-center text-xs font-display text-walnut/70 border border-walnut/15 shadow-sm">01</span>
+            </div>
+            <h3 class="text-base font-bold text-night mb-1">Download the app</h3>
+            <p class="text-dark-gray/70 text-sm leading-relaxed">iOS or Android. Your reading life starts here.</p>
+          </div>
+
+          <!-- Step 2 -->
+          <div class="group text-center">
+            <div class="relative inline-block mb-4">
+              <div class="w-20 h-20 lg:w-24 lg:h-24 bg-[#F5EFE0] rounded-full flex items-center justify-center group-hover:scale-110 transition-transform duration-300 shadow-lg border border-rust/15 mx-auto">
+                <svg class="w-9 h-9 lg:w-10 lg:h-10 text-rust" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path>
+                </svg>
+              </div>
+              <span class="absolute -top-1 -right-1 w-7 h-7 bg-white rounded-full flex items-center justify-center text-xs font-display text-rust/70 border border-rust/15 shadow-sm">02</span>
+            </div>
+            <h3 class="text-base font-bold text-night mb-1">Take the taste quiz</h3>
+            <p class="text-dark-gray/70 text-sm leading-relaxed">3 minutes for genres, pace, and social energy.</p>
+          </div>
+
+          <!-- Step 3 -->
+          <div class="group text-center">
+            <div class="relative inline-block mb-4">
+              <div class="w-20 h-20 lg:w-24 lg:h-24 bg-[#F5EFE0] rounded-full flex items-center justify-center group-hover:scale-110 transition-transform duration-300 shadow-lg border border-beaber/15 mx-auto">
+                <svg class="w-9 h-9 lg:w-10 lg:h-10 text-beaber" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 5v2m0 4v2m0 4v2M5 5a2 2 0 00-2 2v3a2 2 0 110 4v3a2 2 0 002 2h14a2 2 0 002-2v-3a2 2 0 110-4V7a2 2 0 00-2-2H5z"></path>
+                </svg>
+              </div>
+              <span class="absolute -top-1 -right-1 w-7 h-7 bg-white rounded-full flex items-center justify-center text-xs font-display text-beaber/70 border border-beaber/15 shadow-sm">03</span>
+            </div>
+            <h3 class="text-base font-bold text-night mb-1">Choose your passport</h3>
+            <p class="text-dark-gray/70 text-sm leading-relaxed">Virtual worldwide or NYC in-person events.</p>
+          </div>
+
+          <!-- Step 4 -->
+          <div class="group text-center">
+            <div class="relative inline-block mb-4">
+              <div class="w-20 h-20 lg:w-24 lg:h-24 bg-[#F5EFE0] rounded-full flex items-center justify-center group-hover:scale-110 transition-transform duration-300 shadow-lg border border-walnut/15 mx-auto">
+                <svg class="w-9 h-9 lg:w-10 lg:h-10 text-walnut" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+                </svg>
+              </div>
+              <span class="absolute -top-1 -right-1 w-7 h-7 bg-white rounded-full flex items-center justify-center text-xs font-display text-walnut/70 border border-walnut/15 shadow-sm">04</span>
+            </div>
+            <h3 class="text-base font-bold text-night mb-1">Start showing up</h3>
+            <p class="text-dark-gray/70 text-sm leading-relaxed">Browse events, RSVP with one tap.</p>
+          </div>
+
+          <!-- Step 5 -->
+          <div class="group text-center">
+            <div class="relative inline-block mb-4">
+              <div class="w-20 h-20 lg:w-24 lg:h-24 bg-jean rounded-full flex items-center justify-center group-hover:scale-110 transition-transform duration-300 shadow-lg border border-jean/30 mx-auto">
+                <svg class="w-9 h-9 lg:w-10 lg:h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>
+                </svg>
+              </div>
+              <span class="absolute -top-1 -right-1 w-7 h-7 bg-jean rounded-full flex items-center justify-center text-xs font-display text-white border border-jean/30 shadow-sm">05</span>
+            </div>
+            <h3 class="text-base font-bold text-night mb-1">Make real friends</h3>
+            <p class="text-dark-gray/70 text-sm leading-relaxed">See the same faces week after week.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Bridge to TBR -->
+      <div class="mt-16 flex flex-col items-center">
+        <div class="w-px h-12 bg-gradient-to-b from-walnut/20 to-walnut/5"></div>
+        <p class="text-sm text-walnut/60 font-medium mt-4 tracking-wide">But here's the thing...</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- TBR Problem Statement Section -->
+  <section class="pt-8 pb-24 lg:pt-12 lg:pb-32 unified-cream-section relative overflow-hidden">
+    <div class="absolute top-20 left-10 w-64 h-64 rounded-full bg-walnut/5 blur-3xl"></div>
+    <div class="absolute bottom-20 right-10 w-48 h-48 rounded-full bg-walnut/5 blur-3xl"></div>
+    <div class="relative max-w-6xl mx-auto px-6 lg:px-8">
+      <div class="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+        <!-- Left: Rotating Images -->
+        <div class="relative order-2 lg:order-1">
+          <div class="relative overflow-hidden aspect-[4/5] rounded-3xl shadow-2xl tbr-slideshow">
+            <img
+              src="https://images.pexels.com/photos/3825527/pexels-photo-3825527.jpeg?auto=compress&cs=tinysrgb&w=800"
+              alt="Person reading"
+              class="tbr-slide absolute inset-0 w-full h-full object-cover opacity-100 transition-opacity duration-1000"
+            />
+            <img
+              src="https://images.pexels.com/photos/1766604/pexels-photo-1766604.jpeg?auto=compress&cs=tinysrgb&w=800"
+              alt="Cozy reading nook"
+              class="tbr-slide absolute inset-0 w-full h-full object-cover opacity-0 transition-opacity duration-1000"
+            />
+            <img
+              src="https://images.pexels.com/photos/4466492/pexels-photo-4466492.jpeg?auto=compress&cs=tinysrgb&w=800"
+              alt="Books and coffee"
+              class="tbr-slide absolute inset-0 w-full h-full object-cover opacity-0 transition-opacity duration-1000"
+            />
+            <img
+              src="https://images.pexels.com/photos/3747468/pexels-photo-3747468.jpeg?auto=compress&cs=tinysrgb&w=800"
+              alt="Reading together"
+              class="tbr-slide absolute inset-0 w-full h-full object-cover opacity-0 transition-opacity duration-1000"
+            />
+            <div class="absolute inset-0 bg-gradient-to-t from-walnut/40 via-walnut/10 to-transparent rounded-3xl"></div>
+          </div>
+        </div>
+
+        <!-- Right: Content -->
+        <div class="order-1 lg:order-2">
+          <h2 class="text-2xl md:text-3xl lg:text-4xl font-display text-night tracking-wide mb-10">
+            Winter Is Long. Let's Make It Less Lonely.
+          </h2>
+
+          <!-- Pain points as flowing "If you..." statements -->
+          <div class="space-y-6 mb-8">
+            <!-- Point 1 -->
+            <div class="group flex gap-4 md:gap-5 items-start">
+              <div class="flex-shrink-0">
+                <div class="w-12 h-12 bg-walnut/10 rounded-xl flex items-center justify-center text-xl">
+                  <svg class="w-5 h-5 text-walnut" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path>
+                  </svg>
+                </div>
+              </div>
+              <p class="text-base md:text-lg text-dark-gray/80 leading-relaxed pt-2">
+                If you <span class="text-dark-gray font-medium">stay inside all day</span> to stay warm, then scroll alone by night...
+              </p>
+            </div>
+
+            <!-- Point 2 -->
+            <div class="group flex gap-4 md:gap-5 items-start">
+              <div class="flex-shrink-0">
+                <div class="w-12 h-12 bg-walnut/10 rounded-xl flex items-center justify-center text-xl">
+                  <svg class="w-5 h-5 text-walnut" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
+                  </svg>
+                </div>
+              </div>
+              <p class="text-base md:text-lg text-dark-gray/80 leading-relaxed pt-2">
+                If you <span class="text-dark-gray font-medium">speed through books</span>, but rarely meet people who really <em>get</em> why you love them...
+              </p>
+            </div>
+
+            <!-- Point 3 -->
+            <div class="group flex gap-4 md:gap-5 items-start">
+              <div class="flex-shrink-0">
+                <div class="w-12 h-12 bg-walnut/10 rounded-xl flex items-center justify-center text-xl">
+                  <svg class="w-5 h-5 text-walnut" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                  </svg>
+                </div>
+              </div>
+              <p class="text-base md:text-lg text-dark-gray/80 leading-relaxed pt-2">
+                If you <span class="text-dark-gray font-medium">meet cool people</span> at events... but then it's <em>"see you never"</em> after...
+              </p>
+            </div>
+          </div>
+
+          <!-- THEN conclusion - the logical payoff -->
+          <div class="mt-10 pt-8 border-t border-walnut/20">
+            <p class="text-xl md:text-2xl font-display text-rust mb-4">
+              Then the Winter Passport is for you.
+            </p>
+            <p class="text-base md:text-lg text-dark-gray/80 leading-relaxed mb-6">
+              A community that gets it. People who show up consistently, remember your favorite tropes, and text you <span class="text-dark-gray font-medium">"we need to talk about this ending."</span>
+            </p>
+
+            <div class="grid sm:grid-cols-3 gap-4 mt-6">
+              <div class="flex items-start gap-3">
+                <div class="w-8 h-8 bg-walnut/10 rounded-lg flex items-center justify-center flex-shrink-0">
+                  <svg class="w-4 h-4 text-walnut" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M5 13l4 4L19 7"></path>
+                  </svg>
+                </div>
+                <p class="text-sm text-dark-gray/70"><span class="font-medium text-dark-gray">Stop being the planner.</span> We handle structure. You just show up.</p>
+              </div>
+              <div class="flex items-start gap-3">
+                <div class="w-8 h-8 bg-walnut/10 rounded-lg flex items-center justify-center flex-shrink-0">
+                  <svg class="w-4 h-4 text-walnut" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M5 13l4 4L19 7"></path>
+                  </svg>
+                </div>
+                <p class="text-sm text-dark-gray/70"><span class="font-medium text-dark-gray">Safe, calm vibes.</span> Small groups, cozy venues, no awkward pressure.</p>
+              </div>
+              <div class="flex items-start gap-3">
+                <div class="w-8 h-8 bg-walnut/10 rounded-lg flex items-center justify-center flex-shrink-0">
+                  <svg class="w-4 h-4 text-walnut" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M5 13l4 4L19 7"></path>
+                  </svg>
+                </div>
+                <p class="text-sm text-dark-gray/70"><span class="font-medium text-dark-gray">Friendships that build.</span> See the same faces, on purpose.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- CTA after TBR -->
+      <div class="mt-12 text-center">
+        <button type="button" data-passport-cta class="px-8 py-4 bg-night text-white font-medium text-base rounded-xl transition-all duration-300 hover:bg-night/90 hover:shadow-lg hover:shadow-night/20 hover:-translate-y-0.5 cursor-pointer">
+          Get My Passport
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Unified Cream Section - Stats, App Showcase -->
+  <div class="unified-cream-section">
+
+  <!-- Stats & Social Proof -->
+  <section class="pt-20 lg:pt-28 pb-8 relative overflow-hidden">
+    <div class="relative max-w-6xl mx-auto px-6 lg:px-8">
+      <!-- Section Header -->
+      <div class="text-center mb-12 scroll-fade-up">
+        <span class="inline-block px-4 py-2 bg-white border border-walnut/15 text-sm text-walnut mb-4 font-medium rounded-full shadow-sm">By the Numbers</span>
+        <h2 class="text-2xl md:text-3xl lg:text-4xl font-display text-night mb-3">
+          A Community That Shows Up
+        </h2>
+        <p class="text-dark-gray/60 max-w-lg mx-auto">Real readers, real connections, real impact</p>
+      </div>
+
+      <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-6 mb-16 scroll-fade-up stagger-children">
+        <!-- Stat 1 - Readers -->
+        <div class="relative text-center p-6 lg:p-8 bg-gradient-to-br from-white to-walnut/5 rounded-2xl shadow-sm border border-walnut/10 hover:shadow-lg hover:-translate-y-1 transition-all duration-300 group scroll-fade-up overflow-hidden">
+          <div class="relative z-10 w-12 h-12 mx-auto mb-4 rounded-2xl bg-walnut/10 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+            <svg class="w-6 h-6 text-walnut" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+          </div>
+          <p class="text-4xl lg:text-5xl font-display text-night mb-1 tracking-tight">25K<span class="text-walnut">+</span></p>
+          <p class="text-walnut text-sm font-medium">Active Readers</p>
+        </div>
+
+        <!-- Stat 2 - Events -->
+        <div class="relative text-center p-6 lg:p-8 bg-gradient-to-br from-white to-rust/5 rounded-2xl shadow-sm border border-rust/10 hover:shadow-lg hover:-translate-y-1 transition-all duration-300 group scroll-fade-up overflow-hidden">
+          <div class="relative z-10 w-12 h-12 mx-auto mb-4 rounded-2xl bg-rust/10 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+            <svg class="w-6 h-6 text-rust" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+          </div>
+          <p class="text-4xl lg:text-5xl font-display text-night mb-1 tracking-tight">500<span class="text-rust">+</span></p>
+          <p class="text-rust text-sm font-medium">Reading Parties Hosted</p>
+        </div>
+
+        <!-- Stat 3 - Cities -->
+        <div class="relative text-center p-6 lg:p-8 bg-gradient-to-br from-white to-jean/5 rounded-2xl shadow-sm border border-jean/10 hover:shadow-lg hover:-translate-y-1 transition-all duration-300 group scroll-fade-up overflow-hidden">
+          <div class="relative z-10 w-12 h-12 mx-auto mb-4 rounded-2xl bg-jean/10 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+            <svg class="w-6 h-6 text-jean" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+          </div>
+          <p class="text-4xl lg:text-5xl font-display text-night mb-1 tracking-tight">12</p>
+          <p class="text-jean text-sm font-medium">Cities Worldwide</p>
+        </div>
+
+        <!-- Stat 4 - NPS -->
+        <div class="relative text-center p-6 lg:p-8 bg-gradient-to-br from-white to-beaber/5 rounded-2xl shadow-sm border border-beaber/10 hover:shadow-lg hover:-translate-y-1 transition-all duration-300 group scroll-fade-up overflow-hidden">
+          <div class="relative z-10 w-12 h-12 mx-auto mb-4 rounded-2xl bg-beaber/10 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+            <svg class="w-6 h-6 text-beaber" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z"></path></svg>
+          </div>
+          <p class="text-4xl lg:text-5xl font-display text-night mb-1 tracking-tight">9.1</p>
+          <p class="text-beaber text-sm font-medium">Net Promoter Score</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Testimonials Section -->
+    <div class="relative overflow-hidden">
+      <!-- Fade edges -->
+      <div class="absolute left-0 top-0 bottom-0 w-24 bg-gradient-to-r from-[#F8F2E6] to-transparent z-10 pointer-events-none"></div>
+      <div class="absolute right-0 top-0 bottom-0 w-24 bg-gradient-to-l from-[#F8F2E6] to-transparent z-10 pointer-events-none"></div>
+
+      <div class="testimonial-marquee flex gap-5 animate-marquee hover:[animation-play-state:paused]">
+        <div class="flex-shrink-0 w-80 p-6 border border-jean/30 bg-gradient-to-br from-jean/20 to-jean/10 rounded-2xl shadow-lg shadow-jean/20 hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
+          <div class="flex items-center justify-between mb-4">
+            <svg class="w-6 h-6 text-jean/60" fill="currentColor" viewBox="0 0 24 24"><path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"></path></svg>
+          </div>
+          <p class="text-dark-gray text-sm leading-relaxed mb-4">"I leave every single Reading Rhythms party feeling like skipping all the way home even if the work day preceding it makes me tired or kind of cranky. I love seeing the stars in all your eyes as you depart as well, gives me goosebumps!"</p>
+          <p class="text-dark-gray/70 text-sm font-medium">— Regular Attendee</p>
+        </div>
+
+        <div class="flex-shrink-0 w-80 p-6 border border-rust/30 bg-gradient-to-br from-rust/20 to-rust/10 rounded-2xl shadow-lg shadow-rust/20 hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
+          <div class="flex items-center justify-between mb-4">
+            <svg class="w-6 h-6 text-rust/60" fill="currentColor" viewBox="0 0 24 24"><path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"></path></svg>
+          </div>
+          <p class="text-dark-gray text-sm leading-relaxed mb-4">"I'm so glad I found Reading Rhythms! I had no idea how much I needed and wanted to connect with other readers. Last night was another exceptional experience, full of connection, laughter, and community."</p>
+          <p class="text-dark-gray/70 text-sm font-medium">— Stacee</p>
+        </div>
+
+        <div class="flex-shrink-0 w-80 p-6 border border-beaber/30 bg-gradient-to-br from-beaber/20 to-beaber/10 rounded-2xl shadow-lg shadow-beaber/20 hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
+          <div class="flex items-center justify-between mb-4">
+            <svg class="w-6 h-6 text-beaber/60" fill="currentColor" viewBox="0 0 24 24"><path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"></path></svg>
+          </div>
+          <p class="text-dark-gray text-sm leading-relaxed mb-4">"Event space was great. Host brought great energy. Really enjoyed the quiet time reading and the conversation in the middle. Did get slightly distracted by the music (but only because it was good and I was Shazam'ing it)."</p>
+          <p class="text-dark-gray/70 text-sm font-medium">— Bradley Layton</p>
+        </div>
+
+        <div class="flex-shrink-0 w-80 p-6 border border-jean/30 bg-gradient-to-br from-jean/20 to-jean/10 rounded-2xl shadow-lg shadow-jean/20 hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
+          <div class="flex items-center justify-between mb-4">
+            <svg class="w-6 h-6 text-jean/60" fill="currentColor" viewBox="0 0 24 24"><path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"></path></svg>
+          </div>
+          <p class="text-dark-gray text-sm leading-relaxed mb-4">"I'm 88 years old and moved to Hudson Yards to be closer to my grandkids. I think this is a wonderful idea."</p>
+          <p class="text-dark-gray/70 text-sm font-medium">— Judith</p>
+        </div>
+
+        <div class="flex-shrink-0 w-80 p-6 border border-rust/30 bg-gradient-to-br from-rust/20 to-rust/10 rounded-2xl shadow-lg shadow-rust/20 hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
+          <div class="flex items-center justify-between mb-4">
+            <svg class="w-6 h-6 text-rust/60" fill="currentColor" viewBox="0 0 24 24"><path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"></path></svg>
+          </div>
+          <p class="text-dark-gray text-sm leading-relaxed mb-4">"It reminded me why I attend Reading Rhythms in the first place. Not only do they care about the readers, but they also champion the small businesses that helped shape this community in the first place."</p>
+          <p class="text-dark-gray/70 text-sm font-medium">— Andres</p>
+        </div>
+
+        <div class="flex-shrink-0 w-80 p-6 border border-beaber/30 bg-gradient-to-br from-beaber/20 to-beaber/10 rounded-2xl shadow-lg shadow-beaber/20 hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
+          <div class="flex items-center justify-between mb-4">
+            <svg class="w-6 h-6 text-beaber/60" fill="currentColor" viewBox="0 0 24 24"><path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"></path></svg>
+          </div>
+          <p class="text-dark-gray text-sm leading-relaxed mb-4">"That first event I attended was really cool for me because I'd been wanting to just read more often and making a plan to just go somewhere and read really kept me accountable to that."</p>
+          <p class="text-dark-gray/70 text-sm font-medium">— NYC Newcomer</p>
+        </div>
+
+        <div class="flex-shrink-0 w-80 p-6 border border-jean/30 bg-gradient-to-br from-jean/20 to-jean/10 rounded-2xl shadow-lg shadow-jean/20 hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
+          <div class="flex items-center justify-between mb-4">
+            <svg class="w-6 h-6 text-jean/60" fill="currentColor" viewBox="0 0 24 24"><path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"></path></svg>
+          </div>
+          <p class="text-dark-gray text-sm leading-relaxed mb-4">"I really enjoyed the choice to read by the sea, the atmosphere, and the connection that was created with the other readers."</p>
+          <p class="text-dark-gray/70 text-sm font-medium">— Bernardina (Amalfi Coast)</p>
+        </div>
+
+        <div class="flex-shrink-0 w-80 p-6 border border-rust/30 bg-gradient-to-br from-rust/20 to-rust/10 rounded-2xl shadow-lg shadow-rust/20 hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
+          <div class="flex items-center justify-between mb-4">
+            <svg class="w-6 h-6 text-rust/60" fill="currentColor" viewBox="0 0 24 24"><path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"></path></svg>
+          </div>
+          <p class="text-dark-gray text-sm leading-relaxed mb-4">"It was such an amazing event and I could see the Art of Gathering woven throughout the night, which was so fun. I absolutely loved it."</p>
+          <p class="text-dark-gray/70 text-sm font-medium">— Katie Dulka (The Art of Gathering)</p>
+        </div>
+
+        <div class="flex-shrink-0 w-80 p-6 border border-beaber/30 bg-gradient-to-br from-beaber/20 to-beaber/10 rounded-2xl shadow-lg shadow-beaber/20 hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
+          <div class="flex items-center justify-between mb-4">
+            <svg class="w-6 h-6 text-beaber/60" fill="currentColor" viewBox="0 0 24 24"><path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"></path></svg>
+          </div>
+          <p class="text-dark-gray text-sm leading-relaxed mb-4">"I am so back into reading thanks to Reading Rhythms - I even bought a Kindle."</p>
+          <p class="text-dark-gray/70 text-sm font-medium">— Community Member</p>
+        </div>
+
+        <div class="flex-shrink-0 w-80 p-6 border border-jean/30 bg-gradient-to-br from-jean/20 to-jean/10 rounded-2xl shadow-lg shadow-jean/20 hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
+          <div class="flex items-center justify-between mb-4">
+            <svg class="w-6 h-6 text-jean/60" fill="currentColor" viewBox="0 0 24 24"><path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"></path></svg>
+          </div>
+          <p class="text-dark-gray text-sm leading-relaxed mb-4">"Always a great time joining any reading party. Thank you for hosting one of my fave authors."</p>
+          <p class="text-dark-gray/70 text-sm font-medium">— Ellen</p>
+        </div>
+
+        <div class="flex-shrink-0 w-80 p-6 border border-rust/30 bg-gradient-to-br from-rust/20 to-rust/10 rounded-2xl shadow-lg shadow-rust/20 hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
+          <div class="flex items-center justify-between mb-4">
+            <svg class="w-6 h-6 text-rust/60" fill="currentColor" viewBox="0 0 24 24"><path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"></path></svg>
+          </div>
+          <p class="text-dark-gray text-sm leading-relaxed mb-4">"Happy New Year. 2024 was really special. I came to NYC and met you guys. I look forward to attending more Reading Rhythms events this year."</p>
+          <p class="text-dark-gray/70 text-sm font-medium">— Community Member</p>
+        </div>
+
+        <div class="flex-shrink-0 w-80 p-6 border border-beaber/30 bg-gradient-to-br from-beaber/20 to-beaber/10 rounded-2xl shadow-lg shadow-beaber/20 hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
+          <div class="flex items-center justify-between mb-4">
+            <svg class="w-6 h-6 text-beaber/60" fill="currentColor" viewBox="0 0 24 24"><path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"></path></svg>
+          </div>
+          <p class="text-dark-gray text-sm leading-relaxed mb-4">"A millennial library"</p>
+          <p class="text-dark-gray/70 text-sm font-medium">— Barstool Sports</p>
+        </div>
+      </div>
+    </div>
+    <div class="h-16 lg:h-20"></div>
+  </section>
+
+  <!-- Combined App Showcase + Global Reading Parties Section -->
+  <section class="py-20 lg:py-28 relative overflow-hidden bg-cream">
+    <div class="relative max-w-7xl mx-auto px-6 lg:px-8">
+      <!-- Section Header -->
+      <div class="text-center mb-16 scroll-fade-up">
+        <span class="inline-block px-4 py-2 bg-white border border-dark-gray/10 text-sm text-dark-gray/70 mb-6 rounded-full shadow-sm">
+          Available on iOS & Android
+        </span>
+        <h2 class="text-2xl md:text-3xl lg:text-4xl font-display text-dark-gray tracking-wide mb-4">
+          Your reading life, <span class="italic">all in one place</span>
+        </h2>
+        <p class="text-lg text-dark-gray/70 max-w-2xl mx-auto">
+          One app to discover events, get personalized recs, and join readers worldwide.
+        </p>
+      </div>
+
+      <!-- App Screenshots Row - Tilted phones with realistic UI -->
+      <div class="mb-16 lg:mb-20 scroll-fade-up">
+        <div class="flex justify-center items-center gap-4 lg:gap-8">
+          <!-- Screenshot 1 - Events Calendar -->
+          <div class="w-36 md:w-48 lg:w-56 transition-all duration-500 hover:-translate-y-3 hover:scale-105 -rotate-6">
+            <div class="bg-gradient-to-b from-gray-800 to-gray-900 rounded-[2rem] p-2 shadow-2xl shadow-dark-gray/20 transition-shadow duration-500 hover:shadow-dark-gray/40">
+              <div class="bg-cream rounded-[1.75rem] overflow-hidden aspect-[9/19.5]">
+                <div class="w-full h-full flex flex-col bg-gradient-to-b from-cream to-cream-dark">
+                  <div class="bg-jean/10 px-3 py-2 border-b border-jean/10">
+                    <p class="text-jean text-[8px] md:text-[10px] font-bold tracking-wide">EVENTS</p>
+                  </div>
+                  <div class="flex-1 p-2 space-y-1.5 overflow-hidden">
+                    <div class="bg-white rounded-lg p-2 shadow-sm border border-dark-gray/5">
+                      <div class="flex items-start gap-2">
+                        <div class="w-8 h-8 bg-rust/20 rounded-md flex flex-col items-center justify-center flex-shrink-0">
+                          <span class="text-[6px] text-rust font-bold">JAN</span>
+                          <span class="text-[10px] text-rust font-bold leading-none">24</span>
+                        </div>
+                        <div class="min-w-0">
+                          <p class="text-dark-gray text-[7px] md:text-[8px] font-semibold truncate">Chapter 15: West Village</p>
+                          <p class="text-dark-gray/50 text-[6px] md:text-[7px]">7:00 PM - Dante</p>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="bg-white rounded-lg p-2 shadow-sm border border-dark-gray/5">
+                      <div class="flex items-start gap-2">
+                        <div class="w-8 h-8 bg-jean/20 rounded-md flex flex-col items-center justify-center flex-shrink-0">
+                          <span class="text-[6px] text-jean font-bold">JAN</span>
+                          <span class="text-[10px] text-jean font-bold leading-none">31</span>
+                        </div>
+                        <div class="min-w-0">
+                          <p class="text-dark-gray text-[7px] md:text-[8px] font-semibold truncate">Chapter 16: Brooklyn</p>
+                          <p class="text-dark-gray/50 text-[6px] md:text-[7px]">6:30 PM - House of Wax</p>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="bg-white rounded-lg p-2 shadow-sm border border-dark-gray/5">
+                      <div class="flex items-start gap-2">
+                        <div class="w-8 h-8 bg-beaber/20 rounded-md flex flex-col items-center justify-center flex-shrink-0">
+                          <span class="text-[6px] text-beaber font-bold">FEB</span>
+                          <span class="text-[10px] text-beaber font-bold leading-none">07</span>
+                        </div>
+                        <div class="min-w-0">
+                          <p class="text-dark-gray text-[7px] md:text-[8px] font-semibold truncate">Virtual Global Party</p>
+                          <p class="text-dark-gray/50 text-[6px] md:text-[7px]">8:00 PM - Zoom</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Screenshot 2 (Featured/Center) - Home Dashboard -->
+          <div class="w-48 md:w-60 lg:w-72 z-10 transition-all duration-500 hover:-translate-y-4 hover:scale-105">
+            <div class="bg-gradient-to-b from-gray-800 to-gray-900 rounded-[2.25rem] p-2.5 shadow-2xl shadow-dark-gray/30 transition-shadow duration-500 hover:shadow-dark-gray/50">
+              <div class="bg-cream rounded-[2rem] overflow-hidden aspect-[9/19.5]">
+                <div class="w-full h-full flex flex-col bg-gradient-to-b from-cream to-cream-dark">
+                  <div class="bg-rust/10 px-4 py-3 border-b border-rust/10">
+                    <p class="text-rust text-[10px] md:text-xs font-bold tracking-wide">READING RHYTHMS</p>
+                  </div>
+                  <div class="flex-1 p-3 space-y-3 overflow-hidden">
+                    <div class="bg-white rounded-xl p-3 shadow-sm border border-dark-gray/5">
+                      <p class="text-dark-gray/50 text-[8px] uppercase tracking-wider mb-1">Next Event</p>
+                      <p class="text-dark-gray text-[10px] md:text-xs font-semibold mb-1">Chapter 15: West Village</p>
+                      <div class="flex items-center gap-2">
+                        <span class="px-2 py-0.5 bg-rust/10 text-rust text-[7px] md:text-[8px] rounded-full font-medium">Jan 24</span>
+                        <span class="text-dark-gray/50 text-[7px] md:text-[8px]">In 5 days</span>
+                      </div>
+                    </div>
+                    <div class="bg-white rounded-xl p-3 shadow-sm border border-dark-gray/5">
+                      <p class="text-dark-gray/50 text-[8px] uppercase tracking-wider mb-2">This Month's Pick</p>
+                      <div class="flex gap-2">
+                        <div class="w-8 h-12 bg-jean/20 rounded flex-shrink-0"></div>
+                        <div>
+                          <p class="text-dark-gray text-[9px] md:text-[10px] font-semibold leading-tight">Tomorrow, and Tomorrow, and Tomorrow</p>
+                          <p class="text-dark-gray/50 text-[7px] md:text-[8px]">Gabrielle Zevin</p>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="bg-white rounded-xl p-3 shadow-sm border border-dark-gray/5">
+                      <p class="text-dark-gray/50 text-[8px] uppercase tracking-wider mb-1">Your Stats</p>
+                      <div class="flex justify-between">
+                        <div class="text-center">
+                          <p class="text-rust text-sm md:text-base font-bold">12</p>
+                          <p class="text-dark-gray/50 text-[6px] md:text-[7px]">Chapters</p>
+                        </div>
+                        <div class="text-center">
+                          <p class="text-jean text-sm md:text-base font-bold">34</p>
+                          <p class="text-dark-gray/50 text-[6px] md:text-[7px]">Friends</p>
+                        </div>
+                        <div class="text-center">
+                          <p class="text-beaber text-sm md:text-base font-bold">8</p>
+                          <p class="text-dark-gray/50 text-[6px] md:text-[7px]">Books</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Screenshot 3 - Community/Matches -->
+          <div class="w-36 md:w-48 lg:w-56 transition-all duration-500 hover:-translate-y-3 hover:scale-105 rotate-6">
+            <div class="bg-gradient-to-b from-gray-800 to-gray-900 rounded-[2rem] p-2 shadow-2xl shadow-dark-gray/20 transition-shadow duration-500 hover:shadow-dark-gray/40">
+              <div class="bg-cream rounded-[1.75rem] overflow-hidden aspect-[9/19.5]">
+                <div class="w-full h-full flex flex-col bg-gradient-to-b from-cream to-cream-dark">
+                  <div class="bg-beaber/10 px-3 py-2 border-b border-beaber/10">
+                    <p class="text-beaber text-[8px] md:text-[10px] font-bold tracking-wide">COMMUNITY</p>
+                  </div>
+                  <div class="flex-1 p-2 space-y-1.5 overflow-hidden">
+                    <p class="text-dark-gray/50 text-[7px] px-1 mb-1">Your Reading Matches</p>
+                    <div class="bg-white rounded-lg p-2 shadow-sm border border-dark-gray/5">
+                      <div class="flex items-center gap-2">
+                        <div class="w-7 h-7 bg-rust/30 rounded-full flex items-center justify-center text-[8px] font-bold text-rust">SM</div>
+                        <div class="min-w-0 flex-1">
+                          <p class="text-dark-gray text-[8px] font-semibold">Sarah M.</p>
+                          <p class="text-dark-gray/50 text-[6px]">Literary Fiction</p>
+                        </div>
+                        <div class="w-5 h-5 bg-beaber/20 rounded-full flex items-center justify-center">
+                          <span class="text-[7px] text-beaber font-bold">94%</span>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="bg-white rounded-lg p-2 shadow-sm border border-dark-gray/5">
+                      <div class="flex items-center gap-2">
+                        <div class="w-7 h-7 bg-jean/30 rounded-full flex items-center justify-center text-[8px] font-bold text-jean">JK</div>
+                        <div class="min-w-0 flex-1">
+                          <p class="text-dark-gray text-[8px] font-semibold">James K.</p>
+                          <p class="text-dark-gray/50 text-[6px]">Historical Fiction</p>
+                        </div>
+                        <div class="w-5 h-5 bg-beaber/20 rounded-full flex items-center justify-center">
+                          <span class="text-[7px] text-beaber font-bold">89%</span>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="bg-white rounded-lg p-2 shadow-sm border border-dark-gray/5">
+                      <div class="flex items-center gap-2">
+                        <div class="w-7 h-7 bg-beaber/30 rounded-full flex items-center justify-center text-[8px] font-bold text-beaber">AL</div>
+                        <div class="min-w-0 flex-1">
+                          <p class="text-dark-gray text-[8px] font-semibold">Alex L.</p>
+                          <p class="text-dark-gray/50 text-[6px]">Contemporary</p>
+                        </div>
+                        <div class="w-5 h-5 bg-beaber/20 rounded-full flex items-center justify-center">
+                          <span class="text-[7px] text-beaber font-bold">87%</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- App Features - Horizontal Strip -->
+      <div class="mb-24 lg:mb-32">
+        <div class="flex flex-wrap justify-center gap-x-8 gap-y-4 lg:gap-x-12">
+          <div class="flex items-center gap-3 group">
+            <div class="w-10 h-10 bg-jean/10 rounded-full flex items-center justify-center group-hover:bg-jean/20 transition-colors">
+              <svg class="w-5 h-5 text-jean" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+              </svg>
+            </div>
+            <div>
+              <p class="font-semibold text-dark-gray text-sm">Events Calendar</p>
+              <p class="text-dark-gray/50 text-xs">Browse & RSVP</p>
+            </div>
+          </div>
+
+          <div class="flex items-center gap-3 group">
+            <div class="w-10 h-10 bg-rust/10 rounded-full flex items-center justify-center group-hover:bg-rust/20 transition-colors">
+              <svg class="w-5 h-5 text-rust" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path>
+              </svg>
+            </div>
+            <div>
+              <p class="font-semibold text-dark-gray text-sm">Taste Quiz</p>
+              <p class="text-dark-gray/50 text-xs">Find your vibe</p>
+            </div>
+          </div>
+
+          <div class="flex items-center gap-3 group">
+            <div class="w-10 h-10 bg-beaber/10 rounded-full flex items-center justify-center group-hover:bg-beaber/20 transition-colors">
+              <svg class="w-5 h-5 text-beaber" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
+              </svg>
+            </div>
+            <div>
+              <p class="font-semibold text-dark-gray text-sm">Book Recs</p>
+              <p class="text-dark-gray/50 text-xs">Personalized picks</p>
+            </div>
+          </div>
+
+          <div class="flex items-center gap-3 group">
+            <div class="w-10 h-10 bg-walnut/10 rounded-full flex items-center justify-center group-hover:bg-walnut/20 transition-colors">
+              <svg class="w-5 h-5 text-walnut" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"></path>
+              </svg>
+            </div>
+            <div>
+              <p class="font-semibold text-dark-gray text-sm">Community</p>
+              <p class="text-dark-gray/50 text-xs">Find your people</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Global Reading Parties - Cream Section -->
+  <section class="pt-8 lg:pt-12 pb-20 lg:pb-28 relative overflow-hidden bg-cream">
+    <!-- Subtle cream background shape with rounded edges and fade -->
+    <div class="absolute inset-x-0 top-0 flex justify-center pointer-events-none">
+      <div class="w-full max-w-4xl h-[500px] bg-gradient-to-b from-[#F5EFE0]/60 via-[#F5EFE0]/30 to-transparent rounded-[3rem]"></div>
+    </div>
+
+    <div class="relative max-w-7xl mx-auto px-6 lg:px-8">
+      <!-- Header -->
+      <div class="text-center mb-12 scroll-fade-up">
+        <span class="inline-flex items-center gap-2 px-5 py-2.5 bg-white text-rust text-sm font-medium rounded-full shadow-sm border border-rust/20 mb-10">
+          <span class="w-2 h-2 bg-rust rounded-full animate-pulse"></span>
+          The Signature Experience
+        </span>
+
+        <!-- Circular Globe with Pulsing Dots -->
+        <div class="relative w-64 h-64 md:w-72 md:h-72 mx-auto mb-10">
+          <div class="relative w-full h-full rounded-full bg-gradient-to-br from-[#1a365d] via-[#2c5282] to-[#1a365d] shadow-2xl overflow-hidden border-4 border-walnut/20">
+            <div class="absolute inset-0 bg-gradient-to-t from-transparent via-white/5 to-white/20 rounded-full"></div>
+            <svg viewBox="0 0 200 200" class="w-full h-full" preserveAspectRatio="xMidYMid meet">
+              <defs>
+                <clipPath id="globe-clip">
+                  <circle cx="100" cy="100" r="96"/>
+                </clipPath>
+              </defs>
+              <g clip-path="url(#globe-clip)">
+                <g fill="#4a9079" opacity="0.6">
+                  <ellipse cx="55" cy="65" rx="25" ry="30"/>
+                  <ellipse cx="60" cy="120" rx="12" ry="25"/>
+                  <ellipse cx="115" cy="60" rx="18" ry="22"/>
+                  <ellipse cx="120" cy="100" rx="20" ry="28"/>
+                  <ellipse cx="155" cy="75" rx="28" ry="25"/>
+                  <ellipse cx="160" cy="140" rx="15" ry="12"/>
+                </g>
+                <circle class="globe-dot" cx="50" cy="60" r="5" fill="#B85C38" style="--delay: 0s;"/>
+                <circle class="globe-dot" cx="70" cy="85" r="4" fill="#B85C38" style="--delay: 0.5s;"/>
+                <circle class="globe-dot" cx="110" cy="55" r="5" fill="#B85C38" style="--delay: 1s;"/>
+                <circle class="globe-dot" cx="130" cy="70" r="4" fill="#B85C38" style="--delay: 1.5s;"/>
+                <circle class="globe-dot" cx="155" cy="65" r="5" fill="#B85C38" style="--delay: 2s;"/>
+                <circle class="globe-dot" cx="160" cy="135" r="4" fill="#B85C38" style="--delay: 2.5s;"/>
+                <circle class="globe-dot" cx="120" cy="110" r="4" fill="#B85C38" style="--delay: 3s;"/>
+                <circle class="globe-dot" cx="55" cy="130" r="4" fill="#B85C38" style="--delay: 3.5s;"/>
+              </g>
+            </svg>
+            <div class="absolute inset-0 rounded-full shadow-inner pointer-events-none" style="box-shadow: inset 0 0 40px rgba(0,0,0,0.3);"></div>
+          </div>
+          <div class="absolute -bottom-2 -right-2 px-3 py-1.5 bg-walnut text-white text-xs font-bold rounded-full shadow-md">
+            6 continents
+          </div>
+        </div>
+
+        <p class="text-sm text-rust font-medium uppercase tracking-wider mb-3">New for this Winter</p>
+        <h2 class="text-2xl md:text-3xl lg:text-4xl font-display text-night tracking-wide mb-5">
+          Global Reading <span class="italic text-rust">Parties</span>
+        </h2>
+        <p class="text-xl text-dark-gray/80 max-w-2xl mx-auto mb-4">
+          Live virtual reading sessions from anywhere in the world.
+        </p>
+        <p class="text-lg text-dark-gray/60 max-w-xl mx-auto mb-2">
+          Guided breathwork, curated music, cozy reading time, and 1:1 conversations with readers who get it.
+        </p>
+        <p class="text-base text-dark-gray/50 italic">
+          Meet readers from your couch. Pajamas absolutely encouraged.
+        </p>
+      </div>
+
+      <!-- What you get in a virtual party -->
+      <div class="grid md:grid-cols-3 gap-5 mb-8 mt-10">
+        <div class="bg-white rounded-2xl shadow-sm border border-rust/10 p-6 text-center hover:shadow-md hover:-translate-y-1 transition-all duration-300">
+          <div class="w-12 h-12 bg-rust/10 rounded-xl flex items-center justify-center mx-auto mb-4">
+            <svg class="w-6 h-6 text-rust" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"></path>
+            </svg>
+          </div>
+          <h4 class="font-bold text-dark-gray mb-2">Live Virtual Sessions</h4>
+          <p class="text-dark-gray/60 text-sm">90-minute reading parties on Zoom with readers worldwide, every week</p>
+        </div>
+
+        <div class="bg-white rounded-2xl shadow-sm border border-jean/10 p-6 text-center hover:shadow-md hover:-translate-y-1 transition-all duration-300">
+          <div class="w-12 h-12 bg-jean/10 rounded-xl flex items-center justify-center mx-auto mb-4">
+            <svg class="w-6 h-6 text-jean" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"></path>
+            </svg>
+          </div>
+          <h4 class="font-bold text-dark-gray mb-2">1:1 Breakout Chats</h4>
+          <p class="text-dark-gray/60 text-sm">Get paired with 2-3 readers for intimate conversations between reading blocks</p>
+        </div>
+
+        <div class="bg-white rounded-2xl shadow-sm border border-rust/10 p-6 text-center hover:shadow-md hover:-translate-y-1 transition-all duration-300">
+          <div class="w-12 h-12 bg-rust/10 rounded-xl flex items-center justify-center mx-auto mb-4">
+            <svg class="w-6 h-6 text-rust" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>
+            </svg>
+          </div>
+          <h4 class="font-bold text-dark-gray mb-2">Guided Experience</h4>
+          <p class="text-dark-gray/60 text-sm">Host-led breathwork to arrive, curated playlists, and group discussion to close</p>
+        </div>
+      </div>
+
+      <!-- Global reach callout -->
+      <div class="bg-white rounded-2xl shadow-sm border border-dark-gray/10 p-6 lg:p-8 mb-8">
+        <div class="flex flex-col md:flex-row items-center justify-between gap-6">
+          <div class="flex items-center gap-4">
+            <div class="flex -space-x-2">
+              <div class="w-9 h-9 bg-jean/20 rounded-full border-2 border-white flex items-center justify-center text-[10px] font-bold text-jean shadow-sm">NY</div>
+              <div class="w-9 h-9 bg-rust/20 rounded-full border-2 border-white flex items-center justify-center text-[10px] font-bold text-rust shadow-sm">UK</div>
+              <div class="w-9 h-9 bg-walnut/20 rounded-full border-2 border-white flex items-center justify-center text-[10px] font-bold text-walnut shadow-sm">AU</div>
+              <div class="w-9 h-9 bg-beaber/20 rounded-full border-2 border-white flex items-center justify-center text-[10px] font-bold text-beaber shadow-sm">+3</div>
+            </div>
+            <p class="text-sm text-dark-gray/80 font-medium">Readers across 6 continents</p>
+          </div>
+          <p class="text-sm text-rust/60 italic">
+            <span class="mr-1">&#129199;</span>
+            We're still waiting on you, Antarctica...
+          </p>
+        </div>
+      </div>
+
+      <!-- CTA -->
+      <div class="text-center">
+        <button type="button" data-passport-cta class="px-8 py-4 bg-night text-white font-medium text-base rounded-xl transition-all duration-300 hover:bg-night/90 hover:shadow-lg hover:shadow-night/20 hover:-translate-y-0.5 cursor-pointer">
+          Get My Passport
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Pricing & FAQ Section - Cream with Light Cards -->
+  <section id="pricing" class="py-20 lg:py-28 relative overflow-hidden bg-cream">
+    <div class="relative max-w-7xl mx-auto px-6 lg:px-8">
+      <div class="text-center mb-16 scroll-fade-up">
+        <span class="inline-flex items-center gap-2 px-4 py-2 bg-night/10 border border-night/10 text-sm text-dark-gray mb-6 font-medium rounded-full">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+          </svg>
+          Winter 2026 Season | Jan 18 - Apr 18
+        </span>
+        <h2 class="text-2xl md:text-3xl lg:text-4xl font-display text-dark-gray tracking-wide mb-6">
+          Choose your <span class="italic text-rust">passport</span>
+        </h2>
+        <p class="text-lg text-dark-gray/70 max-w-2xl mx-auto">
+          A season of cozy reading parties, curated connections, and bookish friendships that keep growing.
+        </p>
+      </div>
+
+      <div class="grid lg:grid-cols-3 gap-6 max-w-6xl mx-auto mb-12">
+        <!-- Global Connection Tier - Enhanced Free Trial -->
+        <div class="relative bg-white rounded-2xl shadow-sm border border-beaber/20 p-6 lg:p-8 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:border-beaber/40 overflow-hidden group">
+          <div class="absolute top-0 left-0 w-full h-1.5 bg-gradient-to-r from-beaber via-beaber/70 to-beaber/30 rounded-t-2xl"></div>
+
+          <div class="absolute -top-0.5 -right-0.5 overflow-hidden w-28 h-28">
+            <div class="absolute top-4 -right-8 bg-beaber text-night text-[10px] font-bold py-1 px-8 transform rotate-45 shadow-sm">
+              FREE TRIAL
+            </div>
+          </div>
+
+          <div class="text-center mb-6 pt-2">
+            <div class="w-12 h-12 bg-beaber/10 rounded-xl flex items-center justify-center mx-auto mb-4">
+              <svg class="w-6 h-6 text-beaber" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+              </svg>
+            </div>
+            <span class="inline-block px-3 py-1 bg-beaber/10 rounded-full text-xs font-semibold tracking-wider mb-3 text-beaber">
+              VIRTUAL
+            </span>
+            <h3 class="text-xl font-bold text-dark-gray mb-3">Global Connection</h3>
+
+            <div class="bg-beaber/10 border border-beaber/20 rounded-xl p-3 mb-3">
+              <div class="flex items-center justify-center gap-2 mb-1">
+                <span class="text-dark-gray/40 text-lg line-through">$9</span>
+                <span class="text-3xl font-display text-beaber">$0</span>
+                <span class="text-dark-gray/50 text-sm">first month</span>
+              </div>
+              <p class="text-beaber text-xs font-medium">Then $9/month - cancel anytime</p>
+            </div>
+            <p class="text-dark-gray/50 text-sm">For readers anywhere in the world</p>
+          </div>
+
+          <ul class="space-y-3 mb-8">
+            <li class="flex items-start gap-3">
+              <svg class="w-4 h-4 mt-0.5 flex-shrink-0 text-beaber" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+              </svg>
+              <span class="text-dark-gray/70 text-sm">Reading Rhythms mobile app</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <svg class="w-4 h-4 mt-0.5 flex-shrink-0 text-beaber" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+              </svg>
+              <span class="text-dark-gray/70 text-sm">Personalized taste quiz</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <svg class="w-4 h-4 mt-0.5 flex-shrink-0 text-beaber" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+              </svg>
+              <span class="text-dark-gray/70 text-sm">Monthly book recommendations</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <svg class="w-4 h-4 mt-0.5 flex-shrink-0 text-beaber" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+              </svg>
+              <span class="text-dark-gray/70 text-sm"><strong class="text-dark-gray">Unlimited</strong> virtual reading parties</span>
+            </li>
+          </ul>
+
+          <button type="button" data-passport-cta class="block w-full py-4 px-6 text-center font-medium transition-all duration-300 bg-night text-white rounded-xl hover:bg-night/90 hover:shadow-lg hover:shadow-night/30 cursor-pointer">
+            Start Free Trial
+          </button>
+          <p class="text-center text-dark-gray/40 text-xs mt-3">Free to start, then billed monthly</p>
+        </div>
+
+        <!-- NYC Reader Tier -->
+        <div class="relative bg-white rounded-2xl shadow-lg border-2 border-jean/30 p-6 lg:p-8 transition-all duration-300 hover:-translate-y-1 hover:border-jean/50 hover:shadow-xl lg:scale-105 lg:-my-4">
+          <div class="absolute top-0 left-0 w-full h-1.5 bg-gradient-to-r from-jean via-jean/60 to-transparent rounded-t-2xl"></div>
+          <div class="absolute -top-3.5 left-1/2 -translate-x-1/2 z-10">
+            <span class="px-4 py-1.5 bg-jean text-cream text-xs font-semibold rounded-full flex items-center gap-1.5 shadow-lg shadow-jean/30">
+              <svg class="w-3 h-3" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"></path></svg>
+              Most Popular
+            </span>
+          </div>
+
+          <div class="text-center mb-6 pt-4">
+            <div class="w-12 h-12 bg-jean/10 rounded-xl flex items-center justify-center mx-auto mb-4">
+              <svg class="w-6 h-6 text-jean" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
+              </svg>
+            </div>
+            <span class="inline-block px-3 py-1 bg-jean/10 rounded-full text-xs font-semibold tracking-wider mb-3 text-jean">
+              NEW YORK
+            </span>
+            <h3 class="text-xl font-bold text-dark-gray mb-2">NYC Reader</h3>
+            <div class="flex items-baseline justify-center gap-1 mb-2">
+              <span class="text-3xl font-display text-jean">$69</span>
+              <span class="text-dark-gray/50">/season</span>
+            </div>
+            <p class="text-dark-gray/50 text-sm">Unlimited NYC events all winter</p>
+          </div>
+
+          <ul class="space-y-3 mb-8">
+            <li class="flex items-start gap-3">
+              <svg class="w-4 h-4 mt-0.5 flex-shrink-0 text-jean" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+              </svg>
+              <span class="text-dark-gray/70 text-sm">Everything in Global, plus:</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <svg class="w-4 h-4 mt-0.5 flex-shrink-0 text-jean" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+              </svg>
+              <span class="text-dark-gray/70 text-sm"><strong class="text-dark-gray">Unlimited</strong> NYC reading events</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <svg class="w-4 h-4 mt-0.5 flex-shrink-0 text-jean" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+              </svg>
+              <span class="text-dark-gray/70 text-sm">Early merch access</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <svg class="w-4 h-4 mt-0.5 flex-shrink-0 text-jean" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+              </svg>
+              <span class="text-dark-gray/70 text-sm">Quarterly book giveaway entry</span>
+            </li>
+          </ul>
+
+          <button type="button" data-passport-cta class="block w-full py-4 px-6 text-center font-medium transition-all duration-300 bg-night text-white rounded-xl hover:bg-night/90 hover:shadow-lg hover:shadow-night/30 cursor-pointer">
+            Get My Passport
+          </button>
+          <p class="text-center text-dark-gray/40 text-xs mt-3">Billed quarterly. Cancel anytime.</p>
+        </div>
+
+        <!-- NYC All-Access Tier -->
+        <div class="relative bg-white rounded-2xl shadow-sm border border-rust/20 p-6 lg:p-8 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:border-rust/40 overflow-hidden group">
+          <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-rust via-rust/50 to-transparent rounded-t-2xl"></div>
+
+          <div class="text-center mb-6 pt-2">
+            <div class="w-12 h-12 bg-rust/10 rounded-xl flex items-center justify-center mx-auto mb-4">
+              <svg class="w-6 h-6 text-rust" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"></path>
+              </svg>
+            </div>
+            <span class="inline-block px-3 py-1 bg-rust/10 rounded-full text-xs font-semibold tracking-wider mb-3 text-rust">
+              VIP
+            </span>
+            <h3 class="text-xl font-bold text-dark-gray mb-2">NYC All-Access</h3>
+            <div class="flex items-baseline justify-center gap-1 mb-2">
+              <span class="text-3xl font-display text-rust">$99</span>
+              <span class="text-dark-gray/50">/season</span>
+            </div>
+            <p class="text-dark-gray/50 text-sm">The complete VIP experience</p>
+          </div>
+
+          <ul class="space-y-3 mb-8">
+            <li class="flex items-start gap-3">
+              <svg class="w-4 h-4 mt-0.5 flex-shrink-0 text-rust" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+              </svg>
+              <span class="text-dark-gray/70 text-sm">Everything in NYC Reader, plus:</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <svg class="w-4 h-4 mt-0.5 flex-shrink-0 text-rust" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+              </svg>
+              <span class="text-dark-gray/70 text-sm">Guest list for <strong class="text-dark-gray">sold-out</strong> events</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <svg class="w-4 h-4 mt-0.5 flex-shrink-0 text-rust" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+              </svg>
+              <span class="text-dark-gray/70 text-sm"><strong class="text-dark-gray">3 free friend tickets</strong> per season</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <svg class="w-4 h-4 mt-0.5 flex-shrink-0 text-rust" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+              </svg>
+              <span class="text-dark-gray/70 text-sm">Exclusive tote bag + enamel pin</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <svg class="w-4 h-4 mt-0.5 flex-shrink-0 text-rust" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+              </svg>
+              <span class="text-dark-gray/70 text-sm">Priority event RSVPs</span>
+            </li>
+          </ul>
+
+          <button type="button" data-passport-cta class="block w-full py-4 px-6 text-center font-medium transition-all duration-300 bg-night text-white rounded-xl hover:bg-night/90 hover:shadow-lg hover:shadow-night/30 cursor-pointer">
+            Get My Passport
+          </button>
+          <p class="text-center text-dark-gray/40 text-xs mt-3">Billed quarterly. Cancel anytime.</p>
+        </div>
+      </div>
+
+      <!-- Helper text for choosing -->
+      <div class="max-w-3xl mx-auto text-center mb-8">
+        <div class="inline-flex flex-col sm:flex-row items-center gap-4 sm:gap-8 px-6 py-4 bg-night/5 rounded-2xl border border-night/10">
+          <div class="flex items-center gap-2 text-dark-gray/70 text-sm">
+            <svg class="w-4 h-4 text-beaber" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+            </svg>
+            <span>Not in NYC? <strong class="text-dark-gray">Global</strong> is for you</span>
+          </div>
+          <div class="hidden sm:block w-px h-5 bg-dark-gray/20"></div>
+          <div class="flex items-center gap-2 text-dark-gray/70 text-sm">
+            <svg class="w-4 h-4 text-jean" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
+            </svg>
+            <span>In NYC? Get <strong class="text-dark-gray">NYC Reader</strong> or <strong class="text-dark-gray">All-Access</strong></span>
+          </div>
+        </div>
+      </div>
+
+      <p class="text-center text-sm text-dark-gray/50 italic mb-20">Limited to 500 passports this season. Once they're gone, they're gone.</p>
+
+      <!-- FAQ Section -->
+      <div class="max-w-3xl mx-auto">
+        <div class="text-center mb-12">
+          <div class="inline-flex items-center gap-2 px-4 py-2 bg-night/10 rounded-full border border-night/10 mb-6">
+            <svg class="w-4 h-4 text-rust" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+            </svg>
+            <span class="text-dark-gray/70 text-sm font-medium">Common Questions</span>
+          </div>
+          <h2 class="text-2xl md:text-3xl font-display text-dark-gray tracking-wide">
+            Questions? <span class="italic text-rust">Answered.</span>
+          </h2>
+        </div>
+
+        <div class="space-y-3" id="faq-accordion">
+          {faqs.map((faq, index) => (
+            <div class="faq-item bg-white rounded-2xl shadow-sm border border-dark-gray/10 overflow-hidden hover:shadow-md hover:border-dark-gray/20 transition-all duration-300">
+              <button
+                class="faq-trigger w-full px-6 py-5 text-left flex items-center justify-between"
+                data-index={index}
+              >
+                <span class="text-base font-semibold text-dark-gray pr-4">{faq.question}</span>
+                <div class="faq-icon-wrapper w-8 h-8 bg-dark-gray/5 rounded-xl border border-dark-gray/10 flex items-center justify-center flex-shrink-0">
+                  <svg class="faq-icon w-4 h-4 text-dark-gray/50 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                  </svg>
+                </div>
+              </button>
+              <div class="faq-content hidden px-6 pb-5">
+                <p class="text-dark-gray/70 leading-relaxed text-sm">{faq.answer}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        <div class="text-center mt-12">
+          <div class="inline-flex flex-col items-center bg-white rounded-2xl shadow-sm border border-dark-gray/10 px-8 py-6">
+            <p class="text-dark-gray/50 mb-3 text-sm">Still have questions?</p>
+            <a href="mailto:hello@readingrhythms.co" class="inline-flex items-center gap-2 text-rust hover:text-dark-gray transition-colors font-medium">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+              </svg>
+              hello@readingrhythms.co
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Final CTA Section with App Download -->
+  <section id="download" class="py-24 lg:py-32 bg-night relative overflow-hidden">
+    <div class="absolute inset-0 opacity-[0.03]" style="background-image: url(&quot;data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E&quot;);"></div>
+    <div class="absolute top-20 left-1/4 w-72 h-72 rounded-full bg-cream-warm/[0.03] blur-3xl"></div>
+    <div class="absolute bottom-10 right-1/4 w-96 h-96 rounded-full bg-cream-warm/[0.04] blur-3xl"></div>
+    <div class="relative max-w-4xl mx-auto px-6 lg:px-8 text-center scroll-fade-up">
+      <div class="inline-flex items-center gap-3 px-5 py-2.5 bg-cream-warm/10 rounded-full border border-cream-warm/20 mb-8">
+        <span class="w-2 h-2 bg-cream-warm rounded-full animate-pulse"></span>
+        <span class="text-cream-warm/90 text-sm font-medium">Winter Season: January 18th - April 18th</span>
+      </div>
+
+      <h2 class="text-2xl md:text-3xl lg:text-4xl font-display text-cream-warm tracking-wide mb-6">
+        Your people are <em>waiting</em>
+      </h2>
+      <p class="text-lg md:text-xl text-cream-warm/80 mb-10 max-w-2xl mx-auto">
+        Cozy reading parties. Real friendships with fellow book lovers. A community that grows with you, season after season.
+      </p>
+
+      <div class="flex flex-col sm:flex-row gap-4 justify-center mb-10">
+        <button type="button" data-passport-cta class="px-10 py-5 bg-cream-warm text-night font-medium text-lg rounded-xl transition-all duration-300 hover:bg-cream hover:shadow-lg hover:-translate-y-0.5 cursor-pointer">
+          Get My Passport
+        </button>
+      </div>
+
+      <!-- App Download Row -->
+      <div class="flex flex-col md:flex-row items-center justify-center gap-6 pt-8 border-t border-cream-warm/15">
+        <div class="flex items-center gap-4">
+          <a href="#" class="transition-all duration-300 hover:opacity-80 hover:-translate-y-0.5">
+            <img src="https://developer.apple.com/assets/elements/badges/download-on-the-app-store.svg" alt="Download on the App Store" class="h-10 rounded-lg" />
+          </a>
+          <a href="#" class="transition-all duration-300 hover:opacity-80 hover:-translate-y-0.5">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/7/78/Google_Play_Store_badge_EN.svg" alt="Get it on Google Play" class="h-10 rounded-lg" />
+          </a>
+        </div>
+
+        <div class="hidden md:flex items-center gap-4">
+          <div class="w-px h-10 bg-cream-warm/20 rounded-full"></div>
+          <div class="bg-white rounded-xl p-1.5 shadow-lg">
+            <svg class="w-10 h-10 text-night" viewBox="0 0 100 100" fill="currentColor">
+              <rect x="0" y="0" width="28" height="8"/><rect x="36" y="0" width="8" height="8"/><rect x="52" y="0" width="8" height="8"/><rect x="72" y="0" width="28" height="8"/>
+              <rect x="0" y="8" width="8" height="8"/><rect x="20" y="8" width="8" height="8"/><rect x="44" y="8" width="8" height="8"/><rect x="60" y="8" width="8" height="8"/><rect x="72" y="8" width="8" height="8"/><rect x="92" y="8" width="8" height="8"/>
+              <rect x="0" y="16" width="8" height="8"/><rect x="20" y="16" width="8" height="8"/><rect x="36" y="16" width="8" height="8"/><rect x="52" y="16" width="16" height="8"/><rect x="72" y="16" width="8" height="8"/><rect x="92" y="16" width="8" height="8"/>
+              <rect x="0" y="24" width="8" height="8"/><rect x="20" y="24" width="8" height="8"/><rect x="44" y="24" width="8" height="8"/><rect x="72" y="24" width="8" height="8"/><rect x="92" y="24" width="8" height="8"/>
+              <rect x="0" y="32" width="28" height="8"/><rect x="36" y="32" width="8" height="8"/><rect x="52" y="32" width="8" height="8"/><rect x="72" y="32" width="28" height="8"/>
+              <rect x="36" y="40" width="8" height="8"/><rect x="52" y="40" width="8" height="8"/>
+              <rect x="0" y="48" width="8" height="8"/><rect x="20" y="48" width="8" height="8"/><rect x="36" y="48" width="16" height="8"/><rect x="60" y="48" width="8" height="8"/><rect x="76" y="48" width="24" height="8"/>
+              <rect x="8" y="56" width="8" height="8"/><rect x="28" y="56" width="8" height="8"/><rect x="44" y="56" width="8" height="8"/><rect x="60" y="56" width="8" height="8"/><rect x="84" y="56" width="8" height="8"/>
+              <rect x="36" y="64" width="8" height="8"/><rect x="52" y="64" width="8" height="8"/><rect x="68" y="64" width="16" height="8"/><rect x="92" y="64" width="8" height="8"/>
+              <rect x="0" y="72" width="28" height="8"/><rect x="36" y="72" width="8" height="8"/><rect x="52" y="72" width="8" height="8"/><rect x="68" y="72" width="8" height="8"/><rect x="84" y="72" width="8" height="8"/>
+              <rect x="0" y="80" width="8" height="8"/><rect x="20" y="80" width="8" height="8"/><rect x="44" y="80" width="16" height="8"/><rect x="68" y="80" width="8" height="8"/><rect x="84" y="80" width="8" height="8"/>
+              <rect x="0" y="88" width="8" height="8"/><rect x="20" y="88" width="8" height="8"/><rect x="36" y="88" width="8" height="8"/><rect x="52" y="88" width="24" height="8"/><rect x="84" y="88" width="16" height="8"/>
+              <rect x="0" y="96" width="28" height="4"/><rect x="44" y="96" width="8" height="4"/><rect x="60" y="96" width="8" height="4"/><rect x="76" y="96" width="8" height="4"/><rect x="92" y="96" width="8" height="4"/>
+            </svg>
+          </div>
+          <span class="text-cream-warm/50 text-xs">Scan to download</span>
+        </div>
+      </div>
+
+      <p class="text-cream-warm/50 text-sm mt-8">Global renews monthly ($9/mo after free trial). NYC plans renew quarterly each season.</p>
+    </div>
+  </section>
+
+  <!-- Passport CTA Popup Modal -->
+  <div id="passport-modal" class="fixed inset-0 z-50 hidden">
+    <div class="absolute inset-0 bg-night/80 backdrop-blur-sm passport-modal-backdrop"></div>
+    <div class="relative min-h-screen flex items-center justify-center p-4">
+      <div class="passport-modal-content relative bg-cream rounded-3xl shadow-2xl max-w-md w-full p-8 transform scale-95 opacity-0 transition-all duration-300">
+        <button type="button" class="passport-modal-close absolute top-4 right-4 w-10 h-10 flex items-center justify-center rounded-full bg-dark-gray/5 hover:bg-dark-gray/10 transition-colors">
+          <svg class="w-5 h-5 text-dark-gray" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+          </svg>
+        </button>
+
+        <div class="text-center mb-8">
+          <div class="w-16 h-16 bg-rust/10 rounded-2xl flex items-center justify-center mx-auto mb-4">
+            <svg class="w-8 h-8 text-rust" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
+            </svg>
+          </div>
+          <h3 class="text-2xl font-display text-night mb-2">Get Your Passport</h3>
+          <p class="text-dark-gray/70">Download the app to start your reading journey</p>
+        </div>
+
+        <div class="space-y-4 mb-8">
+          <a href="#" class="flex items-center justify-between p-4 bg-white rounded-2xl border border-dark-gray/10 hover:border-dark-gray/20 hover:shadow-md transition-all duration-300 group">
+            <div class="flex items-center gap-4">
+              <div class="w-12 h-12 bg-black rounded-xl flex items-center justify-center">
+                <svg class="w-7 h-7 text-white" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/>
+                </svg>
+              </div>
+              <div>
+                <p class="text-xs text-dark-gray/50 uppercase tracking-wide">Download on the</p>
+                <p class="text-lg font-semibold text-dark-gray">App Store</p>
+              </div>
+            </div>
+            <svg class="w-5 h-5 text-dark-gray/30 group-hover:text-dark-gray/50 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+            </svg>
+          </a>
+
+          <a href="#" class="flex items-center justify-between p-4 bg-white rounded-2xl border border-dark-gray/10 hover:border-dark-gray/20 hover:shadow-md transition-all duration-300 group">
+            <div class="flex items-center gap-4">
+              <div class="w-12 h-12 bg-gradient-to-br from-green-500 via-blue-500 to-yellow-500 rounded-xl flex items-center justify-center">
+                <svg class="w-6 h-6 text-white" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M3.609 1.814L13.792 12 3.61 22.186a.996.996 0 01-.61-.92V2.734a1 1 0 01.609-.92zm10.89 10.893l2.302 2.302-10.937 6.333 8.635-8.635zm3.199-3.198l2.807 1.626a1 1 0 010 1.73l-2.808 1.626L15.206 12l2.492-2.491zM5.864 2.658L16.8 8.99l-2.302 2.302-8.634-8.634z"/>
+                </svg>
+              </div>
+              <div>
+                <p class="text-xs text-dark-gray/50 uppercase tracking-wide">Get it on</p>
+                <p class="text-lg font-semibold text-dark-gray">Google Play</p>
+              </div>
+            </div>
+            <svg class="w-5 h-5 text-dark-gray/30 group-hover:text-dark-gray/50 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+            </svg>
+          </a>
+        </div>
+
+        <!-- QR Code -->
+        <div class="flex items-center justify-center gap-4 pt-6 border-t border-dark-gray/10">
+          <div class="bg-white rounded-xl p-2 shadow-sm">
+            <svg class="w-16 h-16 text-night" viewBox="0 0 100 100" fill="currentColor">
+              <rect x="0" y="0" width="28" height="8"/><rect x="36" y="0" width="8" height="8"/><rect x="52" y="0" width="8" height="8"/><rect x="72" y="0" width="28" height="8"/>
+              <rect x="0" y="8" width="8" height="8"/><rect x="20" y="8" width="8" height="8"/><rect x="44" y="8" width="8" height="8"/><rect x="60" y="8" width="8" height="8"/><rect x="72" y="8" width="8" height="8"/><rect x="92" y="8" width="8" height="8"/>
+              <rect x="0" y="16" width="8" height="8"/><rect x="20" y="16" width="8" height="8"/><rect x="36" y="16" width="8" height="8"/><rect x="52" y="16" width="16" height="8"/><rect x="72" y="16" width="8" height="8"/><rect x="92" y="16" width="8" height="8"/>
+              <rect x="0" y="24" width="8" height="8"/><rect x="20" y="24" width="8" height="8"/><rect x="44" y="24" width="8" height="8"/><rect x="72" y="24" width="8" height="8"/><rect x="92" y="24" width="8" height="8"/>
+              <rect x="0" y="32" width="28" height="8"/><rect x="36" y="32" width="8" height="8"/><rect x="52" y="32" width="8" height="8"/><rect x="72" y="32" width="28" height="8"/>
+              <rect x="36" y="40" width="8" height="8"/><rect x="52" y="40" width="8" height="8"/>
+              <rect x="0" y="48" width="8" height="8"/><rect x="20" y="48" width="8" height="8"/><rect x="36" y="48" width="16" height="8"/><rect x="60" y="48" width="8" height="8"/><rect x="76" y="48" width="24" height="8"/>
+              <rect x="8" y="56" width="8" height="8"/><rect x="28" y="56" width="8" height="8"/><rect x="44" y="56" width="8" height="8"/><rect x="60" y="56" width="8" height="8"/><rect x="84" y="56" width="8" height="8"/>
+              <rect x="36" y="64" width="8" height="8"/><rect x="52" y="64" width="8" height="8"/><rect x="68" y="64" width="16" height="8"/><rect x="92" y="64" width="8" height="8"/>
+              <rect x="0" y="72" width="28" height="8"/><rect x="36" y="72" width="8" height="8"/><rect x="52" y="72" width="8" height="8"/><rect x="68" y="72" width="8" height="8"/><rect x="84" y="72" width="8" height="8"/>
+              <rect x="0" y="80" width="8" height="8"/><rect x="20" y="80" width="8" height="8"/><rect x="44" y="80" width="16" height="8"/><rect x="68" y="80" width="8" height="8"/><rect x="84" y="80" width="8" height="8"/>
+              <rect x="0" y="88" width="8" height="8"/><rect x="20" y="88" width="8" height="8"/><rect x="36" y="88" width="8" height="8"/><rect x="52" y="88" width="24" height="8"/><rect x="84" y="88" width="16" height="8"/>
+              <rect x="0" y="96" width="28" height="4"/><rect x="44" y="96" width="8" height="4"/><rect x="60" y="96" width="8" height="4"/><rect x="76" y="96" width="8" height="4"/><rect x="92" y="96" width="8" height="4"/>
+            </svg>
+          </div>
+          <div class="text-left">
+            <p class="text-sm font-medium text-dark-gray">Scan to download</p>
+            <p class="text-xs text-dark-gray/50">Point your camera at the QR code</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  </div>
+</BaseLayout>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const targetDate = new Date('2026-02-01T23:59:59').getTime();
+
+    function updateCountdown() {
+      const now = new Date().getTime();
+      const difference = targetDate - now;
+
+      if (difference > 0) {
+        const days = Math.floor(difference / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((difference % (1000 * 60)) / 1000);
+
+        const daysEl = document.getElementById('days');
+        const hoursEl = document.getElementById('hours');
+        const minutesEl = document.getElementById('minutes');
+        const secondsEl = document.getElementById('seconds');
+
+        if (daysEl) daysEl.textContent = days.toString().padStart(2, '0');
+        if (hoursEl) hoursEl.textContent = hours.toString().padStart(2, '0');
+        if (minutesEl) minutesEl.textContent = minutes.toString().padStart(2, '0');
+        if (secondsEl) secondsEl.textContent = seconds.toString().padStart(2, '0');
+
+        const heroDaysEl = document.getElementById('hero-days');
+        const heroHoursEl = document.getElementById('hero-hours');
+        const heroMinsEl = document.getElementById('hero-mins');
+
+        if (heroDaysEl) heroDaysEl.textContent = days.toString().padStart(2, '0');
+        if (heroHoursEl) heroHoursEl.textContent = hours.toString().padStart(2, '0');
+        if (heroMinsEl) heroMinsEl.textContent = minutes.toString().padStart(2, '0');
+      }
+    }
+
+    updateCountdown();
+    setInterval(updateCountdown, 1000);
+
+    const tbrSlideshow = document.querySelector('.tbr-slideshow');
+    if (tbrSlideshow) {
+      const slides = tbrSlideshow.querySelectorAll('.tbr-slide');
+      let currentSlide = 0;
+
+      function nextSlide() {
+        slides[currentSlide].classList.remove('opacity-100');
+        slides[currentSlide].classList.add('opacity-0');
+        currentSlide = (currentSlide + 1) % slides.length;
+        slides[currentSlide].classList.remove('opacity-0');
+        slides[currentSlide].classList.add('opacity-100');
+      }
+
+      setInterval(nextSlide, 4000);
+    }
+
+    const faqItems = document.querySelectorAll('.faq-item');
+
+    faqItems.forEach(item => {
+      const trigger = item.querySelector('.faq-trigger');
+      const content = item.querySelector('.faq-content');
+      const icon = item.querySelector('.faq-icon');
+
+      trigger?.addEventListener('click', () => {
+        const isOpen = !content?.classList.contains('hidden');
+
+        faqItems.forEach(otherItem => {
+          const otherContent = otherItem.querySelector('.faq-content');
+          const otherIcon = otherItem.querySelector('.faq-icon');
+          otherContent?.classList.add('hidden');
+          otherIcon?.classList.remove('rotate-180');
+        });
+
+        if (!isOpen) {
+          content?.classList.remove('hidden');
+          icon?.classList.add('rotate-180');
+        }
+      });
+    });
+
+    const scrollElements = document.querySelectorAll('.scroll-fade-up, .scroll-slide-left, .scroll-slide-right, .scroll-scale-in');
+
+    const scrollObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, {
+      threshold: 0.1,
+      rootMargin: '0px 0px -50px 0px'
+    });
+
+    scrollElements.forEach(el => scrollObserver.observe(el));
+
+    const passportModal = document.getElementById('passport-modal');
+    const passportModalContent = passportModal?.querySelector('.passport-modal-content');
+    const passportModalBackdrop = passportModal?.querySelector('.passport-modal-backdrop');
+    const passportModalClose = passportModal?.querySelector('.passport-modal-close');
+    const passportCtaButtons = document.querySelectorAll('[data-passport-cta]');
+
+    function openPassportModal() {
+      if (passportModal && passportModalContent) {
+        passportModal.classList.remove('hidden');
+        document.body.style.overflow = 'hidden';
+        requestAnimationFrame(() => {
+          passportModalContent.classList.remove('scale-95', 'opacity-0');
+          passportModalContent.classList.add('scale-100', 'opacity-100');
+        });
+      }
+    }
+
+    function closePassportModal() {
+      if (passportModal && passportModalContent) {
+        passportModalContent.classList.remove('scale-100', 'opacity-100');
+        passportModalContent.classList.add('scale-95', 'opacity-0');
+        setTimeout(() => {
+          passportModal.classList.add('hidden');
+          document.body.style.overflow = '';
+        }, 300);
+      }
+    }
+
+    passportCtaButtons.forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        e.preventDefault();
+        openPassportModal();
+      });
+    });
+
+    passportModalClose?.addEventListener('click', closePassportModal);
+    passportModalBackdrop?.addEventListener('click', closePassportModal);
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && passportModal && !passportModal.classList.contains('hidden')) {
+        closePassportModal();
+      }
+    });
+
+  });
+</script>
+
+<style>
+  @keyframes globe-orbit {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+
+  .globe-orbit {
+    animation: globe-orbit 6s linear infinite;
+  }
+
+  @keyframes ping-slow {
+    0% { transform: scale(1); opacity: 0.3; }
+    50% { transform: scale(1.1); opacity: 0.1; }
+    100% { transform: scale(1.2); opacity: 0; }
+  }
+
+  .animate-ping-slow {
+    animation: ping-slow 3s ease-out infinite;
+  }
+
+  @keyframes ping-slower {
+    0% { transform: scale(1); opacity: 0.2; }
+    50% { transform: scale(1.15); opacity: 0.05; }
+    100% { transform: scale(1.3); opacity: 0; }
+  }
+
+  .animate-ping-slower {
+    animation: ping-slower 4s ease-out infinite;
+    animation-delay: 1s;
+  }
+
+  @keyframes gradient {
+    0%, 100% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+  }
+
+  .animate-gradient {
+    animation: gradient 4s ease infinite;
+  }
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-20px); }
+  }
+
+  .phone-float {
+    animation: float 6s ease-in-out infinite;
+  }
+
+  .animate-float {
+    animation: float 4s ease-in-out infinite;
+  }
+
+  @keyframes float-slow {
+    0%, 100% { transform: translateY(0px) rotate(0deg); }
+    50% { transform: translateY(-10px) rotate(3deg); }
+  }
+
+  .animate-float-slow {
+    animation: float-slow 4s ease-in-out infinite;
+  }
+
+  @keyframes float-delay {
+    0%, 100% { transform: translateY(0px) rotate(0deg); }
+    50% { transform: translateY(-8px) rotate(-3deg); }
+  }
+
+  .animate-float-delay {
+    animation: float-delay 5s ease-in-out infinite;
+    animation-delay: 1s;
+  }
+
+  @keyframes pulse-slow {
+    0%, 100% { opacity: 0.5; transform: translate(-50%, -50%) scale(1); }
+    50% { opacity: 0.8; transform: translate(-50%, -50%) scale(1.1); }
+  }
+
+  .animate-pulse-slow {
+    animation: pulse-slow 8s ease-in-out infinite;
+  }
+
+  .particle {
+    position: absolute;
+    width: 4px;
+    height: 4px;
+    background: #2d4971;
+    border-radius: 50%;
+    opacity: 0.08;
+  }
+
+  .particle-1 {
+    top: 20%;
+    left: 10%;
+    animation: float-slow 8s ease-in-out infinite;
+  }
+
+  .particle-2 {
+    top: 60%;
+    left: 80%;
+    animation: float-delay 10s ease-in-out infinite;
+  }
+
+  .particle-3 {
+    top: 80%;
+    left: 20%;
+    animation: float-slow 12s ease-in-out infinite;
+    animation-delay: 2s;
+  }
+
+  .particle-4 {
+    top: 30%;
+    left: 70%;
+    animation: float-delay 9s ease-in-out infinite;
+    animation-delay: 1s;
+  }
+
+  .particle-5 {
+    top: 50%;
+    left: 40%;
+    animation: float-slow 11s ease-in-out infinite;
+    animation-delay: 3s;
+  }
+
+  .faq-icon {
+    transition: transform 0.3s ease;
+  }
+
+  .faq-icon.rotate-180 {
+    transform: rotate(180deg);
+  }
+
+  .faq-content {
+    animation: slideDown 0.3s ease;
+  }
+
+  @keyframes slideDown {
+    from {
+      opacity: 0;
+      transform: translateY(-10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes globe-pulse {
+    0%, 100% {
+      opacity: 0.4;
+      r: 4;
+    }
+    50% {
+      opacity: 1;
+      r: 7;
+    }
+  }
+
+  .globe-dot {
+    animation: globe-pulse 2s ease-in-out infinite;
+    animation-delay: var(--delay, 0s);
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  @keyframes draw-arrow {
+    0% {
+      stroke-dashoffset: 400;
+    }
+    100% {
+      stroke-dashoffset: 0;
+    }
+  }
+
+  .animate-draw-arrow {
+    animation: draw-arrow 2s ease-out forwards;
+  }
+
+  @keyframes pulse-scale {
+    0%, 100% {
+      opacity: 0.6;
+      transform: scale(1);
+    }
+    50% {
+      opacity: 0.9;
+      transform: scale(1.3);
+    }
+  }
+
+  .animate-pulse-scale {
+    animation: pulse-scale 2s ease-in-out infinite;
+  }
+
+  @keyframes sparkle {
+    0%, 100% {
+      opacity: 0.3;
+      transform: scale(1) translateY(0);
+    }
+    25% {
+      opacity: 0.7;
+      transform: scale(1.5) translateY(-3px);
+    }
+    50% {
+      opacity: 0.4;
+      transform: scale(0.8) translateY(3px);
+    }
+    75% {
+      opacity: 0.8;
+      transform: scale(1.3) translateY(-2px);
+    }
+  }
+
+  .animate-sparkle {
+    animation: sparkle 3s ease-in-out infinite;
+  }
+
+  @keyframes bounce-soft {
+    0%, 100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-10px);
+    }
+  }
+
+  .animate-bounce-soft {
+    animation: bounce-soft 2s ease-in-out infinite;
+  }
+
+  .paper-texture {
+    position: relative;
+  }
+
+  .paper-texture::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    opacity: 0.03;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+    pointer-events: none;
+  }
+
+  .organic-shadow {
+    box-shadow:
+      0 1px 2px rgba(0,0,0,0.02),
+      0 4px 8px rgba(0,0,0,0.03),
+      0 8px 16px rgba(0,0,0,0.02);
+  }
+
+  .organic-border {
+    border: 1px solid rgba(45, 73, 113, 0.08);
+    border-radius: 16px 20px 18px 22px / 20px 18px 22px 16px;
+  }
+</style>
