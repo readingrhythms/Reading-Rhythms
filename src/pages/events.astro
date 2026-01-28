@@ -3,8 +3,15 @@ import BaseLayout from '@layouts/BaseLayout.astro';
 import { Image } from 'astro:assets';
 import arrowright from '@assets/icons/arrow-right.svg';
 
+// =====================================================
+// FEATURE FLAGS - Toggle these when pasting to live
+// =====================================================
+const ENABLE_VIRTUAL_TAB = false;
+const ENABLE_PASSPORT_PROMO = false;
+// =====================================================
+
 // Active chapters with Luma calendar embeds - 4 main regions
-const activeChapters = [
+const baseChapters = [
   {
     id: 'ny',
     name: 'NY',
@@ -12,7 +19,8 @@ const activeChapters = [
     location: 'New York State',
     calendarId: 'cal-Q8l315UsVMWb6h6',
     description: 'Events across New York State',
-    status: 'active'
+    status: 'active',
+    isNew: false
   },
   {
     id: 'nj',
@@ -21,7 +29,8 @@ const activeChapters = [
     location: 'New Jersey',
     calendarId: 'cal-4yEtAsPtiPI0Nwi',
     description: 'Events across New Jersey',
-    status: 'active'
+    status: 'active',
+    isNew: false
   },
   {
     id: 'ca',
@@ -30,7 +39,8 @@ const activeChapters = [
     location: 'California',
     calendarId: 'cal-Eo35suMbTdQnr20',
     description: 'Events across California',
-    status: 'active'
+    status: 'active',
+    isNew: false
   },
   {
     id: 'global',
@@ -39,47 +49,94 @@ const activeChapters = [
     location: 'Special Events Worldwide',
     calendarId: 'cal-CDoX2WaI5IHD5xs',
     description: 'Exclusive global events and virtual sessions',
-    status: 'active'
+    status: 'active',
+    isNew: false
   }
 ];
+
+const virtualChapter = {
+  id: 'virtual',
+  name: 'Virtual',
+  fullName: 'Reading Rhythms Virtual',
+  location: 'Online Events',
+  calendarId: 'cal-lPEjhFiZCQl0esb',
+  description: 'Join from anywhere - virtual reading sessions',
+  status: 'active',
+  isNew: true
+};
+
+const activeChapters = ENABLE_VIRTUAL_TAB
+  ? [...baseChapters, virtualChapter]
+  : baseChapters;
 ---
 
 <BaseLayout title='Reading Rhythms | Events & Tickets' description='Buy tickets for Reading Rhythms events worldwide. Join active chapters or waitlists for launching cities.' showNavbar={true}>
   <!-- Main Content - Direct to Tickets -->
-  <div class="w-full px-0 pt-4 lg:pt-8">
+  <div class="w-full px-0 pt-2 lg:pt-4">
     <!-- Single Header -->
-    <div class="text-center mb-6 max-w-4xl mx-auto px-4">
-      <h1 class="text-3xl md:text-4xl lg:text-5xl text-dark-gray font-display tracking-wider leading-tight mb-2 md:mb-4">
+    <div class="text-center mb-4 md:mb-6 max-w-4xl mx-auto px-4">
+      <h1 class="text-3xl md:text-4xl lg:text-5xl text-dark-gray font-display tracking-wider leading-tight mb-3 md:mb-4">
         Find Your Next <span class="bg-gradient-to-r from-jean via-rust to-dark-purple bg-clip-text text-transparent">Reading Party</span>
       </h1>
-      <p class="text-base md:text-lg text-dark-gray/70 font-light max-w-2xl mx-auto">
+      <p class="text-base md:text-lg text-dark-gray/60 font-light max-w-2xl mx-auto">
         Buy tickets for upcoming events
       </p>
     </div>
 
     <!-- Mobile-First Tab Navigation - Horizontal Scroll -->
-    <div class="flex justify-center mb-4 md:mb-6 px-4">
-      <div class="bg-gray-100 rounded-2xl p-2 overflow-x-auto scrollbar-hide inline-flex">
-        <div class="flex gap-1" role="tablist" aria-label="Chapters">
-          {activeChapters.map((chapter, index) => (
-            <button 
-              class={`tab-button flex-shrink-0 px-4 sm:px-6 lg:px-8 py-2 sm:py-3 lg:py-4 rounded-xl font-semibold text-sm sm:text-base transition-all duration-300 whitespace-nowrap ${
-                index === 0 
-                  ? 'bg-white text-dark-gray shadow-md' 
-                  : 'text-dark-gray/60 hover:text-dark-gray hover:bg-white/50'
-              }`}
-              data-tab={chapter.id}
-              role="tab"
-              aria-selected={index === 0 ? 'true' : 'false'}
-              aria-controls={`panel-${chapter.id}`}
-              type="button"
-            >
-              {chapter.name}
-            </button>
-          ))}
+    <div class="flex justify-center mb-3 md:mb-4 px-4">
+      <div class="tab-scroll-container relative">
+        <div class="bg-gray-100/80 backdrop-blur-sm rounded-2xl p-1.5 sm:p-2 overflow-x-auto scrollbar-hide inline-flex border border-gray-200/50">
+          <div class="flex gap-1 items-center" role="tablist" aria-label="Chapters">
+            {activeChapters.map((chapter, index) => (
+              <>
+                {chapter.isNew && index > 0 && (
+                  <div class="w-px h-6 bg-dark-gray/20 mx-1 flex-shrink-0"></div>
+                )}
+                <button
+                  class={`tab-button flex-shrink-0 px-3 sm:px-5 lg:px-7 py-2 sm:py-2.5 lg:py-3 rounded-xl font-semibold text-sm sm:text-base transition-all duration-300 whitespace-nowrap ${
+                    index === 0
+                      ? 'bg-white text-dark-gray shadow-md'
+                      : 'text-dark-gray/60 hover:text-dark-gray hover:bg-white/50'
+                  }`}
+                data-tab={chapter.id}
+                data-is-new={chapter.isNew ? 'true' : 'false'}
+                role="tab"
+                aria-selected={index === 0 ? 'true' : 'false'}
+                aria-controls={`panel-${chapter.id}`}
+                type="button"
+              >
+                <span class="flex items-center gap-1.5">
+                  {chapter.name}
+                  {chapter.isNew && (
+                    <span class="new-dot w-1.5 h-1.5 rounded-full bg-sage animate-pulse"></span>
+                  )}
+                </span>
+              </button>
+              </>
+            ))}
+          </div>
         </div>
+        <!-- Scroll indicator fade - mobile only -->
+        <div class="scroll-fade-right absolute right-0 top-0 bottom-0 w-8 bg-gradient-to-l from-cream/80 to-transparent pointer-events-none rounded-r-2xl sm:hidden"></div>
       </div>
     </div>
+
+    {ENABLE_PASSPORT_PROMO && (
+      <div id="passport-promo" class="passport-promo text-center mb-2 px-2 sm:px-4" data-show-tabs="ny,virtual">
+        <a
+          href="/passport"
+          class="passport-link group inline-flex items-center gap-1.5 sm:gap-2 text-xs sm:text-sm text-dark-gray/70 hover:text-dark-gray transition-all duration-200 py-1.5 sm:py-2 px-2 sm:px-3 rounded-lg hover:bg-sage/5"
+        >
+          <span class="w-1.5 h-1.5 rounded-full bg-sage group-hover:scale-125 transition-transform flex-shrink-0"></span>
+          <span class="sm:hidden"><span class="passport-text font-semibold text-dark-gray">Passport</span> for unlimited access</span>
+          <span class="hidden sm:inline">Get unlimited access with <span class="passport-text font-semibold text-dark-gray underline decoration-sage/40 underline-offset-2 hover:decoration-sage transition-all">Passport membership</span></span>
+          <svg class="w-3.5 h-3.5 sm:w-4 sm:h-4 group-hover:translate-x-1 transition-transform duration-200 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+          </svg>
+        </a>
+      </div>
+    )}
 
     <!-- Tab Content - Nearly Full Width Luma Embeds -->
     <div class="tab-content-container mb-8 md:mb-12 px-0 mx-0 max-w-6xl md:mx-auto">
@@ -100,16 +157,16 @@ const activeChapters = [
             <div class="p-0">
               <!-- Maximum Width Luma Calendar -->
               <div class="w-full">
-                <div class="calendar-container w-full" style="min-height: 900px;">
+                <div class="calendar-container w-full" style="min-height: 1100px;">
                   <iframe
                     src={`https://lu.ma/embed/calendar/${chapter.calendarId}/events?lt=light`}
                     width="100%"
-                    height="900"
+                    height="1100"
                     frameborder="0"
-                    style="border: none; min-height: 900px; width: 100%; max-width: 100%;"
+                    style="border: none; min-height: 1100px; width: 100%; max-width: 100%;"
                     allowfullscreen=""
                     aria-hidden="false"
-                    tabindex="-1"   /* keep iframe from taking focus/blue ring */
+                    tabindex="-1"
                     class=""
                     loading="lazy"
                   ></iframe>
@@ -122,20 +179,24 @@ const activeChapters = [
     </div>
 
     <!-- Host Application CTA -->
-    <div class="bg-gradient-to-r from-dark-gray to-dark-purple rounded-2xl p-6 lg:p-8 text-center max-w-4xl mx-auto">
-      <h3 class="text-2xl lg:text-3xl font-display text-white mb-3 tracking-widest">
-        Want to Host in Your City?
-      </h3>
-      <p class="text-white/80 mb-4 max-w-xl mx-auto text-sm">
-        We're always looking for passionate community builders to bring Reading Rhythms to new cities.
-      </p>
-      
-      <a 
-        href="/apply" 
-        class="inline-flex items-center justify-center px-8 py-4 bg-white text-dark-gray rounded-xl font-bold text-base hover:shadow-xl hover:shadow-white/25 transition-all duration-300 hover:-translate-y-1"
-      >
-        Join the Team!
-      </a>
+    <div class="px-4">
+      <div class="bg-gradient-to-r from-dark-gray to-dark-purple rounded-2xl p-6 lg:p-10 text-center max-w-4xl mx-auto mb-8 lg:mb-12">
+        <h3 class="text-2xl lg:text-3xl font-display text-white mb-3 tracking-widest">
+          Want to Host in Your City?
+        </h3>
+        <p class="text-white/75 mb-6 max-w-xl mx-auto text-sm lg:text-base leading-relaxed">
+          We're always looking for passionate community builders to bring Reading Rhythms to new cities.
+        </p>
+        <a
+          href="/apply"
+          class="inline-flex items-center justify-center gap-2 px-8 py-4 bg-white text-dark-gray rounded-xl font-bold text-base hover:shadow-xl hover:shadow-white/25 transition-all duration-300 hover:-translate-y-1 hover:bg-cream group"
+        >
+          Join the Team
+          <svg class="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+          </svg>
+        </a>
+      </div>
     </div>
   </div>
 </BaseLayout>
@@ -144,6 +205,45 @@ const activeChapters = [
   document.addEventListener('DOMContentLoaded', () => {
     const tabButtons = document.querySelectorAll('.tab-button');
     const tabContents = document.querySelectorAll('.tab-content');
+    const passportPromo = document.getElementById('passport-promo');
+    const scrollContainer = document.querySelector('.scrollbar-hide');
+    const scrollFade = document.querySelector('.scroll-fade-right');
+
+    function updateScrollFade() {
+      if (!scrollContainer || !scrollFade) return;
+      const isAtEnd = scrollContainer.scrollLeft + scrollContainer.clientWidth >= scrollContainer.scrollWidth - 10;
+      if (isAtEnd) {
+        scrollFade.classList.add('hidden');
+      } else {
+        scrollFade.classList.remove('hidden');
+      }
+    }
+
+    if (scrollContainer) {
+      scrollContainer.addEventListener('scroll', updateScrollFade);
+      updateScrollFade();
+
+      if (window.innerWidth < 640 && scrollContainer.scrollWidth > scrollContainer.clientWidth) {
+        setTimeout(() => {
+          scrollContainer.scrollTo({ left: 40, behavior: 'smooth' });
+          setTimeout(() => {
+            scrollContainer.scrollTo({ left: 0, behavior: 'smooth' });
+          }, 400);
+        }, 800);
+      }
+    }
+
+    function updatePassportPromo(tabId) {
+      if (!passportPromo) return;
+      const showTabs = passportPromo.dataset.showTabs?.split(',') || [];
+      if (showTabs.includes(tabId)) {
+        passportPromo.classList.remove('hidden');
+        passportPromo.classList.add('passport-promo-visible');
+      } else {
+        passportPromo.classList.add('hidden');
+        passportPromo.classList.remove('passport-promo-visible');
+      }
+    }
 
     function showTab(targetId, { updateUrl = true } = {}) {
       // Hide all tab contents
@@ -176,6 +276,9 @@ const activeChapters = [
         activeButton.setAttribute('aria-selected', 'true');
       }
 
+      // Update passport promo visibility
+      updatePassportPromo(targetId);
+
       // Update URL hash WITHOUT causing browser scroll (no element has that id)
       if (updateUrl) {
         history.replaceState(null, '', `${location.pathname}#${targetId}`);
@@ -201,6 +304,9 @@ const activeChapters = [
       // Render initial tab and ensure we remain at very top
       showTab(initialId, { updateUrl: false });
       window.scrollTo(0, 0);
+    } else {
+      // Default to first tab (ny), also update promo visibility
+      updatePassportPromo('ny');
     }
 
     // Click -> change tab without jumping, keep top
@@ -229,7 +335,21 @@ const activeChapters = [
   .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
   .scrollbar-hide::-webkit-scrollbar { display: none; }
 
-  /* Keep original look: remove focus ring on tabs (optional) */
+  /* Tab scroll container */
+  .tab-scroll-container {
+    max-width: 100%;
+  }
+
+  /* Scroll fade indicator - hints at more content */
+  .scroll-fade-right {
+    opacity: 1;
+    transition: opacity 0.3s ease;
+  }
+  .scroll-fade-right.hidden {
+    opacity: 0;
+  }
+
+  /* Keep original look: remove focus ring on tabs */
   .tab-button { -webkit-tap-highlight-color: transparent; }
   .tab-button:focus,
   .tab-button:focus-visible { outline: none !important; box-shadow: none !important; }
@@ -240,8 +360,8 @@ const activeChapters = [
 
   /* Tab transitions */
   .tab-content { transition: opacity 0.3s ease-in-out; }
-  .tab-content.hidden { opacity: 0; }
-  .tab-content.active { opacity: 1; }
+  .tab-content.hidden { opacity: 0; display: none; }
+  .tab-content.active { opacity: 1; display: block; }
 
   /* Full width iframe optimization */
   iframe { max-width: 100% !important; width: 100% !important; min-width: 100% !important; }
@@ -252,22 +372,22 @@ const activeChapters = [
     .tab-content > div { margin-left: 0 !important; margin-right: 0 !important; width: 100% !important; }
   }
 
-  /* Mobile responsive adjustments - Nearly full width */
+  /* Mobile responsive adjustments - Extended height */
   @media (max-width: 640px) {
-    .calendar-container { min-height: 800px !important; }
-    .calendar-container iframe { height: 800px !important; min-height: 800px !important; }
+    .calendar-container { min-height: 1000px !important; }
+    .calendar-container iframe { height: 1000px !important; min-height: 1000px !important; }
   }
 
   /* Tablet adjustments */
   @media (min-width: 641px) and (max-width: 1024px) {
-    .calendar-container { min-height: 850px !important; }
-    .calendar-container iframe { height: 850px !important; min-height: 850px !important; }
+    .calendar-container { min-height: 1050px !important; }
+    .calendar-container iframe { height: 1050px !important; min-height: 1050px !important; }
   }
 
   /* Desktop - maximum height */
   @media (min-width: 1025px) {
-    .calendar-container { min-height: 900px !important; }
-    .calendar-container iframe { height: 900px !important; min-height: 900px !important; }
+    .calendar-container { min-height: 1100px !important; }
+    .calendar-container iframe { height: 1100px !important; min-height: 1100px !important; }
   }
 
   /* Loading state for iframes */
@@ -282,5 +402,33 @@ const activeChapters = [
     font-size: 1rem;
     z-index: 1;
   }
-  .calendar-container iframe { position: relative; z-index: 2; }
+  .calendar-container iframe { position: relative; z-index: 2; background: white; }
+
+  /* Passport promo styling */
+  .passport-promo {
+    opacity: 0;
+    max-height: 0;
+    overflow: hidden;
+    transition: opacity 0.3s ease, max-height 0.3s ease;
+  }
+  .passport-promo.hidden { display: none; }
+  .passport-promo-visible {
+    opacity: 1;
+    max-height: 60px;
+  }
+
+  /* Passport link hover effect */
+  .passport-link:hover .passport-text {
+    text-decoration-color: #8B9A7F;
+  }
+
+  /* New dot pulse */
+  .new-dot {
+    box-shadow: 0 0 0 0 rgba(139, 154, 127, 0.4);
+    animation: dot-pulse 2s ease-in-out infinite;
+  }
+  @keyframes dot-pulse {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(139, 154, 127, 0.4); }
+    50% { box-shadow: 0 0 0 4px rgba(139, 154, 127, 0); }
+  }
 </style>
