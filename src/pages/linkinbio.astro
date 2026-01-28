@@ -5,7 +5,7 @@ import logo from '@assets/images/logo.svg';
 // =====================================================
 // FEATURE FLAGS - Toggle these when pasting to live
 // =====================================================
-const ENABLE_PASSPORT_PROMO = false;
+const ENABLE_PASSPORT_PROMO = true;
 // =====================================================
 ---
 
@@ -76,7 +76,7 @@ const ENABLE_PASSPORT_PROMO = false;
           <span>Buy Tickets! 🎟️</span>
         </a>
 
-        {ENABLE_PASSPORT_PROMO ? (
+        {ENABLE_PASSPORT_PROMO && (
           <div class="passport-btn-wrapper">
             <a
               href="/passport"
@@ -95,23 +95,6 @@ const ENABLE_PASSPORT_PROMO = false;
               </span>
             </a>
           </div>
-        ) : (
-          <a
-            href="https://www.showclix.com/event/wintertakeover"
-            target="_blank"
-            rel="noopener"
-            class="group inline-flex items-center justify-center gap-2 w-full rounded-xl px-5 py-4 font-semibold text-center
-                  bg-dark-gray text-white
-                  ring-2 ring-rust/40 hover:ring-jean/50
-                  shadow-md hover:shadow-xl hover:shadow-rust/15
-                  transition-all hover:-translate-y-0.5"
-          >
-            <span class="flex items-center gap-2">
-              <span class="inline-flex h-2 w-2 rounded-full bg-rust group-hover:bg-jean transition"></span>
-              Winter Reading Festival Tickets
-            </span>
-            <span class="opacity-80 group-hover:opacity-100 transition" aria-hidden="true">↗</span>
-          </a>
         )}
 
         <!-- Scroll to just below the last button (no changes to global newsletter) -->
