@@ -10,11 +10,11 @@ const faqs = [
   },
   {
     question: "How long does the Passport last?",
-    answer: "Each Passport covers one season - roughly three months of reading parties, book recommendations, and community connections. Your membership renews automatically so you never miss out."
+    answer: "Our winter season runs January through February, but your monthly membership continues automatically into the next season so you never miss out. Cancel anytime before your next billing date."
   },
   {
     question: "How often will I be charged for my Passport?",
-    answer: "It depends on your tier! Global Connection is billed monthly ($9/month after your free trial). NYC Reader and NYC All-Access are billed quarterly at the start of each new season. You can cancel anytime before your renewal date."
+    answer: "All tiers are billed monthly. Global Connection is $9/month after your free trial, NYC Reader is $19/month, and NYC All-Access is $39/month. You can cancel anytime before your next billing date."
   },
   {
     question: "What if I want to skip a season?",
@@ -34,7 +34,7 @@ const faqs = [
   },
   {
     question: "Can I bring a friend to events?",
-    answer: "Yes! NYC Reader passport holders can bring guests at regular ticket prices, while NYC All-Access members get 3x friend tickets each season."
+    answer: "Yes! NYC Reader passport holders can bring guests at regular ticket prices, while NYC All-Access members get 1x friend ticket per month."
   }
 ];
 
@@ -59,8 +59,8 @@ const tiers = [
   {
     name: "NYC Reader",
     badge: "NEW YORK",
-    price: "$69",
-    period: "/season",
+    price: "$19",
+    period: "/mo",
     description: "Unlimited NYC events all winter long",
     color: "jean",
     features: [
@@ -75,15 +75,15 @@ const tiers = [
   {
     name: "NYC All-Access",
     badge: "VIP",
-    price: "$119",
-    period: "/season",
+    price: "$39",
+    period: "/mo",
     description: "The complete VIP experience",
     color: "rust",
     features: [
       "Everything in NYC Reader",
       "Guest list for sold-out events",
-      "3x friend tickets per season",
-      "Exclusive Reading Rhythms tote bag",
+      "1x friend ticket per month",
+      "Exclusive swag giveaway",
       "Entry into seasonal perks giveaway"
     ],
     cta: "Get My Passport",
@@ -305,7 +305,7 @@ const tiers = [
         <!-- Left: Content -->
         <div class="text-center lg:text-left order-2 lg:order-1">
           <!-- Season badge -->
-          <p class="text-center lg:text-left text-sm text-cream-warm/70 mb-2 tracking-wide font-medium">Winter 2026 Season <span class="text-cream-warm/50">|</span> Jan 28th - April 28th</p>
+          <p class="text-center lg:text-left text-sm text-cream-warm/70 mb-2 tracking-wide font-medium">Winter 2026 Season <span class="text-cream-warm/50">|</span> Jan 31st - March 31st <span class="hidden md:inline text-cream-warm/50">|</span> <span class="hidden md:inline text-cream-warm/60">Limited passports</span></p>
 
           <h1 class="text-[1.5rem] sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-display text-cream-warm leading-[1.1] mb-3 md:mb-6">
             Make Friends Through Your Favorite Books, <span class="italic">Wherever You Are</span>
@@ -314,50 +314,6 @@ const tiers = [
           <p class="text-base md:text-xl text-cream-warm/80 mb-4 md:mb-8 leading-relaxed max-w-xl mx-auto lg:mx-0 font-sans">
             Cozy reading parties and real connections, season after season. Turn "I wish I had bookish friends" into "these are my people."
           </p>
-
-          <!-- Unified Urgency Banner - Hidden on mobile -->
-          <div class="hidden md:block mb-5 md:mb-8 max-w-2xl mx-auto lg:mx-0">
-            <div class="relative bg-cream-warm/10 backdrop-blur-sm rounded-xl md:rounded-2xl p-3 md:p-5 shadow-md border border-cream-warm/20 overflow-hidden">
-              <div class="absolute inset-0 bg-gradient-to-br from-cream-warm/5 via-transparent to-walnut/5 pointer-events-none"></div>
-
-              <div class="relative grid grid-cols-2 gap-3 md:gap-6 items-center">
-                <div class="flex items-center gap-2 md:gap-3">
-                  <div class="flex-shrink-0">
-                    <div class="w-8 h-8 md:w-10 md:h-10 bg-walnut/15 rounded-lg md:rounded-xl flex items-center justify-center">
-                      <span class="w-2 h-2 md:w-3 md:h-3 bg-walnut rounded-full animate-pulse"></span>
-                    </div>
-                  </div>
-                  <div>
-                    <p class="text-cream-warm/60 text-[10px] md:text-xs uppercase tracking-wider font-medium">Limited</p>
-                    <p class="text-cream-warm text-sm md:text-lg font-bold leading-tight">500 Passports</p>
-                  </div>
-                </div>
-
-                <div class="flex items-center gap-2 md:gap-3 border-l border-cream-warm/20 pl-3 md:pl-6">
-                  <div class="flex-shrink-0 hidden md:block">
-                    <div class="w-10 h-10 bg-walnut/15 rounded-xl flex items-center justify-center">
-                      <svg class="w-5 h-5 text-cream-warm/80" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                      </svg>
-                    </div>
-                  </div>
-                  <div>
-                    <p class="text-cream-warm/60 text-[10px] md:text-xs uppercase tracking-wider font-medium">Closes In</p>
-                    <div id="hero-countdown" class="flex items-baseline gap-0.5 md:gap-1 text-cream-warm">
-                      <span id="hero-days" class="text-sm md:text-lg font-bold">00</span>
-                      <span class="text-[10px] md:text-xs text-cream-warm/70">d</span>
-                      <span class="text-cream-warm/40 mx-0.5">:</span>
-                      <span id="hero-hours" class="text-sm md:text-lg font-bold">00</span>
-                      <span class="text-[10px] md:text-xs text-cream-warm/70">h</span>
-                      <span class="text-cream-warm/40 mx-0.5">:</span>
-                      <span id="hero-mins" class="text-sm md:text-lg font-bold">00</span>
-                      <span class="text-[10px] md:text-xs text-cream-warm/70">m</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
 
           <!-- CTA Buttons -->
           <div class="flex flex-col sm:flex-row gap-3 md:gap-4 justify-center lg:justify-start mb-4 md:mb-6">
@@ -389,20 +345,19 @@ const tiers = [
           <div class="relative">
             <div class="absolute inset-0 bg-cream-warm/30 blur-[60px] md:blur-[80px] rounded-full scale-150 -z-10"></div>
             <div class="absolute inset-0 bg-khaki/20 blur-[40px] md:blur-[60px] rounded-full scale-125 -z-10"></div>
-            <div class="relative w-[160px] sm:w-[220px] md:w-[320px] lg:w-[340px] mx-auto">
-              <div class="relative bg-[#1a1a1a] rounded-[2rem] md:rounded-[3rem] p-1.5 md:p-2 shadow-2xl shadow-black/50">
+            <div class="relative w-[150px] sm:w-[200px] md:w-[290px] lg:w-[310px] mx-auto">
+              <div class="relative bg-[#1a1a1a] rounded-[2rem] md:rounded-[3rem] p-1 md:p-1.5 shadow-2xl shadow-black/50">
                 <div class="relative bg-black rounded-[1.75rem] md:rounded-[2.5rem] overflow-hidden">
-                  <div class="absolute top-2 md:top-3 left-1/2 -translate-x-1/2 w-14 md:w-20 h-4 md:h-6 bg-black rounded-full z-20"></div>
-                  <div id="app-carousel" class="relative aspect-[9/19.5] overflow-hidden rounded-[1.5rem] md:rounded-[2.3rem] touch-pan-y">
+                  <div id="app-carousel" class="relative aspect-[688/1504] overflow-hidden rounded-[1.5rem] md:rounded-[2.3rem] touch-pan-y bg-black">
                     <div id="carousel-track" class="flex transition-transform duration-300 ease-out h-full" style="width: 300%;">
-                      <div class="carousel-slide w-full h-full flex-shrink-0">
-                        <img src="/assets/passport/hero_1.png" alt="App screenshot 1" class="w-full h-full object-cover" />
+                      <div class="carousel-slide w-1/3 h-full flex-shrink-0 overflow-hidden">
+                        <img src="/assets/passport/hero_1.png" alt="App screenshot 1" class="w-full h-full object-cover scale-[1.03]" />
                       </div>
-                      <div class="carousel-slide w-full h-full flex-shrink-0">
+                      <div class="carousel-slide w-1/3 h-full flex-shrink-0 overflow-hidden">
                         <img src="/assets/passport/hero_2.png" alt="App screenshot 2" class="w-full h-full object-cover" />
                       </div>
-                      <div class="carousel-slide w-full h-full flex-shrink-0">
-                        <img src="/assets/passport/hero_3.png" alt="App screenshot 3" class="w-full h-full object-cover" />
+                      <div class="carousel-slide w-1/3 h-full flex-shrink-0 overflow-hidden">
+                        <img src="/assets/passport/hero_3.png" alt="App screenshot 3" class="w-full h-full object-cover scale-[1.01]" />
                       </div>
                     </div>
                   </div>
@@ -425,7 +380,7 @@ const tiers = [
       <div class="hidden md:flex flex-col items-center mt-6 md:mt-10 lg:mt-12">
         <p class="text-xs md:text-sm text-cream-warm/60 mb-3 md:mb-4">Download the app</p>
         <div class="flex items-center justify-center gap-3 md:gap-4 p-3 md:p-4 bg-white/5 backdrop-blur-sm rounded-xl md:rounded-2xl border border-cream-warm/15">
-          <a href="#" class="transition-all duration-300 hover:scale-105 hover:opacity-100 opacity-90">
+          <a href="https://apps.apple.com/us/app/reading-rhythms/id6756758427" class="transition-all duration-300 hover:scale-105 hover:opacity-100 opacity-90">
             <img src="https://developer.apple.com/assets/elements/badges/download-on-the-app-store.svg" alt="Download on the App Store" class="h-9 md:h-11 rounded-lg" />
           </a>
           <a href="https://play.google.com/store/apps/details?id=app.rork.reading_rhythms_clubs" class="transition-all duration-300 hover:scale-105 hover:opacity-100 opacity-90">
@@ -981,7 +936,7 @@ const tiers = [
         <div class="absolute right-0 top-0 bottom-0 w-8 md:w-24 bg-gradient-to-l from-[#F8F2E6] to-transparent z-10 pointer-events-none"></div>
 
         <div id="testimonials-track" class="flex gap-3 md:gap-5 px-4 md:px-8">
-        <div class="flex-shrink-0 w-80 p-6 border border-jean/30 bg-gradient-to-br from-jean/20 to-jean/10 rounded-2xl shadow-lg shadow-jean/20 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 snap-start">
+        <div class="flex-shrink-0 w-80 p-6 border border-jean/30 bg-cream bg-gradient-to-br from-jean/40 to-jean/25 rounded-2xl shadow-lg shadow-jean/20 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 snap-start">
           <div class="flex items-center justify-between mb-4">
             <svg class="w-6 h-6 text-jean/60" fill="currentColor" viewBox="0 0 24 24"><path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"></path></svg>
           </div>
@@ -989,7 +944,7 @@ const tiers = [
           <p class="text-dark-gray/70 text-sm font-medium">— Regular Attendee</p>
         </div>
 
-        <div class="flex-shrink-0 w-80 p-6 border border-rust/30 bg-gradient-to-br from-rust/20 to-rust/10 rounded-2xl shadow-lg shadow-rust/20 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 snap-start">
+        <div class="flex-shrink-0 w-80 p-6 border border-rust/30 bg-cream bg-gradient-to-br from-rust/40 to-rust/25 rounded-2xl shadow-lg shadow-rust/20 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 snap-start">
           <div class="flex items-center justify-between mb-4">
             <svg class="w-6 h-6 text-rust/60" fill="currentColor" viewBox="0 0 24 24"><path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"></path></svg>
           </div>
@@ -997,7 +952,7 @@ const tiers = [
           <p class="text-dark-gray/70 text-sm font-medium">— Stacee</p>
         </div>
 
-        <div class="flex-shrink-0 w-80 p-6 border border-beaber/30 bg-gradient-to-br from-beaber/20 to-beaber/10 rounded-2xl shadow-lg shadow-beaber/20 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 snap-start">
+        <div class="flex-shrink-0 w-80 p-6 border border-beaber/30 bg-cream bg-gradient-to-br from-beaber/40 to-beaber/25 rounded-2xl shadow-lg shadow-beaber/20 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 snap-start">
           <div class="flex items-center justify-between mb-4">
             <svg class="w-6 h-6 text-beaber/60" fill="currentColor" viewBox="0 0 24 24"><path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"></path></svg>
           </div>
@@ -1005,7 +960,7 @@ const tiers = [
           <p class="text-dark-gray/70 text-sm font-medium">— Bradley Layton</p>
         </div>
 
-        <div class="flex-shrink-0 w-80 p-6 border border-jean/30 bg-gradient-to-br from-jean/20 to-jean/10 rounded-2xl shadow-lg shadow-jean/20 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 snap-start">
+        <div class="flex-shrink-0 w-80 p-6 border border-jean/30 bg-cream bg-gradient-to-br from-jean/40 to-jean/25 rounded-2xl shadow-lg shadow-jean/20 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 snap-start">
           <div class="flex items-center justify-between mb-4">
             <svg class="w-6 h-6 text-jean/60" fill="currentColor" viewBox="0 0 24 24"><path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"></path></svg>
           </div>
@@ -1013,7 +968,7 @@ const tiers = [
           <p class="text-dark-gray/70 text-sm font-medium">— Judith</p>
         </div>
 
-        <div class="flex-shrink-0 w-80 p-6 border border-rust/30 bg-gradient-to-br from-rust/20 to-rust/10 rounded-2xl shadow-lg shadow-rust/20 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 snap-start">
+        <div class="flex-shrink-0 w-80 p-6 border border-rust/30 bg-cream bg-gradient-to-br from-rust/40 to-rust/25 rounded-2xl shadow-lg shadow-rust/20 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 snap-start">
           <div class="flex items-center justify-between mb-4">
             <svg class="w-6 h-6 text-rust/60" fill="currentColor" viewBox="0 0 24 24"><path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"></path></svg>
           </div>
@@ -1021,7 +976,7 @@ const tiers = [
           <p class="text-dark-gray/70 text-sm font-medium">— Andres</p>
         </div>
 
-        <div class="flex-shrink-0 w-80 p-6 border border-beaber/30 bg-gradient-to-br from-beaber/20 to-beaber/10 rounded-2xl shadow-lg shadow-beaber/20 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 snap-start">
+        <div class="flex-shrink-0 w-80 p-6 border border-beaber/30 bg-cream bg-gradient-to-br from-beaber/40 to-beaber/25 rounded-2xl shadow-lg shadow-beaber/20 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 snap-start">
           <div class="flex items-center justify-between mb-4">
             <svg class="w-6 h-6 text-beaber/60" fill="currentColor" viewBox="0 0 24 24"><path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"></path></svg>
           </div>
@@ -1029,7 +984,7 @@ const tiers = [
           <p class="text-dark-gray/70 text-sm font-medium">— NYC Newcomer</p>
         </div>
 
-        <div class="flex-shrink-0 w-80 p-6 border border-jean/30 bg-gradient-to-br from-jean/20 to-jean/10 rounded-2xl shadow-lg shadow-jean/20 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 snap-start">
+        <div class="flex-shrink-0 w-80 p-6 border border-jean/30 bg-cream bg-gradient-to-br from-jean/40 to-jean/25 rounded-2xl shadow-lg shadow-jean/20 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 snap-start">
           <div class="flex items-center justify-between mb-4">
             <svg class="w-6 h-6 text-jean/60" fill="currentColor" viewBox="0 0 24 24"><path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"></path></svg>
           </div>
@@ -1037,7 +992,7 @@ const tiers = [
           <p class="text-dark-gray/70 text-sm font-medium">— Bernardina (Amalfi Coast)</p>
         </div>
 
-        <div class="flex-shrink-0 w-80 p-6 border border-rust/30 bg-gradient-to-br from-rust/20 to-rust/10 rounded-2xl shadow-lg shadow-rust/20 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 snap-start">
+        <div class="flex-shrink-0 w-80 p-6 border border-rust/30 bg-cream bg-gradient-to-br from-rust/40 to-rust/25 rounded-2xl shadow-lg shadow-rust/20 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 snap-start">
           <div class="flex items-center justify-between mb-4">
             <svg class="w-6 h-6 text-rust/60" fill="currentColor" viewBox="0 0 24 24"><path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"></path></svg>
           </div>
@@ -1045,7 +1000,7 @@ const tiers = [
           <p class="text-dark-gray/70 text-sm font-medium">— Katie Dulka (The Art of Gathering)</p>
         </div>
 
-        <div class="flex-shrink-0 w-80 p-6 border border-beaber/30 bg-gradient-to-br from-beaber/20 to-beaber/10 rounded-2xl shadow-lg shadow-beaber/20 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 snap-start">
+        <div class="flex-shrink-0 w-80 p-6 border border-beaber/30 bg-cream bg-gradient-to-br from-beaber/40 to-beaber/25 rounded-2xl shadow-lg shadow-beaber/20 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 snap-start">
           <div class="flex items-center justify-between mb-4">
             <svg class="w-6 h-6 text-beaber/60" fill="currentColor" viewBox="0 0 24 24"><path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"></path></svg>
           </div>
@@ -1053,7 +1008,7 @@ const tiers = [
           <p class="text-dark-gray/70 text-sm font-medium">— Community Member</p>
         </div>
 
-        <div class="flex-shrink-0 w-80 p-6 border border-jean/30 bg-gradient-to-br from-jean/20 to-jean/10 rounded-2xl shadow-lg shadow-jean/20 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 snap-start">
+        <div class="flex-shrink-0 w-80 p-6 border border-jean/30 bg-cream bg-gradient-to-br from-jean/40 to-jean/25 rounded-2xl shadow-lg shadow-jean/20 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 snap-start">
           <div class="flex items-center justify-between mb-4">
             <svg class="w-6 h-6 text-jean/60" fill="currentColor" viewBox="0 0 24 24"><path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"></path></svg>
           </div>
@@ -1061,7 +1016,7 @@ const tiers = [
           <p class="text-dark-gray/70 text-sm font-medium">— Ellen</p>
         </div>
 
-        <div class="flex-shrink-0 w-80 p-6 border border-rust/30 bg-gradient-to-br from-rust/20 to-rust/10 rounded-2xl shadow-lg shadow-rust/20 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 snap-start">
+        <div class="flex-shrink-0 w-80 p-6 border border-rust/30 bg-cream bg-gradient-to-br from-rust/40 to-rust/25 rounded-2xl shadow-lg shadow-rust/20 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 snap-start">
           <div class="flex items-center justify-between mb-4">
             <svg class="w-6 h-6 text-rust/60" fill="currentColor" viewBox="0 0 24 24"><path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"></path></svg>
           </div>
@@ -1069,7 +1024,7 @@ const tiers = [
           <p class="text-dark-gray/70 text-sm font-medium">— Community Member</p>
         </div>
 
-        <div class="flex-shrink-0 w-80 p-6 border border-beaber/30 bg-gradient-to-br from-beaber/20 to-beaber/10 rounded-2xl shadow-lg shadow-beaber/20 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 snap-start">
+        <div class="flex-shrink-0 w-80 p-6 border border-beaber/30 bg-cream bg-gradient-to-br from-beaber/40 to-beaber/25 rounded-2xl shadow-lg shadow-beaber/20 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 snap-start">
           <div class="flex items-center justify-between mb-4">
             <svg class="w-6 h-6 text-beaber/60" fill="currentColor" viewBox="0 0 24 24"><path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"></path></svg>
           </div>
@@ -1132,7 +1087,7 @@ const tiers = [
 
       <!-- App Features - Horizontal Strip -->
       <div class="mb-12 md:mb-24 lg:mb-32">
-        <div class="grid grid-cols-2 md:flex md:flex-wrap justify-items-start md:justify-center gap-3 md:gap-x-8 md:gap-y-4 lg:gap-x-12">
+        <div class="grid grid-cols-2 md:flex md:flex-wrap justify-items-center md:justify-center gap-3 md:gap-x-8 md:gap-y-4 lg:gap-x-12">
           <div class="flex items-center gap-2 md:gap-3 group">
             <div class="w-8 h-8 md:w-10 md:h-10 bg-jean/10 rounded-full flex items-center justify-center group-hover:bg-jean/20 transition-colors">
               <svg class="w-4 h-4 md:w-5 md:h-5 text-jean" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -1194,7 +1149,7 @@ const tiers = [
           <svg class="w-3.5 h-3.5 md:w-4 md:h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
           </svg>
-          Winter 2026 | Jan 28 - Apr 28
+          Winter 2026 | Jan 31 - Mar 31
         </span>
         <h2 class="text-xl md:text-3xl lg:text-4xl font-display text-dark-gray tracking-wide mb-3 md:mb-6">
           Choose your <span class="italic text-rust">passport</span>
@@ -1293,8 +1248,8 @@ const tiers = [
             </span>
             <h3 class="text-lg md:text-xl font-bold text-dark-gray mb-1.5 md:mb-2">NYC Reader</h3>
             <div class="flex items-baseline justify-center gap-1 mb-1.5 md:mb-2">
-              <span class="text-2xl md:text-3xl font-display text-jean">$69</span>
-              <span class="text-dark-gray/50 text-sm">/season</span>
+              <span class="text-2xl md:text-3xl font-display text-jean">$19</span>
+              <span class="text-dark-gray/50 text-sm">/mo</span>
             </div>
             <p class="text-dark-gray/50 text-xs md:text-sm">Unlimited NYC events</p>
           </div>
@@ -1330,7 +1285,7 @@ const tiers = [
             <button type="button" data-passport-cta class="block w-full py-3 md:py-4 px-4 md:px-6 text-center font-medium text-sm md:text-base transition-all duration-300 bg-night text-white rounded-lg md:rounded-xl hover:bg-night/90 hover:shadow-lg hover:shadow-night/30 cursor-pointer">
               Get My Passport
             </button>
-            <p class="text-center text-dark-gray/40 text-[10px] md:text-xs mt-2 md:mt-3">Billed quarterly</p>
+            <p class="text-center text-dark-gray/40 text-[10px] md:text-xs mt-2 md:mt-3">Billed monthly</p>
           </div>
         </div>
 
@@ -1349,8 +1304,8 @@ const tiers = [
             </span>
             <h3 class="text-lg md:text-xl font-bold text-dark-gray mb-1.5 md:mb-2">NYC All-Access</h3>
             <div class="flex items-baseline justify-center gap-1 mb-1.5 md:mb-2">
-              <span class="text-2xl md:text-3xl font-display text-rust">$119</span>
-              <span class="text-dark-gray/50 text-sm">/season</span>
+              <span class="text-2xl md:text-3xl font-display text-rust">$39</span>
+              <span class="text-dark-gray/50 text-sm">/mo</span>
             </div>
             <p class="text-dark-gray/50 text-xs md:text-sm">Complete VIP experience</p>
           </div>
@@ -1372,13 +1327,13 @@ const tiers = [
               <svg class="w-3.5 h-3.5 md:w-4 md:h-4 mt-0.5 flex-shrink-0 text-rust" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
               </svg>
-              <span class="text-dark-gray/70"><strong class="text-dark-gray">3x friend tickets</strong> per season</span>
+              <span class="text-dark-gray/70"><strong class="text-dark-gray">1x friend ticket</strong> per month</span>
             </li>
             <li class="flex items-start gap-2 md:gap-3">
               <svg class="w-3.5 h-3.5 md:w-4 md:h-4 mt-0.5 flex-shrink-0 text-rust" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
               </svg>
-              <span class="text-dark-gray/70">Exclusive Reading Rhythms tote bag</span>
+              <span class="text-dark-gray/70">Exclusive swag giveaway</span>
             </li>
             <li class="flex items-start gap-2 md:gap-3">
               <svg class="w-3.5 h-3.5 md:w-4 md:h-4 mt-0.5 flex-shrink-0 text-rust" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -1392,7 +1347,7 @@ const tiers = [
             <button type="button" data-passport-cta class="block w-full py-3 md:py-4 px-4 md:px-6 text-center font-medium text-sm md:text-base transition-all duration-300 bg-night text-white rounded-lg md:rounded-xl hover:bg-night/90 hover:shadow-lg hover:shadow-night/30 cursor-pointer">
               Get My Passport
             </button>
-            <p class="text-center text-dark-gray/40 text-[10px] md:text-xs mt-2 md:mt-3">Billed quarterly</p>
+            <p class="text-center text-dark-gray/40 text-[10px] md:text-xs mt-2 md:mt-3">Billed monthly</p>
           </div>
         </div>
       </div>
@@ -1415,7 +1370,7 @@ const tiers = [
             <span>In NYC? Get <strong class="text-dark-gray">NYC Reader</strong> or <strong class="text-dark-gray">All-Access</strong></span>
           </div>
         </div>
-        <p class="mt-3 text-[11px] md:text-xs text-dark-gray/50 italic">Limited to 500 passports this season. Once they're gone, they're gone.</p>
+        <p class="mt-3 text-[11px] md:text-xs text-dark-gray/50 italic">Limited NYC spots available.</p>
       </div>
 
       <div class="mb-12 md:mb-20"></div>
@@ -1478,7 +1433,7 @@ const tiers = [
     <div class="relative max-w-4xl mx-auto px-4 md:px-6 lg:px-8 text-center scroll-fade-up">
       <div class="inline-flex items-center gap-2 md:gap-3 px-3 py-1.5 md:px-5 md:py-2.5 bg-cream-warm/10 rounded-full border border-cream-warm/20 mb-5 md:mb-8">
         <span class="w-1.5 h-1.5 md:w-2 md:h-2 bg-cream-warm rounded-full animate-pulse"></span>
-        <span class="text-cream-warm/90 text-xs md:text-sm font-medium">Winter Season: Jan 28 - Apr 28</span>
+        <span class="text-cream-warm/90 text-xs md:text-sm font-medium">Winter Season: Jan 31 - Mar 31</span>
       </div>
 
       <h2 class="text-xl md:text-3xl lg:text-4xl font-display text-cream-warm tracking-wide mb-4 md:mb-6">
@@ -1497,7 +1452,7 @@ const tiers = [
       <!-- App Download Row -->
       <div class="flex flex-col md:flex-row items-center justify-center gap-4 md:gap-6 pt-5 md:pt-8 border-t border-cream-warm/15">
         <div class="flex items-center gap-3 md:gap-4">
-          <a href="#" class="transition-all duration-300 hover:opacity-80 hover:-translate-y-0.5">
+          <a href="https://apps.apple.com/us/app/reading-rhythms/id6756758427" class="transition-all duration-300 hover:opacity-80 hover:-translate-y-0.5">
             <img src="https://developer.apple.com/assets/elements/badges/download-on-the-app-store.svg" alt="Download on the App Store" class="h-9 md:h-10 rounded-lg" />
           </a>
           <a href="https://play.google.com/store/apps/details?id=app.rork.reading_rhythms_clubs" class="transition-all duration-300 hover:opacity-80 hover:-translate-y-0.5">
@@ -1507,7 +1462,7 @@ const tiers = [
 
       </div>
 
-      <p class="text-cream-warm/50 text-[10px] md:text-sm mt-5 md:mt-8">Global: $9/mo. NYC plans: billed quarterly.</p>
+      <p class="text-cream-warm/50 text-[10px] md:text-sm mt-5 md:mt-8">All plans billed monthly.</p>
     </div>
   </section>
 
@@ -1533,7 +1488,7 @@ const tiers = [
         </div>
 
         <div class="space-y-4 mb-8">
-          <a href="#" class="flex items-center justify-between p-4 bg-white rounded-2xl border border-dark-gray/10 hover:border-dark-gray/20 hover:shadow-md transition-all duration-300 group">
+          <a href="https://apps.apple.com/us/app/reading-rhythms/id6756758427" class="flex items-center justify-between p-4 bg-white rounded-2xl border border-dark-gray/10 hover:border-dark-gray/20 hover:shadow-md transition-all duration-300 group">
             <div class="flex items-center gap-4">
               <div class="w-12 h-12 bg-black rounded-xl flex items-center justify-center">
                 <svg class="w-7 h-7 text-white" viewBox="0 0 24 24" fill="currentColor">
@@ -1620,7 +1575,7 @@ const tiers = [
 
     if (carousel && track && dots.length > 0) {
       let currentSlideIndex = 0;
-      const totalSlides = 5;
+      const totalSlides = 3;
       let startX = 0;
       let isDragging = false;
       let currentTranslate = 0;
