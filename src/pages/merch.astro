@@ -1,0 +1,1121 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout title="Merch | Reading Rhythms" fullWidth={true} fullHeight={true} showNavbar={true}>
+  <style>
+    @font-face {
+      font-family: 'Fraunces';
+      src: url('https://fonts.gstatic.com/s/fraunces/v31/6NUh8FyLNQOQZAnv9bYEvDiIdE9Ea92uemAk_WBq8U_9v0c.woff2') format('woff2');
+      font-weight: 400;
+      font-style: normal;
+      font-display: swap;
+    }
+    @font-face {
+      font-family: 'Fraunces';
+      src: url('https://fonts.gstatic.com/s/fraunces/v31/6NVf8FyLNQOQZAnv9ZwNjucMHVn85Ni7emAe9lKqZTnbB-gzTK0K1ChJdt9vIVYX9G37lvd9.woff2') format('woff2');
+      font-weight: 400;
+      font-style: italic;
+      font-display: swap;
+    }
+    @font-face {
+      font-family: 'Inter';
+      src: url('https://fonts.gstatic.com/s/inter/v13/UcCO3FwrK3iLTeHuS_fvQtMwCp50KnMw2boKoduKmMEVuLyfAZ9hiJ-Ek-_EeA.woff2') format('woff2');
+      font-weight: 400;
+      font-style: normal;
+      font-display: swap;
+    }
+
+    .merch-page {
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    }
+
+    .merch-page h1, .merch-page h2, .merch-page h3 {
+      font-family: 'Fraunces', serif;
+    }
+
+    .merch-page section {
+      width: 100vw;
+      position: relative;
+      left: 50%;
+      right: 50%;
+      margin-left: -50vw;
+      margin-right: -50vw;
+    }
+
+    .unified-cream-section {
+      background: linear-gradient(180deg, #FAF8F5 0%, #F5F2ED 100%);
+    }
+
+    .scroll-fade-up {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+    }
+
+    .scroll-fade-up.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .cart-drawer {
+      transform: translateX(100%);
+      transition: transform 0.3s ease-out;
+    }
+
+    .cart-drawer.open {
+      transform: translateX(0);
+    }
+
+    .cart-overlay {
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease-out;
+    }
+
+    .cart-overlay.open {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .cart-drawer {
+      height: 100dvh;
+      max-height: 100dvh;
+    }
+
+    #cart-items {
+      min-height: 0;
+      flex: 1 1 0%;
+    }
+
+    #cart-footer, #cart-empty {
+      flex-shrink: 0;
+    }
+
+    .toast-notification {
+      transform: translateY(-20px);
+      opacity: 0;
+      transition: transform 0.3s ease-out, opacity 0.3s ease-out;
+      pointer-events: none;
+    }
+
+    .toast-notification.show {
+      transform: translateY(0);
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .cart-button-pulse {
+      animation: pulse 0.4s ease-out;
+    }
+
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.15); }
+      100% { transform: scale(1); }
+    }
+
+    .product-card {
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .product-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.1);
+    }
+
+    .add-to-cart-btn {
+      transition: all 0.2s ease;
+    }
+
+    .add-to-cart-btn:hover {
+      transform: translateY(-2px);
+    }
+
+    .add-to-cart-btn:active {
+      transform: translateY(0);
+    }
+
+    .add-to-cart-btn.confirmed {
+      background-color: #16a34a;
+      pointer-events: none;
+    }
+
+    .add-to-cart-btn .btn-content {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+    }
+
+    .add-to-cart-btn .checkmark {
+      display: none;
+    }
+
+    .add-to-cart-btn.confirmed .checkmark {
+      display: inline;
+    }
+
+    .quantity-btn {
+      transition: background-color 0.15s ease;
+    }
+
+    .quantity-btn:hover {
+      background-color: rgba(0, 0, 0, 0.08);
+    }
+
+    .scrollbar-hide {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+    .scrollbar-hide::-webkit-scrollbar {
+      display: none;
+    }
+
+    .mobile-carousel {
+      display: flex;
+      gap: 12px;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch;
+      padding: 0 16px;
+      margin: 0 -16px;
+    }
+
+    .mobile-carousel::-webkit-scrollbar {
+      display: none;
+    }
+
+    .mobile-carousel {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+
+    .mobile-carousel .product-card {
+      flex: 0 0 80%;
+      scroll-snap-align: center;
+      min-width: 0;
+    }
+
+    .carousel-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background-color: rgba(0, 0, 0, 0.2);
+      transition: background-color 0.2s ease, transform 0.2s ease;
+    }
+
+    .carousel-dot.active {
+      background-color: #111111;
+      transform: scale(1.2);
+    }
+
+    @media (min-width: 768px) {
+      .mobile-carousel {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 24px;
+        overflow: visible;
+        scroll-snap-type: none;
+        padding: 0;
+        margin: 0;
+      }
+
+      .mobile-carousel .product-card {
+        flex: none;
+        width: auto;
+      }
+    }
+
+    @media (min-width: 1024px) {
+      .mobile-carousel {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 32px;
+      }
+    }
+
+    .product-gallery {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .product-gallery-images {
+      display: flex;
+      transition: transform 0.3s ease-out;
+    }
+
+    .product-gallery-images img {
+      flex: 0 0 100%;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .gallery-nav {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 32px;
+      height: 32px;
+      background: rgba(255, 255, 255, 0.9);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      opacity: 0;
+      transition: opacity 0.2s ease;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+      z-index: 10;
+    }
+
+    .product-gallery:hover .gallery-nav {
+      opacity: 1;
+    }
+
+    .gallery-nav:hover {
+      background: rgba(255, 255, 255, 1);
+    }
+
+    .gallery-nav.prev {
+      left: 8px;
+    }
+
+    .gallery-nav.next {
+      right: 8px;
+    }
+
+    .gallery-dots {
+      position: absolute;
+      bottom: 8px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 6px;
+      z-index: 10;
+    }
+
+    .gallery-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.5);
+      cursor: pointer;
+      transition: background 0.2s ease, transform 0.2s ease;
+    }
+
+    .gallery-dot.active {
+      background: rgba(255, 255, 255, 0.95);
+      transform: scale(1.3);
+    }
+
+    @media (max-width: 767px) {
+      .gallery-nav {
+        width: 28px;
+        height: 28px;
+        opacity: 0.6;
+      }
+
+      .product-gallery .gallery-nav {
+        opacity: 0.6;
+      }
+
+      .product-gallery:hover .gallery-nav,
+      .gallery-nav:active {
+        opacity: 0.9;
+      }
+    }
+
+    :global(footer) {
+      z-index: 1 !important;
+    }
+  </style>
+
+  <div class="merch-page">
+
+    <!-- Hero Section -->
+    <section class="relative overflow-hidden pt-[64px] lg:pt-[80px]" style="background: #111111;">
+      <div class="relative w-full max-w-7xl mx-auto px-4 md:px-6 lg:px-8 py-4 md:py-12 lg:py-16">
+        <div class="text-center">
+          <p class="text-xs md:text-sm text-cream-warm/70 mb-2 md:mb-3 tracking-wide font-medium">Pre-Order Now <span class="text-cream-warm/50">|</span> Orders Close February 7th</p>
+
+          <h1 class="text-2xl sm:text-3xl md:text-5xl lg:text-6xl font-display text-cream-warm leading-[1.1] mb-2 md:mb-4">
+            Reading Rhythms <span class="italic">Merch</span>
+          </h1>
+
+          <p class="text-sm md:text-lg text-cream-warm/80 leading-relaxed max-w-2xl mx-auto">
+            Limited edition pieces for readers who know that being "left on read" is actually a compliment.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Products Section -->
+    <section id="products" class="py-6 md:py-12 lg:py-16 unified-cream-section relative overflow-hidden">
+      <div class="absolute top-20 left-10 w-64 h-64 rounded-full bg-walnut/5 blur-3xl hidden md:block"></div>
+      <div class="absolute bottom-20 right-10 w-48 h-48 rounded-full bg-rust/5 blur-3xl hidden md:block"></div>
+
+      <div class="max-w-7xl mx-auto px-4 md:px-6 lg:px-8 relative">
+        <!-- Product Grid / Mobile Carousel -->
+        <div id="product-carousel" class="mobile-carousel scroll-fade-up">
+
+          <!-- Crewneck -->
+          <div class="product-card bg-white rounded-xl md:rounded-2xl overflow-hidden border border-walnut/10 shadow-sm" data-product="crewneck">
+            <div class="aspect-square overflow-hidden bg-[#F5F2ED] product-gallery" data-gallery="crewneck">
+              <div class="product-gallery-images w-full h-full">
+                <img
+                  src="https://reading-rhythms.myshopify.com/cdn/shop/files/IMG_7080.jpg?v=1769501240"
+                  alt="Reading Rhythms Crewneck - Back View"
+                  class="w-full h-full object-cover"
+                />
+                <img
+                  src="https://reading-rhythms.myshopify.com/cdn/shop/files/IG1A7663.jpg?v=1769640448"
+                  alt="Reading Rhythms Crewneck - Front View"
+                  class="w-full h-full object-cover"
+                />
+                <img
+                  src="https://reading-rhythms.myshopify.com/cdn/shop/files/IG1A9455.jpg?v=1769640448"
+                  alt="Reading Rhythms Crewneck - Lifestyle"
+                  class="w-full h-full object-cover"
+                />
+                <img
+                  src="https://reading-rhythms.myshopify.com/cdn/shop/files/Screenshot2026-01-13at11.25.41AM_1.png?v=1769640448"
+                  alt="Reading Rhythms Crewneck - Detail"
+                  class="w-full h-full object-cover"
+                />
+              </div>
+              <button type="button" class="gallery-nav prev" aria-label="Previous image">
+                <svg class="w-4 h-4 text-night" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+                </svg>
+              </button>
+              <button type="button" class="gallery-nav next" aria-label="Next image">
+                <svg class="w-4 h-4 text-night" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                </svg>
+              </button>
+              <div class="gallery-dots">
+                <button type="button" class="gallery-dot active" data-index="0" aria-label="View image 1"></button>
+                <button type="button" class="gallery-dot" data-index="1" aria-label="View image 2"></button>
+                <button type="button" class="gallery-dot" data-index="2" aria-label="View image 3"></button>
+                <button type="button" class="gallery-dot" data-index="3" aria-label="View image 4"></button>
+              </div>
+            </div>
+            <div class="p-3 md:p-5 lg:p-6">
+              <h3 class="text-sm md:text-lg lg:text-xl text-night mb-0.5 md:mb-1 line-clamp-2">Reading Rhythms Crewneck</h3>
+              <p class="text-rust font-medium text-sm md:text-lg mb-1 md:mb-3">$65.00</p>
+              <p class="text-dark-gray/70 text-xs md:text-sm mb-2 md:mb-4 hidden md:block">Premium heavyweight cotton crewneck with embroidered logo.</p>
+
+              <div class="mb-2 md:mb-4">
+                <label for="size-crewneck" class="block text-[10px] md:text-xs text-dark-gray/60 mb-1 font-medium">Size</label>
+                <select
+                  id="size-crewneck"
+                  class="w-full px-2 md:px-3 py-1.5 md:py-2.5 border border-walnut/20 rounded-lg text-xs md:text-sm bg-white focus:outline-none focus:ring-2 focus:ring-rust/30 focus:border-rust/50 appearance-none cursor-pointer"
+                  style="background-image: url('data:image/svg+xml;charset=US-ASCII,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%2212%22 height=%2212%22 viewBox=%220 0 12 12%22><path fill=%22%23666%22 d=%22M6 8L2 4h8z%22/></svg>'); background-repeat: no-repeat; background-position: right 8px center;"
+                >
+                  <option value="43191780868132">Small</option>
+                  <option value="43191780900900" selected>Medium</option>
+                  <option value="43191780933668">Large</option>
+                  <option value="43191780966436">XL</option>
+                  <option value="43191780999204">2XL</option>
+                  <option value="43191781031972">3XL</option>
+                </select>
+              </div>
+
+              <div class="product-buttons flex flex-col gap-1.5 md:gap-2" data-product-id="crewneck" data-always-add="true">
+                <div class="add-to-cart-container">
+                  <button
+                    type="button"
+                    class="add-to-cart-btn w-full py-2.5 md:py-3 bg-night text-white font-medium text-xs md:text-sm rounded-lg md:rounded-xl hover:bg-night/90 active:bg-night"
+                    data-product-name="Reading Rhythms Crewneck"
+                    data-product-price="65.00"
+                    data-product-image="https://reading-rhythms.myshopify.com/cdn/shop/files/IMG_7080.jpg?v=1769501240"
+                    data-has-size="true"
+                    data-size-select="size-crewneck"
+                    data-show-confirmation="true"
+                  >
+                    <span class="btn-content">
+                      <svg class="checkmark w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                      <span class="btn-text">Add to Cart</span>
+                    </span>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Tote Bag -->
+          <div class="product-card bg-white rounded-xl md:rounded-2xl overflow-hidden border border-walnut/10 shadow-sm" data-product="tote">
+            <div class="aspect-square overflow-hidden bg-[#E8F0E8] product-gallery" data-gallery="tote">
+              <div class="product-gallery-images w-full h-full">
+                <img
+                  src="https://reading-rhythms.myshopify.com/cdn/shop/files/LEFTON.zip-6_1.png?v=1769500857"
+                  alt="Left on Read Tote Bag - Front"
+                  class="w-full h-full object-cover"
+                />
+                <img
+                  src="https://reading-rhythms.myshopify.com/cdn/shop/files/LEFT_ON.zip_-_5_1.png?v=1769500882"
+                  alt="Left on Read Tote Bag - Lifestyle"
+                  class="w-full h-full object-cover"
+                />
+              </div>
+              <button type="button" class="gallery-nav prev" aria-label="Previous image">
+                <svg class="w-4 h-4 text-night" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+                </svg>
+              </button>
+              <button type="button" class="gallery-nav next" aria-label="Next image">
+                <svg class="w-4 h-4 text-night" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                </svg>
+              </button>
+              <div class="gallery-dots">
+                <button type="button" class="gallery-dot active" data-index="0" aria-label="View image 1"></button>
+                <button type="button" class="gallery-dot" data-index="1" aria-label="View image 2"></button>
+              </div>
+            </div>
+            <div class="p-3 md:p-5 lg:p-6">
+              <h3 class="text-sm md:text-lg lg:text-xl text-night mb-0.5 md:mb-1 line-clamp-2">"Left on Read" Tote Bag</h3>
+              <p class="text-rust font-medium text-sm md:text-lg mb-1 md:mb-3">$25.00</p>
+              <p class="text-dark-gray/70 text-xs md:text-sm mb-2 md:mb-4 hidden md:block">Organic cotton tote with gusseted bottom for extra room.</p>
+
+              <div class="product-buttons flex flex-col gap-1.5 md:gap-2" data-product-id="tote">
+                <div class="add-to-cart-container">
+                  <button
+                    type="button"
+                    class="add-to-cart-btn w-full py-2.5 md:py-3 bg-night text-white font-medium text-xs md:text-sm rounded-lg md:rounded-xl hover:bg-night/90 active:bg-night"
+                    data-product-name="Left on Read Tote Bag"
+                    data-product-price="25.00"
+                    data-product-image="https://reading-rhythms.myshopify.com/cdn/shop/files/LEFTON.zip-6_1.png?v=1769500857"
+                    data-variant-id="43191794532388"
+                  >
+                    Add to Cart
+                  </button>
+                </div>
+                <div class="quantity-container hidden">
+                  <div class="flex items-center justify-between w-full py-1.5 md:py-2 px-2 md:px-3 border-2 border-night rounded-lg md:rounded-xl">
+                    <button type="button" class="qty-decrease w-7 h-7 md:w-8 md:h-8 flex items-center justify-center text-night hover:bg-night/10 rounded-md transition-colors">
+                      <svg class="w-3 h-3 md:w-4 md:h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 12H4"></path></svg>
+                    </button>
+                    <span class="qty-display text-sm md:text-base font-medium text-night">1</span>
+                    <button type="button" class="qty-increase w-7 h-7 md:w-8 md:h-8 flex items-center justify-center text-night hover:bg-night/10 rounded-md transition-colors">
+                      <svg class="w-3 h-3 md:w-4 md:h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path></svg>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Pin -->
+          <div class="product-card bg-white rounded-xl md:rounded-2xl overflow-hidden border border-walnut/10 shadow-sm" data-product="pin">
+            <div class="aspect-square overflow-hidden bg-[#F5F2ED]">
+              <img
+                src="https://reading-rhythms.myshopify.com/cdn/shop/files/image.png?v=1769640363"
+                alt="Reading Rhythms Pin"
+                class="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
+              />
+            </div>
+            <div class="p-3 md:p-5 lg:p-6">
+              <h3 class="text-sm md:text-lg lg:text-xl text-night mb-0.5 md:mb-1">Reading Rhythms Pin</h3>
+              <p class="text-rust font-medium text-sm md:text-lg mb-1 md:mb-3">$15.00</p>
+              <p class="text-dark-gray/70 text-xs md:text-sm mb-2 md:mb-4 hidden md:block">Enamel pin to show off your Reading Rhythms pride.</p>
+
+              <div class="product-buttons flex flex-col gap-1.5 md:gap-2" data-product-id="pin">
+                <div class="add-to-cart-container">
+                  <button
+                    type="button"
+                    class="add-to-cart-btn w-full py-2.5 md:py-3 bg-night text-white font-medium text-xs md:text-sm rounded-lg md:rounded-xl hover:bg-night/90 active:bg-night"
+                    data-product-name="Reading Rhythms Pin"
+                    data-product-price="15.00"
+                    data-product-image="https://reading-rhythms.myshopify.com/cdn/shop/files/image.png?v=1769640363"
+                    data-variant-id="43191805214756"
+                  >
+                    Add to Cart
+                  </button>
+                </div>
+                <div class="quantity-container hidden">
+                  <div class="flex items-center justify-between w-full py-1.5 md:py-2 px-2 md:px-3 border-2 border-night rounded-lg md:rounded-xl">
+                    <button type="button" class="qty-decrease w-7 h-7 md:w-8 md:h-8 flex items-center justify-center text-night hover:bg-night/10 rounded-md transition-colors">
+                      <svg class="w-3 h-3 md:w-4 md:h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 12H4"></path></svg>
+                    </button>
+                    <span class="qty-display text-sm md:text-base font-medium text-night">1</span>
+                    <button type="button" class="qty-increase w-7 h-7 md:w-8 md:h-8 flex items-center justify-center text-night hover:bg-night/10 rounded-md transition-colors">
+                      <svg class="w-3 h-3 md:w-4 md:h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path></svg>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Carousel Indicators (mobile only) -->
+        <div id="carousel-indicators" class="flex justify-center gap-2 mt-4 md:hidden">
+          <button type="button" class="carousel-dot active" data-index="0" aria-label="View product 1"></button>
+          <button type="button" class="carousel-dot" data-index="1" aria-label="View product 2"></button>
+          <button type="button" class="carousel-dot" data-index="2" aria-label="View product 3"></button>
+        </div>
+      </div>
+    </section>
+
+  </div>
+
+  <!-- Floating Cart Button -->
+  <div class="fixed top-[72px] md:top-[88px] right-3 md:right-4 lg:right-6 z-[9997]">
+    <button
+      id="cart-button"
+      type="button"
+      class="relative flex items-center justify-center w-12 h-12 md:w-14 md:h-14 bg-cream-warm text-night rounded-full shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 ring-2 ring-walnut/20"
+      aria-label="Open cart"
+    >
+      <svg class="w-5 h-5 md:w-6 md:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path>
+      </svg>
+      <span id="cart-count" class="absolute -top-1 -right-1 w-5 h-5 md:w-6 md:h-6 bg-rust text-white text-xs md:text-sm font-bold rounded-full flex items-center justify-center hidden">0</span>
+    </button>
+  </div>
+
+  <!-- Cart Overlay -->
+  <div id="cart-overlay" class="cart-overlay fixed inset-0 bg-black/50 z-[9998]"></div>
+
+  <!-- Cart Drawer -->
+  <div id="cart-drawer" class="cart-drawer fixed top-0 right-0 w-full max-w-md bg-white z-[9999] shadow-2xl flex flex-col" style="height: 100dvh; max-height: 100dvh;">
+    <div class="p-5 border-b border-walnut/10 flex items-center justify-between">
+      <h2 class="text-xl font-display text-night" style="font-family: 'Fraunces', serif;">Your Cart</h2>
+      <button id="close-cart" type="button" class="p-2 hover:bg-walnut/5 rounded-lg transition-colors" aria-label="Close cart">
+        <svg class="w-5 h-5 text-dark-gray" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+        </svg>
+      </button>
+    </div>
+
+    <div id="cart-items" class="flex-1 overflow-y-auto p-5 scrollbar-hide">
+      <!-- Cart items will be rendered here -->
+    </div>
+
+    <div id="cart-footer" class="p-5 border-t border-walnut/10 hidden">
+      <div class="flex items-center justify-between mb-4">
+        <span class="text-dark-gray/70">Subtotal</span>
+        <span id="cart-subtotal" class="text-lg font-medium text-night">$0.00</span>
+      </div>
+      <p class="text-xs text-dark-gray/50 mb-4">Shipping calculated at checkout</p>
+      <button
+        id="checkout-btn"
+        type="button"
+        class="w-full py-3.5 bg-night text-white font-medium rounded-xl hover:bg-night/90 transition-colors"
+      >
+        Checkout
+      </button>
+      <button
+        id="continue-shopping"
+        type="button"
+        class="w-full py-3 mt-2 text-dark-gray/70 font-medium hover:text-night transition-colors"
+      >
+        Continue Shopping
+      </button>
+    </div>
+
+    <div id="cart-empty" class="flex-1 flex flex-col items-center justify-center p-8 text-center">
+      <div class="w-16 h-16 rounded-full bg-walnut/5 flex items-center justify-center mb-4">
+        <svg class="w-8 h-8 text-walnut/40" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path>
+        </svg>
+      </div>
+      <p class="text-dark-gray/70 mb-4">Your cart is empty</p>
+      <button
+        id="start-shopping"
+        type="button"
+        class="px-6 py-2.5 bg-night text-white font-medium rounded-xl hover:bg-night/90 transition-colors"
+      >
+        Start Shopping
+      </button>
+    </div>
+  </div>
+
+  <!-- Toast Notification -->
+  <div id="toast" class="toast-notification fixed top-20 right-4 md:right-6 z-[10000] bg-night text-cream-warm px-4 py-3 rounded-xl shadow-lg flex items-center gap-3">
+    <svg class="w-5 h-5 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+    </svg>
+    <span id="toast-message">Added to cart</span>
+  </div>
+
+  <script>
+    const STORAGE_KEY = 'rr-merch-cart';
+
+    interface CartItem {
+      variantId: string;
+      name: string;
+      size?: string;
+      price: number;
+      quantity: number;
+      image: string;
+    }
+
+    function getCart(): CartItem[] {
+      try {
+        const stored = localStorage.getItem(STORAGE_KEY);
+        return stored ? JSON.parse(stored) : [];
+      } catch {
+        return [];
+      }
+    }
+
+    function saveCart(cart: CartItem[]): void {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(cart));
+      updateCartUI();
+      updateProductCardStates();
+    }
+
+    function addToCart(item: CartItem): void {
+      const cart = getCart();
+      const existingIndex = cart.findIndex(
+        i => i.variantId === item.variantId
+      );
+
+      if (existingIndex >= 0) {
+        cart[existingIndex].quantity += 1;
+      } else {
+        cart.push({ ...item, quantity: 1 });
+      }
+
+      saveCart(cart);
+      showToast(`${item.name} added to cart`);
+      pulseCartButton();
+    }
+
+    function removeFromCart(variantId: string): void {
+      const cart = getCart().filter(item => item.variantId !== variantId);
+      saveCart(cart);
+    }
+
+    function updateQuantity(variantId: string, delta: number): void {
+      const cart = getCart();
+      const item = cart.find(i => i.variantId === variantId);
+
+      if (item) {
+        item.quantity += delta;
+        if (item.quantity <= 0) {
+          removeFromCart(variantId);
+        } else {
+          saveCart(cart);
+        }
+      }
+    }
+
+    function setQuantity(variantId: string, quantity: number): void {
+      const cart = getCart();
+      const item = cart.find(i => i.variantId === variantId);
+
+      if (item) {
+        if (quantity <= 0) {
+          removeFromCart(variantId);
+        } else {
+          item.quantity = quantity;
+          saveCart(cart);
+        }
+      }
+    }
+
+    function getCartTotal(): number {
+      return getCart().reduce((sum, item) => sum + item.price * item.quantity, 0);
+    }
+
+    function getCartCount(): number {
+      return getCart().reduce((sum, item) => sum + item.quantity, 0);
+    }
+
+    function getItemQuantity(variantId: string): number {
+      const cart = getCart();
+      const item = cart.find(i => i.variantId === variantId);
+      return item ? item.quantity : 0;
+    }
+
+    function updateProductCardStates(): void {
+      document.querySelectorAll('.product-buttons').forEach(container => {
+        const alwaysAdd = container.getAttribute('data-always-add') === 'true';
+        if (alwaysAdd) return;
+
+        const addToCartContainer = container.querySelector('.add-to-cart-container') as HTMLElement;
+        const quantityContainer = container.querySelector('.quantity-container') as HTMLElement;
+        const addToCartBtn = container.querySelector('.add-to-cart-btn') as HTMLElement;
+        const qtyDisplay = container.querySelector('.qty-display') as HTMLElement;
+
+        if (!addToCartContainer || !quantityContainer || !addToCartBtn) return;
+
+        const hasSize = addToCartBtn.getAttribute('data-has-size') === 'true';
+        let variantId = addToCartBtn.getAttribute('data-variant-id') || '';
+
+        if (hasSize) {
+          const selectId = addToCartBtn.getAttribute('data-size-select');
+          const select = selectId ? document.getElementById(selectId) as HTMLSelectElement : null;
+          if (select) {
+            variantId = select.value;
+          }
+        }
+
+        const qty = getItemQuantity(variantId);
+
+        if (qty > 0) {
+          addToCartContainer.classList.add('hidden');
+          quantityContainer.classList.remove('hidden');
+          if (qtyDisplay) qtyDisplay.textContent = qty.toString();
+        } else {
+          addToCartContainer.classList.remove('hidden');
+          quantityContainer.classList.add('hidden');
+        }
+      });
+    }
+
+    function updateCartUI(): void {
+      const cart = getCart();
+      const count = getCartCount();
+      const total = getCartTotal();
+
+      const countEl = document.getElementById('cart-count');
+      const itemsEl = document.getElementById('cart-items');
+      const footerEl = document.getElementById('cart-footer');
+      const emptyEl = document.getElementById('cart-empty');
+      const subtotalEl = document.getElementById('cart-subtotal');
+
+      if (countEl) {
+        countEl.textContent = count.toString();
+        countEl.classList.toggle('hidden', count === 0);
+      }
+
+      if (subtotalEl) {
+        subtotalEl.textContent = `$${total.toFixed(2)}`;
+      }
+
+      if (footerEl && emptyEl) {
+        footerEl.classList.toggle('hidden', cart.length === 0);
+        emptyEl.classList.toggle('hidden', cart.length > 0);
+      }
+
+      if (itemsEl) {
+        if (cart.length === 0) {
+          itemsEl.innerHTML = '';
+        } else {
+          itemsEl.innerHTML = cart.map(item => `
+            <div class="flex gap-4 py-4 border-b border-walnut/10 last:border-0" data-variant="${item.variantId}">
+              <div class="w-20 h-20 rounded-lg overflow-hidden bg-[#F5F2ED] flex-shrink-0">
+                ${item.image
+                  ? `<img src="${item.image}" alt="${item.name}" class="w-full h-full object-cover" />`
+                  : `<div class="w-full h-full flex items-center justify-center">
+                      <svg class="w-8 h-8 text-walnut/30" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z"></path>
+                      </svg>
+                    </div>`
+                }
+              </div>
+              <div class="flex-1 min-w-0">
+                <h4 class="text-sm font-medium text-night truncate">${item.name}</h4>
+                ${item.size ? `<p class="text-xs text-dark-gray/60 mt-0.5">Size: ${item.size}</p>` : ''}
+                <p class="text-sm text-rust font-medium mt-1">$${item.price.toFixed(2)}</p>
+                <div class="flex items-center gap-2 mt-2">
+                  <button
+                    type="button"
+                    class="quantity-btn w-7 h-7 rounded-md border border-walnut/20 flex items-center justify-center text-dark-gray"
+                    data-action="decrease"
+                    data-variant="${item.variantId}"
+                  >
+                    <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 12H4"></path>
+                    </svg>
+                  </button>
+                  <span class="text-sm font-medium w-6 text-center">${item.quantity}</span>
+                  <button
+                    type="button"
+                    class="quantity-btn w-7 h-7 rounded-md border border-walnut/20 flex items-center justify-center text-dark-gray"
+                    data-action="increase"
+                    data-variant="${item.variantId}"
+                  >
+                    <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
+                    </svg>
+                  </button>
+                  <button
+                    type="button"
+                    class="ml-auto p-1.5 text-dark-gray/40 hover:text-rust transition-colors"
+                    data-action="remove"
+                    data-variant="${item.variantId}"
+                  >
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
+                    </svg>
+                  </button>
+                </div>
+              </div>
+            </div>
+          `).join('');
+        }
+      }
+    }
+
+    function showToast(message: string): void {
+      const toast = document.getElementById('toast');
+      const toastMessage = document.getElementById('toast-message');
+
+      if (toast && toastMessage) {
+        toastMessage.textContent = message;
+        toast.classList.add('show');
+
+        setTimeout(() => {
+          toast.classList.remove('show');
+        }, 2500);
+      }
+    }
+
+    function pulseCartButton(): void {
+      const btn = document.getElementById('cart-button');
+      if (btn) {
+        btn.classList.add('cart-button-pulse');
+        setTimeout(() => btn.classList.remove('cart-button-pulse'), 400);
+      }
+    }
+
+    function openCart(): void {
+      const drawer = document.getElementById('cart-drawer');
+      const overlay = document.getElementById('cart-overlay');
+
+      drawer?.classList.add('open');
+      overlay?.classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeCart(): void {
+      const drawer = document.getElementById('cart-drawer');
+      const overlay = document.getElementById('cart-overlay');
+
+      drawer?.classList.remove('open');
+      overlay?.classList.remove('open');
+      document.body.style.overflow = '';
+    }
+
+    function buildCheckoutUrl(items?: { variantId: string; quantity: number }[]): string {
+      const cartItems = items || getCart().map(item => ({ variantId: item.variantId, quantity: item.quantity }));
+      const itemsStr = cartItems.map(item => `${item.variantId}:${item.quantity}`).join(',');
+      return `https://reading-rhythms.myshopify.com/cart/${itemsStr}`;
+    }
+
+    function getSizeLabel(variantId: string): string {
+      const sizeMap: Record<string, string> = {
+        '43191780868132': 'Small',
+        '43191780900900': 'Medium',
+        '43191780933668': 'Large',
+        '43191780966436': 'XL',
+        '43191780999204': '2XL',
+        '43191781031972': '3XL'
+      };
+      return sizeMap[variantId] || '';
+    }
+
+    function getVariantIdFromButton(btn: Element): string {
+      const hasSize = btn.getAttribute('data-has-size') === 'true';
+      let variantId = btn.getAttribute('data-variant-id') || '';
+
+      if (hasSize) {
+        const selectId = btn.getAttribute('data-size-select');
+        const select = selectId ? document.getElementById(selectId) as HTMLSelectElement : null;
+        if (select) {
+          variantId = select.value;
+        }
+      }
+
+      return variantId;
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      updateCartUI();
+      updateProductCardStates();
+
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('visible');
+            }
+          });
+        },
+        { threshold: 0.1 }
+      );
+
+      document.querySelectorAll('.scroll-fade-up').forEach(el => observer.observe(el));
+
+      document.querySelectorAll('.add-to-cart-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const name = btn.getAttribute('data-product-name') || '';
+          const price = parseFloat(btn.getAttribute('data-product-price') || '0');
+          const image = btn.getAttribute('data-product-image') || '';
+          const hasSize = btn.getAttribute('data-has-size') === 'true';
+          const showConfirmation = btn.getAttribute('data-show-confirmation') === 'true';
+
+          let variantId = btn.getAttribute('data-variant-id') || '';
+          let size: string | undefined;
+
+          if (hasSize) {
+            const selectId = btn.getAttribute('data-size-select');
+            const select = selectId ? document.getElementById(selectId) as HTMLSelectElement : null;
+            if (select) {
+              variantId = select.value;
+              size = getSizeLabel(variantId);
+            }
+          }
+
+          addToCart({ variantId, name, size, price, quantity: 1, image });
+
+          if (showConfirmation) {
+            const btnText = btn.querySelector('.btn-text') as HTMLElement;
+            const originalText = btnText?.textContent || 'Add to Cart';
+
+            btn.classList.add('confirmed');
+            if (btnText) {
+              btnText.textContent = `Added! (${size || 'Item'})`;
+            }
+
+            setTimeout(() => {
+              btn.classList.remove('confirmed');
+              if (btnText) {
+                btnText.textContent = originalText;
+              }
+            }, 1800);
+          }
+        });
+      });
+
+      document.querySelectorAll('.product-buttons').forEach(container => {
+        const addToCartBtn = container.querySelector('.add-to-cart-btn') as HTMLElement;
+
+        container.querySelector('.qty-decrease')?.addEventListener('click', () => {
+          const variantId = getVariantIdFromButton(addToCartBtn);
+          updateQuantity(variantId, -1);
+        });
+
+        container.querySelector('.qty-increase')?.addEventListener('click', () => {
+          const variantId = getVariantIdFromButton(addToCartBtn);
+          updateQuantity(variantId, 1);
+        });
+      });
+
+      document.querySelectorAll('select[id^="size-"]').forEach(select => {
+        select.addEventListener('change', () => {
+          updateProductCardStates();
+        });
+      });
+
+      document.getElementById('cart-button')?.addEventListener('click', openCart);
+      document.getElementById('close-cart')?.addEventListener('click', closeCart);
+      document.getElementById('cart-overlay')?.addEventListener('click', closeCart);
+      document.getElementById('continue-shopping')?.addEventListener('click', closeCart);
+      document.getElementById('start-shopping')?.addEventListener('click', closeCart);
+
+      document.getElementById('cart-items')?.addEventListener('click', (e) => {
+        const target = e.target as HTMLElement;
+        const btn = target.closest('button');
+        if (!btn) return;
+
+        const action = btn.getAttribute('data-action');
+        const variantId = btn.getAttribute('data-variant');
+
+        if (!variantId) return;
+
+        if (action === 'increase') {
+          updateQuantity(variantId, 1);
+        } else if (action === 'decrease') {
+          updateQuantity(variantId, -1);
+        } else if (action === 'remove') {
+          removeFromCart(variantId);
+        }
+      });
+
+      document.getElementById('checkout-btn')?.addEventListener('click', () => {
+        const url = buildCheckoutUrl();
+        window.location.href = url;
+      });
+
+      document.querySelectorAll('.product-gallery').forEach(gallery => {
+        const imagesContainer = gallery.querySelector('.product-gallery-images') as HTMLElement;
+        const images = imagesContainer?.querySelectorAll('img') || [];
+        const dots = gallery.querySelectorAll('.gallery-dot');
+        const prevBtn = gallery.querySelector('.gallery-nav.prev');
+        const nextBtn = gallery.querySelector('.gallery-nav.next');
+        let currentIndex = 0;
+
+        const updateGallery = (index: number) => {
+          if (index < 0) index = images.length - 1;
+          if (index >= images.length) index = 0;
+          currentIndex = index;
+
+          if (imagesContainer) {
+            imagesContainer.style.transform = `translateX(-${currentIndex * 100}%)`;
+          }
+
+          dots.forEach((dot, i) => {
+            dot.classList.toggle('active', i === currentIndex);
+          });
+        };
+
+        prevBtn?.addEventListener('click', (e) => {
+          e.stopPropagation();
+          updateGallery(currentIndex - 1);
+        });
+
+        nextBtn?.addEventListener('click', (e) => {
+          e.stopPropagation();
+          updateGallery(currentIndex + 1);
+        });
+
+        dots.forEach((dot, index) => {
+          dot.addEventListener('click', (e) => {
+            e.stopPropagation();
+            updateGallery(index);
+          });
+        });
+      });
+
+      const carousel = document.getElementById('product-carousel');
+      const indicators = document.querySelectorAll('.carousel-dot');
+
+      if (carousel && indicators.length > 0) {
+        const updateIndicators = () => {
+          if (window.innerWidth >= 768) return;
+
+          const cards = carousel.querySelectorAll('.product-card');
+          const carouselRect = carousel.getBoundingClientRect();
+          const carouselCenter = carouselRect.left + carouselRect.width / 2;
+
+          let closestIndex = 0;
+          let closestDistance = Infinity;
+
+          cards.forEach((card, index) => {
+            const cardRect = card.getBoundingClientRect();
+            const cardCenter = cardRect.left + cardRect.width / 2;
+            const distance = Math.abs(cardCenter - carouselCenter);
+
+            if (distance < closestDistance) {
+              closestDistance = distance;
+              closestIndex = index;
+            }
+          });
+
+          indicators.forEach((dot, index) => {
+            dot.classList.toggle('active', index === closestIndex);
+          });
+        };
+
+        carousel.addEventListener('scroll', updateIndicators, { passive: true });
+
+        indicators.forEach((dot, index) => {
+          dot.addEventListener('click', () => {
+            const cards = carousel.querySelectorAll('.product-card');
+            if (cards[index]) {
+              cards[index].scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+            }
+          });
+        });
+      }
+    });
+  </script>
+</BaseLayout>
