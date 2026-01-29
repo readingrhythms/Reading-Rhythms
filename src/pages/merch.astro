@@ -364,6 +364,50 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     .sticky-cart-bar.visible {
       transform: translateY(0);
     }
+
+    .shipping-progress-bar {
+      background: #E5E7EB;
+      border-radius: 9999px;
+      height: 8px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .shipping-progress-fill {
+      background: linear-gradient(90deg, #B45309, #D97706);
+      height: 100%;
+      border-radius: 9999px;
+      transition: width 0.4s ease-out;
+    }
+
+    .shipping-progress-fill.complete {
+      background: linear-gradient(90deg, #059669, #10B981);
+    }
+
+    @keyframes shimmer {
+      0% { transform: translateX(-100%); }
+      100% { transform: translateX(100%); }
+    }
+
+    .shipping-progress-fill.complete::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+      animation: shimmer 1.5s ease-out;
+    }
+
+    .free-shipping-badge {
+      background: linear-gradient(135deg, #059669, #10B981);
+      color: white;
+      padding: 2px 8px;
+      border-radius: 4px;
+      font-size: 12px;
+      font-weight: 600;
+    }
   </style>
 
   <div class="merch-page">
@@ -380,6 +424,20 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 
           <p class="text-base md:text-lg text-cream-warm/80 leading-relaxed max-w-2xl mx-auto">
             Limited edition pieces for readers who know that being "left on read" is actually a compliment.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Free Shipping Banner -->
+    <section class="bg-[#F5F2ED] border-b border-walnut/10">
+      <div class="max-w-7xl mx-auto px-4 md:px-6 lg:px-8 py-3 md:py-4">
+        <div class="flex items-center justify-center gap-2 md:gap-3">
+          <svg class="w-5 h-5 md:w-6 md:h-6 text-walnut" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M8.25 18.75a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m3 0h6m-9 0H3.375a1.125 1.125 0 01-1.125-1.125V14.25m17.25 4.5a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m3 0h1.125c.621 0 1.129-.504 1.09-1.124a17.902 17.902 0 00-3.213-9.193 2.056 2.056 0 00-1.58-.86H14.25M16.5 18.75h-2.25m0-11.177v-.958c0-.568-.422-1.048-.987-1.106a48.554 48.554 0 00-10.026 0 1.106 1.106 0 00-.987 1.106v7.635m12-6.677v6.677m0 4.5v-4.5m0 0h-12"></path>
+          </svg>
+          <p class="text-sm md:text-base text-walnut font-medium">
+            Free Shipping on Orders Over $30
           </p>
         </div>
       </div>
@@ -538,12 +596,33 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 
           <!-- Pin -->
           <div class="product-card bg-white rounded-xl md:rounded-2xl overflow-hidden border border-walnut/10 shadow-sm" data-product="pin">
-            <div class="aspect-square overflow-hidden bg-[#F5F2ED]">
-              <img
-                src="https://reading-rhythms.myshopify.com/cdn/shop/files/image.png?v=1769640363"
-                alt="Reading Rhythms Pin"
-                class="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
-              />
+            <div class="aspect-square overflow-hidden bg-[#F5F2ED] product-gallery" data-gallery="pin">
+              <div class="product-gallery-images w-full h-full">
+                <img
+                  src="https://reading-rhythms.myshopify.com/cdn/shop/files/Pin_Showcase_Product_Image.jpg?v=1769724694"
+                  alt="Reading Rhythms Pin - Product Showcase"
+                  class="w-full h-full object-cover"
+                />
+                <img
+                  src="https://reading-rhythms.myshopify.com/cdn/shop/files/image.png?v=1769724694"
+                  alt="Reading Rhythms Pin - Detail"
+                  class="w-full h-full object-cover"
+                />
+              </div>
+              <button type="button" class="gallery-nav prev" aria-label="Previous image">
+                <svg class="w-4 h-4 text-night" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+                </svg>
+              </button>
+              <button type="button" class="gallery-nav next" aria-label="Next image">
+                <svg class="w-4 h-4 text-night" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                </svg>
+              </button>
+              <div class="gallery-dots">
+                <button type="button" class="gallery-dot active" data-index="0" aria-label="View image 1"></button>
+                <button type="button" class="gallery-dot" data-index="1" aria-label="View image 2"></button>
+              </div>
             </div>
             <div class="p-3 md:p-5 lg:p-6">
               <h3 class="text-sm md:text-lg lg:text-xl text-night mb-0.5 md:mb-1">Reading Rhythms Pin</h3>
@@ -557,7 +636,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
                     class="add-to-cart-btn w-full py-3.5 md:py-4 bg-night text-white font-medium text-sm md:text-base rounded-lg md:rounded-xl hover:bg-night/90 active:bg-night"
                     data-product-name="Reading Rhythms Pin"
                     data-product-price="15.00"
-                    data-product-image="https://reading-rhythms.myshopify.com/cdn/shop/files/image.png?v=1769640363"
+                    data-product-image="https://reading-rhythms.myshopify.com/cdn/shop/files/Pin_Showcase_Product_Image.jpg?v=1769724694"
                     data-variant-id="43191805214756"
                   >
                     Add to Cart
@@ -644,16 +723,37 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       </button>
     </div>
 
+    <div id="shipping-progress" class="px-5 py-4 border-b border-walnut/10 hidden">
+      <div class="flex items-center justify-between mb-2">
+        <span id="shipping-message" class="text-sm text-dark-gray/80"></span>
+        <svg id="shipping-truck" class="w-5 h-5 text-dark-gray/60" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M8.25 18.75a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m3 0h6m-9 0H3.375a1.125 1.125 0 01-1.125-1.125V14.25m17.25 4.5a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m3 0h1.125c.621 0 1.129-.504 1.09-1.124a17.902 17.902 0 00-3.213-9.193 2.056 2.056 0 00-1.58-.86H14.25M16.5 18.75h-2.25m0-11.177v-.958c0-.568-.422-1.048-.987-1.106a48.554 48.554 0 00-10.026 0 1.106 1.106 0 00-.987 1.106v7.635m12-6.677v6.677m0 4.5v-4.5m0 0h-12"></path>
+        </svg>
+      </div>
+      <div class="shipping-progress-bar">
+        <div id="shipping-progress-fill" class="shipping-progress-fill" style="width: 0%"></div>
+      </div>
+    </div>
+
     <div id="cart-items" class="flex-1 overflow-y-auto p-5 scrollbar-hide">
       <!-- Cart items will be rendered here -->
     </div>
 
     <div id="cart-footer" class="p-5 border-t border-walnut/10 hidden">
-      <div class="flex items-center justify-between mb-4">
-        <span class="text-dark-gray/70">Subtotal</span>
-        <span id="cart-subtotal" class="text-lg font-medium text-night">$0.00</span>
+      <div class="space-y-2 mb-4">
+        <div class="flex items-center justify-between">
+          <span class="text-dark-gray/70 text-sm">Subtotal</span>
+          <span id="cart-subtotal" class="text-sm text-night">$0.00</span>
+        </div>
+        <div class="flex items-center justify-between">
+          <span class="text-dark-gray/70 text-sm">Shipping</span>
+          <span id="cart-shipping" class="text-sm text-night">$5.00</span>
+        </div>
+        <div class="border-t border-walnut/10 pt-2 flex items-center justify-between">
+          <span class="text-night font-medium">Total</span>
+          <span id="cart-total" class="text-lg font-medium text-night">$0.00</span>
+        </div>
       </div>
-      <p class="text-xs text-dark-gray/50 mb-4">Shipping calculated at checkout</p>
       <button
         id="checkout-btn"
         type="button"
@@ -822,19 +922,31 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       });
     }
 
+    const FREE_SHIPPING_THRESHOLD = 30;
+    const SHIPPING_COST = 5;
+
     function updateCartUI(): void {
       const cart = getCart();
       const count = getCartCount();
-      const total = getCartTotal();
+      const subtotal = getCartTotal();
+      const qualifiesForFreeShipping = subtotal >= FREE_SHIPPING_THRESHOLD;
+      const shippingCost = qualifiesForFreeShipping ? 0 : (cart.length > 0 ? SHIPPING_COST : 0);
+      const total = subtotal + shippingCost;
 
       const countEl = document.getElementById('cart-count');
       const itemsEl = document.getElementById('cart-items');
       const footerEl = document.getElementById('cart-footer');
       const emptyEl = document.getElementById('cart-empty');
       const subtotalEl = document.getElementById('cart-subtotal');
+      const shippingEl = document.getElementById('cart-shipping');
+      const totalEl = document.getElementById('cart-total');
       const stickyBar = document.getElementById('sticky-cart-bar');
       const stickyCount = document.getElementById('sticky-cart-count');
       const stickyTotal = document.getElementById('sticky-cart-total');
+      const shippingProgress = document.getElementById('shipping-progress');
+      const shippingMessage = document.getElementById('shipping-message');
+      const shippingProgressFill = document.getElementById('shipping-progress-fill');
+      const shippingTruck = document.getElementById('shipping-truck');
 
       if (countEl) {
         countEl.textContent = count.toString();
@@ -842,7 +954,39 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       }
 
       if (subtotalEl) {
-        subtotalEl.textContent = `$${total.toFixed(2)}`;
+        subtotalEl.textContent = `$${subtotal.toFixed(2)}`;
+      }
+
+      if (shippingEl) {
+        if (qualifiesForFreeShipping) {
+          shippingEl.innerHTML = '<span class="free-shipping-badge">FREE</span>';
+        } else {
+          shippingEl.textContent = `$${SHIPPING_COST.toFixed(2)}`;
+        }
+      }
+
+      if (totalEl) {
+        totalEl.textContent = `$${total.toFixed(2)}`;
+      }
+
+      if (shippingProgress && shippingMessage && shippingProgressFill) {
+        shippingProgress.classList.toggle('hidden', cart.length === 0);
+
+        if (cart.length > 0) {
+          const progressPercent = Math.min((subtotal / FREE_SHIPPING_THRESHOLD) * 100, 100);
+          shippingProgressFill.style.width = `${progressPercent}%`;
+
+          if (qualifiesForFreeShipping) {
+            shippingMessage.innerHTML = '<span class="text-emerald-600 font-medium">You\'re eligible for free shipping!</span>';
+            shippingProgressFill.classList.add('complete');
+            if (shippingTruck) shippingTruck.classList.add('text-emerald-600');
+          } else {
+            const amountNeeded = (FREE_SHIPPING_THRESHOLD - subtotal).toFixed(2);
+            shippingMessage.innerHTML = `Add <span class="font-medium text-night">$${amountNeeded}</span> more for free shipping`;
+            shippingProgressFill.classList.remove('complete');
+            if (shippingTruck) shippingTruck.classList.remove('text-emerald-600');
+          }
+        }
       }
 
       if (stickyBar) {
