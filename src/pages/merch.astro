@@ -3,7 +3,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 ---
 
 <BaseLayout title="Merch | Reading Rhythms" fullWidth={true} fullHeight={true} showNavbar={true}>
-  <style>
+  <style is:global>
     @font-face {
       font-family: 'Fraunces';
       src: url('https://fonts.gstatic.com/s/fraunces/v31/6NUh8FyLNQOQZAnv9bYEvDiIdE9Ea92uemAk_WBq8U_9v0c.woff2') format('woff2');
@@ -26,21 +26,47 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       font-display: swap;
     }
 
+    html, body {
+      margin: 0 !important;
+      padding: 0 !important;
+      max-width: none !important;
+      width: 100% !important;
+      overflow-x: hidden;
+    }
+
+    body > main,
+    body > .container,
+    body > .wrapper,
+    body > div:first-of-type,
+    main,
+    .main-content,
+    #main-content,
+    .page-wrapper,
+    .content-wrapper {
+      max-width: none !important;
+      width: 100% !important;
+      margin: 0 !important;
+      padding: 0 !important;
+      border: none !important;
+      box-shadow: none !important;
+    }
+
     .merch-page {
+      width: 100vw !important;
+      max-width: 100vw !important;
+      margin-left: calc(-50vw + 50%) !important;
+      margin-right: calc(-50vw + 50%) !important;
+      overflow-x: hidden;
       font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    }
+
+    .merch-page section {
+      width: 100% !important;
+      max-width: none !important;
     }
 
     .merch-page h1, .merch-page h2, .merch-page h3 {
       font-family: 'Fraunces', serif;
-    }
-
-    .merch-page section {
-      width: 100vw;
-      position: relative;
-      left: 50%;
-      right: 50%;
-      margin-left: -50vw;
-      margin-right: -50vw;
     }
 
     .unified-cream-section {
@@ -329,21 +355,30 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     :global(footer) {
       z-index: 1 !important;
     }
+
+    .sticky-cart-bar {
+      transform: translateY(100%);
+      transition: transform 0.3s ease-out;
+    }
+
+    .sticky-cart-bar.visible {
+      transform: translateY(0);
+    }
   </style>
 
   <div class="merch-page">
 
     <!-- Hero Section -->
     <section class="relative overflow-hidden pt-[64px] lg:pt-[80px]" style="background: #111111;">
-      <div class="relative w-full max-w-7xl mx-auto px-4 md:px-6 lg:px-8 py-4 md:py-12 lg:py-16">
+      <div class="relative w-full max-w-7xl mx-auto px-4 md:px-6 lg:px-8 py-6 md:py-12 lg:py-16">
         <div class="text-center">
-          <p class="text-xs md:text-sm text-cream-warm/70 mb-2 md:mb-3 tracking-wide font-medium">Pre-Order Now <span class="text-cream-warm/50">|</span> Orders Close February 7th</p>
+          <p class="text-sm md:text-sm text-cream-warm/70 mb-2 md:mb-3 tracking-wide font-medium">Pre-Order Now <span class="text-cream-warm/50">|</span> Orders Close February 7th</p>
 
-          <h1 class="text-2xl sm:text-3xl md:text-5xl lg:text-6xl font-display text-cream-warm leading-[1.1] mb-2 md:mb-4">
+          <h1 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-display text-cream-warm leading-[1.1] mb-3 md:mb-4">
             Reading Rhythms <span class="italic">Merch</span>
           </h1>
 
-          <p class="text-sm md:text-lg text-cream-warm/80 leading-relaxed max-w-2xl mx-auto">
+          <p class="text-base md:text-lg text-cream-warm/80 leading-relaxed max-w-2xl mx-auto">
             Limited edition pieces for readers who know that being "left on read" is actually a compliment.
           </p>
         </div>
@@ -378,11 +413,6 @@ import BaseLayout from '../layouts/BaseLayout.astro';
                   alt="Reading Rhythms Crewneck - Lifestyle"
                   class="w-full h-full object-cover"
                 />
-                <img
-                  src="https://reading-rhythms.myshopify.com/cdn/shop/files/Screenshot2026-01-13at11.25.41AM_1.png?v=1769640448"
-                  alt="Reading Rhythms Crewneck - Detail"
-                  class="w-full h-full object-cover"
-                />
               </div>
               <button type="button" class="gallery-nav prev" aria-label="Previous image">
                 <svg class="w-4 h-4 text-night" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -398,7 +428,6 @@ import BaseLayout from '../layouts/BaseLayout.astro';
                 <button type="button" class="gallery-dot active" data-index="0" aria-label="View image 1"></button>
                 <button type="button" class="gallery-dot" data-index="1" aria-label="View image 2"></button>
                 <button type="button" class="gallery-dot" data-index="2" aria-label="View image 3"></button>
-                <button type="button" class="gallery-dot" data-index="3" aria-label="View image 4"></button>
               </div>
             </div>
             <div class="p-3 md:p-5 lg:p-6">
@@ -426,7 +455,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
                 <div class="add-to-cart-container">
                   <button
                     type="button"
-                    class="add-to-cart-btn w-full py-2.5 md:py-3 bg-night text-white font-medium text-xs md:text-sm rounded-lg md:rounded-xl hover:bg-night/90 active:bg-night"
+                    class="add-to-cart-btn w-full py-3.5 md:py-4 bg-night text-white font-medium text-sm md:text-base rounded-lg md:rounded-xl hover:bg-night/90 active:bg-night"
                     data-product-name="Reading Rhythms Crewneck"
                     data-product-price="65.00"
                     data-product-image="https://reading-rhythms.myshopify.com/cdn/shop/files/IMG_7080.jpg?v=1769501240"
@@ -483,7 +512,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
                 <div class="add-to-cart-container">
                   <button
                     type="button"
-                    class="add-to-cart-btn w-full py-2.5 md:py-3 bg-night text-white font-medium text-xs md:text-sm rounded-lg md:rounded-xl hover:bg-night/90 active:bg-night"
+                    class="add-to-cart-btn w-full py-3.5 md:py-4 bg-night text-white font-medium text-sm md:text-base rounded-lg md:rounded-xl hover:bg-night/90 active:bg-night"
                     data-product-name="Left on Read Tote Bag"
                     data-product-price="25.00"
                     data-product-image="https://reading-rhythms.myshopify.com/cdn/shop/files/LEFTON.zip-6_1.png?v=1769500857"
@@ -525,7 +554,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
                 <div class="add-to-cart-container">
                   <button
                     type="button"
-                    class="add-to-cart-btn w-full py-2.5 md:py-3 bg-night text-white font-medium text-xs md:text-sm rounded-lg md:rounded-xl hover:bg-night/90 active:bg-night"
+                    class="add-to-cart-btn w-full py-3.5 md:py-4 bg-night text-white font-medium text-sm md:text-base rounded-lg md:rounded-xl hover:bg-night/90 active:bg-night"
                     data-product-name="Reading Rhythms Pin"
                     data-product-price="15.00"
                     data-product-image="https://reading-rhythms.myshopify.com/cdn/shop/files/image.png?v=1769640363"
@@ -560,6 +589,30 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       </div>
     </section>
 
+  </div>
+
+  <!-- Sticky Cart Bar (Mobile & Desktop) -->
+  <div id="sticky-cart-bar" class="sticky-cart-bar fixed bottom-0 left-0 right-0 bg-night z-[9996] shadow-[0_-4px_20px_rgba(0,0,0,0.15)]">
+    <div class="max-w-7xl mx-auto px-4 md:px-6 py-3 md:py-4 flex items-center justify-between gap-4">
+      <div class="flex items-center gap-3">
+        <div class="w-10 h-10 md:w-12 md:h-12 bg-cream-warm/10 rounded-full flex items-center justify-center">
+          <svg class="w-5 h-5 md:w-6 md:h-6 text-cream-warm" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path>
+          </svg>
+        </div>
+        <div>
+          <p id="sticky-cart-count" class="text-cream-warm font-medium text-sm md:text-base">0 items</p>
+          <p id="sticky-cart-total" class="text-cream-warm/70 text-xs md:text-sm">$0.00</p>
+        </div>
+      </div>
+      <button
+        id="sticky-view-cart-btn"
+        type="button"
+        class="px-6 md:px-8 py-3 md:py-3.5 bg-cream-warm text-night font-medium text-sm md:text-base rounded-xl hover:bg-cream-warm/90 transition-colors"
+      >
+        View Cart
+      </button>
+    </div>
   </div>
 
   <!-- Floating Cart Button -->
@@ -779,6 +832,9 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       const footerEl = document.getElementById('cart-footer');
       const emptyEl = document.getElementById('cart-empty');
       const subtotalEl = document.getElementById('cart-subtotal');
+      const stickyBar = document.getElementById('sticky-cart-bar');
+      const stickyCount = document.getElementById('sticky-cart-count');
+      const stickyTotal = document.getElementById('sticky-cart-total');
 
       if (countEl) {
         countEl.textContent = count.toString();
@@ -787,6 +843,18 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 
       if (subtotalEl) {
         subtotalEl.textContent = `$${total.toFixed(2)}`;
+      }
+
+      if (stickyBar) {
+        stickyBar.classList.toggle('visible', count > 0);
+      }
+
+      if (stickyCount) {
+        stickyCount.textContent = count === 1 ? '1 item' : `${count} items`;
+      }
+
+      if (stickyTotal) {
+        stickyTotal.textContent = `$${total.toFixed(2)}`;
       }
 
       if (footerEl && emptyEl) {
@@ -1006,6 +1074,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       });
 
       document.getElementById('cart-button')?.addEventListener('click', openCart);
+      document.getElementById('sticky-view-cart-btn')?.addEventListener('click', openCart);
       document.getElementById('close-cart')?.addEventListener('click', closeCart);
       document.getElementById('cart-overlay')?.addEventListener('click', closeCart);
       document.getElementById('continue-shopping')?.addEventListener('click', closeCart);
