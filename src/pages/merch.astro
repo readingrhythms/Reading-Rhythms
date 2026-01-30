@@ -356,6 +356,23 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       z-index: 1 !important;
     }
 
+    #presale-ended-overlay {
+      animation: fadeIn 0.5s ease-out;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+      }
+      to {
+        opacity: 1;
+      }
+    }
+
+    #countdown-container .font-display {
+      font-family: 'Fraunces', serif;
+    }
+
     .sticky-cart-bar {
       transform: translateY(100%);
       transition: transform 0.3s ease-out;
@@ -412,19 +429,68 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 
   <div class="merch-page">
 
+    <!-- Pre-Sale Ended Overlay -->
+    <div id="presale-ended-overlay" class="fixed inset-0 bg-black/90 z-[10001] flex items-center justify-center p-6 hidden">
+      <div class="text-center max-w-lg">
+        <div class="w-20 h-20 mx-auto mb-6 rounded-full bg-cream-warm/10 flex items-center justify-center">
+          <svg class="w-10 h-10 text-cream-warm" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+          </svg>
+        </div>
+        <h2 class="text-3xl md:text-4xl lg:text-5xl font-display text-cream-warm mb-4" style="font-family: 'Fraunces', serif;">Pre-Order Closed</h2>
+        <p class="text-lg md:text-xl text-cream-warm/80 leading-relaxed">
+          Congrats to everyone who purchased our first ever merch drop!
+        </p>
+        <p class="text-sm text-cream-warm/50 mt-6">Orders are now in production.</p>
+      </div>
+    </div>
+
     <!-- Hero Section -->
     <section class="relative overflow-hidden pt-[64px] lg:pt-[80px]" style="background: #111111;">
-      <div class="relative w-full max-w-7xl mx-auto px-4 md:px-6 lg:px-8 py-6 md:py-12 lg:py-16">
+      <div class="relative w-full max-w-7xl mx-auto px-4 md:px-6 lg:px-8 py-6 md:py-10 lg:py-12">
         <div class="text-center">
-          <p class="text-sm md:text-sm text-cream-warm/70 mb-2 md:mb-3 tracking-wide font-medium">Pre-Order Now <span class="text-cream-warm/50">|</span> Orders Close February 7th</p>
-
+          <p class="text-xs md:text-sm text-cream-warm/70 uppercase tracking-widest mb-2 md:mb-3">1st Merch Drop</p>
           <h1 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-display text-cream-warm leading-[1.1] mb-3 md:mb-4">
             Reading Rhythms <span class="italic">Merch</span>
           </h1>
 
-          <p class="text-base md:text-lg text-cream-warm/80 leading-relaxed max-w-2xl mx-auto">
+          <p class="text-sm md:text-base text-cream-warm/80 leading-relaxed max-w-2xl mx-auto mb-4 md:mb-5">
             Limited edition pieces for readers who know that being "left on read" is actually a compliment.
           </p>
+
+          <!-- Countdown Timer with Closing Date -->
+          <div id="countdown-container" class="flex flex-col items-center gap-2">
+            <p class="text-xs md:text-sm text-cream-warm/80 font-medium">Pre-Order Closes February 15th</p>
+            <div class="flex items-center justify-center gap-1.5 md:gap-2">
+              <div class="flex flex-col items-center">
+                <div class="w-11 h-11 md:w-14 md:h-14 rounded-md bg-cream-warm/10 flex items-center justify-center">
+                  <span id="countdown-days" class="text-lg md:text-2xl font-display text-cream-warm">00</span>
+                </div>
+                <span class="text-[9px] md:text-[10px] text-cream-warm/60 mt-1 uppercase tracking-wider">Days</span>
+              </div>
+              <span class="text-cream-warm/40 text-base md:text-lg -mt-3">:</span>
+              <div class="flex flex-col items-center">
+                <div class="w-11 h-11 md:w-14 md:h-14 rounded-md bg-cream-warm/10 flex items-center justify-center">
+                  <span id="countdown-hours" class="text-lg md:text-2xl font-display text-cream-warm">00</span>
+                </div>
+                <span class="text-[9px] md:text-[10px] text-cream-warm/60 mt-1 uppercase tracking-wider">Hours</span>
+              </div>
+              <span class="text-cream-warm/40 text-base md:text-lg -mt-3">:</span>
+              <div class="flex flex-col items-center">
+                <div class="w-11 h-11 md:w-14 md:h-14 rounded-md bg-cream-warm/10 flex items-center justify-center">
+                  <span id="countdown-minutes" class="text-lg md:text-2xl font-display text-cream-warm">00</span>
+                </div>
+                <span class="text-[9px] md:text-[10px] text-cream-warm/60 mt-1 uppercase tracking-wider">Mins</span>
+              </div>
+              <span class="text-cream-warm/40 text-base md:text-lg -mt-3">:</span>
+              <div class="flex flex-col items-center">
+                <div class="w-11 h-11 md:w-14 md:h-14 rounded-md bg-cream-warm/10 flex items-center justify-center">
+                  <span id="countdown-seconds" class="text-lg md:text-2xl font-display text-cream-warm">00</span>
+                </div>
+                <span class="text-[9px] md:text-[10px] text-cream-warm/60 mt-1 uppercase tracking-wider">Secs</span>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </section>
@@ -439,7 +505,14 @@ import BaseLayout from '../layouts/BaseLayout.astro';
           <p class="text-sm md:text-base text-walnut font-medium">
             Free Shipping on Orders Over $30
           </p>
+          <span class="text-walnut/40 hidden sm:inline">|</span>
+          <p class="text-xs md:text-sm text-walnut/70 hidden sm:inline">
+            Expected delivery mid-March
+          </p>
         </div>
+        <p class="text-xs text-walnut/60 text-center mt-1 sm:hidden">
+          Expected delivery mid-March
+        </p>
       </div>
     </section>
 
@@ -1139,7 +1212,65 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       return variantId;
     }
 
+    const PRE_SALE_END_DATE = new Date('2026-02-16T04:59:59Z');
+
+    function updateCountdown(): boolean {
+      const now = new Date();
+      const diff = PRE_SALE_END_DATE.getTime() - now.getTime();
+
+      if (diff <= 0) {
+        return true;
+      }
+
+      const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+
+      const daysEl = document.getElementById('countdown-days');
+      const hoursEl = document.getElementById('countdown-hours');
+      const minutesEl = document.getElementById('countdown-minutes');
+      const secondsEl = document.getElementById('countdown-seconds');
+
+      if (daysEl) daysEl.textContent = days.toString().padStart(2, '0');
+      if (hoursEl) hoursEl.textContent = hours.toString().padStart(2, '0');
+      if (minutesEl) minutesEl.textContent = minutes.toString().padStart(2, '0');
+      if (secondsEl) secondsEl.textContent = seconds.toString().padStart(2, '0');
+
+      return false;
+    }
+
+    function showPreSaleEndedOverlay(): void {
+      const overlay = document.getElementById('presale-ended-overlay');
+      const countdownContainer = document.getElementById('countdown-container');
+
+      if (overlay) {
+        overlay.classList.remove('hidden');
+        document.body.style.overflow = 'hidden';
+      }
+      if (countdownContainer) {
+        countdownContainer.innerHTML = '<p class="text-cream-warm/70 text-sm">Pre-order period has ended</p>';
+      }
+    }
+
+    function initCountdown(): void {
+      const isEnded = updateCountdown();
+
+      if (isEnded) {
+        showPreSaleEndedOverlay();
+        return;
+      }
+
+      setInterval(() => {
+        const isEnded = updateCountdown();
+        if (isEnded) {
+          showPreSaleEndedOverlay();
+        }
+      }, 1000);
+    }
+
     document.addEventListener('DOMContentLoaded', () => {
+      initCountdown();
       updateCartUI();
       updateProductCardStates();
 
