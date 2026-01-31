@@ -496,7 +496,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     </section>
 
     <!-- Free Shipping Banner -->
-    <section class="bg-[#F5F2ED] border-b border-walnut/10">
+    <section id="free-shipping-banner" class="bg-[#F5F2ED] border-b border-walnut/10">
       <div class="max-w-7xl mx-auto px-4 md:px-6 lg:px-8 py-3 md:py-4">
         <div class="flex items-center justify-center gap-2 md:gap-3">
           <svg class="w-5 h-5 md:w-6 md:h-6 text-walnut" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -810,18 +810,19 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 
     <div id="cart-footer" class="p-5 border-t border-walnut/10 hidden">
       <div class="space-y-2 mb-4">
-        <div class="flex items-center justify-between">
+        <div id="shipping-row" class="flex items-center justify-between">
           <span class="text-dark-gray/70 text-sm">Subtotal</span>
           <span id="cart-subtotal" class="text-sm text-night">$0.00</span>
         </div>
-        <div class="flex items-center justify-between">
+        <div id="shipping-cost-row" class="flex items-center justify-between">
           <span class="text-dark-gray/70 text-sm">Shipping</span>
           <span id="cart-shipping" class="text-sm text-night">$5.00</span>
         </div>
-        <div class="border-t border-walnut/10 pt-2 flex items-center justify-between">
-          <span class="text-night font-medium">Total</span>
+        <div id="total-row" class="border-t border-walnut/10 pt-2 flex items-center justify-between">
+          <span id="total-label" class="text-night font-medium">Total</span>
           <span id="cart-total" class="text-lg font-medium text-night">$0.00</span>
         </div>
+        <p id="intl-shipping-note" class="text-xs text-dark-gray/60 text-center hidden">Shipping calculated at checkout</p>
       </div>
       <button
         id="checkout-btn"
@@ -866,6 +867,15 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 
   <script>
     const STORAGE_KEY = 'rr-merch-cart';
+    const GEO_STORAGE_KEY = 'rr-geo-location';
+    const GEO_CACHE_DURATION = 24 * 60 * 60 * 1000;
+
+    let isInternational = false;
+
+    interface GeoCache {
+      isInternational: boolean;
+      timestamp: number;
+    }
 
     interface CartItem {
       variantId: string;
@@ -874,6 +884,89 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       price: number;
       quantity: number;
       image: string;
+    }
+
+    function getCachedGeoLocation(): GeoCache | null {
+      try {
+        const cached = localStorage.getItem(GEO_STORAGE_KEY);
+        if (!cached) return null;
+        const data: GeoCache = JSON.parse(cached);
+        if (Date.now() - data.timestamp > GEO_CACHE_DURATION) {
+          localStorage.removeItem(GEO_STORAGE_KEY);
+          return null;
+        }
+        return data;
+      } catch {
+        return null;
+      }
+    }
+
+    function setCachedGeoLocation(international: boolean): void {
+      const data: GeoCache = {
+        isInternational: international,
+        timestamp: Date.now()
+      };
+      localStorage.setItem(GEO_STORAGE_KEY, JSON.stringify(data));
+    }
+
+    async function detectGeoLocation(): Promise<void> {
+      const urlParams = new URLSearchParams(window.location.search);
+      const intlParam = urlParams.get('intl');
+
+      if (intlParam !== null) {
+        isInternational = intlParam === '1' || intlParam === 'true';
+        applyInternationalUI();
+        return;
+      }
+
+      const cached = getCachedGeoLocation();
+      if (cached !== null) {
+        isInternational = cached.isInternational;
+        applyInternationalUI();
+        return;
+      }
+
+      try {
+        const controller = new AbortController();
+        const timeoutId = setTimeout(() => controller.abort(), 3000);
+
+        const response = await fetch('https://ipapi.co/json/', {
+          signal: controller.signal
+        });
+        clearTimeout(timeoutId);
+
+        if (response.ok) {
+          const data = await response.json();
+          isInternational = data.country_code !== 'US';
+          setCachedGeoLocation(isInternational);
+          applyInternationalUI();
+        }
+      } catch {
+        isInternational = false;
+      }
+    }
+
+    function applyInternationalUI(): void {
+      const freeShippingBanner = document.getElementById('free-shipping-banner');
+      const shippingProgress = document.getElementById('shipping-progress');
+      const shippingCostRow = document.getElementById('shipping-cost-row');
+      const totalLabel = document.getElementById('total-label');
+      const intlShippingNote = document.getElementById('intl-shipping-note');
+
+      if (isInternational) {
+        if (freeShippingBanner) freeShippingBanner.classList.add('hidden');
+        if (shippingProgress) shippingProgress.classList.add('hidden');
+        if (shippingCostRow) shippingCostRow.classList.add('hidden');
+        if (totalLabel) totalLabel.textContent = 'Subtotal';
+        if (intlShippingNote) intlShippingNote.classList.remove('hidden');
+      } else {
+        if (freeShippingBanner) freeShippingBanner.classList.remove('hidden');
+        if (shippingCostRow) shippingCostRow.classList.remove('hidden');
+        if (totalLabel) totalLabel.textContent = 'Total';
+        if (intlShippingNote) intlShippingNote.classList.add('hidden');
+      }
+
+      updateCartUI();
     }
 
     function getCart(): CartItem[] {
@@ -999,7 +1092,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       const count = getCartCount();
       const subtotal = getCartTotal();
       const qualifiesForFreeShipping = subtotal >= FREE_SHIPPING_THRESHOLD;
-      const shippingCost = qualifiesForFreeShipping ? 0 : (cart.length > 0 ? SHIPPING_COST : 0);
+      const shippingCost = isInternational ? 0 : (qualifiesForFreeShipping ? 0 : (cart.length > 0 ? SHIPPING_COST : 0));
       const total = subtotal + shippingCost;
 
       const countEl = document.getElementById('cart-count');
@@ -1016,6 +1109,9 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       const shippingMessage = document.getElementById('shipping-message');
       const shippingProgressFill = document.getElementById('shipping-progress-fill');
       const shippingTruck = document.getElementById('shipping-truck');
+      const shippingCostRow = document.getElementById('shipping-cost-row');
+      const totalLabel = document.getElementById('total-label');
+      const intlShippingNote = document.getElementById('intl-shipping-note');
 
       if (countEl) {
         countEl.textContent = count.toString();
@@ -1026,34 +1122,46 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         subtotalEl.textContent = `$${subtotal.toFixed(2)}`;
       }
 
-      if (shippingEl) {
-        if (qualifiesForFreeShipping) {
-          shippingEl.innerHTML = '<span class="free-shipping-badge">FREE</span>';
-        } else {
-          shippingEl.textContent = `$${SHIPPING_COST.toFixed(2)}`;
-        }
-      }
+      if (isInternational) {
+        if (shippingCostRow) shippingCostRow.classList.add('hidden');
+        if (shippingProgress) shippingProgress.classList.add('hidden');
+        if (totalLabel) totalLabel.textContent = 'Subtotal';
+        if (intlShippingNote) intlShippingNote.classList.remove('hidden');
+        if (totalEl) totalEl.textContent = `$${subtotal.toFixed(2)}`;
+      } else {
+        if (shippingCostRow) shippingCostRow.classList.remove('hidden');
+        if (totalLabel) totalLabel.textContent = 'Total';
+        if (intlShippingNote) intlShippingNote.classList.add('hidden');
 
-      if (totalEl) {
-        totalEl.textContent = `$${total.toFixed(2)}`;
-      }
-
-      if (shippingProgress && shippingMessage && shippingProgressFill) {
-        shippingProgress.classList.toggle('hidden', cart.length === 0);
-
-        if (cart.length > 0) {
-          const progressPercent = Math.min((subtotal / FREE_SHIPPING_THRESHOLD) * 100, 100);
-          shippingProgressFill.style.width = `${progressPercent}%`;
-
+        if (shippingEl) {
           if (qualifiesForFreeShipping) {
-            shippingMessage.innerHTML = '<span class="text-emerald-600 font-medium">You\'re eligible for free shipping!</span>';
-            shippingProgressFill.classList.add('complete');
-            if (shippingTruck) shippingTruck.classList.add('text-emerald-600');
+            shippingEl.innerHTML = '<span class="free-shipping-badge">FREE</span>';
           } else {
-            const amountNeeded = (FREE_SHIPPING_THRESHOLD - subtotal).toFixed(2);
-            shippingMessage.innerHTML = `Add <span class="font-medium text-night">$${amountNeeded}</span> more for free shipping`;
-            shippingProgressFill.classList.remove('complete');
-            if (shippingTruck) shippingTruck.classList.remove('text-emerald-600');
+            shippingEl.textContent = `$${SHIPPING_COST.toFixed(2)}`;
+          }
+        }
+
+        if (totalEl) {
+          totalEl.textContent = `$${total.toFixed(2)}`;
+        }
+
+        if (shippingProgress && shippingMessage && shippingProgressFill) {
+          shippingProgress.classList.toggle('hidden', cart.length === 0);
+
+          if (cart.length > 0) {
+            const progressPercent = Math.min((subtotal / FREE_SHIPPING_THRESHOLD) * 100, 100);
+            shippingProgressFill.style.width = `${progressPercent}%`;
+
+            if (qualifiesForFreeShipping) {
+              shippingMessage.innerHTML = '<span class="text-emerald-600 font-medium">You\'re eligible for free shipping!</span>';
+              shippingProgressFill.classList.add('complete');
+              if (shippingTruck) shippingTruck.classList.add('text-emerald-600');
+            } else {
+              const amountNeeded = (FREE_SHIPPING_THRESHOLD - subtotal).toFixed(2);
+              shippingMessage.innerHTML = `Add <span class="font-medium text-night">$${amountNeeded}</span> more for free shipping`;
+              shippingProgressFill.classList.remove('complete');
+              if (shippingTruck) shippingTruck.classList.remove('text-emerald-600');
+            }
           }
         }
       }
@@ -1067,7 +1175,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       }
 
       if (stickyTotal) {
-        stickyTotal.textContent = `$${total.toFixed(2)}`;
+        stickyTotal.textContent = `$${subtotal.toFixed(2)}`;
       }
 
       if (footerEl && emptyEl) {
@@ -1178,7 +1286,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     function buildCheckoutUrl(items?: { variantId: string; quantity: number }[]): string {
       const cartItems = items || getCart().map(item => ({ variantId: item.variantId, quantity: item.quantity }));
       const itemsStr = cartItems.map(item => `${item.variantId}:${item.quantity}`).join(',');
-      return `https://reading-rhythms.myshopify.com/cart/${itemsStr}`;
+      return `https://store.readingrhythms.co/cart/${itemsStr}`;
     }
 
     function getSizeLabel(variantId: string): string {
@@ -1267,6 +1375,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 
     document.addEventListener('DOMContentLoaded', () => {
       initCountdown();
+      detectGeoLocation();
       updateCartUI();
       updateProductCardStates();
 
@@ -1459,3 +1568,4 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     });
   </script>
 </BaseLayout>
+

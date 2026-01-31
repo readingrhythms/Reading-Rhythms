@@ -1,6 +1,8 @@
 ---
 import BaseLayout from '@layouts/BaseLayout.astro';
 
+const GOOGLE_PLAY_ENABLED = false;
+
 const serifFont = "https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;0,9..144,800;1,9..144,400;1,9..144,500;1,9..144,600&display=swap";
 
 const faqs = [
@@ -204,6 +206,7 @@ const tiers = [
       opacity: 0;
       transform: translateY(60px);
       transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+      will-change: transform, opacity;
     }
 
     .scroll-fade-up.visible {
@@ -215,6 +218,7 @@ const tiers = [
       opacity: 0;
       transform: translateX(-80px);
       transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+      will-change: transform, opacity;
     }
 
     .scroll-slide-left.visible {
@@ -226,6 +230,7 @@ const tiers = [
       opacity: 0;
       transform: translateX(80px);
       transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+      will-change: transform, opacity;
     }
 
     .scroll-slide-right.visible {
@@ -237,6 +242,7 @@ const tiers = [
       opacity: 0;
       transform: scale(0.9);
       transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+      will-change: transform, opacity;
     }
 
     .scroll-scale-in.visible {
@@ -380,12 +386,24 @@ const tiers = [
       <div class="hidden md:flex flex-col items-center mt-6 md:mt-10 lg:mt-12">
         <p class="text-xs md:text-sm text-cream-warm/60 mb-3 md:mb-4">Download the app</p>
         <div class="flex items-center justify-center gap-3 md:gap-4 p-3 md:p-4 bg-white/5 backdrop-blur-sm rounded-xl md:rounded-2xl border border-cream-warm/15">
-          <a href="https://apps.apple.com/us/app/reading-rhythms/id6756758427" class="transition-all duration-300 hover:scale-105 hover:opacity-100 opacity-90">
-            <img src="https://developer.apple.com/assets/elements/badges/download-on-the-app-store.svg" alt="Download on the App Store" class="h-9 md:h-11 rounded-lg" />
-          </a>
-          <a href="https://play.google.com/store/apps/details?id=app.rork.reading_rhythms_clubs" class="transition-all duration-300 hover:scale-105 hover:opacity-100 opacity-90">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/7/78/Google_Play_Store_badge_EN.svg" alt="Get it on Google Play" class="h-9 md:h-11 rounded-lg" />
-          </a>
+          <div class="flex flex-col items-center">
+            <span class="text-[10px] text-cream-warm/50 mb-1 invisible">Coming by 2/7</span>
+            <a href="https://apps.apple.com/us/app/reading-rhythms/id6756758427" class="transition-all duration-300 hover:scale-105 hover:opacity-100 opacity-90">
+              <img src="https://developer.apple.com/assets/elements/badges/download-on-the-app-store.svg" alt="Download on the App Store" class="h-9 md:h-11 rounded-lg" />
+            </a>
+          </div>
+          {GOOGLE_PLAY_ENABLED ? (
+            <a href="https://play.google.com/store/apps/details?id=app.rork.reading_rhythms_clubs" class="transition-all duration-300 hover:scale-105 hover:opacity-100 opacity-90">
+              <img src="https://upload.wikimedia.org/wikipedia/commons/7/78/Google_Play_Store_badge_EN.svg" alt="Get it on Google Play" class="h-9 md:h-11 rounded-lg" />
+            </a>
+          ) : (
+            <div class="flex flex-col items-center">
+              <span class="text-[10px] text-cream-warm/50 mb-1">Coming by 2/7</span>
+              <div class="opacity-50 grayscale cursor-not-allowed">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/7/78/Google_Play_Store_badge_EN.svg" alt="Get it on Google Play" class="h-9 md:h-11 rounded-lg" />
+              </div>
+            </div>
+          )}
         </div>
       </div>
     </div>
@@ -1457,9 +1475,18 @@ const tiers = [
           <a href="https://apps.apple.com/us/app/reading-rhythms/id6756758427" class="transition-all duration-300 hover:opacity-80 hover:-translate-y-0.5">
             <img src="https://developer.apple.com/assets/elements/badges/download-on-the-app-store.svg" alt="Download on the App Store" class="h-9 md:h-10 rounded-lg" />
           </a>
-          <a href="https://play.google.com/store/apps/details?id=app.rork.reading_rhythms_clubs" class="transition-all duration-300 hover:opacity-80 hover:-translate-y-0.5">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/7/78/Google_Play_Store_badge_EN.svg" alt="Get it on Google Play" class="h-9 md:h-10 rounded-lg" />
-          </a>
+          {GOOGLE_PLAY_ENABLED ? (
+            <a href="https://play.google.com/store/apps/details?id=app.rork.reading_rhythms_clubs" class="transition-all duration-300 hover:opacity-80 hover:-translate-y-0.5">
+              <img src="https://upload.wikimedia.org/wikipedia/commons/7/78/Google_Play_Store_badge_EN.svg" alt="Get it on Google Play" class="h-9 md:h-10 rounded-lg" />
+            </a>
+          ) : (
+            <div class="flex flex-col items-center">
+              <span class="text-[10px] text-cream-warm/50 mb-1">Coming by 2/7</span>
+              <div class="opacity-50 grayscale cursor-not-allowed">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/7/78/Google_Play_Store_badge_EN.svg" alt="Get it on Google Play" class="h-9 md:h-10 rounded-lg" />
+              </div>
+            </div>
+          )}
         </div>
 
       </div>
@@ -1507,22 +1534,42 @@ const tiers = [
             </svg>
           </a>
 
-          <a href="https://play.google.com/store/apps/details?id=app.rork.reading_rhythms_clubs" class="flex items-center justify-between p-4 bg-white rounded-2xl border border-dark-gray/10 hover:border-dark-gray/20 hover:shadow-md transition-all duration-300 group">
-            <div class="flex items-center gap-4">
-              <div class="w-12 h-12 bg-gradient-to-br from-green-500 via-blue-500 to-yellow-500 rounded-xl flex items-center justify-center">
-                <svg class="w-6 h-6 text-white" viewBox="0 0 24 24" fill="currentColor">
-                  <path d="M3.609 1.814L13.792 12 3.61 22.186a.996.996 0 01-.61-.92V2.734a1 1 0 01.609-.92zm10.89 10.893l2.302 2.302-10.937 6.333 8.635-8.635zm3.199-3.198l2.807 1.626a1 1 0 010 1.73l-2.808 1.626L15.206 12l2.492-2.491zM5.864 2.658L16.8 8.99l-2.302 2.302-8.634-8.634z"/>
-                </svg>
+          {GOOGLE_PLAY_ENABLED ? (
+            <a href="https://play.google.com/store/apps/details?id=app.rork.reading_rhythms_clubs" class="flex items-center justify-between p-4 bg-white rounded-2xl border border-dark-gray/10 hover:border-dark-gray/20 hover:shadow-md transition-all duration-300 group">
+              <div class="flex items-center gap-4">
+                <div class="w-12 h-12 bg-gradient-to-br from-green-500 via-blue-500 to-yellow-500 rounded-xl flex items-center justify-center">
+                  <svg class="w-6 h-6 text-white" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M3.609 1.814L13.792 12 3.61 22.186a.996.996 0 01-.61-.92V2.734a1 1 0 01.609-.92zm10.89 10.893l2.302 2.302-10.937 6.333 8.635-8.635zm3.199-3.198l2.807 1.626a1 1 0 010 1.73l-2.808 1.626L15.206 12l2.492-2.491zM5.864 2.658L16.8 8.99l-2.302 2.302-8.634-8.634z"/>
+                  </svg>
+                </div>
+                <div>
+                  <p class="text-xs text-dark-gray/50 uppercase tracking-wide">Get it on</p>
+                  <p class="text-lg font-semibold text-dark-gray">Google Play</p>
+                </div>
               </div>
-              <div>
-                <p class="text-xs text-dark-gray/50 uppercase tracking-wide">Get it on</p>
-                <p class="text-lg font-semibold text-dark-gray">Google Play</p>
+              <svg class="w-5 h-5 text-dark-gray/30 group-hover:text-dark-gray/50 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+              </svg>
+            </a>
+          ) : (
+            <div class="flex items-center justify-between p-4 bg-white rounded-2xl border border-dark-gray/10 opacity-50 grayscale cursor-not-allowed">
+              <div class="flex items-center gap-4">
+                <div class="w-12 h-12 bg-gradient-to-br from-green-500 via-blue-500 to-yellow-500 rounded-xl flex items-center justify-center">
+                  <svg class="w-6 h-6 text-white" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M3.609 1.814L13.792 12 3.61 22.186a.996.996 0 01-.61-.92V2.734a1 1 0 01.609-.92zm10.89 10.893l2.302 2.302-10.937 6.333 8.635-8.635zm3.199-3.198l2.807 1.626a1 1 0 010 1.73l-2.808 1.626L15.206 12l2.492-2.491zM5.864 2.658L16.8 8.99l-2.302 2.302-8.634-8.634z"/>
+                  </svg>
+                </div>
+                <div>
+                  <p class="text-xs text-dark-gray/50 uppercase tracking-wide">Get it on</p>
+                  <p class="text-lg font-semibold text-dark-gray">Google Play</p>
+                  <p class="text-[10px] text-dark-gray/40 mt-0.5">Coming by 2/7</p>
+                </div>
               </div>
+              <svg class="w-5 h-5 text-dark-gray/30" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+              </svg>
             </div>
-            <svg class="w-5 h-5 text-dark-gray/30 group-hover:text-dark-gray/50 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
-            </svg>
-          </a>
+          )}
         </div>
       </div>
     </div>
@@ -1826,6 +1873,7 @@ const tiers = [
     if (testimonialsSection && testimonialsContainer && testimonialsTrack) {
       let isUserScrolling = false;
       let userScrollTimeout: ReturnType<typeof setTimeout>;
+      let ticking = false;
 
       testimonialsContainer.addEventListener('scroll', () => {
         isUserScrolling = true;
@@ -1836,7 +1884,10 @@ const tiers = [
       }, { passive: true });
 
       function updateTestimonialsScroll() {
-        if (isUserScrolling) return;
+        if (isUserScrolling) {
+          ticking = false;
+          return;
+        }
 
         const rect = testimonialsSection.getBoundingClientRect();
         const viewportHeight = window.innerHeight;
@@ -1857,9 +1908,18 @@ const tiers = [
           const scrollAmount = clampedProgress * maxScroll * 0.6;
           testimonialsContainer.scrollLeft = scrollAmount;
         }
+
+        ticking = false;
       }
 
-      window.addEventListener('scroll', updateTestimonialsScroll, { passive: true });
+      function onScroll() {
+        if (!ticking) {
+          requestAnimationFrame(updateTestimonialsScroll);
+          ticking = true;
+        }
+      }
+
+      window.addEventListener('scroll', onScroll, { passive: true });
       updateTestimonialsScroll();
     }
 
@@ -2182,3 +2242,4 @@ const tiers = [
     border-radius: 16px 20px 18px 22px / 20px 18px 22px 16px;
   }
 </style>
+
